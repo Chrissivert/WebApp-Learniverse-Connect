@@ -1,5 +1,11 @@
-body{
+h1{
   font-family: verdana;
   font-size: xx-large;
   color: rgb(255, 0, 242);
+}
+
+p{
+  font-family: verdana;
+  font-size: x-large;
+  color:rgb(0, 0, 255)
 }
