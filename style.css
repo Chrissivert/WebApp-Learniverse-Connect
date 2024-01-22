@@ -56,3 +56,23 @@ footer {
   bottom: 100;
   width: 100%;
 }
+
+.animated-box {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  animation: bounce 2s infinite; /* Apply the animation named 'bounce' */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); /* Initial, middle, and final position */
+  }
+  40% {
+    transform: translateY(-30px); /* Bounce up */
+  }
+  60% {
+    transform: translateY(-15px); /* Bounce down */
+  }
+}
+
