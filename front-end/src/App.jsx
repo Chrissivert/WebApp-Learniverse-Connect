@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/navbarTest.jsx';
 
@@ -18,7 +18,6 @@ function App() {
         </p>
       </div>
       <div>
-      <Navbar />
         <h1>My React App</h1>
         <p>{randomText}</p>
       </div>
