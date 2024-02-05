@@ -18,6 +18,7 @@ function App() {
         </p>
       </div>
       <div>
+        <Navbar />
         <h1>My React App</h1>
         <p>{randomText}</p>
       </div>
