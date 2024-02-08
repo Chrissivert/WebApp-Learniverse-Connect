@@ -15,9 +15,9 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>./App.jsx</code> HELLLOOOOO
+          Edit <code>./App.jsx</code>
         </p>
-        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%"></img>
+        <img src="front-end/src/resources/learniverse_connect_logo.svg" width="40%"/>
       </div>
       <div>
         <h1>Welcome to Learniverse Connect!</h1>
