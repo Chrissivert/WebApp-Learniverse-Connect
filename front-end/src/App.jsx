@@ -20,7 +20,7 @@ function App() {
         <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%"></img>
       </div>
       <div>
-        <h1>My React App</h1>
+        <h1>Welcome to Learniverse Connect!</h1>
         <p>{randomText}</p>
       </div>
     </>
@@ -28,7 +28,7 @@ function App() {
 }
 
 function generateRandomText() {
-  const texts = ["Hello!", "Welcome to my app!", "React is awesome!"];
+  const texts = ["Hello!", "Welcome!", "Start Learning Today!"];
   const randomIndex = Math.floor(Math.random() * texts.length);
   return texts[randomIndex];
 }
