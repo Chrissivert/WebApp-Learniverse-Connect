@@ -1,5 +1,6 @@
-nav {
+.nav {
     display: flex;
+    width: max-content;
   }
   
   nav ul {

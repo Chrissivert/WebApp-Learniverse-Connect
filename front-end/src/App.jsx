@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import NavigationBar from './components/navbar/Navbar.jsx';
-import './css/Logo.css';
+import './css/logo.css';
+import Footer from './components/Footer/Footer.jsx';
 
 function MainPage() {
   const [count, setCount] = useState(0);
@@ -20,12 +21,10 @@ function MainPage() {
       <div>
         <h1>Welcome to Learniverse Connect!</h1>
         <p>{randomText}</p>
-        {/* Added random elements */}
         <div className="logo">Logo</div>
         <a href="#" className="logo react">React Logo</a>
-        <div className="card">Card Element</div>
-        <div className="read-the-docs">Read the Docs</div>
       </div>
+      <Footer/>
     </>
   );
 }
