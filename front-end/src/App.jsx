@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import NavigationBar from './components/navbar/navbarTest.jsx';
+import NavigationBar from './components/navbar/Navbar.jsx';
+import './css/Logo.css';
 
-function App() {
+function MainPage() {
   const [count, setCount] = useState(0);
   const randomText = generateRandomText();
 
@@ -14,14 +15,16 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>./App.jsx</code>
-        </p>
-        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%"/>
+        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%" className="logo" />
       </div>
       <div>
         <h1>Welcome to Learniverse Connect!</h1>
         <p>{randomText}</p>
+        {/* Added random elements */}
+        <div className="logo">Logo</div>
+        <a href="#" className="logo react">React Logo</a>
+        <div className="card">Card Element</div>
+        <div className="read-the-docs">Read the Docs</div>
       </div>
     </>
   );
@@ -33,4 +36,4 @@ function generateRandomText() {
   return texts[randomIndex];
 }
 
-export default App;
+export default MainPage;
