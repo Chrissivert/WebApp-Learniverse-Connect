@@ -17,6 +17,7 @@ function App() {
         <p>
           Edit <code>./App.jsx</code> HELLLOOOOO
         </p>
+        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%"></img>
       </div>
       <div>
         <h1>My React App</h1>
