@@ -14,7 +14,7 @@ function App() {
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <div>
-        <h1>Helldwadw</h1>
+        <h1>Ikke fjern!</h1>
       </div>
     </Router>
   );

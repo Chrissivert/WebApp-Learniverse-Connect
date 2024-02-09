@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NavigationBar from './components/navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import './css/mainpage.css';
 
 function CreateMainPage() {
   const [count, setCount] = useState(0);

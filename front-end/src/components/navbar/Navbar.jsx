@@ -1,37 +1,33 @@
-// Navbar.jsx
-
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Logo from '../Logo/Logo.jsx';
+import Logo from '../Logo/Logo.jsx'; // Adjust the path to your Logo component
+import '../../css/navbar.css';
 
 const NavigationBar = () => {
   return (
     <Navbar expand="lg" className="nav">
-      <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Logo />
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
+      <Container fluid>
+        <Navbar.Brand className="mr-auto">
+          <Logo />
+        </Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link href="home">Home</Nav.Link>
+          <Nav.Link href="search">Search</Nav.Link>
+          <Nav.Link href="about">About Us</Nav.Link>
+          <Nav.Link href="contact">Contact</Nav.Link>
+        </Nav>
+        <Nav className="ms-auto">
+          <Nav.Link href="login">Login</Nav.Link>
+          <Nav.Link href="cart">
+            <img
+              src="path_to_cart_image"
+              alt="Cart"
+              // style={{ width: '30px', height: '30px' }} // adjust size as needed
+            />
+          </Nav.Link>
+        </Nav>
       </Container>
     </Navbar>
   );

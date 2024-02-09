@@ -5,7 +5,7 @@ import '../../css/logo.css';
 const Logo = () => {
   return (
     <div className="logo">
-      <Link to="/destination">
+      <Link to="/search">
         <img src="front-end\src\resources\learniverse_connect_logo.svg" alt="Logo" className="logo" />
       </Link>
     </div>
