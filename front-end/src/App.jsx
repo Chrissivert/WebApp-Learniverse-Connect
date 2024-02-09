@@ -1,38 +1,29 @@
-import React, { useState } from 'react';
-import './App.css';
-import NavigationBar from './components/navbar/Navbar.jsx';
-import './css/logo.css';
-import Footer from './components/Footer/Footer.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './MainPage';
+import SearchCourse from './SearchCourse';
+import './css/index.css';
 
-function MainPage() {
-  const [count, setCount] = useState(0);
-  const randomText = generateRandomText();
-
+function App() {
   return (
-    <>
-      <NavigationBar/>
-      <h1>Learniverse Connect</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%" className="logo" />
-      </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<MainPage />} />
+        <Route path="/searchCourses" element={<SearchCourse />} />
+        <Route path="*" element={<div>Page Not Found</div>} />
+      </Routes>
       <div>
-        <h1>Welcome to Learniverse Connect!</h1>
-        <p>{randomText}</p>
-        <div className="logo">Logo</div>
-        <a href="#" className="logo react">React Logo</a>
+        <h1>Helldwadw</h1>
       </div>
-      <Footer/>
-    </>
+    </Router>
   );
 }
 
-function generateRandomText() {
-  const texts = ["Hello!", "Welcome!", "Start Learning Today!"];
-  const randomIndex = Math.floor(Math.random() * texts.length);
-  return texts[randomIndex];
-}
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-export default MainPage;
+export default App;

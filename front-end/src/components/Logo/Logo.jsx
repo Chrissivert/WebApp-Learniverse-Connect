@@ -1,20 +1,13 @@
-// Logo.jsx
-
 import React from 'react';
-import { useHistory } from 'react-router-dom'; // Assuming you're using React Router for navigation
+import { Link } from 'react-router-dom';
+import '../../css/logo.css';
 
 const Logo = () => {
-  const history = useHistory();
-
-  const handleClick = () => {
-    // Handle logic for when the logo is clicked, e.g., navigate to a specific page
-    history.push('/'); // Navigate to the homepage
-  };
-
   return (
-    <div className="logo" onClick={handleClick}>
-       <img src="front-end\src\resources\learniverse_connect_logo.svg" alt="Logo" className="logo" />
-
+    <div className="logo">
+      <Link to="/destination">
+        <img src="front-end\src\resources\learniverse_connect_logo.svg" alt="Logo" className="logo" />
+      </Link>
     </div>
   );
 };
