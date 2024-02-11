@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
 import SearchCourse from './SearchCourse';
 import './css/index.css';
-import Footer from './components/Footer/Footer';
+import PageNotFound from './PageNotFound';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<MainPage />} />
         <Route path="/search" element={<SearchCourse />} />
-        <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
       <div>
         <h1>Ikke fjern!</h1>
