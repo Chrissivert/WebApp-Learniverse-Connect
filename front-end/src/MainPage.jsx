@@ -14,7 +14,7 @@ function CreateMainPage() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <img src="front-end\src\resources\learniverse_connect_logo.svg" width="40%" className="logo" />
+        <img src="front-end\src\resources\learniverse_connect_logo.svg" className="logo" />
       </div>
       <div>
         <p>{randomText}</p>
