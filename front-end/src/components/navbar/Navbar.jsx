@@ -2,7 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../logo/Logo.js'; // Adjust the path to your Logo component
+import Logo from '../logo/Logo.jsx'; // Adjust the path to your Logo component
 import '../../css/navbar.css';
 
 const NavigationBar = () => {
