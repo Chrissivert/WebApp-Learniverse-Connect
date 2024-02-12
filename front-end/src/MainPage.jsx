@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import NavigationBar from './components/navbar/Navbar.jsx';
-import Footer from './components/Footer/Footer.jsx';
 
 function CreateMainPage() {
   const [count, setCount] = useState(0);
@@ -19,7 +18,6 @@ function CreateMainPage() {
       <div>
         <p>{randomText}</p>
       </div>
-      <Footer/>
     </>
   );
 }
