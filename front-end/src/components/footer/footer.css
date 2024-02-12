@@ -5,5 +5,5 @@ footer{
   height: 100%;
   left: 0;
   right: 0;
-  position: fixed;
+  position: absolute;
 }
