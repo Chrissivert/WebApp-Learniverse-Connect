@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
 import Footer from "./components/footer/Footer.jsx"
 import SearchCourse from './SearchCourse';
+import LoginPage from './LoginPage.jsx';
 import './css/index.css';
 import PageNotFound from './PageNotFound';
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<MainPage />} />
         <Route path="/search" element={<SearchCourse />} />
+        <Route path ="/login" element={<LoginPage />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
       <Footer/>
