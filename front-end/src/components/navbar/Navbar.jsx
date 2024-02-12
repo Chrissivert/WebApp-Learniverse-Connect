@@ -20,7 +20,7 @@ const NavigationBar = () => {
           <Logo />
         </Navbar.Brand>
         <Nav className="me-auto middle-nav">
-          <Nav.Link href="home">Home</Nav.Link>
+          <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="search">Search</Nav.Link>
           <Nav.Link href="about">About Us</Nav.Link>
           <Nav.Link href="contact">Contact</Nav.Link>
