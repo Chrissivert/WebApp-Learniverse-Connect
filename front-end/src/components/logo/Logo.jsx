@@ -4,7 +4,11 @@ import './logo.css';
 
 const Logo = () => {
   return (
-    <img src="front-end\src\resources\learniverse_connect_logo.svg" alt="Logo" className="logo" id="logo"/>
+    <div className="logo">
+      <Link to="/">
+        <img src="front-end\src\resources\learniverse_connect_logo.svg" alt="Logo" className="logo" />
+      </Link>
+    </div>
   );
 };
 

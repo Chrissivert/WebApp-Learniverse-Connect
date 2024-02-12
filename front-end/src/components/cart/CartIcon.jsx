@@ -14,4 +14,4 @@ function CartIcon({ colorMode }) {
   );
 }
 
-export default CartIcon;""
+export default CartIcon;
