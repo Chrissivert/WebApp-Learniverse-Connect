@@ -19,7 +19,7 @@ const NavigationBar = () => {
         <Navbar.Brand className="mr-auto">
           <Logo />
         </Navbar.Brand>
-        <Nav className="me-auto">
+        <Nav className="me-auto middle-nav">
           <Nav.Link href="home">Home</Nav.Link>
           <Nav.Link href="search">Search</Nav.Link>
           <Nav.Link href="about">About Us</Nav.Link>
@@ -28,7 +28,7 @@ const NavigationBar = () => {
         <Nav className="ms-auto">
           <Nav.Link href="login">Login</Nav.Link>
           <Nav.Link href="cart">
-            <CartIcon colorMode={colorMode} /> {/* Pass the colorMode state as a prop */}
+            <CartIcon colorMode={colorMode} />
           </Nav.Link>
           <button onClick={toggleColorMode}>Toggle Color Mode</button>
         </Nav>
