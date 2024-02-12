@@ -7,6 +7,7 @@ import SearchCourse from './SearchCourse';
 import LoginPage from './LoginPage.jsx';
 import './css/index.css';
 import PageNotFound from './PageNotFound';
+import CreateAccountPage from './CreateAccount.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/search" element={<SearchCourse />} />
         <Route path ="/login" element={<LoginPage />} />
         <Route path="*" element={<PageNotFound/>} />
+        <Route path="/createAccount" element={<CreateAccountPage />} />
       </Routes>
       <Footer/>
     </Router>
