@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../logo/Logo.jsx'; // Adjust the path to your Logo component
+import Logo from '../logo/Logo.jsx';
+import CartIcon from '../cart/CartIcon.jsx';
 import './navbar.css';
 
 const NavigationBar = () => {
+  const [colorMode, setColorMode] = useState('dark');
+
+  const toggleColorMode = () => {
+    setColorMode(colorMode === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <Navbar expand="lg" className="nav">
       <Container fluid>
@@ -21,12 +28,9 @@ const NavigationBar = () => {
         <Nav className="ms-auto">
           <Nav.Link href="login">Login</Nav.Link>
           <Nav.Link href="cart">
-            <img
-              src="path_to_cart_image"
-              alt="Cart"
-              // style={{ width: '30px', height: '30px' }} // adjust size as needed
-            />
+            <CartIcon colorMode={colorMode} /> {/* Pass the colorMode state as a prop */}
           </Nav.Link>
+          <button onClick={toggleColorMode}>Toggle Color Mode</button>
         </Nav>
       </Container>
     </Navbar>
