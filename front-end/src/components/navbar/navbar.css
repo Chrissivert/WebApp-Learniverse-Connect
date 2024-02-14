@@ -1,32 +1,38 @@
-.nav {
+/* .nav {
   background-color: #d0bfff;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
+  padding: 10px;
   width: 100%;
+  height: auto;
+} */
 
+header {
+  position: fixed;
+  background-color: #d0bfff;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  align-items: center;
 }
 
-.navbar-brand {
-  margin-right: 20px; /* Adjust margin if needed */
-}
-
-.me-auto {
-
+/* .me-auto {
   align-items: center;
   padding: 5px 0;
-}
+} */
 
-.nav-link {
+/* .nav-link {
   margin-right: 20px;
   color: #333333;
   font-weight: bold;
-}
+} */
 
-.nav-link:hover {
+/* .nav-link:hover {
   color: #007bff;
-}
+} */
 
-.cart-icon {
+/* .cart-icon {
   width: 30px;
   height: 30px;
-}
+} */
