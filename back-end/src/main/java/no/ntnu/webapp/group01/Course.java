@@ -5,6 +5,7 @@ import java.util.List;
 public class Course {
   private int id;
   private String title;
+  private Category category;
   private List<String> tags;
   private Level level;
   private String courseSession;
@@ -15,10 +16,11 @@ public class Course {
   private double price;
   private String description;
 
-  public Course(int id, String title, List<String> tags, Level level, String courseSession, double courseSize,
+  public Course(int id, String title, Category category, List<String> tags, Level level, String courseSession, double courseSize,
       double hoursPerWeek, String relatedCertifications, String provider, double price, String description) {
     this.id = id;
     this.title = title;
+    this.category = category;
     this.tags = tags;
     this.level = level;
     this.courseSession = courseSession;
@@ -44,6 +46,14 @@ public class Course {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public Category getCategory() {
+    return this.category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   public List<String> getTags() {
