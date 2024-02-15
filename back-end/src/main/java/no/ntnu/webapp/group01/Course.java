@@ -33,7 +33,7 @@ public class Course {
   }
   
   public int getId() {
-    return id;
+    return this.id;
   }
   
   public void setId(int id) {
@@ -57,7 +57,7 @@ public class Course {
   }
 
   public List<String> getTags() {
-    return tags;
+    return this.tags;
   }
 
   public void setTags(List<String> tags) {
@@ -65,7 +65,7 @@ public class Course {
   }
 
   public Level getLevel() {
-    return level;
+    return this.level;
   }
 
   public void setLevel(Level level) {
@@ -73,7 +73,7 @@ public class Course {
   }
 
   public String getCourseSession() {
-    return courseSession;
+    return this.courseSession;
   }
 
   public void setCourseSession(String courseSession) {
@@ -81,7 +81,7 @@ public class Course {
   }
 
   public double getCourseSize() {
-    return courseSize;
+    return this.courseSize;
   }
 
   public void setCourseSize(double courseSize) {
@@ -89,7 +89,7 @@ public class Course {
   }
 
   public double getHoursPerWeek() {
-    return hoursPerWeek;
+    return this.hoursPerWeek;
   }
 
   public void setHoursPerWeek(double hoursPerWeek) {
@@ -97,7 +97,7 @@ public class Course {
   }
 
   public String getRelatedCertifications() {
-    return relatedCertifications;
+    return this.relatedCertifications;
   }
 
   public void setRelatedCertifications(String relatedCertifications) {
@@ -105,7 +105,7 @@ public class Course {
   }
 
   public String getProvider() {
-    return provider;
+    return this.provider;
   }
 
   public void setProvider(String provider) {
@@ -113,7 +113,7 @@ public class Course {
   }
 
   public double getPrice() {
-    return price;
+    return this.price;
   }
 
   public void setPrice(double price) {
@@ -121,7 +121,7 @@ public class Course {
   }
 
   public String getDescription() {
-    return description;
+    return this.description;
   }
 
   public void setDescription(String description) {
