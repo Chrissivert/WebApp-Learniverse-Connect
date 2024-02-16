@@ -27,23 +27,12 @@
   margin-bottom: 5px;
 }
 
-.course-box button {
-  background-color: #c788ff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+.course-box :hover {
+  background-color: #eabfe7;
 }
-
-.course-box button:hover {
-  background-color: #a66eff;
-}
-
 
 .course-section {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
-  gap: 20px; /* Gap between grid items */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }

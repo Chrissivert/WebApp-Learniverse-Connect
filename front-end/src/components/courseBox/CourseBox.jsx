@@ -3,19 +3,17 @@ import PropTypes from 'prop-types';
 import "./courseBoxStyling.css";
 import programmingImage from '../../resources/images/coursebox/computer/programming.jpg';
 
-
-function CourseBox({ title, duration, price, buttonText, onClick }) {
+function CourseBox({ title, duration, price, onClick }) {
   return (
-    <div className="course-box">
+    <a className="course-box" href="#" onClick={onClick}>
       <div className="course-box-upper" style={{backgroundImage: `url(${programmingImage})`}}>
       </div>
       <div className="course-box-lower">
         <h2>{title}</h2>
         <p>Duration: {duration}</p>
         <p>Price: ${price}</p>
-        <button onClick={onClick}>{buttonText}</button>
       </div>
-    </div>
+    </a>
   );
 }
   
@@ -23,8 +21,6 @@ CourseBox.propTypes = {
   title: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
@@ -35,10 +31,15 @@ function CourseSection() {
     { title: 'Web Design Basics', duration: '3 weeks', price: 79 }
   ];
 
+  const handleCourseClick = () => {
+    // Handle the click event for the entire CourseBox
+    console.log("CourseBox clicked");
+  };
+
   return (
     <div className="course-section">
       {courses.map((course, index) => (
-        <CourseBox key={index} {...course} />
+        <CourseBox key={index} {...course} onClick={handleCourseClick} />
       ))}
     </div>
   );

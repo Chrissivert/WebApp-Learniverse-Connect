@@ -8,6 +8,7 @@ import LoginPage from './LoginPage.jsx';
 import './css/index.css';
 import PageNotFound from './PageNotFound';
 import CreateAccountPage from './CreateAccount.jsx';
+import ThemeProvider from './ThemeProvider';
 
 function App() {
   return (
@@ -26,8 +27,14 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
 export default App;
+
+
+
+
