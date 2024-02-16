@@ -30,8 +30,6 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('theme', theme === lightTheme ? 'light' : 'dark');
-
-    // Update CSS variables
     const root = document.documentElement;
     root.style.setProperty('--background-color', theme.backgroundColor);
     root.style.setProperty('--text-color', theme.textColor);
