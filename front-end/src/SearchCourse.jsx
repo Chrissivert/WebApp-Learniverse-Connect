@@ -10,7 +10,6 @@ function SearchCoursesPage() {
 
   return (
     <div>
-      <NavigationBar/>
       <h1>Search Courses Page</h1>
       <input
         type="text"

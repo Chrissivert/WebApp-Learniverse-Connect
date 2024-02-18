@@ -6,7 +6,6 @@ function CreateMainPage() {
 
   return (
     <>
-      <NavigationBar/>
       <h1>Learniverse Connect</h1>
       <CourseSection/>
     </>
