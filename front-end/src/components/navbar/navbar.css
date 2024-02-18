@@ -15,7 +15,13 @@ header {
   right: 0;
   height: auto;
   align-items: center;
+  z-index: 100;
 }
+
+/* .hamburger{
+  color: black;
+  background-color: black;
+} */
 
 /* .me-auto {
   align-items: center;
@@ -36,3 +42,8 @@ header {
   width: 30px;
   height: 30px;
 } */
+
+.NavBar {
+  font-family: sans-serif;
+  text-align: center;
+}
