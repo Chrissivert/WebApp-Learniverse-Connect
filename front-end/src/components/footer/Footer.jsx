@@ -6,7 +6,7 @@ import "./footer.css"
 const Footer = () => {
   return (
     <footer>
-      <p>&copy;{new Date().getFullYear()} Learniverse</p>
+      <p>&copy;{new Date().getFullYear()} Learniverse Connect</p>
     </footer>
   );
 };
