@@ -1,6 +1,6 @@
 import React from 'react';
-import blackCartIcon from '../../resources/cart/blackCart.png';
-import whiteCartIcon from '../../resources/cart/whiteCart.png';
+import blackCartIcon from '../../resources/images/cart/blackCart.png';
+import whiteCartIcon from '../../resources/images/cart/whiteCart.png';
 import "./cartStyling.css";
 
 
