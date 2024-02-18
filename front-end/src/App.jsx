@@ -8,10 +8,12 @@ import LoginPage from './LoginPage.jsx';
 import './css/index.css';
 import PageNotFound from './PageNotFound';
 import CreateAccountPage from './CreateAccount.jsx';
+import NavigationBar from './components/navbar/Navbar.jsx';
 
 function App() {
   return (
     <Router>
+      <NavigationBar/>
       <Routes>
         <Route exact path="/" element={<MainPage />} />
         <Route path="/search" element={<SearchCourse />} />
