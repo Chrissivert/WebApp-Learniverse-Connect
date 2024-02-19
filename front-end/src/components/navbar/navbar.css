@@ -13,7 +13,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: auto;
+  /* height: 3rem; */
   align-items: center;
   z-index: 100;
 }
@@ -42,8 +42,3 @@ header {
   width: 30px;
   height: 30px;
 } */
-
-.NavBar {
-  font-family: sans-serif;
-  text-align: center;
-}
