@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './MainPage';
+import MainPage from './components/pages/mainPage/MainPage.jsx';
 import Footer from "./components/footer/Footer.jsx"
 import SearchCourse from './SearchCourse';
 import LoginPage from './LoginPage.jsx';
