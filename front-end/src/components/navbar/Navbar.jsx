@@ -30,13 +30,6 @@ export default function NavigationBar() {
           <Logo/> Learniverse Connect
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
-         {/*<Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav>
-            <Nav.Link href='/search'>Search</Nav.Link>
-            <Nav.Link href='/about'>About us</Nav.Link>
-            <Nav.Link href='/contact'>Contact</Nav.Link>
-          </Nav>
-        </Navbar.Collapse> */}
         <HamburgerMenu/>
       </Navbar>
     </header>
