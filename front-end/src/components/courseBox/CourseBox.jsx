@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import "./courseBoxStyling.css";
+import './courseBoxStyling.css';
 import programmingImage from '../../resources/images/coursebox/computer/programming.jpg';
+
+
 
 function CourseBox({ title, duration, price, onClick }) {
   return (
