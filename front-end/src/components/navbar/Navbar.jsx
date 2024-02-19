@@ -20,24 +20,18 @@ import {
 import HamburgerMenu from './hamburger/Hamburger.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css';
-import CreateMainPage from '../pages/mainPage/MainPage.jsx';
+// import CreateMainPage from '../pages/mainPage/MainPage.jsx';
 
 export default function NavigationBar() {
-
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleNavbar = () => {
-    setExpanded(!expanded);
-  };
 
 
   return (
     <header>
-      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' className='NavBar'>
         <Navbar.Brand href='/'>
           <Logo/> Learniverse Connect
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' onClick={toggleNavbar}/>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
          {/*<Navbar.Collapse id='responsive-navbar-nav'>
           <Nav>
             <Nav.Link href='/search'>Search</Nav.Link>
@@ -47,7 +41,7 @@ export default function NavigationBar() {
         </Navbar.Collapse> */}
         <HamburgerMenu/>
       </Navbar>
-      <CreateMainPage expanded={expanded}/>
+      {/* <CreateMainPage expanded={expanded}/> */}
     </header>
   );
 };
