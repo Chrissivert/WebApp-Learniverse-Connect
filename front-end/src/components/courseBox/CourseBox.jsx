@@ -11,21 +11,9 @@ function CourseBox({ title, duration, price, onClick }) {
       <div className="course-box-upper" style={{backgroundImage: `url(${programmingImage})`}}>
       </div>
       <div className="course-box-lower">
-      <div className="course-info">
-          <p className="category">Humanities</p>
-          <p className="type">Online</p>
-        </div>
-        {/* Course Title and Description */}
-        <div className="course-details">
-          <h2 className="title">{title}</h2>
-          <p className="description">This course covers fundamental concepts of React programming...</p>
-        </div>
-        {/* Duration, Price, and Start/End Dates */}
-        <div className="course-meta">
-          <p className="price">Price: ${price}</p>
-          <p className="duration">Duration: {duration}</p>
-          <p className="schedule">Starts: 10/02/2024 - Ends: 10/26/2024</p>
-        </div>
+        <h2>{title}</h2>
+        <p>Duration: {duration}</p>
+        <p>Price: ${price}</p>
       </div>
     </a>
   );
