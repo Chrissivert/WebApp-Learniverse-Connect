@@ -17,12 +17,9 @@ export default function HamburgerMenu() {
   return (
     <Navbar.Collapse id='responsive-navbar-nav'>
       <Nav>
-        {/* <Nav.Link href='/search'>Search</Nav.Link>
+        <Nav.Link href='/search'>Search</Nav.Link>
         <Nav.Link href='/about'>About us</Nav.Link>
-        <Nav.Link href='/contact'>Contact</Nav.Link> */}
-        <a href='/search'>Search</a>
-        <a href='/about'>About us</a>
-        <a href='/contact'>Contact</a>
+        <Nav.Link href='/contact'>Contact</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   )
