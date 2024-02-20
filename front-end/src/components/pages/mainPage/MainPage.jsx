@@ -3,9 +3,9 @@ import CourseSection from '../../courseBox/CourseBox.jsx';
 import ThemeToggle from '../../../ThemeToggle.jsx';
 import './mainpage.css';
 
-function CreateMainPage({ expanded }) {
+function CreateMainPage() {
   return (
-    <div className={expanded ? 'main-content-expanded' : 'main-content'}>
+    <div>
       <ThemeToggle/>
       <CourseSection/>
     </div>
