@@ -1,14 +1,22 @@
-BEGIN;
-
-CREATE TABLE company (
-    company_id SERIAL PRIMARY KEY,
-    company_name TEXT NOT NULL
+-- Create tables for the courses
+CREATE TABLE Courses (
+    ProductID INTEGER PRIMARY KEY,
+    Title TEXT NOT NULL,
+    CoveredTopics TEXT NOT NULL,
+    Level TEXT NOT NULL,
+    ClosestSession TEXT NOT NULL,
+    CourseSize REAL NOT NULL,
+    HoursPerWeek REAL NOT NULL,
+    RelatedCertifications TEXT,
+    CourseProviders TEXT NOT NULL,
+    Description TEXT NOT NULL
 );
 
-CREATE TABLE app_user (
-    email TEXT NOT NULL,
-    pass_hash TEXT NOT NULL,
-    company_id INT NOT NULL
+-- Course Providers table
+CREATE TABLE CourseProviders (
+    ProviderID INTEGER PRIMARY KEY,
+    ProviderName TEXT NOT NULL,
+    CourseID INTEGER NOT NULL,
+    Price REAL NOT NULL,
+    FOREIGN KEY (CourseID) REFERENCES Courses(ProductID)
 );
-
-COMMIT;
