@@ -1,3 +1,4 @@
+BEGIN;
 -- Create tables for the courses
 CREATE TABLE Courses (
     ProductID INTEGER PRIMARY KEY,
@@ -20,3 +21,5 @@ CREATE TABLE CourseProviders (
     Price REAL NOT NULL,
     FOREIGN KEY (CourseID) REFERENCES Courses(ProductID)
 );
+
+COMMIT;

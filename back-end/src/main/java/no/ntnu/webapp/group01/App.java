@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class App {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/group1database";
+    private static final String URL = "jdbc:mysql://localhost:3306/group1database";
     private static final String USERNAME = "user1";
     private static final String PASSWORD = "password1";
 
@@ -17,7 +17,7 @@ public class App {
 
         try {
             // Load the JDBC driver
-            Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish connection
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -41,16 +41,15 @@ public class App {
     }
 
     private static void readData(Connection connection) {
-        String query = "SELECT Title, CoveredTopics FROM Courses";
+        String query = "SELECT Title FROM Courses";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            System.out.println("Coursess: ");
+            System.out.println("Data from MySQL database:");
             while (resultSet.next()) {
-                String title = resultSet.getString("Title");
-                String coveredTopics = resultSet.getString("CoveredTopics");
-                System.out.println("> Title: " + title + ", Covered Topics: " + coveredTopics);
+                System.out.println(resultSet.getString("Title"));
+                // Process each row of the result set
             }
         } catch (SQLException sqle) {
             System.err.println("Error while reading data: " + sqle.getMessage());
