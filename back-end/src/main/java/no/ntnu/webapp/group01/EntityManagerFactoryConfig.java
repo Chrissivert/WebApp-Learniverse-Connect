@@ -18,8 +18,8 @@ public class EntityManagerFactoryConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
-                .packages("no.ntnu.webapp.group01") // Specify the package to scan for entity classes
-                .persistenceUnit("group1PersistenceUnit") // Set the persistence unit name
+                .packages("no.ntnu.webapp.group01")
+                .persistenceUnit("group1PersistenceUnit")
                 .build();
     }
 }

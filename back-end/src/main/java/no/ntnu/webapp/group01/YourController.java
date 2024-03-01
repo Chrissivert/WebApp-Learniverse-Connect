@@ -21,7 +21,7 @@ public class YourController {
         List<Courses> courses = courseRepository.findAll();
         
         for (Courses course : courses) {
-            System.out.println("Title: " + course.getTitle() + ", ID: " + course.getId());
+            System.out.println("Title: " + course.getTitle() + ", ID: " + course.getCourseID());
         }
         
         return courses;

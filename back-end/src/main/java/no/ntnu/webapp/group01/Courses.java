@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Courses {
 
     @Id
-    private int id;
+    private int CourseID;
 
     // @Column(columnDefinition = "TEXT")
     private String title;
@@ -26,12 +26,12 @@ public class Courses {
     }
 
     // Getters and setters
-    public int getId() {
-        return this.id;
+    public int getCourseID() {
+        return this.CourseID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCourseID(int id) {
+        this.CourseID = id;
     }
 
     public String getTitle() {
