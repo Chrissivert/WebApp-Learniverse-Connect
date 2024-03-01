@@ -17,11 +17,10 @@ public class YourController {
     private CourseRepository courseRepository;
 
     @GetMapping("/courses")
-    public List<Course> getCourses() {
-        List<Course> courses = courseRepository.findAll();
+    public List<Courses> getCourses() {
+        List<Courses> courses = courseRepository.findAll();
         
-        // Logging titles and ids
-        for (Course course : courses) {
+        for (Courses course : courses) {
             System.out.println("Title: " + course.getTitle() + ", ID: " + course.getId());
         }
         

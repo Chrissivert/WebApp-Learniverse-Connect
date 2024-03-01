@@ -1,23 +1,27 @@
 package no.ntnu.webapp.group01;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Courses")
-public class Course {
+public class Courses {
 
     @Id
     private int id;
+
+    // @Column(columnDefinition = "TEXT")
     private String title;
 
-    public Course() {
+    public Courses() {
         // Default constructor required by JPA
     }
 
-    public Course(int id, String title) {
-        this.id = id;
+    public Courses(String title) {
         this.title = title;
     }
 
