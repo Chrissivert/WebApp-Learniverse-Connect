@@ -15,8 +15,6 @@ services:
     volumes:
        - ./sql_scripts:/docker-entrypoint-initdb.d
 
-
-
   adminer:
     image: adminer
     restart: always

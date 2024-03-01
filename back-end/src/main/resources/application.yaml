@@ -7,6 +7,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  security:
+    user:
+      name: user1
+      password: password1
 
 logging:
   level:
