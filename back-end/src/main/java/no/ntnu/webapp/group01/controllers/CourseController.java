@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.webapp.group01.models.Courses;
-import no.ntnu.webapp.group01.repositories.CourseRepository;
+import no.ntnu.webapp.group01.service.CourseService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -18,16 +18,12 @@ import java.util.List;
 public class CourseController {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @GetMapping("/courses")
-    public List<Courses> getCourses() {
-        List<Courses> courses = courseRepository.findAll();
-        
-        for (Courses course : courses) {
-            System.out.println("Title: " + course.getTitle() + ", ID: " + course.getCourseID());
-        }
-        
-        return courses;
-    }
+    public List<Courses> getAllCourses() {
+    List<Courses> courses = courseService.getCheapestCoursePrice();
+    
+    return courses;
+}
 }

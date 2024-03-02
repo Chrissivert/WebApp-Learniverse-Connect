@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
 import programmingImage from '../../resources/images/coursebox/computer/programming.jpg';
 
-function CourseBox({ title, difficulty, price, credits, onClick, cheapestPrice }) {
+function CourseBox({ title, difficulty, credits, onClick, cheapestPrice }) {
+  const roundToTwoDecimalPlaces = (number) => {
+    return Math.round(number * 100) / 100;
+  };
+
   return (
     <a className="course-box" href="#" onClick={onClick}>
       <div className="course-box-upper" style={{backgroundImage: `url(${programmingImage})`}}>
@@ -11,29 +15,28 @@ function CourseBox({ title, difficulty, price, credits, onClick, cheapestPrice }
       <div className="course-box-lower">
         <h2>{title}</h2>
         <p>Difficulty: {difficulty}</p>
-        <p>Price: ${price}</p>
         <p>Credits: {credits}</p>
-        {cheapestPrice && <p>Cheapest Price: ${cheapestPrice}</p>}
+        {cheapestPrice && <p>Cheapest Price: {roundToTwoDecimalPlaces(cheapestPrice)} NOK</p>}
       </div>
     </a>
   );
 }
-  
+
 CourseBox.propTypes = {
   title: PropTypes.string.isRequired,
   difficulty: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  credits: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   cheapestPrice: PropTypes.number // Add prop type for cheapest price
 };
 
 function CourseSection() {
   const [courses, setCourses] = useState([]);
-  const [cheapestPrices, setCheapestPrices] = useState({}); // State to store cheapest prices
+  const [cheapestPrices, setCheapestPrices] = useState({});
 
   useEffect(() => {
     fetchCourses();
-    fetchCheapestPrices(); // Fetch cheapest prices when component mounts
+    fetchCheapestPrices();
   }, []);
 
   const fetchCourses = async () => {
@@ -53,14 +56,16 @@ function CourseSection() {
 
   const fetchCheapestPrices = async () => {
     try {
-      const response = await fetch('http://localhost:8081/api/cheapest-course-prices', {
+      const response = await fetch('http://localhost:8081/api/converted-course-prices', {
         credentials: 'include'
       });
       if (!response.ok) {
         throw new Error('Failed to fetch cheapest prices');
       }
       const data = await response.json();
-      // Store cheapest prices in state using course ID as key
+      if (!Array.isArray(data)) {
+        throw new Error('Cheapest prices data is not an array');
+      }
       const cheapestPricesMap = {};
       data.forEach(price => {
         cheapestPricesMap[price.courseID] = price.price;

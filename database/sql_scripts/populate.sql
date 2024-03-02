@@ -28,17 +28,18 @@ VALUES (1, 'Apache Software Foundation'),
        (4, 'Oracle');
 
 INSERT INTO CourseProviderRelationship (providerID, courseID)
-VALUES (1, 1),  -- Apache Software Foundation offers Real-Time Programming in Java
-       (2, 1),  -- NTNU offers Real-Time Programming in Java
-       (2, 2),  -- NTNU also offers Introduction to SQL Essentials
-       (3, 2);  -- Pearson offers Introduction to SQL Essentials
+VALUES (1, 1),  
+       (2, 1),  
+       (2, 2),
+       (3, 2);
 
 INSERT INTO CoursePricing (pricingID, courseID, providerID, price, currency)
 VALUES 
-    (1, 1, 1, 29999.00, 'NOK'), -- Real-Time Programming in Java price option 1 from provider 1
-    (2, 1, 2, 31000.00, 'NOK'), -- Real-Time Programming in Java price option 2 from provider 2
-    (3, 2, 2, 800.00, 'USD'),   -- Introduction to SQL Essentials price option 1 from provider 2
-    (4, 2, 3, 750.00, 'USD');   -- Introduction to SQL Essentials price option 2 from provider 3
+    (1, 1, 2, 29999.00, 'NOK'), 
+    (2, 1, 4, 32000.00, 'NOK'),
+    (3, 2, 2, 800.00, 'USD'),  
+    (4, 2, 1, 10000.00, 'NOK'),
+    (5, 2, 3, 899.00, 'USD');
 
 INSERT INTO CourseCertifications (certificationID, title) 
 VALUES  (1, 'Java SE 17 Programmer Professional'),
