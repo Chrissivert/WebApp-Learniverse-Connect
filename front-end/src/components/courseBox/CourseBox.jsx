@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
 import programmingImage from '../../resources/images/coursebox/computer/programming.jpg';
-
-
 
 function CourseBox({ title, duration, price, onClick }) {
   return (
@@ -27,11 +25,27 @@ CourseBox.propTypes = {
 };
 
 function CourseSection() {
-  const courses = [
-    { title: 'React Fundamentals', duration: '4 weeks', price: 99 },
-    { title: 'Advanced JavaScript', duration: '6 weeks', price: 149 },
-    { title: 'Web Design Basics', duration: '3 weeks', price: 79 }
-  ];
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch('http://localhost:8081/api/courses', {
+        credentials: 'include' // Include credentials
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch courses');
+      }
+      const data = await response.json();
+      setCourses(data);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
+  
 
   const handleCourseClick = () => {
     // Handle the click event for the entire CourseBox
