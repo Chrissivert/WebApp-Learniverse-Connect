@@ -34,19 +34,16 @@ function CourseSection() {
   const [courses, setCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
 
-  useEffect(() => {
-    fetchCourses();
-    fetchCheapestPrices();
-  }, []);
-
-  const fetchCourses = async () => {
+  const fetchCourses = async (sortBy) => {
     try {
-      const response = await fetch('http://localhost:8081/api/courses', {
+      const response = await fetch(`http://localhost:8081/api/courses?sortBy=${sortBy}`, {
         credentials: 'include'
       });
+
       if (!response.ok) {
         throw new Error('Failed to fetch courses');
       }
+
       const data = await response.json();
       setCourses(data);
     } catch (error) {
@@ -75,6 +72,11 @@ function CourseSection() {
       console.error('Error fetching cheapest prices:', error);
     }
   };
+
+  useEffect(() => {
+    fetchCourses('credits');
+    // fetchCheapestPrices();
+  }, []);
 
   const handleCourseClick = () => {
     console.log("CourseBox clicked");
