@@ -22,13 +22,20 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("/courses")
-public List<Courses> getAllCourses(@RequestParam(required = false) String sortBy) {
-    if (sortBy != null) {
-        if ("credits".equals(sortBy)) {
-            return courseService.getCoursesSortedByCredits();
+    public List<Courses> getAllCourses(@RequestParam(required = false) String sortBy) {
+        if (sortBy != null) {
+            switch (sortBy) {
+                case "credits":
+                    return courseService.getCoursesSortedByCredits();
+                case "title":
+                    return courseService.getCoursesSortedByTitle();
+                case "difficulty":
+                    return courseService.getCoursesSortedByDifficulty();
+                default:
+                    break;
+            }
         }
+        return courseService.getAllCourses();
     }
-    return courseService.getCheapestCoursePrice();
 }
-
-}
+    
