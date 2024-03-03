@@ -6,6 +6,8 @@ import CourseBox from './CourseBox'; // Import CourseBox component
 function CourseSection({ searchQuery }) {
   const [courses, setCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
+  const [filterBy, setFilterBy] = useState(null); // State to track the filter criteria
+  const [filteredCourses, setFilteredCourses] = useState([]); // State to hold filtered courses
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -24,12 +26,12 @@ function CourseSection({ searchQuery }) {
         }
 
         setCourses(coursesData);
+        setFilteredCourses(coursesData); // Initialize filteredCourses with all courses
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
 
-    // Fetching cheapest prices
     const fetchConvertedPrices = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/converted-course-prices', {
@@ -56,27 +58,52 @@ function CourseSection({ searchQuery }) {
       }
     };
 
-    fetchCourses().then(fetchConvertedPrices);
+    fetchCourses();
+    fetchConvertedPrices();
   }, []);
 
-  const handleCourseClick = (courseId) => {
-    console.log("CourseBox clicked", courseId);
-  };
+  useEffect(() => {
+    // Update filtered courses whenever searchQuery or courses change
+    const filterCourses = (courses, criteria) => {
+      switch (criteria) {
+        case 'credits':
+          return courses.slice().sort((a, b) => a.credits - b.credits);
+        case 'price':
+          return courses.slice().sort((a, b) => {
+            const priceA = cheapestPrices[a.courseID] || Infinity;
+            const priceB = cheapestPrices[b.courseID] || Infinity;
+            return priceA - priceB;
+          });
+        case 'alphabetical':
+          return courses.slice().sort((a, b) => a.title.localeCompare(b.title));
+        default:
+          return courses.slice();
+      }
+    };
 
-  // Filter courses based on search query
-  const filteredCourses = searchQuery ? courses.filter(course => {
-    return course.title.toLowerCase().includes(searchQuery.toLowerCase());
-  }) : courses;
-  
+    const newFilteredCourses = searchQuery
+      ? filterCourses(courses.filter(course => course.title.toLowerCase().includes(searchQuery.toLowerCase())), filterBy)
+      : filterCourses(courses, filterBy);
+
+    setFilteredCourses(newFilteredCourses);
+  }, [searchQuery, courses, filterBy, cheapestPrices]);
+
+  const handleFilterChange = (criteria) => {
+    setFilterBy(criteria);
+  };
 
   return (
     <div className="course-section">
+      <div>
+        <button onClick={() => handleFilterChange('credits')}>Filter by Credits</button>
+        <button onClick={() => handleFilterChange('price')}>Filter by Price</button>
+        <button onClick={() => handleFilterChange('alphabetical')}>Filter Alphabetically</button>
+      </div>
       {filteredCourses.map(course => (
         <CourseBox
-          key={course.courseID} // Assuming each course has a unique `courseID`
+          key={course.courseID}
           {...course}
-          onClick={() => handleCourseClick(course.courseID)} // Passing `courseID` to handleCourseClick
-          cheapestPrice={cheapestPrices[course.courseID]} // Assuming the ID field is `courseID`
+          cheapestPrice={cheapestPrices[course.courseID]}
         />
       ))}
     </div>

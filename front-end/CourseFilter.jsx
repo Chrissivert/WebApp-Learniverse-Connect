@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import SearchBar from './SearchBar';
+import CourseSection from './CourseSection'; // Import CourseSection component
 
-function CourseFilter({ onSortChange }) {
-  const [sortBy, setSortBy] = useState('');
+function SearchCoursesPage() {
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSortChange = (event) => {
-    const value = event.target.value;
-    setSortBy(value);
-    onSortChange(value);
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
 
   return (
-    <select value={sortBy} onChange={handleSortChange}>
-      <option value="">Sort by...</option>
-      <option value="credits">Credits</option>
-      <option value="price">Price</option>
-      <option value="title">Alphabetically</option>
-    </select>
+    <div>
+      <h1>Search Courses Page</h1>
+      <SearchBar onSearch={handleSearch} />
+      <CourseSection searchQuery={searchQuery} />
+    </div>
   );
 }
 
-CourseFilter.propTypes = {
-  onSortChange: PropTypes.func.isRequired,
-};
-
-export default CourseFilter;
+export default SearchCoursesPage;
