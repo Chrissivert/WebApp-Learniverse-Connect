@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
 import CourseBox from './CourseBox'; // Import CourseBox component
 
-function CourseSection() {
+function CourseSection({ searchQuery }) {
   const [courses, setCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
 
   useEffect(() => {
-    // Fetching courses
     const fetchCourses = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/courses', {
@@ -64,9 +63,15 @@ function CourseSection() {
     console.log("CourseBox clicked", courseId);
   };
 
+  // Filter courses based on search query
+  const filteredCourses = searchQuery ? courses.filter(course => {
+    return course.title.toLowerCase().includes(searchQuery.toLowerCase());
+  }) : courses;
+  
+
   return (
     <div className="course-section">
-      {courses.map(course => (
+      {filteredCourses.map(course => (
         <CourseBox
           key={course.courseID} // Assuming each course has a unique `courseID`
           {...course}
@@ -76,10 +81,10 @@ function CourseSection() {
       ))}
     </div>
   );
-}  
+}
 
 CourseSection.propTypes = {
-  // Removed courses from propTypes since we're fetching inside the component now
+  searchQuery: PropTypes.string.isRequired, // Add searchQuery prop type
 };
 
 export default CourseSection;

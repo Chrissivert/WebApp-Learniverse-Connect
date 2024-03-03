@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CourseBox from '../../courseBox/CourseBox';
+import CourseSection from '../../courseBox/CourseSection';
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
@@ -42,20 +42,14 @@ const SearchBar = () => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search courses..."
       />
-      <button onClick={() => setQuery(query)} disabled={loading}>Search</button>
-
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      <div>
-        {results.length > 0 ? (
-          results.map((course, index) => (
-            <CourseBox key={index} {...course} />
-          ))
-        ) : (
-          <p>No courses found.</p>
-        )}
-      </div>
+      {results.length > 0 ? (
+        <CourseSection searchQuery={query} />
+      ) : (
+        query && <p>No courses found.</p>
+      )}
     </div>
   );
 };

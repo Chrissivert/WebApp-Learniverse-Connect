@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import SortByCourseSection from './SortCourseSection';
 import SearchBar from './SearchBar';
 
 function SearchCoursesPage() {
