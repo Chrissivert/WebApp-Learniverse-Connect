@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import CourseBox from '../../courseBox/CourseBox';
+// import CourseBox from './CourseBox'; // Import your CourseBox component
 
 const SearchCourses = () => {
     const [query, setQuery] = useState('');
@@ -40,15 +42,15 @@ const SearchCourses = () => {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
 
-            <ul>
+            <div>
                 {results.length > 0 ? (
                     results.map((course) => (
-                        <li key={course.id}>{course.title}</li>
+                        <CourseBox key={course.courseID} course={course} />
                     ))
                 ) : (
-                    <li>No courses found.</li>
+                    <p>No courses found.</p>
                 )}
-            </ul>
+            </div>
         </div>
     );
 };

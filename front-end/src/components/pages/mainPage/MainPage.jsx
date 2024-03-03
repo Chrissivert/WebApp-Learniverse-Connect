@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseSection from '../../courseBox/CourseBox.jsx';
+// import CourseSection from '../../courseBox/CourseBox.jsx';
 import ThemeToggle from '../../theme/ThemeToggle.jsx';
 import './mainpage.css';
 import YourComponent from '../../../FetchAPI.jsx';
@@ -8,7 +8,7 @@ function CreateMainPage() {
   return (
     <div>
       <ThemeToggle/>
-      <CourseSection/>
+      {/* <CourseSection/> */}
       <YourComponent/>
     </div>
   );

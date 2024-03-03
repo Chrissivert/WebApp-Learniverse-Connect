@@ -37,7 +37,7 @@ const YourComponent = () => {
             ) : (
                 <ul>
                     {courses.map(course => (
-                        <li key={course.id}>{course.title}</li>
+                        <li key={course.courseID}>{course.title}</li>
                     ))}
                 </ul>
             )}

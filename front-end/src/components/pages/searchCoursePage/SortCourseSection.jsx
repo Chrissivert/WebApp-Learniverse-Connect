@@ -1,46 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import CourseSection from '../../courseBox/CourseBox';
-import CourseFilter from '../../../../CourseFilter';
-function SortByCourseSection({ sortBy }) {
-  const [courses, setCourses] = useState([]);
+// import React, { useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
+// import CourseSection from '../../courseBox/CourseBox';
+// import CourseFilter from '../../../../CourseFilter';
 
-  useEffect(() => {
-    fetchCourses(sortBy);
-  }, [sortBy]);
+// function SortByCourseSection({ sortBy }) {
+//   const [courses, setCourses] = useState([]);
 
-  const fetchCourses = async (sortBy) => {
-    try {
-      let url = 'http://localhost:8081/api/courses';
-      if (sortBy) {
-        url += `?sortBy=${sortBy}`;
-      }
+//   useEffect(() => {
+//     fetchCourses(sortBy);
+//   }, [sortBy]);
 
-      const response = await fetch(url, {
-        credentials: 'include'
-      });
+//   const fetchCourses = async (sortBy) => {
+//     try {
+//       let url = 'http://localhost:8081/api/courses';
+//       if (sortBy) {
+//         url += `?sortBy=${sortBy}`;
+//       }
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch courses');
-      }
+//       const response = await fetch(url, {
+//         credentials: 'include'
+//       });
 
-      const data = await response.json();
-      setCourses(data);
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-    }
-  };
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch courses');
+//       }
 
-  return (
-    <div>
-      <CourseFilter onSortChange={fetchCourses} />
-      <CourseSection courses={courses} />
-    </div>
-  );
-}
+//       const data = await response.json();
+//       setCourses(data);
+//     } catch (error) {
+//       console.error('Error fetching courses:', error);
+//     }
+//   };
 
-SortByCourseSection.propTypes = {
-  sortBy: PropTypes.string.isRequired,
-};
+//   const handleSortChange = (sortCriteria) => {
+//     fetchCourses(sortCriteria);
+//   };
 
-export default SortByCourseSection;
+//   return (
+//     <div>
+//       <CourseFilter onSortChange={handleSortChange} />
+//       <CourseSection courses={courses} />
+//     </div>
+//   );
+// }
+
+// SortByCourseSection.propTypes = {
+//   sortBy: PropTypes.string.isRequired,
+// };
+
+// export default SortByCourseSection;
