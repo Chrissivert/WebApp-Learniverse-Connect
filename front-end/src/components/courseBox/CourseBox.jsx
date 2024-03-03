@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
 import programmingImage from '../../resources/images/coursebox/computer/programming.jpg';
 
-function CourseBox({ title, difficulty, credits, onClick }) {
+function CourseBox({ title, difficulty, credits, onClick, cheapestPrice }) {
   const roundToTwoDecimalPlaces = (number) => {
     return Math.round(number * 100) / 100;
   };
@@ -21,6 +21,7 @@ function CourseBox({ title, difficulty, credits, onClick }) {
         <h3>{title}</h3>
         <p>Difficulty: {difficulty}</p>
         <p>Credits: {credits}</p>
+        <p>cheapestPrice: {roundToTwoDecimalPlaces(cheapestPrice)} NOK </p>
         {/* {cheapestPrice !== undefined && <p>Cheapest Price: {roundToTwoDecimalPlaces(cheapestPrice)} NOK</p>} */}
       </div>
     </div>
