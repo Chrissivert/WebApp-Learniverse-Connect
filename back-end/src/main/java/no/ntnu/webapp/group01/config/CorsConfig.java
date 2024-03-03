@@ -1,4 +1,4 @@
-package no.ntnu.webapp.group01;
+package no.ntnu.webapp.group01.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

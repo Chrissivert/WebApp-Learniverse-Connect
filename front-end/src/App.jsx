@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CreateMainPage from './components/pages/mainPage/MainPage.jsx';
 import Footer from "./components/footer/Footer.jsx"
-import CreateLoginPage from './LoginPage.jsx';
+import CreateLoginPage from './components/pages/LoginPage.jsx';
 import './css/index.css';
-import CreatePageNotFound from './PageNotFound';
-import CreateAccountPage from './CreateAccount.jsx';
+import CreatePageNotFound from './components/pages/PageNotFound.jsx';
+import CreateAccountPage from './components/pages/CreateAccount.jsx';
 import NavigationBar from './components/navbar/Navbar.jsx';
-import ThemeProvider from './ThemeProvider';
+import ThemeProvider from './components/theme/ThemeProvider.jsx';
 import CourseDetails from './components/pages/coursePage/CoursePage.jsx';
 import CreateSearchCoursesPage from './components/pages/searchCoursePage/SearchCoursePage.jsx';
 

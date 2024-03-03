@@ -1,4 +1,4 @@
-package no.ntnu.webapp.group01;
+package no.ntnu.webapp.group01.config;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;

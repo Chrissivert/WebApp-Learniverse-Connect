@@ -63,5 +63,8 @@ public class CourseService {
          }
          return -1;
      }
-    
+
+    public List<Courses> searchCourses(String query) {
+        return courseRepository.findByTitleContainingIgnoreCase(query);
+    }
 }

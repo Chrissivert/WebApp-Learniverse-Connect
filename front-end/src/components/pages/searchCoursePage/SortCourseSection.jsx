@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import CourseSection from './components/courseBox/CourseBox';
-import CourseFilter from '../CourseFilter';
+import CourseSection from '../../courseBox/CourseBox';
+import CourseFilter from '../../../../CourseFilter';
 function SortByCourseSection({ sortBy }) {
   const [courses, setCourses] = useState([]);
 

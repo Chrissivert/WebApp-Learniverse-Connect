@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import NavigationBar from './components/navbar/Navbar';
+import NavigationBar from '../navbar/Navbar';
 
 function LoginPage({ onNavigateToCreateAccount }) {
   const handleCreateAccountClick = () => {

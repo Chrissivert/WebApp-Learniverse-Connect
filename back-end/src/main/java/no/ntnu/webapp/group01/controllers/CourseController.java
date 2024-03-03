@@ -11,6 +11,8 @@ import no.ntnu.webapp.group01.service.CourseService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+
 import java.util.List;
 
 @RestController
@@ -36,6 +38,12 @@ public class CourseController {
             }
         }
         return courseService.getAllCourses();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Courses>> searchCourses(@RequestParam("query") String query) {
+        List<Courses> courses = courseService.searchCourses(query);
+        return ResponseEntity.ok(courses);
     }
 }
     

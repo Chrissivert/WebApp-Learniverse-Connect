@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
+import no.ntnu.webapp.group01.config.CorsConfig;
+
 @SpringBootApplication
 @Import(CorsConfig.class)
 @ComponentScan(basePackages = {"no.ntnu.webapp.group01"})
