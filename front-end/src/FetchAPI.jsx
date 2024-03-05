@@ -5,24 +5,31 @@ const YourComponent = () => {
     const [isLoading, setIsLoading] = useState(true); // Add loading state
 
     useEffect(() => {
-        fetch('http://localhost:8081/api/courses', {
-            credentials: 'include', // Include cookies in the request
-        })
-            .then(response => {
+        const fetchCourses = async (sortBy) => {
+            try {
+                let url = 'http://localhost:8081/api/courses';
+                if (sortBy) {
+                    url += `?sortBy=${sortBy}`;
+                }
+                const response = await fetch(url, {
+                    credentials: 'include', // Include cookies in the request
+                });
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then(data => {
+
+                const data = await response.json();
                 setCourses(data);
                 setIsLoading(false); // Update loading state
                 console.log('Courses:', data); // Log courses data
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching courses:', error);
                 setIsLoading(false); // Update loading state
-            });
+            }
+        };
+
+        fetchCourses(); // Call fetchCourses without sorting initially
     }, []);
 
     // Log courses and loading state for debugging
