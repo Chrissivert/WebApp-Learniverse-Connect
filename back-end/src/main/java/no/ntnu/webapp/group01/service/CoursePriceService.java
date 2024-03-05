@@ -18,8 +18,8 @@ public class CoursePriceService {
     @Autowired
     private PriceRepository priceRepository;
 
-    public List<CoursePrice> getConvertedCoursePrices(String targetCurrency) {
-        List<CoursePrice> allCoursePrices = priceRepository.findAll();
+     public List<CoursePrice> getConvertedCoursePrices(String targetCurrency) {
+        List<CoursePrice> allCoursePrices = priceRepository.findByOrderByPriceAsc(); // Using repository method here
         List<CoursePrice> convertedCoursePrices = new ArrayList<>();
 
         for (CoursePrice coursePrice : allCoursePrices) {

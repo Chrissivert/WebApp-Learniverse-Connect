@@ -18,7 +18,7 @@ spring:
 logging:
   level:
     # root: INFO
-    org.hibernate: DEBUG
+    org.hibernate: INFO
 
 your:
   custom:

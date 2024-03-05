@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
-import CourseBox from './CourseBox'; // Import CourseBox component
+import CourseBox from './CourseBox';
 
 function CourseSection({ searchQuery }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [cheapestPrices, setCheapestPrices] = useState([]);
 
   useEffect(() => {
     const fetchFilteredCourses = async () => {
@@ -28,18 +29,47 @@ function CourseSection({ searchQuery }) {
     fetchFilteredCourses();
   }, [searchQuery]);
 
+  useEffect(() => {
+    const fetchConvertedPrices = async () => {
+      try {
+        const response = await fetch('http://localhost:8081/api/converted-course-prices', {
+          credentials: 'include',
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to fetch converted prices');
+        }
+  
+        const pricesData = await response.json();
+        setCheapestPrices(pricesData);
+      } catch (error) {
+        console.error('Error fetching converted prices:', error);
+      }
+    };
+  
+    fetchConvertedPrices();
+  }, []);
+
+  CourseSection.propTypes = {
+    searchQuery: PropTypes.string.isRequired,
+  };
+
   return (
     <div className="course-section">
-      {/* Render your filtered courses here */}
-      {filteredCourses.map(course => (
-        <CourseBox key={course.courseID} {...course} />
-      ))}
+      {filteredCourses.map(course => {
+        const priceData = cheapestPrices.find(price => price.courseID === course.courseID);
+        const cheapestPrice = priceData ? priceData.price : null;
+  
+        return (
+          <CourseBox 
+            key={course.courseID} 
+            {...course}
+            cheapestPrice={cheapestPrice}
+          />
+        );
+      })}
     </div>
   );
 }
-
-CourseSection.propTypes = {
-  searchQuery: PropTypes.string.isRequired, // Add searchQuery prop type
-};
 
 export default CourseSection;
