@@ -62,10 +62,12 @@ function SearchBar() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search courses..."
       />
-
+  
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-
+  
+      {query && results.length === 0 && <p>No results found.</p>}
+  
       {results.length > 0 && (
         <div className="result-box">
           <ul>
@@ -77,7 +79,7 @@ function SearchBar() {
           </ul>
         </div>
       )}
-
+  
       <CourseSection searchQuery={query} />
     </div>
   );

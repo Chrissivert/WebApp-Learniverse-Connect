@@ -9,8 +9,8 @@ function CourseBox({title, difficulty, credits, onClick, cheapestPrice}) {
   };
 
   const handleClick = (e) => {
-    e.preventDefault(); // Prevent the default anchor action
-    onClick(); // Call the passed onClick function
+    e.preventDefault();
+    onClick();
   };
 
   return (
@@ -18,11 +18,10 @@ function CourseBox({title, difficulty, credits, onClick, cheapestPrice}) {
       <div className="course-box-upper" style={{backgroundImage: `url(${programmingImage})`}}>
       </div>
       <div className="course-box-lower">
-        <h3>{title}</h3>
+        <h4>{title}</h4>
         <p>Difficulty: {difficulty}</p>
         <p>Credits: {credits}</p>
         <p>cheapestPrice: {roundToTwoDecimalPlaces(cheapestPrice)} NOK </p>
-        {/* {cheapestPrice !== undefined && <p>Cheapest Price: {roundToTwoDecimalPlaces(cheapestPrice)} NOK</p>} */}
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
-  
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: bold;  
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: var(--text-color);
@@ -49,6 +50,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  
 }
 button:hover {
   border-color: #646cff;
