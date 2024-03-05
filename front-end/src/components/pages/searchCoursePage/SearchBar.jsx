@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import CourseSection from '../../courseBox/CourseSection';
+import './searchBar.css';
 
-const SearchBar = () => {
+function SearchBar() {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [results, setResults] = useState([]);
+
+  const highlightMatch = (title) => {
+    const index = title.toLowerCase().indexOf(query.toLowerCase());
+    if (index !== -1) {
+      return (
+        <>
+          {title.substring(0, index)}
+          <span className="highlight">{title.substring(index, index + query.length)}</span>
+          {title.substring(index + query.length)}
+        </>
+      );
+    }
+    return title;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!query) {
+        setResults([]);
+        return;
+      }
+
       setLoading(true);
       setError(null);
 
@@ -35,23 +55,32 @@ const SearchBar = () => {
   }, [query]);
 
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search courses..."
       />
+
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      {results.length > 0 ? (
-        <CourseSection searchQuery={query} />
-      ) : (
-        query && <p>No courses found.</p>
+      {results.length > 0 && (
+        <div className="result-box">
+          <ul>
+            {results.map((result) => (
+              <li key={result.courseID} onClick={() => setQuery(result.title)}>
+                {highlightMatch(result.title)}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
+
+      <CourseSection searchQuery={query} />
     </div>
   );
-};
+}
 
 export default SearchBar;
