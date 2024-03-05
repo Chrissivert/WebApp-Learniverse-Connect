@@ -2,32 +2,31 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './courseBoxStyling.css';
 import CourseBox from './CourseBox';
+import SortButtons from '../../SortButtons';
 
 function CourseSection({ searchQuery }) {
-  const [filteredCourses, setFilteredCourses] = useState([]);
-  const [cheapestPrices, setCheapestPrices] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [sortBy, setSortBy] = useState();
+  const [coursePrice, setCoursePrice] = useState([]);
 
   useEffect(() => {
     const fetchFilteredCourses = async () => {
       try {
-        let url = 'http://localhost:8081/api/courses';
-        if (searchQuery) {
-          url = `http://localhost:8081/api/search?query=${encodeURIComponent(searchQuery)}`;
-        }
-
-        const response = await fetch(url, { credentials: 'include' });
+        const response = await fetch(`http://localhost:8081/api/search?query=${encodeURIComponent(searchQuery)}&sortBy=${sortBy}`, { credentials: 'include' });
+        
         if (!response.ok) {
           throw new Error('Failed to fetch courses');
         }
-        const coursesData = await response.json();
-        setFilteredCourses(coursesData);
+
+        const apiCourses = await response.json();
+        setCourses(apiCourses);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
 
     fetchFilteredCourses();
-  }, [searchQuery]);
+  }, [searchQuery, sortBy]);
 
   useEffect(() => {
     const fetchConvertedPrices = async () => {
@@ -40,8 +39,8 @@ function CourseSection({ searchQuery }) {
           throw new Error('Failed to fetch converted prices');
         }
   
-        const pricesData = await response.json();
-        setCheapestPrices(pricesData);
+        const apiPrices = await response.json();
+        setCoursePrice(apiPrices);
       } catch (error) {
         console.error('Error fetching converted prices:', error);
       }
@@ -50,14 +49,15 @@ function CourseSection({ searchQuery }) {
     fetchConvertedPrices();
   }, []);
 
-  CourseSection.propTypes = {
-    searchQuery: PropTypes.string.isRequired,
+  const handleSortBy = (sortByValue) => {
+    setSortBy(sortByValue);
   };
 
   return (
     <div className="course-section">
-      {filteredCourses.map(course => {
-        const priceData = cheapestPrices.find(price => price.courseID === course.courseID);
+      <SortButtons handleSortBy={handleSortBy} />
+      {courses.map(course => {
+        const priceData = coursePrice.find(price => price.courseID === course.courseID);
         const cheapestPrice = priceData ? priceData.price : null;
   
         return (
@@ -71,5 +71,9 @@ function CourseSection({ searchQuery }) {
     </div>
   );
 }
+
+CourseSection.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+};
 
 export default CourseSection;
