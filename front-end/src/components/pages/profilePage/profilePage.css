@@ -16,7 +16,13 @@
 } */
 
 .profilepage {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 6fr 2fr 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   background-color: #b7b7b7;
+  border-radius: 30px;
 }
 
 .card {
@@ -32,7 +38,8 @@
 }
 
 .avatar {
-  width: 75%;
+  width: 100px;
+  height: 100px;
   display: block;
   justify-content: center;
   border-radius: 50px;

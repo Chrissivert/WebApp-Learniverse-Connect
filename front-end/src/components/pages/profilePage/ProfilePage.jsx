@@ -46,6 +46,16 @@ function ProfilePage() {
         customized with props */}
         </div>
       </div>
+      <div className="content">
+        <p className="contentTitle">This is the info part of the page</p>
+      </div>
+      <div>
+        <p>This is miscellaneous social media info about the user</p>
+      </div>
+      <div>
+        <p>This is where various info about the courses are located</p>
+      </div>
+      
     </div>
   );
 }
