@@ -13,6 +13,7 @@ import CourseDetails from './components/pages/coursePage/CoursePage.jsx';
 import CreateSearchCoursesPage from './components/pages/searchCoursePage/SearchCoursePage.jsx';
 import ProfilePage from './components/pages/profilePage/ProfilePage.jsx';
 import AboutUsPage from './components/pages/aboutUsPage/AboutUsPage.jsx';
+import ContactPage from './components/pages/contactPage/ContactPage.jsx';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/createAccount" element={<CreateAccountPage />} />
         <Route path="/about" element={<AboutUsPage/>} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/contact" element={<ContactPage/>} />
       </Routes>
       <Footer/>
     </Router>
