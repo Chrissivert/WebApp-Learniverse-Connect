@@ -12,6 +12,7 @@ import ThemeProvider from './components/theme/ThemeProvider.jsx';
 import CourseDetails from './components/pages/coursePage/CoursePage.jsx';
 import CreateSearchCoursesPage from './components/pages/searchCoursePage/SearchCoursePage.jsx';
 import AboutUsPage from './components/pages/AboutUsPage.jsx';
+import ProfilePage from './components/pages/profilePage/ProfilePage.jsx';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="*" element={<CreatePageNotFound/>} />
         <Route path="/createAccount" element={<CreateAccountPage />} />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
       <Footer/>
     </Router>
