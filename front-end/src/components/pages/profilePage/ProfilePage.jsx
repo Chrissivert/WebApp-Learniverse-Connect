@@ -47,15 +47,14 @@ function ProfilePage() {
         </div>
       </div>
       <div className="content">
-        <p className="contentTitle">This is the info part of the page</p>
+        <p>This is the content part of the page</p>
       </div>
-      <div>
+      <div className="social-media">
         <p>This is miscellaneous social media info about the user</p>
       </div>
-      <div>
-        <p>This is where various info about the courses are located</p>
+      <div className="course-info">
+        <p>This is where info about the user's personal courses are located</p>
       </div>
-      
     </div>
   );
 }
@@ -75,9 +74,13 @@ function Intro() {
     <div>
       <h1>Prince Froggy</h1>
       <p>
-        Full-stack web developer and student at NTNU. I like to play video
-        games, and enjoy swimming at the beach.
+        Full-stack web developer and student at NTNU. 
       </p>
+      <p>User since: January 8th 2024</p>
+      <div className="buttons">
+        <button className="button">Follow</button>
+        <button className="button">Message</button>
+      </div>
     </div>
   );
 }
