@@ -63,7 +63,7 @@ function Avatar() {
   return (
     <img
       className="avatar"
-      src="front-end/src/resources/images/profile/prince_froggy.png"
+      src="front-end/src/resources/images/profile/prince_froggy.jpeg"
       alt="Prince Froggy"
     />
   );
@@ -72,7 +72,7 @@ function Avatar() {
 function Intro() {
   return (
     <div>
-      <h1>Prince Froggy</h1>
+      <h2>Prince Froggy</h2>
       <p>
         Full-stack web developer and student at NTNU. 
       </p>
