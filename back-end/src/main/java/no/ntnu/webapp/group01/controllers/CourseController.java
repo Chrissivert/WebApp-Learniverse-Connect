@@ -15,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Comparator;
 import java.util.List;
 
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api")
 public class CourseController {
-
     @Autowired
     private CourseService courseService;
 

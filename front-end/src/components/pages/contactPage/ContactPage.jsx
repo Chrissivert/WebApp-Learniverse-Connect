@@ -19,8 +19,9 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/send-email', {
+      const response = await fetch('http://localhost:8081/api/email', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -34,11 +35,6 @@ function ContactPage() {
     } catch (error) {
       console.error('Error sending email:', error);
     }
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
   };
 
   return (

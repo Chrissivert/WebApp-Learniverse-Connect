@@ -12,12 +12,22 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
   security:
     user:
-      name: user1
-      password: password1
+      name: user2
+      password: password2
+  mail:
+    host: smtp.outlook.com
+    port: 587
+    username: IAmChuckNorris1940@outlook.com
+    password: hello123123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 logging:
   level:
-    # root: INFO
     org.hibernate: INFO
 
 your:
