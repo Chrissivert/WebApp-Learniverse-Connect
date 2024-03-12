@@ -26,9 +26,13 @@ spring:
           starttls:
             enable: true
 
+jwt:
+  expiration: 3600 # Expiration time in seconds (e.g., 3600 seconds = 1 hour)
+  secret: yourSecretKey 
+
 logging:
   level:
-    org.hibernate: INFO
+    org.hibernate: DEBUG
 
 your:
   custom:

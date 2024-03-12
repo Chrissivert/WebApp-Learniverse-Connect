@@ -19,7 +19,7 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8081/api/email', {
+      const response = await fetch('http://localhost:8081/public/email', {
         method: 'POST',
         credentials: 'include',
         headers: {

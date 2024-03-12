@@ -11,7 +11,7 @@ import no.ntnu.webapp.group01.service.CoursePriceService;
 import no.ntnu.webapp.group01.models.CoursePrice;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/public2")
 public class CoursePriceController {
 
     @Autowired

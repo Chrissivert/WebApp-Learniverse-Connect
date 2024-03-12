@@ -1,5 +1,7 @@
 version: '3.1'
 
+#TROR DENNE FILA KAN FJERNES
+
 services:
   db:
     image: postgres

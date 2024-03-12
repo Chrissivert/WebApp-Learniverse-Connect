@@ -1,18 +1,19 @@
-package no.ntnu.webapp.group01.security;
+package no.ntnu.webapp.group01.util;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
+@Service
 public class JwtTokenUtil {
 
     @Value("${jwt.secret}")
@@ -61,6 +62,9 @@ public class JwtTokenUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-    }
+    JwtParser parser = Jwts.parser().setSigningKey(secret).build();
+    return parser.parseClaimsJws(token).getBody();
+}
+
+    
 }

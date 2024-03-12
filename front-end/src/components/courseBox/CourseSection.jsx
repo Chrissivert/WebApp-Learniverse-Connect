@@ -12,7 +12,7 @@ function CourseSection({ searchQuery }) {
   useEffect(() => {
     const fetchFilteredCourses = async () => {
       try {
-        const response = await fetch(`http://localhost:8081/api/search?query=${encodeURIComponent(searchQuery)}&sortBy=${sortBy}`, { credentials: 'include' });
+        const response = await fetch(`http://localhost:8081/public/search?query=${encodeURIComponent(searchQuery)}&sortBy=${sortBy}`, { credentials: 'include' });
         
         if (!response.ok) {
           throw new Error('Failed to fetch courses');
@@ -31,7 +31,7 @@ function CourseSection({ searchQuery }) {
   useEffect(() => {
     const fetchConvertedPrices = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/converted-course-prices', {
+        const response = await fetch('http://localhost:8081/public2/converted-course-prices', {
           credentials: 'include',
         });
   

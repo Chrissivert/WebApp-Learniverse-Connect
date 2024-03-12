@@ -7,7 +7,7 @@ const YourComponent = () => {
     useEffect(() => {
         const fetchCourses = async (sortBy) => {
             try {
-                let url = 'http://localhost:8081/api/courses';
+                let url = 'http://localhost:8081/public/courses';
                 if (sortBy) {
                     url += `?sortBy=${sortBy}`;
                 }
