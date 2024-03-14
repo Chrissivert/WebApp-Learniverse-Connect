@@ -30,19 +30,10 @@ public class UserService {
         }
         System.out.println("HELLLLLOOO");
 
-        userRepository.save(user);
-
-
-
-        // Check if the email already exists in the database
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already exists");
         }
         System.out.println("SSSSELLLLLOOO");
-
-
-
-        userRepository.save(user);
 
 
         // Encrypt the password before saving the user
@@ -50,6 +41,9 @@ public class UserService {
         System.out.println(encryptedPassword + " encrypted password");
         user.setUserPassword(encryptedPassword);
         System.out.println(encryptedPassword + " encrypted password");
+
+
+        userRepository.save(user);
 
 
     }

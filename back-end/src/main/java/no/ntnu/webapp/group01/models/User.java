@@ -20,6 +20,8 @@ public class User {
     @Schema(description = "User's email", example = "user@example.com")
     private String email;
 
+    //OBSOBS LEGG TIL @JSONIGNORE HER TIL SENERE!!!
+
     @Schema(description = "User's password", example = "password123")
     private String userPassword;
 
