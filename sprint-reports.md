@@ -2,7 +2,7 @@
 
 ## Week 7: 
 
-Date: 15 February  
+Date: 15th February  
 Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
 
 ### What was accomplished: 
@@ -37,7 +37,7 @@ We have created a basic react application where the user can go between differen
 
 ## Week 9
 
-Date: 29 February  
+Date: 29th February  
 Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
 
 ### What was accomplished: 
@@ -68,6 +68,41 @@ and making front-end elements retrieve necessary information
 
 ## Discussion: 
 Each person works on their indivudal page to avoid merge conflicts. Important to remember to divide the work among the group memebers on both front-end and back-end. As of now we continue working on front-end, Chris Sivert will attempt to make the front-end be able to retrieve information from the database. We feel as we are waiting for the lecture to move on. Now we only create styling but have no functionality.
+
+
+## Week 11
+
+Date: 14th March  
+Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
+
+### What was accomplished: 
+
+* Able to fetch APIs from backend connected to database
+* Populated the db with three courses
+* Added ability to sort by credits and title
+* Added API that converts all currencies to NOK
+* Added ability to search for coursetitle(searchbar)
+* Added ability to signup
+* Added loginpage (not working)
+* Added contact form (email not working)
+* Began adding JWT
+
+
+### What didn’t go well: 
+
+* Still missing quite a bit on styling
+* Little hard for everyone to understand exactly what is happening when everyone works on their own stuff
+* Currency conversion has only 5000 total requests so not a permanent solution
+
+### What to do: 
+
+* Add authentication of user using JWTs
+* Add more improved styling
+* Improve fetching from backend (make seperate classes for fetching)
+
+
+## Discussion: 
+A lot was achieved the past two weeks especially on backend. The database works as intended and fetching works. A little hard to understand all the changes that has happend since everyone solves them independently although this will probably become easier as we get more familiar with frontend and backend and how it all works.
 
 
 
