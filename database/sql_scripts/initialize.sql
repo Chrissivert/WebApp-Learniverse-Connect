@@ -1,8 +1,5 @@
 BEGIN;
 
--- CREATE TYPE role_enum AS ENUM ('admin', 'user', 'visitor');
-
-
 CREATE TABLE Courses (
     courseID INTEGER PRIMARY KEY,
     title TEXT NOT NULL,
@@ -19,18 +16,12 @@ CREATE TABLE CourseProviders (
     providerName TEXT NOT NULL
 );
 
--- CREATE TABLE app_user (
---     id SERIAL PRIMARY KEY,
---     email TEXT NOT NULL UNIQUE,
---     password TEXT NOT NULL,
---     name TEXT,
---     active BOOLEAN NOT NULL DEFAULT TRUE
--- );
+CREATE TABLE app_user (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    userPassword TEXT NOT NULL
+);
 
--- CREATE TABLE role (
---     id SERIAL PRIMARY KEY,
---     name role_enum NOT NULL UNIQUE
--- );
 
 CREATE TABLE CourseProviderRelationship (
     providerID INTEGER NOT NULL,

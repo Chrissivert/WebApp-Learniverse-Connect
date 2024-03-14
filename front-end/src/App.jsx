@@ -13,7 +13,7 @@ import ProfilePage from './components/pages/profilePage/ProfilePage.jsx';
 import AboutUsPage from './components/pages/aboutUsPage/AboutUsPage.jsx';
 import ContactPage from './components/pages/contactPage/ContactPage.jsx';
 import LoginPage from './components/pages/loginPage/Loginpage.jsx';
-// import RegisterPage from './components/pages/loginPage/CreateAccountPage.jsx';
+import RegisterPage from './components/pages/loginPage/CreateAccountPage.jsx';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/login" element={<LoginPage/>} />
-        {/* <Route path="/createAccount" element={<RegisterPage />} /> */}
+        <Route path="/createAccount" element={<RegisterPage />} />
       </Routes>
       <Footer/>
     </Router>

@@ -70,6 +70,10 @@ INSERT INTO CourseCertificationRelationship (courseID, certificationID)
 VALUES (1,1),
        (2,2),
        (1,3),
-       (2,4);        
+       (2,4);  
+
+INSERT INTO app_user (id, email, userPassword)
+VALUES 
+    (1,'user1@example.com', 'password1');      
 
 COMMIT;
