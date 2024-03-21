@@ -4,10 +4,11 @@ a:hover {
 
 button {
   background-color: rgb(151, 88, 163);
+  color: white;
 }
 
 button:hover {
-  background-color:  rgb(255, 255, 255);
-  color:black;
+  background-color: rgb(255, 255, 255);
+  color: black;
   /* text-decoration: solid; */
 }
