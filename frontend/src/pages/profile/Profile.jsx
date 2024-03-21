@@ -52,6 +52,9 @@ export default function Profile() {
       <div className="course-info">
         <p>This is where info about the user's personal courses are located</p>
       </div>
+      <div className="course-selection">
+        <p>This is where the user's personal courses are located</p>
+      </div>
     </div>
   );
 }

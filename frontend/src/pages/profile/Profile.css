@@ -91,6 +91,16 @@
   background-color: #ffffff;
 }
 
+.course-selection {
+  grid-row: 3; /* Place it in the third grid row */
+  grid-column: span 2; /* Span across both columns */
+  background-color: #ffffff;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 5px;
+}
+
 .data {
   padding: 32px;
   padding-top: 24px;
