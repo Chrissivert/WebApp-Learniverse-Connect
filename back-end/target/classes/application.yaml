@@ -15,7 +15,7 @@ spring:
       name: user2
       password: password2
   mail:
-    host: smtp.outlook.com
+    host: smtp.outlook.com #This doesnt work
     port: 587
     username: IAmChuckNorris1940@outlook.com
     password: hello123123

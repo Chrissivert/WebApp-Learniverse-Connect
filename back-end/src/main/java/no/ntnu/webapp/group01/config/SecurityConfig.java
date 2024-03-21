@@ -26,11 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         System.out.println("Security configuration applied.");
     }
 
-    // @Override
-    // @Bean
-    // public AuthenticationManager authenticationManagerBean() throws Exception {
-    //     return super.authenticationManagerBean();
-    // }
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
