@@ -1,38 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CreateMainPage from './components/pages/mainPage/MainPage.jsx';
-import Footer from "./components/footer/Footer.jsx"
-import './css/index.css';
-import CreatePageNotFound from './components/pages/PageNotFound.jsx';
-import NavigationBar from './components/navbar/Navbar.jsx';
-import ThemeProvider from './components/theme/ThemeProvider.jsx';
-import CourseDetails from './components/pages/coursePage/CoursePage.jsx';
-import CreateSearchCoursesPage from './components/pages/searchCoursePage/SearchCoursePage.jsx';
-import ProfilePage from './components/pages/profilePage/ProfilePage.jsx';
-import AboutUsPage from './components/pages/aboutUsPage/AboutUsPage.jsx';
-import ContactPage from './components/pages/contactPage/ContactPage.jsx';
-import LoginPage from './components/pages/loginPage/Loginpage.jsx';
-import RegisterPage from './components/pages/loginPage/CreateAccountPage.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/header/Header.jsx';
+import Footer from './components/footer/Footer.jsx';
+import Home from './pages/home/Home.jsx';
+import About from './pages/about/About.jsx';
+import NotFound from './pages/error/notFound/404.jsx';
+import Course from './pages/course/Course.jsx';
+import Search from './pages/search/Search.jsx';
+import FImage from '/home/front_image.svg';
+import './index.css';
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <NavigationBar/>
+      <Header/>
       <Routes>
-        <Route exact path="/" element={<CreateMainPage />} />
-        <Route path="/search" element={<CreateSearchCoursesPage />} />
-        <Route path ="/coursePage" element={<CourseDetails/>} />
-        <Route path="*" element={<CreatePageNotFound/>} />
-        <Route path="/about" element={<AboutUsPage/>} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/contact" element={<ContactPage/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/createAccount" element={<RegisterPage />} />
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/course' element={<Course description='Test Description' price='Test Price' image={FImage}/>}/>
+        <Route path='/search' element={<Search/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
       <Footer/>
     </Router>
   );
 }
-
-export default App;
