@@ -1,0 +1,13 @@
+a:hover {
+  color: white;
+}
+
+button {
+  background-color: rgb(151, 88, 163);
+}
+
+button:hover {
+  background-color:  rgb(255, 255, 255);
+  color:black;
+  /* text-decoration: solid; */
+}
