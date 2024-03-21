@@ -73,8 +73,8 @@ function Intro() {
       <p>Full-stack web developer and student at NTNU.</p>
       <p>User since: January 8th 2024</p>
       <div className="buttons">
-        <button className="button">Follow</button>
-        <button className="button">Message</button>
+        <button className="button1">Follow</button>
+        <button className="button1">Message</button>
       </div>
     </div>
   );
