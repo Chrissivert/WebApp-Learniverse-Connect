@@ -44,16 +44,35 @@ export default function Profile() {
         </div>
       </div>
       <div className="content">
-        <p>This is the content part of the page</p>
+        <h3>This is the content part of the page.</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+          asperiores, magnam consequuntur deserunt repudiandae, non tempore
+          maxime eum tempora ipsam reprehenderit, fuga labore corporis numquam
+          quos rem error quaerat necessitatibus.
+        </p>
+        <p>
+          Commodi asperiores, magnam consequuntur deserunt repudiandae, non
+          tempore maxime eum tempora ipsam reprehenderit, fuga labore corporis
+          numquam quos rem error quaerat necessitatibus.
+        </p>
       </div>
       <div className="social-media">
-        <p>This is miscellaneous social media info about the user</p>
+        <h3>Miscellaneous social media info about the user.</h3>
       </div>
       <div className="course-info">
-        <p>This is where info about the user's personal courses are located</p>
+        <h3>
+          This is where info about the user's personal courses are located.
+        </h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+          asperiores, magnam consequuntur deserunt repudiandae, non tempore
+          maxime eum tempora ipsam reprehenderit, fuga labore corporis numquam
+          quos rem error quaerat necessitatibus.
+        </p>
       </div>
       <div className="course-selection">
-        <p>This is where the user's personal courses are located</p>
+        <h3>This is where the user's personal courses are located.</h3>
       </div>
     </div>
   );
@@ -76,8 +95,8 @@ function Intro() {
       <p>Full-stack web developer and student at NTNU.</p>
       <p>User since: January 8th 2024</p>
       <div className="buttons">
-        <button className="button1">Follow</button>
-        <button className="button1">Message</button>
+        <button className="button">Follow</button>
+        <button className="button">Message</button>
       </div>
     </div>
   );
