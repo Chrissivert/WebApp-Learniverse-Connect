@@ -1,7 +1,7 @@
 import './Hamburger.css';
 import React, { useState } from 'react';
 import Hamburger from 'hamburger-react';
-import Button from '../../button/Button';
+import Button from '../button/Button';
 
 export default function HamburgerMenu() {
   const [isOpen, setOpen] = useState(false);

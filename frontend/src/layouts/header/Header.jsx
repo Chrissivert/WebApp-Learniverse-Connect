@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
-import HamburgerMenu from './hamburger/Hamburger';
-import Logo from '../logo/Logo';
+import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
+import Logo from '../../components/logo/Logo.jsx';
 
 export default function Header() {
 
