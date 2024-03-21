@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date; // Import Date class for startDate and endDate
+import java.sql.Date;
 
 @Entity
 @Table(name = "Courses")

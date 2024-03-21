@@ -1,13 +1,10 @@
 package no.ntnu.webapp.group01.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Represents data for user authentication, containing email and password")
 public class AuthRequest {
-  @Schema(description = "User's email", example = "user@example.com")
+
   private String email;
 
-  @Schema(description = "User's password", example = "password123")
   private String password;
 
   public AuthRequest() {
