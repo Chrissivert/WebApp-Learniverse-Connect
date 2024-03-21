@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Objects;
+
 @Entity
 public class Course {
     @Id
@@ -41,5 +43,27 @@ public class Course {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (Course) obj;
+        return this.id == that.id &&
+                Objects.equals(this.name, that.name) &&
+                this.description == that.description &&
+                this.duration == that.duration;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, duration);
+    }
+    @Override
+    public String toString() {
+        return "Course[" +
+                "id=" + id + ", " +
+                "name=" + name + ", " +
+                "description=" + description + ", " +
+                "duration=" + duration + ']';
+    }
 }
