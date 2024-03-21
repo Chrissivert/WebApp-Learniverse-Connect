@@ -42,23 +42,8 @@ export default function Profile() {
           <Intro />
         </div>
       </div>
-      <div className="content">
-        <h3>This is the content part of the page.</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          asperiores, magnam consequuntur deserunt repudiandae, non tempore
-          maxime eum tempora ipsam reprehenderit, fuga labore corporis numquam
-          quos rem error quaerat necessitatibus.
-        </p>
-        <p>
-          Commodi asperiores, magnam consequuntur deserunt repudiandae, non
-          tempore maxime eum tempora ipsam reprehenderit, fuga labore corporis
-          numquam quos rem error quaerat necessitatibus.
-        </p>
-      </div>
-      <div className="social-media">
-        <h3>Miscellaneous social media info about the user.</h3>
-      </div>
+      <Content />
+      <SocialMedia />
       <CourseInfo />
       <CourseSelection />
     </div>
@@ -89,6 +74,25 @@ function Intro() {
   );
 }
 
+function Content() {
+  return (
+    <div className="content">
+      <h3>This is the content part of the page.</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
+        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
+        error quaerat necessitatibus.
+      </p>
+      <p>
+        Commodi asperiores, magnam consequuntur deserunt repudiandae, non
+        tempore maxime eum tempora ipsam reprehenderit, fuga labore corporis
+        numquam quos rem error quaerat necessitatibus.
+      </p>
+    </div>
+  );
+}
+
 function CourseInfo() {
   return (
     <div className="course-info">
@@ -107,6 +111,14 @@ function CourseSelection() {
   return (
     <div className="course-selection">
       <h3>This is where the user's personal courses are located.</h3>
+    </div>
+  );
+}
+
+function SocialMedia() {
+  return (
+    <div className="social-media">
+      <h3>Miscellaneous social media info about the user.</h3>
     </div>
   );
 }
