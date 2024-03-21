@@ -41,9 +41,6 @@ export default function Profile() {
         <Avatar />
         <div className="data">
           <Intro />
-          {/* Should contain one Skill component
-        for each web dev skill that you have,
-        customized with props */}
         </div>
       </div>
       <div className="content">
@@ -63,7 +60,7 @@ function Avatar() {
   return (
     <img
       className="avatar"
-      src="front-end/src/resources/images/profile/prince_froggy.jpeg"
+      src="/profile/prince_froggy.jpeg"
       alt="Prince Froggy"
     />
   );
@@ -71,11 +68,9 @@ function Avatar() {
 
 function Intro() {
   return (
-    <div>
+    <div className="intro">
       <h2>Prince Froggy</h2>
-      <p>
-        Full-stack web developer and student at NTNU. 
-      </p>
+      <p>Full-stack web developer and student at NTNU.</p>
       <p>User since: January 8th 2024</p>
       <div className="buttons">
         <button className="button">Follow</button>
