@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import no.ntnu.backend.exception.UserNotFoundException;
 import no.ntnu.backend.model.User;
 import no.ntnu.backend.repository.UserRepository;
 import org.slf4j.Logger;
@@ -24,5 +25,10 @@ public class UserController {
     List<User> getAllUsers() {
         return userRepository.findAll();
     }
-
+    @GetMapping("/user/{id}")
+    User getUserById(@PathVariable Long id) {
+        logger.warn("Getting a user");
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
 }
