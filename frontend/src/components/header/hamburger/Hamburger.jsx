@@ -36,6 +36,9 @@ export default function HamburgerMenu() {
             <li>
               <Button text='Test [404]' src='/Error_404-Page_Not_Found'/>
             </li>
+            <li>
+              <Button text='Profile' src='/profile'/>
+            </li>
           </ul>
         </nav>
       </div>
