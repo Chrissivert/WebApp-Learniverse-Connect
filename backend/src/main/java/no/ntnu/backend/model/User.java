@@ -3,6 +3,9 @@ package no.ntnu.backend.model;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
+
+import java.util.Objects;
+
 @Entity
 @Table(name = "user")
 public final class User {
@@ -70,5 +73,30 @@ public final class User {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (User) obj;
+        return this.id == that.id &&
+                Objects.equals(this.firstName, that.firstName) &&
+                Objects.equals(this.lastName, that.lastName) &&
+                Objects.equals(this.email, that.email) &&
+                Objects.equals(this.password, that.password);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User[" +
+                "id=" + id + ", " +
+                "firstName=" + firstName + ", " +
+                "lastName=" + lastName + ", " +
+                "email=" + email + ", " +
+                "password=" + password + ']';
+    }
 }
