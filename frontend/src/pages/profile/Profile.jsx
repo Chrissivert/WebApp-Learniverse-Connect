@@ -1,6 +1,5 @@
 import React from "react";
 import "./Profile.css";
-
 const skills = [
   {
     courses: "HTML+CSS",
@@ -60,20 +59,8 @@ export default function Profile() {
       <div className="social-media">
         <h3>Miscellaneous social media info about the user.</h3>
       </div>
-      <div className="course-info">
-        <h3>
-          This is where info about the user's personal courses are located.
-        </h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          asperiores, magnam consequuntur deserunt repudiandae, non tempore
-          maxime eum tempora ipsam reprehenderit, fuga labore corporis numquam
-          quos rem error quaerat necessitatibus.
-        </p>
-      </div>
-      <div className="course-selection">
-        <h3>This is where the user's personal courses are located.</h3>
-      </div>
+      <CourseInfo />
+      <CourseSelection />
     </div>
   );
 }
@@ -98,6 +85,28 @@ function Intro() {
         <button className="button">Follow</button>
         <button className="button">Message</button>
       </div>
+    </div>
+  );
+}
+
+function CourseInfo() {
+  return (
+    <div className="course-info">
+      <h3>This is where info about the user's personal courses are located.</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
+        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
+        error quaerat necessitatibus.
+      </p>
+    </div>
+  );
+}
+
+function CourseSelection() {
+  return (
+    <div className="course-selection">
+      <h3>This is where the user's personal courses are located.</h3>
     </div>
   );
 }
