@@ -44,4 +44,13 @@ public class CourseController {
                     return courseRepository.save(course);
                 }).orElseThrow(() -> new CourseNotFoundException(id));
     }
+
+    @DeleteMapping("/course/{id}")
+    String deleteCourse(@PathVariable Long id){
+        if(!courseRepository.existsById(id)){
+            throw new CourseNotFoundException(id);
+        }
+        courseRepository.deleteById(id);
+        return  "Course with id "+id+" has been deleted success.";
+    }
 }
