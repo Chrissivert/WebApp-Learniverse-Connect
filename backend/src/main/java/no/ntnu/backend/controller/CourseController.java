@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import no.ntnu.backend.exception.CourseNotFoundException;
 import no.ntnu.backend.model.Course;
 import no.ntnu.backend.repository.CourseRepository;
 import org.slf4j.Logger;
@@ -27,4 +28,10 @@ public class CourseController {
         logger.warn("Getting all courses");
         return courseRepository.findAll();
     }
+    @GetMapping("/course/{id}")
+    Course getCourseById(@PathVariable Long id) {
+        return courseRepository.findById(id)
+                .orElseThrow(() -> new CourseNotFoundException(id));
+    }
+
 }
