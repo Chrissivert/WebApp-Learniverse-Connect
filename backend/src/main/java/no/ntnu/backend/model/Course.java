@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,8 @@ public class Course {
     private String title;
     private int levelId;
     private int categoryId;
+    private Date startDate;
+    private Date endDate;
     private String description;
     private int duration;
 
@@ -48,6 +51,22 @@ public class Course {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     public String getDescription() {
