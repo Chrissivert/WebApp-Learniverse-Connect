@@ -27,6 +27,9 @@ public class Course {
     public Course() {
     }
 
+    /**
+     * id
+     */
     public int getId() {
         return id;
     }
