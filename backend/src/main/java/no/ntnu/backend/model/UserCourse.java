@@ -66,7 +66,7 @@ public class UserCourse {
     public String toString() {
         return "User[" +
                 "user_id=" + user_id + ", " +
-                "course_id=" + course_id ", "+ 
+                "course_id=" + course_id + ", " + 
                 "completed=" + completed + "]";
     }
 }
