@@ -39,8 +39,14 @@ public class CourseController {
         return courseRepository.findById(id)
                 .map(course -> {
                     course.setTitle(newCourse.getTitle());
+                    course.setLevelId(newCourse.getLevelId());
+                    course.setCategoryId(newCourse.getCategoryId());
+                    course.setStartDate(newCourse.getStartDate());
+                    course.setEndDate(newCourse.getEndDate());
+                    course.setCredit(newCourse.getCredit());
+                    course.setHoursPerWeek(newCourse.getHoursPerWeek());
                     course.setDescription(newCourse.getDescription());
-                    course.setDuration(newCourse.getDuration());
+                    course.setRelatedCertification(newCourse.getRelatedCertification());
                     return courseRepository.save(course);
                 }).orElseThrow(() -> new CourseNotFoundException(id));
     }
