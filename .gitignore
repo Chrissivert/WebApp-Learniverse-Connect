@@ -53,3 +53,4 @@ build/
 !**/src/test/**/build/
 
 .env
+application.properties
