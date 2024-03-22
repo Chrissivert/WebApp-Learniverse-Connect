@@ -19,6 +19,7 @@ public class Course {
     private Date startDate;
     private Date endDate;
     private double credit;
+    private double hoursPerWeek;
     private String description;
     private int duration;
 
@@ -76,6 +77,14 @@ public class Course {
 
     public double getCredit() {
         return credit;
+    }
+
+    public void setHoursPerWeek(double hoursPerWeek) {
+        this.hoursPerWeek = hoursPerWeek;
+    }
+
+    public double getHoursPerWeek() {
+        return hoursPerWeek;
     }
 
     public String getDescription() {
