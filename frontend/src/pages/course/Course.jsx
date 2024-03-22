@@ -1,20 +1,42 @@
-import './Course.css';
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
+function Course() {
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+  const [error, setError] = useState(null);
 
-function Course({}) {
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/course/${id}`);
+        setCourse(response.data);
+      } catch (error) {
+        console.error("Error fetching course:", error);
+        setError(error.response ? error.response.data : "Failed to fetch course details");
+      }
+    };
 
+    fetchCourse();
 
+    return () => {
+      // Cleanup function
+    };
+  }, [id]);
 
-  return(
+  if (!course) {
+    return <div>Loading...</div>;
+  }
+
+  return (
     <div className="Course">
-        <h1>This is course</h1>
-        <Link to = {'/courses'}>
-          <button>Go back</button>
-        </Link>
-        
-      </div>
+      <h2>{course.title}</h2>
+      <p>{course.description}</p>
+      <p>Start Date: {course.startDate}</p>
+      <p>Related Certification: {course.relatedCertification}</p>
+      {/* Display other course details as needed */}
+    </div>
   );
 }
 

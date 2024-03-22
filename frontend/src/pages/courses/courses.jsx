@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
+import Course from "../course/Course.jsx";
 
 function Courses({}) {
 
@@ -15,14 +16,20 @@ function Courses({}) {
   }, []);
 
   const loadCourses = async () => {
-    const result = await axios.get("http://localhost:8080/courses");
-    setCourses(result.data);
+    try {
+      const result = await axios.get("http://localhost:8080/courses");
+      setCourses(result.data);
+    } catch (error) {
+      console.error("Error loading courses:", error);
+    }
   };
 
   return(
     <div className="Courses">
         {courses.map((course, index) => (
-            <Coursecard key={index} course={course} />
+          <Link to={`/course/${course.id}`} key={course.id}>
+            <Coursecard key = {index} course={course}/>
+          </Link>
         ))}
       </div>
   );

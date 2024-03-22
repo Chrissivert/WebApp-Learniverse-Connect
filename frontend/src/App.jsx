@@ -20,7 +20,7 @@ export default function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/courses' element={<Courses/>}/>
-        <Route path='/course' element={<Course/>}/>
+        <Route path='/course/:id' element={<Course/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='profile' element={<Profile/>}/>
