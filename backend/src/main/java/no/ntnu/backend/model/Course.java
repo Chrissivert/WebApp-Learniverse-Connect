@@ -12,7 +12,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String title;
     private String description;
     private int duration;
 
@@ -25,11 +25,11 @@ public class Course {
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
     public String getDescription() {
         return description;
@@ -49,20 +49,20 @@ public class Course {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Course) obj;
         return this.id == that.id &&
-                Objects.equals(this.name, that.name) &&
+                Objects.equals(this.title, that.title) &&
                 this.description == that.description &&
                 this.duration == that.duration;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, duration);
+        return Objects.hash(id, title, description, duration);
     }
     @Override
     public String toString() {
         return "Course[" +
                 "id=" + id + ", " +
-                "name=" + name + ", " +
+                "name=" + title + ", " +
                 "description=" + description + ", " +
                 "duration=" + duration + ']';
     }

@@ -38,7 +38,7 @@ public class CourseController {
     Course updateCourse(@RequestBody Course newCourse, @PathVariable Long id) {
         return courseRepository.findById(id)
                 .map(course -> {
-                    course.setName(newCourse.getName());
+                    course.setTitle(newCourse.getTitle());
                     course.setDescription(newCourse.getDescription());
                     course.setDuration(newCourse.getDuration());
                     return courseRepository.save(course);
