@@ -14,6 +14,7 @@ public class Course {
     private int id;
     private String title;
     private int levelId;
+    private int categoryId;
     private String description;
     private int duration;
 
@@ -39,6 +40,14 @@ public class Course {
 
     public void setLevelId(int levelId) {
         this.levelId = levelId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getDescription() {
