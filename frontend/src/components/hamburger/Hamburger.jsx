@@ -28,7 +28,7 @@ export default function HamburgerMenu() {
               <Button text='About' src='/about'/>
             </li>
             <li>
-              <Button text='Course' src='/course'/>
+              <Button text='Courses' src='/courses'/>
             </li>
             <li>
               <Button text='Search' src='/Search'/>
