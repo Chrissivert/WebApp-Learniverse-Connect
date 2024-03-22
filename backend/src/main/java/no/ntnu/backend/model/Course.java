@@ -18,6 +18,7 @@ public class Course {
     private int categoryId;
     private Date startDate;
     private Date endDate;
+    private double credit;
     private String description;
     private int duration;
 
@@ -67,6 +68,14 @@ public class Course {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double getCredit() {
+        return credit;
     }
 
     public String getDescription() {
