@@ -18,6 +18,7 @@ public final class User {
     private String firstName;
     @Column(name = "lastName")
     private String lastName;
+    private String startDate;
     private String email;
     private String password;
 
@@ -64,6 +65,14 @@ public final class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getEmail() {
