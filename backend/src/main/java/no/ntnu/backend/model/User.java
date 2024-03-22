@@ -14,10 +14,9 @@ public final class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int roleId;
-    @Column(name = "firstName")
-    private String firstName;
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "username")
+    private String username;
+
     private String startDate;
     private String email;
     private String password;
@@ -29,8 +28,7 @@ public final class User {
     public User(int id, int roleId, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.roleId = roleId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.username = firstName;
         this.email = email;
         this.password = password;
     }
@@ -51,21 +49,14 @@ public final class User {
         return roleId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String firstName) {
+        this.username = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getStartDate() {
         return startDate;
@@ -97,23 +88,21 @@ public final class User {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (User) obj;
         return this.id == that.id &&
-                Objects.equals(this.firstName, that.firstName) &&
-                Objects.equals(this.lastName, that.lastName) &&
+                Objects.equals(this.username, that.username) &&
                 Objects.equals(this.email, that.email) &&
                 Objects.equals(this.password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password);
+        return Objects.hash(id, username, email, password);
     }
 
     @Override
     public String toString() {
         return "User[" +
                 "id=" + id + ", " +
-                "firstName=" + firstName + ", " +
-                "lastName=" + lastName + ", " +
+                "firstName=" + username + ", " +
                 "email=" + email + ", " +
                 "password=" + password + ']';
     }

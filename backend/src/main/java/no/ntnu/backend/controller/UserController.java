@@ -36,8 +36,7 @@ public class UserController {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setRoleId(newUser.getRoleId());
-                    user.setFirstName(newUser.getFirstName());
-                    user.setLastName(newUser.getLastName());
+                    user.setUsername(newUser.getUsername());
                     user.setStartDate(newUser.getStartDate());
                     user.setEmail(newUser.getEmail());
                     user.setPassword(newUser.getPassword());
