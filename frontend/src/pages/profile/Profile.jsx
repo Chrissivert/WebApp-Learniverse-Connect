@@ -77,6 +77,21 @@ function Intro() {
 function Content() {
   return (
     <div className="content">
+      {/* <h1>User Info:</h1> */}
+      {/* <div className="user-info">
+        <table>
+          <tr>Full Name:</tr>
+          <tr>Start Date:</tr>
+          <tr>Email:</tr>
+          <tr>Password:</tr>
+        </table>
+        <table>
+          <tr>Froggy Frogface</tr>
+          <tr>January 8th 2024</tr>
+          <tr>Frogger@Hotmail.com</tr>
+          <tr>Sup</tr>
+        </table>
+      </div> */}
       <h3>This is the content part of the page.</h3>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
