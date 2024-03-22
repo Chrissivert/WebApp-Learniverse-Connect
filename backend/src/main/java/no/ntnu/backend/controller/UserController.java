@@ -35,8 +35,10 @@ public class UserController {
     User updateUser(@RequestBody User newUser, @PathVariable Long id) {
         return userRepository.findById(id)
                 .map(user -> {
+                    user.setRoleId(newUser.getRoleId());
                     user.setFirstName(newUser.getFirstName());
                     user.setLastName(newUser.getLastName());
+                    user.setStartDate(newUser.getStartDate());
                     user.setEmail(newUser.getEmail());
                     user.setPassword(newUser.getPassword());
                     return userRepository.save(user);
