@@ -1,6 +1,5 @@
 import React from "react";
 import "./Profile.css";
-
 const skills = [
   {
     courses: "HTML+CSS",
@@ -41,20 +40,12 @@ export default function Profile() {
         <Avatar />
         <div className="data">
           <Intro />
-          {/* Should contain one Skill component
-        for each web dev skill that you have,
-        customized with props */}
         </div>
       </div>
-      <div className="content">
-        <p>This is the content part of the page</p>
-      </div>
-      <div className="social-media">
-        <p>This is miscellaneous social media info about the user</p>
-      </div>
-      <div className="course-info">
-        <p>This is where info about the user's personal courses are located</p>
-      </div>
+      <Content />
+      <SocialMedia />
+      <CourseInfo />
+      <CourseSelection />
     </div>
   );
 }
@@ -63,7 +54,7 @@ function Avatar() {
   return (
     <img
       className="avatar"
-      src="front-end/src/resources/images/profile/prince_froggy.jpeg"
+      src="/profile/prince_froggy.jpeg"
       alt="Prince Froggy"
     />
   );
@@ -71,16 +62,78 @@ function Avatar() {
 
 function Intro() {
   return (
-    <div>
+    <div className="intro">
       <h2>Prince Froggy</h2>
-      <p>
-        Full-stack web developer and student at NTNU. 
-      </p>
+      <p>Full-stack web developer and student at NTNU.</p>
       <p>User since: January 8th 2024</p>
       <div className="buttons">
         <button className="button">Follow</button>
         <button className="button">Message</button>
       </div>
+    </div>
+  );
+}
+
+function Content() {
+  return (
+    <div className="content">
+      {/* <h1>User Info:</h1> */}
+      {/* <div className="user-info">
+        <table>
+          <tr>Full Name:</tr>
+          <tr>Start Date:</tr>
+          <tr>Email:</tr>
+          <tr>Password:</tr>
+        </table>
+        <table>
+          <tr>Froggy Frogface</tr>
+          <tr>January 8th 2024</tr>
+          <tr>Frogger@Hotmail.com</tr>
+          <tr>Sup</tr>
+        </table>
+      </div> */}
+      <h3>This is the content part of the page.</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
+        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
+        error quaerat necessitatibus.
+      </p>
+      <p>
+        Commodi asperiores, magnam consequuntur deserunt repudiandae, non
+        tempore maxime eum tempora ipsam reprehenderit, fuga labore corporis
+        numquam quos rem error quaerat necessitatibus.
+      </p>
+    </div>
+  );
+}
+
+function CourseInfo() {
+  return (
+    <div className="course-info">
+      <h3>This is where info about the user's personal courses are located.</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
+        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
+        error quaerat necessitatibus.
+      </p>
+    </div>
+  );
+}
+
+function CourseSelection() {
+  return (
+    <div className="course-selection">
+      <h3>This is where the user's personal courses are located.</h3>
+    </div>
+  );
+}
+
+function SocialMedia() {
+  return (
+    <div className="social-media">
+      <h3>Miscellaneous social media info about the user.</h3>
     </div>
   );
 }
