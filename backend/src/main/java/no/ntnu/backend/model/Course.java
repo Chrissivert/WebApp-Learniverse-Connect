@@ -21,7 +21,7 @@ public class Course {
     private double credit;
     private double hoursPerWeek;
     private String description;
-    private int duration;
+    private String relatedCertification;
 
     public Course() {
     }
@@ -93,11 +93,11 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
-    public int getDuration() {
-        return duration;
+    public String getRelatedCertification() {
+        return relatedCertification;
     }
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setRelatedCertification(String relatedCertification) {
+        this.relatedCertification = relatedCertification;
     }
     @Override
     public boolean equals(Object obj) {
@@ -107,12 +107,12 @@ public class Course {
         return this.id == that.id &&
                 Objects.equals(this.title, that.title) &&
                 this.description == that.description &&
-                this.duration == that.duration;
+                this.relatedCertification == that.relatedCertification;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, duration);
+        return Objects.hash(id, title, description, relatedCertification);
     }
     @Override
     public String toString() {
@@ -120,6 +120,6 @@ public class Course {
                 "id=" + id + ", " +
                 "name=" + title + ", " +
                 "description=" + description + ", " +
-                "duration=" + duration + ']';
+                "duration=" + relatedCertification + ']';
     }
 }
