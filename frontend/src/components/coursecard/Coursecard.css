@@ -1,0 +1,7 @@
+.coursecard {
+    border-style: solid;
+    border-color: rgb(151, 88, 163);
+    border-radius: 25px;
+    margin: 2%;
+    padding :10%;
+  }
