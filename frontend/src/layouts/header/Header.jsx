@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
 import Logo from '../../components/logo/Logo.jsx';
+import Button from '../../components/button/Button.jsx';
 
 export default function Header() {
 
@@ -9,7 +10,7 @@ export default function Header() {
     <header>
       <HamburgerMenu/>
       <Logo home_src={true}/>
-      <h3>Log in</h3>
+      <Button text='Search' src='/register'/>
     </header>
   );
 }
