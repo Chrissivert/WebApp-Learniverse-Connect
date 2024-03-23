@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
-import Course from "../course/Course.jsx";
+import Course from "../course/CourseTest.jsx";
 
 function Courses({}) {
 
