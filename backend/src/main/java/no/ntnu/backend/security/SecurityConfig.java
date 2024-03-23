@@ -41,6 +41,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .and()
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication
         //test
+        //test2
     return http.build();
 }
 
