@@ -40,6 +40,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Set session management to STATELESS
             .and()
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication
+        //test
     return http.build();
 }
 
