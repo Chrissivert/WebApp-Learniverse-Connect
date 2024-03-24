@@ -22,8 +22,6 @@ function Register() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: parseInt(id), // Parse id to integer
-                    roleId: parseInt(roleId), // Assuming the backend expects 'role_id' rather than 'roleid'
                     username,
                     startDate,
                     email,
@@ -48,8 +46,6 @@ function Register() {
             <h2>Register</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} required />
-                <input type="text" placeholder="Role ID" value={roleId} onChange={(e) => setRoleId(e.target.value)} required />
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <input type="text" placeholder="Start Date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />

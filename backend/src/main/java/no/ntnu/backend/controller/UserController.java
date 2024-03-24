@@ -42,9 +42,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody AuthRequest authRequest) {
         try {
+            System.out.println("AuthRequest:++ " + authRequest.getEmail() + " " + authRequest.getPassword());
             String jwtToken = userService.loginUser(authRequest.getEmail(), authRequest.getPassword());
             return ResponseEntity.ok(new AuthResponse(jwtToken));
         } catch (Exception e) {
+            System.out.println(("Authentication faileddddd: " + e.getMessage()));
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
         }
     }

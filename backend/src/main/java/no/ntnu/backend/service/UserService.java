@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import no.ntnu.backend.model.User;
 import no.ntnu.backend.repository.UserRepository;
 import no.ntnu.backend.util.JwtTokenUtil;
-import no.ntnu.backend.security.MyUserDetailsService;
 
 @Service
 public class UserService {
@@ -44,13 +43,14 @@ public class UserService {
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
 
-        System.out.println("User: " + user);
+        System.out.println("User: heee " + user);
 
         userRepository.save(user);
     }
 
     public String loginUser(String email, String password) throws Exception {
         try {
+            System.out.println("inside authneciationmanager");
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password)
             );
@@ -58,7 +58,11 @@ public class UserService {
             throw new Exception("Incorrect username or password", e);
         }
 
+        System.out.println("after authneciationmanager, before userdetails");
+
         final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        System.out.println("after loadby method" + userDetails.getUsername() + userDetails.getPassword() + userDetails.getAuthorities());
+
         return jwtTokenUtil.generateToken(userDetails);
     }
 }

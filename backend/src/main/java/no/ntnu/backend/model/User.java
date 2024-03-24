@@ -2,16 +2,17 @@ package no.ntnu.backend.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public final class User implements UserDetails{
+public final class User{
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -116,29 +117,4 @@ public final class User implements UserDetails{
                 "password=" + password + ']';
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true; 
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true; 
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
-    }
 }
