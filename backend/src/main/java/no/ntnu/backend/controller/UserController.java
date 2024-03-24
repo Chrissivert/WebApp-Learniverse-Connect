@@ -5,7 +5,7 @@ import no.ntnu.backend.dto.AuthResponse;
 import no.ntnu.backend.exception.UserNotFoundException;
 import no.ntnu.backend.model.User;
 import no.ntnu.backend.repository.UserRepository;
-// import no.ntnu.backend.service.UserService;
+import no.ntnu.backend.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,28 +26,28 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // @Autowired
-    // private UserService userService;
+    @Autowired
+    private UserService userService;
 
-    //  @PostMapping("/register")
-    // public ResponseEntity<?> registerUser(@RequestBody User user) {
-    //     try {
-    //         userService.registerUser(user);
-    //         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register user");
-    //     }
-    // }
+     @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        try {
+            userService.registerUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register user");
+        }
+    }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<?> authenticateUser(@RequestBody AuthRequest authRequest) {
-    //     try {
-    //         String jwtToken = userService.loginUser(authRequest.getEmail(), authRequest.getPassword());
-    //         return ResponseEntity.ok(new AuthResponse(jwtToken));
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
-    //     }
-    // }
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody AuthRequest authRequest) {
+        try {
+            String jwtToken = userService.loginUser(authRequest.getEmail(), authRequest.getPassword());
+            return ResponseEntity.ok(new AuthResponse(jwtToken));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+        }
+    }
 
     @PostMapping("/user")
     User newUser(@RequestBody User newUser) {

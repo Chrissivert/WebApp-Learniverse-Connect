@@ -44,6 +44,8 @@ public class UserService {
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
 
+        System.out.println("User: " + user);
+
         userRepository.save(user);
     }
 

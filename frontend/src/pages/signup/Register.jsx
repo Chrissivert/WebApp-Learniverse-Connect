@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of
 
 function Register() {
     const [email, setEmail] = useState('');
-    const [userPassword, setPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [roleId, setRoleId] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [id, setId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate(); // Use useNavigate hook
@@ -14,11 +18,17 @@ function Register() {
         try {
             const response = await fetch('http://localhost:8080/public/register', {
                 method: 'POST',
-                // credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({email, userPassword}),
+                body: JSON.stringify({
+                    id: parseInt(id), // Parse id to integer
+                    roleId: parseInt(roleId), // Assuming the backend expects 'role_id' rather than 'roleid'
+                    username,
+                    startDate,
+                    email,
+                    password
+                }),
             });
             if (!response.ok) {
                 throw new Error('Registration failed');
@@ -38,8 +48,12 @@ function Register() {
             <h2>Register</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} required />
+                <input type="text" placeholder="Role ID" value={roleId} onChange={(e) => setRoleId(e.target.value)} required />
+                <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="Start Date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" value={userPassword} onChange={(e) => setPassword(e.target.value)} required />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 <button type="submit" disabled={loading}>Register</button>
             </form>
             {loading && <p>Loading...</p>}
