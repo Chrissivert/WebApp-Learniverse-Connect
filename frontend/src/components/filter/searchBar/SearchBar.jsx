@@ -31,7 +31,6 @@ function SearchBar({ searchQuery, setSearchQuery }) {
 
       try {
         const response = await fetch(`http://localhost:8081/api/search?query=${searchQuery}`, {
-          credentials: 'include'
         });
 
         if (!response.ok) {

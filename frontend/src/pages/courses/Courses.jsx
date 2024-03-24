@@ -3,11 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
-import Course from "../course/Course.jsx";
-import SearchBar from '../../components/searchBar/SearchBar.jsx';
 
-function Courses({ searchQuery }) {
-
+function Courses({ filters }) {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
 
@@ -19,7 +16,7 @@ function Courses({ searchQuery }) {
 
   useEffect(() => {
     filterCourses();
-  }, [searchQuery, courses]);
+  }, [filters, courses]); // Update useEffect dependency array to include filters
 
   const loadCourses = async () => {
     try {
@@ -31,17 +28,26 @@ function Courses({ searchQuery }) {
   };
 
   const filterCourses = () => {
-    if (!searchQuery) {
-      setFilteredCourses(courses);
-    } else {
-      const filtered = courses.filter(course =>
-        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+    let filtered = courses;
+
+    if (filters.searchQuery) {
+      filtered = filtered.filter(course =>
+        course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())
       );
-      setFilteredCourses(filtered);
     }
+
+    if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
+      filtered = filtered.filter(course =>
+        course.credit >= filters.minPrice && course.credit <= filters.maxPrice
+      );
+    }
+
+    // Add more filters as needed
+
+    setFilteredCourses(filtered);
   };
 
-  return(
+  return (
     <div className="Courses">
       {filteredCourses.map((course, index) => (
         <Link to={`/course/${course.id}`} key={course.id}>
