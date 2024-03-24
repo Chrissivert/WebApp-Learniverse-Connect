@@ -4,16 +4,22 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import Course from "../course/Course.jsx";
+import SearchBar from '../../components/searchBar/SearchBar.jsx';
 
-function Courses({}) {
+function Courses({ searchQuery }) {
 
   const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
     loadCourses();
   }, []);
+
+  useEffect(() => {
+    filterCourses();
+  }, [searchQuery, courses]);
 
   const loadCourses = async () => {
     try {
@@ -24,14 +30,25 @@ function Courses({}) {
     }
   };
 
+  const filterCourses = () => {
+    if (!searchQuery) {
+      setFilteredCourses(courses);
+    } else {
+      const filtered = courses.filter(course =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredCourses(filtered);
+    }
+  };
+
   return(
     <div className="Courses">
-        {courses.map((course, index) => (
-          <Link to={`/course/${course.id}`} key={course.id}>
-            <Coursecard key = {index} course={course}/>
-          </Link>
-        ))}
-      </div>
+      {filteredCourses.map((course, index) => (
+        <Link to={`/course/${course.id}`} key={course.id}>
+          <Coursecard key={index} course={course}/>
+        </Link>
+      ))}
+    </div>
   );
 }
 

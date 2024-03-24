@@ -11,6 +11,8 @@ import './index.css';
 import Profile from './pages/profile/Profile.jsx';
 import Register from './pages/signup/Register.jsx';
 import Login from './pages/login/Login.jsx';
+import CoursesPage from './pages/courses/CoursesPage.jsx';
+// import Courses from './pages/courses/Courses.jsx';
 
 export default function App() {
   return (
@@ -19,7 +21,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
-        {/* <Route path='/courses' element={<Courses/>}/> */}
+        <Route path='/courses' element={<CoursesPage/>}/>
         <Route path='/course/:id' element={<Course/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path='*' element={<NotFound/>}/>
