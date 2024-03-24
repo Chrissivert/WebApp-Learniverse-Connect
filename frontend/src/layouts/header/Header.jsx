@@ -10,7 +10,8 @@ export default function Header() {
     <header>
       <HamburgerMenu/>
       <Logo home_src={true}/>
-      <Button text='Search' src='/register'/>
+      <Button text='Log in' src='/register'/>
+      <Button text='Real login' src='/login'/>
     </header>
   );
 }
