@@ -1,14 +1,14 @@
 import React from "react";
-import './Coursecard.css'
 
-function Coursecard({ course }) {
+function Coursecard({ course, cheapestPrice }) {
+  // Round the cheapestPrice to zero decimals
+  const roundedCheapestPrice = cheapestPrice.toFixed(0);
+
   return (
-    <div className="coursecard">
-      <div className="card-body">
-        <h5 className="card-title">{course.title}</h5>
-        <p className="card-text">Start Date: {course.startDate}</p>
-        <p className="card-text">Related Certification: {course.relatedCertification}</p>
-      </div>
+    <div className="course-card">
+      <h2>{course.title}</h2>
+      <p>Credits: {course.credit}</p>
+      {roundedCheapestPrice && <p>Cheapest Price: {roundedCheapestPrice}</p>}
     </div>
   );
 }

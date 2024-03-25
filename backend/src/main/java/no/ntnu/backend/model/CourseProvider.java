@@ -7,20 +7,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-// @Entity
+@Entity
 public class CourseProvider {
 
+  @Id
   private int course_id;
   private int provider_id;
   private double price;
+  private String currency;
 
   public CourseProvider() {
   }
 
-  public CourseProvider(int course_id, int provider_id, double price) {
+  public CourseProvider(int course_id, int provider_id, double price, String currency) {
     this.course_id = course_id;
     this.provider_id = provider_id;
     this.price = price;
+    this.currency = currency;
   }
 
   public int getCourseId() {
@@ -45,6 +48,14 @@ public class CourseProvider {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public String getCurrency() {
+    return this.currency;
+  }
+
+  public void setCurrency(String currency) {
+    this.currency = currency;
   }
 
   @Override

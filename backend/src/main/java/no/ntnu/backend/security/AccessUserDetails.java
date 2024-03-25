@@ -27,12 +27,12 @@ public class AccessUserDetails implements UserDetails {
     // this.convertRoles(user.getRoles());
   }
 
-//   private void convertRoles(Set<Role> roles) {
-//     authorities.clear();
-//     for (Role role : roles) {
-//       authorities.add(new SimpleGrantedAuthority(role.getName()));
-//     }
-//   }
+  // private void convertRoles(Set<Role> roles) {
+  //   authorities.clear();
+  //   for (Role role : roles) {
+  //     authorities.add(new SimpleGrantedAuthority(role.getName()));
+  //   }
+  // }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
