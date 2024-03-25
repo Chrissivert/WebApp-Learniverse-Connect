@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function PriceRangeFilter({ onPriceChange }) {
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(50); // Default max price
+  const [maxPrice, setMaxPrice] = useState(10000); // Default max price
 
   const handleMinPriceChange = (event) => {
     const newMinPrice = parseFloat(event.target.value);
@@ -37,7 +37,7 @@ function PriceRangeFilter({ onPriceChange }) {
         <input
           type="range"
           min={minPrice}
-          max="50"
+          max="10000"
           value={maxPrice}
           onChange={handleMaxPriceChange}
         />
