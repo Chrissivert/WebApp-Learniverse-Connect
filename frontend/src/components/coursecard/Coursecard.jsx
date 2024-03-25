@@ -2,8 +2,7 @@ import React from "react";
 
 function Coursecard({ course, cheapestPrice }) {
   // Round the cheapestPrice to zero decimals
-  const roundedCheapestPrice = cheapestPrice.toFixed(0);
-
+const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
   return (
     <div className="course-card">
       <h2>{course.title}</h2>
