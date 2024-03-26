@@ -1,5 +1,4 @@
-export function filterAndSortCourses(courses, filters, cheapestPrices, sortBy, sortOrder) {
-  
+export function filterAndSortCourses(courses, filters, cheapestPrices) {
   // Filter by search query, min and max price
   let filtered = courses.filter(course =>
     course.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) &&
@@ -8,32 +7,22 @@ export function filterAndSortCourses(courses, filters, cheapestPrices, sortBy, s
   );
 
   // Sort the filtered courses based on the selected attribute and sort order
-  if (sortBy === 'title') {
+  if (filters.sortBy === 'title') {
     filtered.sort((courseA, courseB) => {
       const titleA = courseA.title.toLowerCase();
       const titleB = courseB.title.toLowerCase();
-      if (sortOrder === 'asc') {
-        return titleA.localeCompare(titleB);
-      } else {
-        return titleB.localeCompare(titleA);
-      }
+      return filters.sortOrder === 'asc' ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
     });
-  } else if (sortBy) {
-    // Sorting logic for other attributes remains unchanged
+  } else if (filters.sortBy) {
     filtered.sort((courseA, courseB) => {
-      const valueA = getValueByAttribute(courseA, sortBy, cheapestPrices);
-      const valueB = getValueByAttribute(courseB, sortBy, cheapestPrices);
-      if (sortOrder === 'asc') {
-        return valueA - valueB;
-      } else {
-        return valueB - valueA;
-      }
+      const valueA = getValueByAttribute(courseA, filters.sortBy, cheapestPrices);
+      const valueB = getValueByAttribute(courseB, filters.sortBy, cheapestPrices);
+      return filters.sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
     });
   }
 
   return filtered;
 }
-
 
 function getValueByAttribute(course, attribute, cheapestPrices) {
   if (attribute === 'price') {
@@ -45,4 +34,3 @@ function getValueByAttribute(course, attribute, cheapestPrices) {
   }
   return 0;
 }
-

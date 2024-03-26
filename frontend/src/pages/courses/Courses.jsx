@@ -1,5 +1,5 @@
 // Courses.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import './Courses.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
@@ -9,10 +9,8 @@ import CoursesFetch from "./CoursesFetch.jsx";
 
 function Courses({ filters, currentPage }) {
   const [courses, setCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
   const perPage = 5;
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,18 +22,17 @@ function Courses({ filters, currentPage }) {
     };
 
     fetchData();
-
   }, []);
 
-  useEffect(() => {
-    const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);
-    const { paginatedData } = paginationUtils(updatedFilteredCourses, currentPage, perPage);
-    setFilteredCourses(paginatedData);
-  }, [courses, filters, cheapestPrices, currentPage, perPage]);
+  const filteredCourses = useMemo(() => {
+    return filterAndSortCourses(courses, filters, cheapestPrices);
+  }, [courses, filters, cheapestPrices]);
+
+  const { paginatedData } = paginationUtils(filteredCourses, currentPage, perPage);
 
   return (
     <div className="Courses">
-      {filteredCourses.map((course) => (
+      {paginatedData.map((course) => (
         <Link to={`/course/${course.id}`} key={course.id}>
           <Coursecard course={course} cheapestPrice={cheapestPrices[course.id]} />
         </Link>

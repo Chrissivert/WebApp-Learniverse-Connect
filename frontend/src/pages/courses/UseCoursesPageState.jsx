@@ -5,9 +5,6 @@ function useCoursesPageState() {
     searchQuery: '',
     minPrice: 0,
     maxPrice: 100000,
-    sortBy: null,
-    sortOrder: null,
-    category: null, // Add category property to the initial state
   });
 
   const [currentPage, setCurrentPage] = useState(1);
