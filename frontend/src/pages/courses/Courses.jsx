@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import './Courses.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
+import { filterAndSortCourses } from "./CoursesUtils.jsx";
+import CoursesFetch from "./CoursesFetch.jsx";
 
 function Courses({ filters }) {
   const [courses, setCourses] = useState([]);
@@ -15,62 +16,18 @@ function Courses({ filters }) {
   }, []);
 
   useEffect(() => {
-    filterAndSortCourses();
+    const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);
+    setFilteredCourses(updatedFilteredCourses);
   }, [filters, courses, cheapestPrices]);
 
   const loadCourses = async () => {
-    try {
-      const result = await axios.get("http://localhost:8080/courses");
-      setCourses(result.data);
-    } catch (error) {
-      console.error("Error loading courses:", error);
-    }
+    const data = await CoursesFetch.fetchCourses();
+    setCourses(data);
   };
 
   const fetchCheapestPrices = async () => {
-    try {
-      const result = await axios.get("http://localhost:8080/cheapest-course-prices");
-      const pricesMap = result.data.reduce((acc, current) => {
-        acc[current.courseId] = current.price;
-        return acc;
-      }, {});
-      setCheapestPrices(pricesMap);
-    } catch (error) {
-      console.error("Error fetching cheapest prices:", error);
-    }
-  };
-
-  const filterAndSortCourses = () => {
-    let filtered = courses.filter(course =>
-      course.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) &&
-      cheapestPrices[course.id] >= filters.minPrice &&
-      cheapestPrices[course.id] <= filters.maxPrice
-    );
-  
-    if (filters.sortBy) {
-      filtered.sort((a, b) => {
-        const valueA = getValueByAttribute(a, filters.sortBy);
-        const valueB = getValueByAttribute(b, filters.sortBy);
-        if (filters.sortOrder === 'asc') {
-          return valueA > valueB ? 1 : -1;
-        } else {
-          return valueB > valueA ? 1 : -1; // Changed comparison to sort in descending order
-        }
-      });
-    }
-  
-    setFilteredCourses(filtered);
-  };
-
-  const getValueByAttribute = (course, attribute) => {
-    if (attribute === 'price') {
-      return cheapestPrices[course.id] || 0;
-    } else if (attribute === 'credits') {
-      return course.credit || 0;
-    }else if (attribute === 'title') {
-      return course.title || '';
-    }
-    return 0;
+    const pricesMap = await CoursesFetch.fetchCheapestPrices();
+    setCheapestPrices(pricesMap);
   };
 
   return (
