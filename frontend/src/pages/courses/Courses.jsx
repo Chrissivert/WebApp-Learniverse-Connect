@@ -1,65 +1,35 @@
-import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+// Courses.js
+import React, { useEffect, useState } from "react";
 import './Courses.css';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
+import { filterAndSortCourses } from "./CoursesUtils.jsx";
+import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
+import CoursesFetch from "./CoursesFetch.jsx";
 
-function Courses({ filters }) {
-  const [courses, setCourses] = useState([]);
+function Courses({ filters, currentPage, courses, setCourses }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
-
-  const { id } = useParams();
-
-  useEffect(() => {
-    loadCourses();
-    fetchCheapestPrices();
-  }, []);
+  const perPage = 5; // Number of courses per page - hardcoded
 
   useEffect(() => {
-    filterCourses();
-  }, [filters, courses, cheapestPrices]);
+    const fetchData = async () => {
+      const coursesData = await CoursesFetch.fetchCourses();
+      setCourses(coursesData);
 
-  const loadCourses = async () => {
-    try {
-      const result = await axios.get("http://localhost:8080/courses");
-      setCourses(result.data);
-    } catch (error) {
-      console.error("Error loading courses:", error);
-    }
-  };
+      const cheapestPricesData = await CoursesFetch.fetchCheapestPrices();
+      setCheapestPrices(cheapestPricesData);
+    };
 
-  const fetchCheapestPrices = async () => {
-    try {
-      const result = await axios.get("http://localhost:8080/cheapest-course-prices");
-      const prices = result.data;
-      const pricesMap = prices.reduce((acc, current) => {
-        acc[current.courseId] = current.price;
-        return acc;
-      }, {});
-      setCheapestPrices(pricesMap);
-    } catch (error) {
-      console.error("Error fetching cheapest prices:", error);
-    }
-  };
+    fetchData(); // Call the fetchData function
 
-  const filterCourses = () => {
-    let filtered = Object.values(courses);
+  }, [setCourses]); // Dependency array should include setCourses
 
-    if (filters.searchQuery) {
-      filtered = filtered.filter(course =>
-        course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())
-      );
-    }
-
-    if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
-      filtered = filtered.filter(course =>
-        cheapestPrices[course.id] >= filters.minPrice && cheapestPrices[course.id] <= filters.maxPrice
-      );
-    }
-
-    setFilteredCourses(filtered);
-  };
+  useEffect(() => {
+    const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);
+    const { paginatedData } = paginationUtils(updatedFilteredCourses, currentPage, perPage);
+    setFilteredCourses(paginatedData);
+  }, [courses, filters, cheapestPrices, currentPage]);
 
   return (
     <div className="Courses">

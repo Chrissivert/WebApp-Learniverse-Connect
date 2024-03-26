@@ -1,7 +1,42 @@
-.coursecard {
-    border-style: solid;
-    border-color: rgb(151, 88, 163);
-    border-radius: 25px;
-    margin: 2%;
-    padding :10%;
+.Courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust minmax values */
+  gap: 20px; /* Adjust gap between cards */
+  justify-content: center; /* Center align the cards */
+}
+
+/* Adjust minmax values for smaller screens */
+@media screen and (max-width: 767px) {
+  .Courses {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Updated minmax values for mobile */
   }
+}
+
+.course-card {
+  border-radius: 25px; /* Purple border radius */
+  padding: 15px; /* Increased padding */
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  border: 2px solid #8a2be2; /* Purple border */
+}
+
+.course-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increased spread radius */
+}
+
+.course-card h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #333; /* Change the text color */
+}
+
+.course-card p {
+  margin: 4px 0;
+  color: #666; /* Change the text color */
+}
+
+.course-card .cheapest-price {
+  font-weight: bold;
+  color: green;
+}

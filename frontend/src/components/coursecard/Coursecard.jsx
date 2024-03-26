@@ -1,4 +1,5 @@
 import React from "react";
+import "./Coursecard.css";
 
 function Coursecard({ course, cheapestPrice }) {
   // Round the cheapestPrice to zero decimals
