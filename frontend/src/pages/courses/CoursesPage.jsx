@@ -1,11 +1,10 @@
 // CoursesPage.js
 import React, { useState, useEffect } from 'react';
 import Courses from './Courses';
-import SearchBar from '../../components/filter/searchBar/SearchBar';
-import PriceRangeFilter from '../../components/filter/pricefilter/PriceFilter';
-import TableFilter from '../../components/filter/sortbyfilter/TableFilter';
+// import FilterSection from './FilterSection';
 import Pagination from '../../components/pagination/Pagination';
 import CoursesFetch from './CoursesFetch';
+import FilterSection from '../../components/filter/FilterSection';
 
 function CoursesPage() {
   const [filters, setFilters] = useState({
@@ -19,7 +18,7 @@ function CoursesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [courses, setCourses] = useState([]); // All courses
   const [totalPages, setTotalPages] = useState(1); // Total pages
-  const perPage = 4; // Number of courses per page
+  const [perPage, setPerPage] = useState(5); // Number of courses per page
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +30,7 @@ function CoursesPage() {
   }, []);
 
   useEffect(() => {
-    const totalPages = Math.ceil((courses.length / perPage)+1);
+    const totalPages = Math.ceil(courses.length / perPage);
     setTotalPages(totalPages);
   }, [courses, perPage]);
 
@@ -42,18 +41,22 @@ function CoursesPage() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  
+  const handleSearchQueryChange = (query) => {
+    setFilters({ ...filters, searchQuery: query });
+  };
+
+  const handlePriceChange = (min, max) => {
+    setFilters({ ...filters, minPrice: min, maxPrice: max });
+  };
 
   return (
     <div>
-      <SearchBar setSearchQuery={(query) => setFilters({ ...filters, searchQuery: query })} />
-      <PriceRangeFilter
-        minPrice={0}
-        maxPrice={100000}
-        onPriceChange={(min, max) =>
-          setFilters({ ...filters, minPrice: min, maxPrice: max })
-        }
+      <FilterSection
+        onSearchQueryChange={handleSearchQueryChange}
+        onPriceChange={handlePriceChange}
+        onSortChange={handleSortChange}
       />
-      <TableFilter onSortChange={handleSortChange} />
       <Courses
         filters={filters}
         currentPage={currentPage}
