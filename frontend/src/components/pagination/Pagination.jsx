@@ -1,6 +1,9 @@
-import React from 'react';
+// Pagination.jsx
 
-function Pagination({currentPage, totalPages, onPageChange}) {
+import React from 'react';
+import './pagination.css'; // Ensure the path to your CSS file is correct
+
+function Pagination({ currentPage, totalPages, onPageChange }) {
   const changePage = (page) => {
     onPageChange(page);
   };

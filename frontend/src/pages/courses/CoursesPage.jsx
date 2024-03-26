@@ -1,10 +1,11 @@
-// Updated CoursesPage component with pagination controls
-import React, { useState } from 'react';
+// CoursesPage.js
+import React, { useState, useEffect } from 'react';
 import Courses from './Courses';
 import SearchBar from '../../components/filter/searchBar/SearchBar';
 import PriceRangeFilter from '../../components/filter/pricefilter/PriceFilter';
 import TableFilter from '../../components/filter/sortbyfilter/TableFilter';
 import Pagination from '../../components/pagination/Pagination';
+import CoursesFetch from './CoursesFetch';
 
 function CoursesPage() {
   const [filters, setFilters] = useState({
@@ -16,6 +17,23 @@ function CoursesPage() {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [courses, setCourses] = useState([]); // All courses
+  const [totalPages, setTotalPages] = useState(1); // Total pages
+  const perPage = 4; // Number of courses per page
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const coursesData = await CoursesFetch.fetchCourses();
+      setCourses(coursesData);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const totalPages = Math.ceil((courses.length / perPage)+1);
+    setTotalPages(totalPages);
+  }, [courses, perPage]);
 
   const handleSortChange = (sortBy, sortOrder) => {
     setFilters({ ...filters, sortBy, sortOrder });
@@ -36,8 +54,15 @@ function CoursesPage() {
         }
       />
       <TableFilter onSortChange={handleSortChange} />
-      <Courses filters={filters} currentPage={currentPage} onPageChange={handlePageChange} />
-      <Pagination currentPage={currentPage} totalPages={10} onPageChange={handlePageChange} />
+      <Courses
+        filters={filters}
+        currentPage={currentPage}
+        perPage={perPage}
+        onPageChange={handlePageChange}
+        courses={courses}
+        setCourses={setCourses}
+      />
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 }

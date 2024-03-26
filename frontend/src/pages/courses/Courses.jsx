@@ -1,13 +1,13 @@
+// Courses.js
 import React, { useEffect, useState } from "react";
 import './Courses.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import { filterAndSortCourses } from "./CoursesUtils.jsx";
-import CoursesFetch from "./CoursesFetch.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
+import CoursesFetch from "./CoursesFetch.jsx";
 
-function Courses({ filters, currentPage}) {
-  const [courses, setCourses] = useState([]);
+function Courses({ filters, currentPage, courses, setCourses }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
   const perPage = 5; // Number of courses per page - hardcoded
@@ -21,8 +21,9 @@ function Courses({ filters, currentPage}) {
       setCheapestPrices(cheapestPricesData);
     };
 
-    fetchData();
-  }, []);
+    fetchData(); // Call the fetchData function
+
+  }, [setCourses]); // Dependency array should include setCourses
 
   useEffect(() => {
     const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);
