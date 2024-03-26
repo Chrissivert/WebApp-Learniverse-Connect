@@ -1,8 +1,10 @@
+// Updated CoursesPage component with pagination controls
 import React, { useState } from 'react';
 import Courses from './Courses';
 import SearchBar from '../../components/filter/searchBar/SearchBar';
 import PriceRangeFilter from '../../components/filter/pricefilter/PriceFilter';
 import TableFilter from '../../components/filter/sortbyfilter/TableFilter';
+import Pagination from '../../components/pagination/Pagination';
 
 function CoursesPage() {
   const [filters, setFilters] = useState({
@@ -13,8 +15,15 @@ function CoursesPage() {
     sortOrder: null,
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 10; // Number of courses per page
+
   const handleSortChange = (sortBy, sortOrder) => {
     setFilters({ ...filters, sortBy, sortOrder });
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -28,7 +37,8 @@ function CoursesPage() {
         }
       />
       <TableFilter onSortChange={handleSortChange} />
-      <Courses filters={filters} />
+      <Courses filters={filters} currentPage={currentPage} perPage={perPage} onPageChange={handlePageChange} />
+      <Pagination currentPage={currentPage} totalPages={10} onPageChange={handlePageChange} />
     </div>
   );
 }

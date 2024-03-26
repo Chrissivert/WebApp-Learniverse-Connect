@@ -45,3 +45,4 @@ function getValueByAttribute(course, attribute, cheapestPrices) {
   }
   return 0;
 }
+
