@@ -29,7 +29,7 @@ function PriceRangeFilter({ onPriceChange }) {
 
   useEffect(() => {
     onPriceChange(minValue, maxValue);
-  }, [minValue, maxValue, onPriceChange]);
+  }, [minValue, maxValue]);
 
   return (
     <div>

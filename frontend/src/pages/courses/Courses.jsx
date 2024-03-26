@@ -7,10 +7,12 @@ import { filterAndSortCourses } from "./CoursesUtils.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
 import CoursesFetch from "./CoursesFetch.jsx";
 
-function Courses({ filters, currentPage, courses, setCourses, setPerPage }) {
+function Courses({ filters, currentPage }) {
+  const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
-  const perPage = 8; // Number of courses per page - hardcoded
+  const perPage = 5;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,9 +23,9 @@ function Courses({ filters, currentPage, courses, setCourses, setPerPage }) {
       setCheapestPrices(cheapestPricesData);
     };
 
-    fetchData(); // Call the fetchData function
+    fetchData();
 
-  }, [setCourses]); // Dependency array should include setCourses
+  }, []);
 
   useEffect(() => {
     const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);

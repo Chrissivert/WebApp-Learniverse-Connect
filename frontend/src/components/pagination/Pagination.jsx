@@ -1,9 +1,9 @@
 // Pagination.jsx
-
 import React from 'react';
-import './pagination.css'; // Ensure the path to your CSS file is correct
+import './pagination.css';
+import { paginationUtils } from "./PaginationUtils.jsx"; // Import paginationUtils
 
-function Pagination({currentPage, totalPages, onPageChange }) {
+function Pagination({ currentPage, totalPages, onPageChange }) {
   const changePage = (page) => {
     onPageChange(page);
   };
@@ -29,6 +29,7 @@ function Pagination({currentPage, totalPages, onPageChange }) {
       <button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
         Next
       </button>
+      <span className="total-pages">Total Pages: {totalPages}</span>
     </div>
   );
 }
