@@ -7,9 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-// @Entity
+@Entity
 public class CourseTags {
 
+  @Id
   private int course_id;
   private int tag_id;
 

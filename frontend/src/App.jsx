@@ -6,13 +6,11 @@ import Home from './pages/home/Home.jsx';
 import About from './pages/about/About.jsx';
 import NotFound from './pages/error/notFound/404.jsx';
 import Course from './pages/course/Course.jsx';
-import Search from './pages/search/Search.jsx';
 import './index.css';
 import Profile from './pages/profile/Profile.jsx';
 import Register from './pages/signup/Register.jsx';
 import Login from './pages/login/Login.jsx';
 import CoursesPage from './pages/courses/CoursesPage.jsx';
-// import Courses from './pages/courses/Courses.jsx';
 
 export default function App() {
   return (
@@ -23,7 +21,6 @@ export default function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/courses' element={<CoursesPage/>}/>
         <Route path='/course/:id' element={<Course/>}/>
-        <Route path='/search' element={<Search/>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='profile' element={<Profile/>}/>
         <Route path='/register' element={<Register/>}/>

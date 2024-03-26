@@ -1,4 +1,3 @@
-// useCoursesPageState.js
 import { useState } from 'react';
 
 function useCoursesPageState() {
@@ -8,6 +7,7 @@ function useCoursesPageState() {
     maxPrice: 100000,
     sortBy: null,
     sortOrder: null,
+    category: null, // Add category property to the initial state
   });
 
   const [currentPage, setCurrentPage] = useState(1);

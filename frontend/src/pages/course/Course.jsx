@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 function Course() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -21,7 +20,6 @@ function Course() {
     fetchCourse();
 
     return () => {
-      // Cleanup function
     };
   }, [id]);
 
@@ -35,7 +33,6 @@ function Course() {
       <p>{course.description}</p>
       <p>Start Date: {course.startDate}</p>
       <p>Related Certification: {course.relatedCertification}</p>
-      {/* Display other course details as needed */}
     </div>
   );
 }
