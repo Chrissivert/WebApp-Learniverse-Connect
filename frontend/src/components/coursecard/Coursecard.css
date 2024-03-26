@@ -1,10 +1,23 @@
+.Courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust minmax values */
+  gap: 20px; /* Adjust gap between cards */
+  justify-content: center; /* Center align the cards */
+}
+
+/* Adjust minmax values for smaller screens */
+@media screen and (max-width: 767px) {
+  .Courses {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Updated minmax values for mobile */
+  }
+}
+
 .course-card {
   border-radius: 25px; /* Purple border radius */
   padding: 15px; /* Increased padding */
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  margin-bottom: 10px; /* Increased margin between course cards */
   border: 2px solid #8a2be2; /* Purple border */
 }
 
