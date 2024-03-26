@@ -67,6 +67,8 @@ function Courses({ filters }) {
       return cheapestPrices[course.id] || 0;
     } else if (attribute === 'credits') {
       return course.credit || 0;
+    }else if (attribute === 'title') {
+      return course.title || '';
     }
     return 0;
   };

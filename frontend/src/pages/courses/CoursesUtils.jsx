@@ -29,9 +29,7 @@ export function filterAndSortCourses(courses, filters, cheapestPrices, sortBy, s
         } else {
           return valueB - valueA;
         }
-      });
-    }
-  
+      });  
     return filtered;
   }
   
@@ -41,6 +39,8 @@ export function filterAndSortCourses(courses, filters, cheapestPrices, sortBy, s
         return cheapestPrices[course.id];
       case 'credits':
         return parseInt(course.credit);
+      case 'title':
+        return course.title;
       default:
         return null;
     }

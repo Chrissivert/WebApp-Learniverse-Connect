@@ -13,23 +13,24 @@ function TableFilter({ onSortChange }) {
   const toggleSortOrder = () => {
     const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     setSortOrder(newSortOrder);
-    // Pass the current sorting attribute and the new sort order
     onSortChange(sortAttribute, newSortOrder);
   };
 
-  return (
-    <div>
-      <label htmlFor="sortSelect">Sort by:</label>
-      <select id="sortSelect" onChange={handleAttributeChange}>
-        <option value="">-- Select an attribute --</option>
-        <option value="price">Price</option>
-        <option value="credits">Credits</option>
-      </select>
-      <button onClick={toggleSortOrder}>
-        {sortOrder === 'asc' ? 'Ascending' : 'Descending'}
-      </button>
-    </div>
-  );
+  
+return (
+  <div>
+    <label htmlFor="sortSelect">Sort by:</label>
+    <select id="sortSelect" onChange={handleAttributeChange}>
+      <option value="">-- Select an attribute --</option>
+      <option value="price">Price</option>
+      <option value="credits">Credits</option>
+      <option value="title">Title</option>
+    </select>
+    <button onClick={toggleSortOrder}>
+      {sortAttribute === 'title' ? (sortOrder === 'asc' ? 'A to Z' : 'Z to A') : (sortOrder === 'asc' ? 'Low to High' : 'High to Low')}
+    </button>
+  </div>
+);
 }
 
 export default TableFilter;
