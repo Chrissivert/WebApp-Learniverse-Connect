@@ -5,45 +5,38 @@ import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import { filterAndSortCourses } from "./CoursesUtils.jsx";
 import CoursesFetch from "./CoursesFetch.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
-import Pagination from "../../components/pagination/Pagination.jsx";
 
-function Courses({ filters, currentPage, perPage, onPageChange }) {
+function Courses({ filters, currentPage}) {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [cheapestPrices, setCheapestPrices] = useState({});
-  const [totalPages, setTotalPages] = useState(0); // Added state for total pages
-  
+  const perPage = 5; // Number of courses per page - hardcoded
+
   useEffect(() => {
-    loadCourses();
-    fetchCheapestPrices();
+    const fetchData = async () => {
+      const coursesData = await CoursesFetch.fetchCourses();
+      setCourses(coursesData);
+
+      const cheapestPricesData = await CoursesFetch.fetchCheapestPrices();
+      setCheapestPrices(cheapestPricesData);
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
     const updatedFilteredCourses = filterAndSortCourses(courses, filters, cheapestPrices, filters.sortBy, filters.sortOrder);
-    setFilteredCourses(updatedFilteredCourses);
-  }, [filters, courses, cheapestPrices]);
+    const { paginatedData } = paginationUtils(updatedFilteredCourses, currentPage, perPage);
+    setFilteredCourses(paginatedData);
+  }, [courses, filters, cheapestPrices, currentPage]);
 
-  const loadCourses = async () => {
-    const data = await CoursesFetch.fetchCourses();
-    setCourses(data);
-  };
-
-  const fetchCheapestPrices = async () => {
-    const cheapestPrices = await CoursesFetch.fetchCheapestPrices();
-    setCheapestPrices(cheapestPrices);
-  };
-
-  // Calculate index range for current page
-  const { paginatedData } = paginationUtils(filteredCourses, currentPage, perPage);
-  
   return (
     <div className="Courses">
-      {paginatedData.map((course) => (
+      {filteredCourses.map((course) => (
         <Link to={`/course/${course.id}`} key={course.id}>
           <Coursecard course={course} cheapestPrice={cheapestPrices[course.id]} />
         </Link>
       ))}
-      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={onPageChange} />
     </div>
   );
 }

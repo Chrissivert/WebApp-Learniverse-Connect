@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pagination({ currentPage, totalPages, onPageChange }) {
+function Pagination({currentPage, totalPages, onPageChange}) {
   const changePage = (page) => {
     onPageChange(page);
   };

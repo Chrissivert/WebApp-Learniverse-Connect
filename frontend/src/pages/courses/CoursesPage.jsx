@@ -16,7 +16,6 @@ function CoursesPage() {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 10; // Number of courses per page
 
   const handleSortChange = (sortBy, sortOrder) => {
     setFilters({ ...filters, sortBy, sortOrder });
@@ -37,7 +36,7 @@ function CoursesPage() {
         }
       />
       <TableFilter onSortChange={handleSortChange} />
-      <Courses filters={filters} currentPage={currentPage} perPage={perPage} onPageChange={handlePageChange} />
+      <Courses filters={filters} currentPage={currentPage} onPageChange={handlePageChange} />
       <Pagination currentPage={currentPage} totalPages={10} onPageChange={handlePageChange} />
     </div>
   );
