@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 function PriceRangeFilter({ minPrice, maxPrice, onPriceChange }) {
   const [useInput, setUseInput] = useState(false);
-  const [minValue, setMinValue] = useState(minPrice || '');
-  const [maxValue, setMaxValue] = useState(maxPrice || '');
+  const [minValue, setMinValue] = useState(minPrice);
+  const [maxValue, setMaxValue] = useState(maxPrice);
+
 
   const handleMinChange = (e) => {
     let value = parseFloat(e.target.value);
