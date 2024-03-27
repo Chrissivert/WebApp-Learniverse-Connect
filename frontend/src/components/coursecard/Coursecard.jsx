@@ -1,9 +1,11 @@
 import React from "react";
 import "./Coursecard.css";
 
-function Coursecard({ course, cheapestPrice }) {
+function Coursecard({ course }) {
+  // Destructure cheapestPrice from course object
+  const { cheapestPrice } = course;
   // Round the cheapestPrice to zero decimals
-const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
   return (
     <div className="course-card">
       <h2>{course.title}</h2>

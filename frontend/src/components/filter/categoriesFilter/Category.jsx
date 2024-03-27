@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Courses from "../../../pages/courses/Courses";
 
-const Categories = () => {
+const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [courseTags, setCourseTags] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,18 +29,41 @@ const Categories = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const filterCoursesByCategory = () => {
+      if (!selectedCategory) {
+        return []; // No category selected, return empty list
+      }
+
+      // Find tags associated with the selected category
+      const selectedCategoryTags = categories.filter(tag => tag.tag === selectedCategory);
+
+      // Find course IDs associated with the selected tags
+      const courseIds = selectedCategoryTags.flatMap(categoryTag =>
+        courseTags
+          .filter(courseTag => courseTag.tagId === categoryTag.id)
+          .map(courseTag => courseTag.courseId)
+      );
+
+      // Filter courses based on the filtered course IDs
+      return courseIds.map(courseId =>
+        // Replace this with your actual course fetching logic
+        ({ id: courseId, name: `Course ${courseId}` })
+      );
+    };
+
+    setFilteredCourses(filterCoursesByCategory());
+  }, [selectedCategory, categories, courseTags]);
+
   const processTags = (tagsData) => {
-    // Define mapping for similar tags to group them
     const similarTagsMap = {
       "MYSQL": "Databases",
       "SQL": "Databases",
-      // Add more mappings as needed
     };
 
-    // Replace similar tags with their grouped category
-    const processedTags = tagsData.map(tag => ({
-      ...tag,
-      tag: similarTagsMap[tag.tag] || tag.tag // Use grouped category if available, otherwise keep original tag
+    const processedTags = tagsData.map(tags => ({
+      ...tags,
+      tag: similarTagsMap[tags.tag] || tags.tag // Use grouped category if available, otherwise keep original tag
     }));
 
     // Remove duplicate categories
@@ -56,30 +80,6 @@ const Categories = () => {
   const handleChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-
-  const filterCoursesByCategory = () => {
-    if (!selectedCategory) {
-      return []; // No category selected, return empty list
-    }
-
-    // Find tags associated with the selected category
-    const selectedCategoryTags = categories.filter(tag => tag.tag === selectedCategory);
-
-    // Find course IDs associated with the selected tags
-    const courseIds = selectedCategoryTags.flatMap(categoryTag =>
-      courseTags
-        .filter(courseTag => courseTag.tagId === categoryTag.id)
-        .map(courseTag => courseTag.courseId)
-    );
-
-    // Filter courses based on the filtered course IDs
-    return courseIds.map(courseId =>
-      // Replace this with your actual course fetching logic
-      ({ id: courseId, name: `Course ${courseId}` })
-    );
-  };
-
-  const filteredCourses = filterCoursesByCategory();
 
   return (
     <div>
@@ -98,4 +98,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Category;

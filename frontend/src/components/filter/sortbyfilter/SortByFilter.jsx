@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function TableFilter({ onSortChange }) {
+function SortByFilter({ onSortChange }) {
   const [sortAttribute, setSortAttribute] = useState(''); // State to store the sorting attribute
   const [sortOrder, setSortOrder] = useState('asc');
 
@@ -33,4 +33,4 @@ return (
 );
 }
 
-export default TableFilter;
+export default SortByFilter;

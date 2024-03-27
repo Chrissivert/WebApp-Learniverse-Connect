@@ -2,14 +2,16 @@
 import React from 'react';
 import SearchBar from '../../components/filter/searchBar/SearchBar';
 import PriceRangeFilter from '../../components/filter/pricefilter/PriceFilter';
-import TableFilter from '../../components/filter/sortbyfilter/TableFilter';
+import SortByFilter from './sortbyfilter/SortByFilter';
+import Category from './categoriesFilter/Category';
 
-function FilterSection({ onSearchQueryChange, onPriceChange, onSortChange }) {
+function FilterSection({ onSearchQueryChange, onPriceChange, onSortChange, onCategoryChange }) {
   return (
     <div>
       <SearchBar setSearchQuery={onSearchQueryChange} />
       <PriceRangeFilter onPriceChange={onPriceChange} />
-      <TableFilter onSortChange={onSortChange} />
+      <SortByFilter onSortChange={onSortChange} />
+      <Category onCategoryChange={onCategoryChange} />
     </div>
   );
 }

@@ -1,9 +1,17 @@
-export function filterAndSortCourses(courses, filters, cheapestPrices) {
-  // Filter by search query, min and max price
+export function filterAndSortCourses(courses, filters, selectedCategory) {
+  // Filter by search query, min and max price, and selected categories
   let filtered = courses.filter(course =>
-    course.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) &&
-    cheapestPrices[course.id] >= filters.minPrice &&
-    cheapestPrices[course.id] <= filters.maxPrice
+    (!filters.searchQuery || course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())) &&
+    course.cheapestPrice >= filters.minPrice &&
+    course.cheapestPrice <= filters.maxPrice &&
+    (!filters.category || // Check if category is undefined or empty
+      (course.categories && // Check if course.categories exists
+       course.categories.includes(filters.category))
+    ) &&
+    (!selectedCategory || // Check if selectedCategory is undefined or empty
+      (course.categories && // Check if course.categories exists
+       course.categories.includes(selectedCategory))
+    )
   );
 
   // Sort the filtered courses based on the selected attribute and sort order
@@ -15,8 +23,8 @@ export function filterAndSortCourses(courses, filters, cheapestPrices) {
     });
   } else if (filters.sortBy) {
     filtered.sort((courseA, courseB) => {
-      const valueA = getValueByAttribute(courseA, filters.sortBy, cheapestPrices);
-      const valueB = getValueByAttribute(courseB, filters.sortBy, cheapestPrices);
+      const valueA = getValueByAttribute(courseA, filters.sortBy);
+      const valueB = getValueByAttribute(courseB, filters.sortBy);
       return filters.sortOrder === 'asc' ? valueA - valueB : valueB - valueA;
     });
   }
@@ -24,9 +32,9 @@ export function filterAndSortCourses(courses, filters, cheapestPrices) {
   return filtered;
 }
 
-function getValueByAttribute(course, attribute, cheapestPrices) {
+function getValueByAttribute(course, attribute) {
   if (attribute === 'price') {
-    return cheapestPrices[course.id] || 0;
+    return course.cheapestPrice || 0;
   } else if (attribute === 'credits') {
     return course.credit || 0;
   } else if (attribute === 'title') {
