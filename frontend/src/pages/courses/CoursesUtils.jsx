@@ -7,10 +7,6 @@ export function filterAndSortCourses(courses, filters) {
     (!filters.category || // Check if category is undefined or empty
       (course.categories && // Check if course.categories exists
         course.categories.includes(filters.category))
-    ) &&
-    (!filters.selectedCategory || // Check if selectedCategory is undefined or empty
-      (course.categories && // Check if course.categories exists
-        course.categories.includes(filters.selectedCategory))
     )
   );
 
