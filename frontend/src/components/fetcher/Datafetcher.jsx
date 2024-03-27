@@ -21,7 +21,27 @@ class DataFetcher {
             throw error;
         }
     }
+
+    static async fetchTags() {
+        try {
+          const response = await fetch('http://localhost:8080/tags');
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('Error fetching tags:', error);
+          throw error;
+        }
+      }
+    
+      static async fetchCourseTags() {
+        try {
+          const response = await fetch('http://localhost:8080/course-tags');
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('Error fetching course tags:', error);
+          throw error;
+        }
+      }
   }
-  
   export default DataFetcher;
-  

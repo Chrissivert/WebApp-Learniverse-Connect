@@ -5,13 +5,13 @@ import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import { filterAndSortCourses } from "./CoursesUtils.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
 
-function Courses({ courses, filters: tableFilters, currentPage, selectedCategory }) {
+function Courses({ courses, filters: tableFilters, currentPage }) {
   const perPage = 5;
-  console.log(courses + "dadnadakld")
+  console.log("INSIDE OF COURSOURS:", courses);
 
   const filteredCourses = useMemo(() => {
-    return filterAndSortCourses(courses, tableFilters, selectedCategory);
-  }, [courses, tableFilters, selectedCategory]);
+    return filterAndSortCourses(courses, tableFilters);
+  }, [courses, tableFilters]);
   
   const { paginatedData } = paginationUtils(filteredCourses, currentPage, perPage);
 

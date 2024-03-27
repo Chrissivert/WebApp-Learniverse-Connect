@@ -1,16 +1,16 @@
-export function filterAndSortCourses(courses, filters, selectedCategory) {
-  // Filter by search query, min and max price, and selected categories
+export function filterAndSortCourses(courses, filters) {
+  // Filter by search query, min and max price, and selected category
   let filtered = courses.filter(course =>
     (!filters.searchQuery || course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())) &&
     course.cheapestPrice >= filters.minPrice &&
     course.cheapestPrice <= filters.maxPrice &&
     (!filters.category || // Check if category is undefined or empty
       (course.categories && // Check if course.categories exists
-       course.categories.includes(filters.category))
+        course.categories.includes(filters.category))
     ) &&
-    (!selectedCategory || // Check if selectedCategory is undefined or empty
+    (!filters.selectedCategory || // Check if selectedCategory is undefined or empty
       (course.categories && // Check if course.categories exists
-       course.categories.includes(selectedCategory))
+        course.categories.includes(filters.selectedCategory))
     )
   );
 
@@ -31,6 +31,7 @@ export function filterAndSortCourses(courses, filters, selectedCategory) {
 
   return filtered;
 }
+
 
 function getValueByAttribute(course, attribute) {
   if (attribute === 'price') {

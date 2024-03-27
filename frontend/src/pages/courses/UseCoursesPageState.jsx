@@ -15,20 +15,24 @@ function useCoursesPageState() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(5); // Number of courses per page - hardcoded
   const [courses, setCourses] = useState([]);
+  const [courseTags, setCourseTags] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const coursesData = await DataFetcher.fetchCourses();
         const cheapestPricesData = await DataFetcher.fetchCheapestPrices();
-        const combinedCourses = CourseDataCombiner.combineCoursesWithPrices(coursesData, cheapestPricesData);
-        console.log(combinedCourses);
+        const tagsData = await DataFetcher.fetchCourseTags();
+  
+        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, cheapestPricesData, tagsData);
+        console.log("Combined", combinedCourses);
         setCourses(combinedCourses);
+        setCourseTags(tagsData);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -57,6 +61,7 @@ function useCoursesPageState() {
     currentPage,
     perPage,
     courses,
+    courseTags,
     handleSortChange,
     handlePageChange,
     handleSearchQueryChange,
