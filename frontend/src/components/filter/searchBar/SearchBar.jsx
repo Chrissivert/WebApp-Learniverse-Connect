@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import './searchBar.css';
 
 function SearchBar({ searchQuery, setSearchQuery }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [results, setResults] = useState([]);
-
-  const highlightMatch = (title) => {
-    const index = title.toLowerCase().indexOf(searchQuery.toLowerCase());
-    if (index !== -1) {
-      return (
-        <>
-          {title.substring(0, index)}
-          <span className="highlight">{title.substring(index, index + searchQuery.length)}</span>
-          {title.substring(index + searchQuery.length)}
-        </>
-      );
-    }
-    return title;
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,9 +17,7 @@ function SearchBar({ searchQuery, setSearchQuery }) {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:8081/api/search?query=${searchQuery}`, {
-        });
-
+        const response = await fetch(`http://localhost:8081/api/search?query=${searchQuery}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -58,24 +43,17 @@ function SearchBar({ searchQuery, setSearchQuery }) {
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search courses..."
       />
-  
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-  
-      {searchQuery && results.length === 0 && <p>No results found.</p>}
-  
-      {results.length > 0 && (
-        <div className="result-box">
-          <ul>
-            {results.map((result) => (
-              <li key={result.courseID} onClick={() => setSearchQuery(result.title)}>
-                {highlightMatch(result.title)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-  
+      
+      {loading && <div>Loading...</div>}
+      {error && <div>{error}</div>}
+      
+      <div className="autocomplete-box">
+        {results.map((result) => (
+          <div key={result.id} className="autocomplete-item" onClick={() => setSearchQuery(result.title)}>
+            {result.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

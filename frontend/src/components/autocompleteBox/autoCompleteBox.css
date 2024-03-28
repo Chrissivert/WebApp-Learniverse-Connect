@@ -1,0 +1,15 @@
+.autocomplete-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .autocomplete-box {
+    margin-top: 10px;
+  }
+  
+  .autocomplete-scrollable {
+    max-height: 200px; 
+    overflow-y: auto; 
+  }
+
+   

@@ -7,7 +7,6 @@ import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx
 
 function Courses({ courses, filters: tableFilters, currentPage }) {
   const perPage = 5;
-  console.log("INSIDE OF COURSOURS:", courses);
 
   const filteredCourses = useMemo(() => {
     return filterAndSortCourses(courses, tableFilters);
