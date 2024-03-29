@@ -24,13 +24,15 @@ function CoursesPage() {
         onPriceChange={handlePriceChange}
         onSortChange={handleSortChange}
         onCategoryChange={handleCategoryChange}
+        searchQuery={filters.searchQuery}
+        courses={courses} // Pass courses to FilterSection
+        filters={filters} // Pass filters to FilterSection
       />
       <Courses
         filters={filters}
         currentPage={currentPage}
         courses={courses}
       />
-
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
