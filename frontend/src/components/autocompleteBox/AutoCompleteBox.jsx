@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './autoCompleteBox.css';
-import { filterAndSortCourses } from '../../pages/courses/CoursesUtils';
+import { filterLogic } from '../../pages/courses/FilterLogic';
 
 function AutocompleteBox({ courses, filters }) {
   // Filter and sort courses based on filters
-  const filteredAndSortedCourses = filterAndSortCourses(courses, filters);
+  const filteredAndSortedCourses = filterLogic(courses, filters);
 
   // Check if the search query is empty
   if (!filters.searchQuery.trim() || filteredAndSortedCourses.length === 0) {

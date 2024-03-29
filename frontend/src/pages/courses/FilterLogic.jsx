@@ -1,4 +1,4 @@
-export function filterAndSortCourses(courses, filters) {
+export function filterLogic(courses, filters) {
   // Filter by search query, min and max price, and selected category
   let filtered = courses.filter(course =>
     (!filters.searchQuery || course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())) &&

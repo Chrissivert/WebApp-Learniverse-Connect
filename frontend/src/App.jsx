@@ -8,7 +8,7 @@ import NotFound from './pages/error/notFound/404.jsx';
 import Course from './pages/course/Course.jsx';
 import './index.css';
 import Profile from './pages/profile/Profile.jsx';
-import Register from './pages/signup/Register.jsx';
+import Register from './pages/register/Register.jsx';
 import Login from './pages/login/Login.jsx';
 import CoursesPage from './pages/courses/CoursesPage.jsx';
 
