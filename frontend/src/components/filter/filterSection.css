@@ -1,0 +1,32 @@
+.filter-container {
+    display: flex;
+    justify-content: center; /* Center the filter row horizontally */
+  }
+  
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line when there's not enough space */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Adjust the width of each filter component for different screen sizes */
+  @media screen and (max-width: 768px) {
+    .filter-row > * {
+      width: 100%; /* Each component takes up 100% width on small screens */
+      margin-bottom: 10px; /* Add some spacing between components */
+    }
+  }
+  
+  /* Optional: Add specific styles for larger screens if needed */
+  @media screen and (min-width: 769px) {
+    .filter-row > * {
+      flex: 1; /* Each component shares an equal amount of available space */
+      margin-right: 10px; /* Add some spacing between components */
+    }
+    
+    .filter-row > *:last-child {
+      margin-right: 0; /* Remove right margin for the last component */
+    }
+  }
+  
