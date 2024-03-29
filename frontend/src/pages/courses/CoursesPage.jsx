@@ -3,8 +3,6 @@ import Courses from './Courses';
 import FilterSection from '../../components/filter/FilterSection';
 import Pagination from '../../components/pagination/Pagination';
 import useCoursesPageState from './UseCoursesPageState';
-import AutocompleteBox from '../../components/autocompleteBox/AutoCompleteBox';
-
 
 function CoursesPage() {
   const {
@@ -20,14 +18,15 @@ function CoursesPage() {
   } = useCoursesPageState();
 
   return (
-    <div className="autocomplete-container">
+    <div>
       <FilterSection
         onSearchQueryChange={handleSearchQueryChange}
         onPriceChange={handlePriceChange}
         onSortChange={handleSortChange}
         onCategoryChange={handleCategoryChange}
         searchQuery={filters.searchQuery}
-        courses={courses}
+        courses={courses} // Pass courses to FilterSection
+        filters={filters} // Pass filters to FilterSection
       />
       <Courses
         filters={filters}

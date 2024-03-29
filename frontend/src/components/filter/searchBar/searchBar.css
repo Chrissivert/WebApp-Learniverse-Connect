@@ -1,25 +1,15 @@
 .search-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px; /* Adjust based on your design */
-  }
-  
-  .autocomplete-box {
-    position: absolute;
-    width: 100%;
-    border: 1px solid #ccc;
-    background: #fff;
-    z-index: 1000; /* Ensure it appears above other content */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
-  
-  .autocomplete-item {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .autocomplete-item:hover {
-    background-color: #f9f9f9;
-  }
-  
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; /* Center the search bar horizontally */
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}

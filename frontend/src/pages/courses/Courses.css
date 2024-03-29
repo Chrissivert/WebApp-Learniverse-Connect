@@ -5,12 +5,8 @@
     align-items: center;
   }
 
-  /* @media (max-width: 800px) {
+  @media (max-width: 800px) {
     .Courses {
       flex-direction: column;
-    } */
-
-    .autocomplete-container {
-      display: flex;
-      flex-direction: column;
     }
+  }
