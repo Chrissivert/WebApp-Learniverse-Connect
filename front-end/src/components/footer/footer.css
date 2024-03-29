@@ -1,0 +1,10 @@
+footer {
+  background-color: #d0bfff;
+  color: #000000;
+  width: 100%;
+  height: auto;
+  position: fixed; /* or position: absolute; */
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}

@@ -1,22 +1,25 @@
-// package no.ntnu.backend.service;
+package no.ntnu.backend.service;
 
-// import java.util.List;
+import java.util.List;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// import no.ntnu.backend.model.CourseTags;
-// import no.ntnu.backend.repository.CourseTagsRepository;
+import no.ntnu.backend.model.CourseTags;
+import no.ntnu.backend.repository.CourseTagsRepository;
 
-// @Service
-// public class CourseTagsService {
+@Service
+public class CourseTagsService {
 
-//     @Autowired
-//     private CourseTagsRepository courseTagsRepository;
+    //DOES NOT WORK ERROR IN DATABASE
 
-//     public List<CourseTags> findAllDistinct3() {
-//         return courseTagsRepository.findAllDistinct();
-//     }
-// }
+
+    // @Autowired
+    // private CourseTagsRepository courseTagsRepository;
+
+    // public List<CourseTags> findAllDistinct3() {
+    //     return courseTagsRepository.findAllDistinct();
+    // }
+}
 
 

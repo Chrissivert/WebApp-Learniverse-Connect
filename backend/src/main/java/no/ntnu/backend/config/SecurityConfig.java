@@ -1,4 +1,4 @@
-package no.ntnu.backend.security;
+package no.ntnu.backend.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import no.ntnu.backend.security.JwtRequestFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -40,13 +41,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Set session management to STATELESS
             .and()
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication
-        //test
-        //test2
     return http.build();
 }
 
-
-    
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {

@@ -1,4 +1,4 @@
-package no.ntnu.backend.security;
+package no.ntnu.backend.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
