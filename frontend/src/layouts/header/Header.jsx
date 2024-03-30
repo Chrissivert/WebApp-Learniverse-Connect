@@ -5,18 +5,27 @@ import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
 import Logo from '../../components/logo/Logo.jsx';
 import Button from '../../components/button/Button.jsx';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
+import { FaShoppingCart } from 'react-icons/fa'; // Import the cart icon from react-icons
 
 export default function Header() {
   const { cart } = useContext(CartContext);
 
   return (
-    <header>
+    <header className="header-container">
       <HamburgerMenu/>
-      <Logo home_src={true}/>
-      {/* Display cart length */}
-      <li><Link to="/cart">Cart ({cart.length})</Link></li>
-      <Button text='Register' src='/register'/>
-      <Button text='Real login' src='/login'/>
+      <div className="logo-container">
+        <Logo home_src={true}/>
+      </div>
+      <div className="cart-container">
+        <Link to="/cart" className="cart-link">
+          <FaShoppingCart className="cart-icon" /> {/* Cart icon */}
+          <span className="cart-text">Cart ({cart.length})</span>
+        </Link>
+      </div>
+      <div className="button-container">
+        <Button text='Register' src='/register'/>
+        <Button text='Real login' src='/login'/>
+      </div>
     </header>
   );
 }

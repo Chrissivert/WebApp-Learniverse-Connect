@@ -1,33 +1,54 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartProvider';
-import Coursecard from '../../components/coursecard/Coursecard';
+import './cartPage.css'; // Import the stylesheet for CartPage
 import Button from '../../components/button/Button';
+import Coursecard from '../../components/coursecard/Coursecard';
 
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
 
   const handleRemoveItem = (courseId) => {
-    removeFromCart(courseId); // Call removeFromCart with the courseId to remove the specific item
+    removeFromCart(courseId);
   };
 
   const handleClearCart = () => {
-    clearCart(); // Call clearCart to remove all items from the cart
+    clearCart();
   };
 
+  // Calculate total price
+  const totalPrice = cart.reduce((total, course) => total + course.cheapestPrice, 0);
+
   return (
-    <div>
-      <Button text='Go to courses' src='/courses'/>
-      <h2>Cart</h2>
-      <h3>Items in Cart: {cart.length}</h3>
-      <div className="cart-items">
-        {cart.map(course => (
-          <div key={course.id} className="cart-item">
-            <Coursecard course={course} />
-            <button onClick={() => handleRemoveItem(course.id)}>Remove</button> {/* Button to remove a specific item */}
-          </div>
-        ))}
+    <div className="cart-page">
+      <div className="cart-header">
+        <h1>Shopping Cart</h1>
+        <Button text="Go to Courses" src="/courses" />
       </div>
-      <button onClick={handleClearCart}>Clear Cart</button> {/* Button to clear all items from the cart */}
+      <div className="cart-items">
+        {cart.length > 0 ? (
+          cart.map((course) => {
+            console.log(course); // Print the course object in the console
+            return (
+              <div key={course.id} className="cart-item">
+                <Coursecard course={course} />
+                <p>Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
+                <button onClick={() => handleRemoveItem(course.id)}>Remove</button>
+              </div>
+            );
+          })
+        ) : (
+          <p>Your cart is empty.</p>
+        )}
+      </div>
+      <div className="cart-summary">
+        <div className="price-summary">
+          <p>Total Price: ${totalPrice}</p> {/* Display total price */}
+        </div>
+        <div className="action-buttons">
+          <button onClick={handleClearCart}>Clear Cart</button>
+          <Button text="Proceed to Checkout" src="/checkout" />
+        </div>
+      </div>
     </div>
   );
 }
