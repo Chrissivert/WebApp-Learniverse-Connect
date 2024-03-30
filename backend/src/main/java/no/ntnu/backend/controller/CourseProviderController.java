@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,9 +20,9 @@ public class CourseProviderController {
     @Autowired
     private CourseProviderServiceDTO courseProviderService;
 
-    @GetMapping("/course-by-each-provider")
-    public List<CourseByEachProviderDTO> getAllCourseProvidersWithProviderNames() {
-        return courseProviderService.getAllCourseProvidersWithProviderNames("NOK");
+     @GetMapping("/course/providers/{courseId}")
+    public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId) {
+        return courseProviderService.getProvidersForCourse(courseId, "NOK");
     }
 
     @GetMapping("/cheapest-course-prices")
