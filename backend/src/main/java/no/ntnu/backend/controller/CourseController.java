@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/courses")
 @CrossOrigin("http://localhost:5173")
 public class CourseController {
-    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
+    // private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseRepository courseRepository;
@@ -23,19 +24,20 @@ public class CourseController {
         return courseRepository.save(newCourse);
     }
 
-    @GetMapping("/courses")
+    @GetMapping()
     List<Course> getAllCourses() {
-        logger.warn("Getting all courses");
+        // logger.warn("Getting all courses");
         return courseRepository.findAll();
     }
-    @GetMapping("/course/{id}")
-    Course getCourseById(@PathVariable Long id) {
+
+    @GetMapping("/{id}")
+    Course getCourseById(@PathVariable int id) {
         return courseRepository.findById(id)
                 .orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     @PutMapping("/course/{id}")
-    Course updateCourse(@RequestBody Course newCourse, @PathVariable Long id) {
+    Course updateCourse(@RequestBody Course newCourse, @PathVariable int id) {
         return courseRepository.findById(id)
                 .map(course -> {
                     course.setTitle(newCourse.getTitle());
@@ -52,7 +54,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/course/{id}")
-    String deleteCourse(@PathVariable Long id){
+    String deleteCourse(@PathVariable int id){
         if(!courseRepository.existsById(id)){
             throw new CourseNotFoundException(id);
         }

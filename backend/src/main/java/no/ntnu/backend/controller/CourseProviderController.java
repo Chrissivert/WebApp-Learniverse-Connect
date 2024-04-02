@@ -20,10 +20,10 @@ public class CourseProviderController {
     @Autowired
     private CourseProviderServiceDTO courseProviderService;
 
-     @GetMapping("/course/providers/{courseId}")
-    public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId) {
-        return courseProviderService.getProvidersForCourse(courseId, "NOK");
-    }
+    //  @GetMapping("/course/providers/{courseId}")
+    // public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId) {
+    //     return courseProviderService.getProvidersForCourse(courseId, "NOK");
+    // }
 
     @GetMapping("/cheapest-course-prices")
     public List<CourseProvider> getCheapestCoursePrices() {
