@@ -107,4 +107,34 @@ A lot was achieved the past two weeks especially on backend. The database works 
 
 
 
+ ## Week 14
+
+Date: 4th April
+Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
+
+### What was accomplished: 
+
+* Added connection to DBeaver instead of using SQL scripts inside of Vscode
+* Readded the filters (such as price and sortby price, credits and title)
+* Added ability to sort by categories, although not implemented as intended
+* Added a simple cartPage (not working)
+
+
+### What didn’t go well: 
+
+* Easter break so less has been done
+* Some things that have been added need to be redone due to not being implemented correctly
+
+### What to do: 
+
+* Øystein will work on authentication, will look at code girts presented in class. Will attempt to connect
+user in database to show on profile page. Vegard will look at backend specifically using ResponseEntities instead of
+models. Chris Sivert will try to make cart page work as intended (able to add courses from different providers). Birgitte will work on the overall project not a specific page, she will work on styling aswell.
+
+
+## Discussion: 
+We have a good plan of what to do forward, and understand what happens pretty well. There is a lot to do and a little stressed with the time left. 
+
+
+
  
