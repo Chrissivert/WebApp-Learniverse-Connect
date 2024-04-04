@@ -1,18 +1,17 @@
 package no.ntnu.backend.model;
-
+import java.sql.Date;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.sql.Date;
-import java.util.Objects;
-
 /**
- * Represents a course entity with its properties and methods.
+ * 
  *
- * @author group 01
- * @version spring 2024
+ * @author 
+ * @version 29.03.2024
  */
 @Entity
 public class Course {
@@ -28,210 +27,262 @@ public class Course {
     private double hoursPerWeek;
     private String description;
     private String relatedCertification;
-    /**
-     * Default constructor for Course class.
-     */
-    public Course() {
-    }
 
-    /**
-     * Retrieves the ID of the course.
-     *
-     * @return The ID of the course.
-     */
-    public int getId() {
-        return id;
-    }
-    /**
-     * Sets the ID of the course.
-     *
-     * @param id The ID of the course.
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-    /**
-     * Retrieves the title of the course.
-     *
-     * @return The title of the course.
-     */
-    public String getTitle() {
-        return title;
-    }
-    /**
-     * Sets the title of the course.
-     *
-     * @param title The title of the course.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    /**
-     * Retrieves the level id of the course.
-     *
-     * @return The level id of the course.
-     */
-    public int getLevelId() {
-        return levelId;
-    }
-    /**
-     * Sets the level id of the course.
-     *
-     * @param levelId The ID of the course.
-     */
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
-    }
-    /**
-     * Retrieves the category id of the course.
-     *
-     * @return The category id of the course.
-     */
-    public int getCategoryId() {
-        return categoryId;
-    }
-    /**
-     * Sets the category id of the course.
-     *
-     * @param categoryId The ID of the course.
-     */
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
+  /**
+   * 
+   */
+  public Course() {
+  }
 
-    /**
-     * Sets the start date of the course.
-     *
-     * @param startDate The start date of the course.
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-    /**
-     * Retrieves the start date of the course.
-     *
-     * @return The start date of the course.
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
-    /**
-     * Sets the end date of the course.
-     *
-     * @param endDate The end date of the course.
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-    /**
-     * Retrieves the end date of the course.
-     *
-     * @return The end date of the course.
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
-    /**
-     * Sets the credit of the course.
-     *
-     * @param credit The credit of the course.
-     */
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
-    /**
-     * Retrieves the credit of the course.
-     *
-     * @return The credit of the course.
-     */
-    public double getCredit() {
-        return credit;
-    }
-    /**
-     * Sets the number of hours per week of the course.
-     *
-     * @param hoursPerWeek The number of hours per week of the course.
-     */
-    public void setHoursPerWeek(double hoursPerWeek) {
-        this.hoursPerWeek = hoursPerWeek;
-    }
-    /**
-     * Retrieves the number of hours per week of the course.
-     *
-     * @return The number of hours per week  of the course.
-     */
-    public double getHoursPerWeek() {
-        return hoursPerWeek;
-    }
-    /**
-     * Retrieves the description of the course.
-     *
-     * @return The description of the course.
-     */
-    public String getDescription() {
-        return description;
-    }
-    /**
-     * Sets the description of the course.
-     *
-     * @param description The description of the course.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    /**
-     * Retrieves the related certification of the course.
-     *
-     * @return The related certification of the course.
-     */
-    public String getRelatedCertification() {
-        return relatedCertification;
-    }
-    /**
-     * Sets the related certification of the course.
-     *
-     * @param relatedCertification The related certification of the course.
-     */
-    public void setRelatedCertification(String relatedCertification) {
-        this.relatedCertification = relatedCertification;
-    }
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * @param obj The reference object with which to compare.
-     * @return true if this object is the same as the obj argument; false otherwise.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Course) obj;
-        return this.id == that.id &&
-                Objects.equals(this.title, that.title) &&
-                this.description == that.description &&
-                this.relatedCertification == that.relatedCertification;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getId() {
+    return this.id;
+  }
 
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return A hash code value for this object.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, relatedCertification);
-    }
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return A string representation of the object.
-     */
-    @Override
-    public String toString() {
-        return "Course[" +
-                "id=" + id + ", " +
-                "name=" + title + ", " +
-                "description=" + description + ", " +
-                "duration=" + relatedCertification + ']';
-    }
+  /**
+   * 
+   *
+   * @param id
+   */
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getTitle() {
+    return this.title;
+  }
+
+  /**
+   * 
+   *
+   * @param name
+   */
+  public void setTitle(String name) {
+    this.title = name;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getLevelId() {
+    return this.levelId;
+  }
+
+  /**
+   * 
+   *
+   * @param levelId
+   */
+  public void setLevelId(int levelId) {
+    this.levelId = levelId;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getCategoryId() {
+    return this.categoryId;
+  }
+
+  /**
+   * 
+   *
+   * @param categoryId
+   */
+  public void setCategoryId(int categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public Date getStartDate() {
+    return this.startDate;
+  }
+
+  /**
+   * 
+   *
+   * @param startDate
+   */
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public Date getEndDate() {
+    return this.endDate;
+  }
+
+  /**
+   * 
+   *
+   * @param endDate
+   */
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public double getCredit() {
+    return this.credit;
+  }
+
+  /**
+   * 
+   *
+   * @param credit
+   */
+  public void setCredit(double credit) {
+    this.credit = credit;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public double getHoursPerWeek() {
+    return this.hoursPerWeek;
+  }
+
+  /**
+   * 
+   *
+   * @param hoursPerWeek
+   */
+  public void setHoursPerWeek(double hoursPerWeek) {
+    this.hoursPerWeek = hoursPerWeek;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getRelatedCertification() {
+    return this.relatedCertification;
+  }
+
+  /**
+   * 
+   *
+   * @param relatedCertification
+   */
+  public void setRelatedCertification(String relatedCertification) {
+    this.relatedCertification = relatedCertification;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getDescription() {
+    return this.description;
+  }
+
+  /**
+   * 
+   *
+   * @param description
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+//   /**
+//    * 
+//    *
+//    * @return
+//    */
+//   public String getImageType() {
+//     return this.imageType;
+//   }
+
+//   /**
+//    * 
+//    *
+//    * @param imageType
+//    */
+//   public void setImageType(String imageType) {
+//     this.imageType = imageType;
+//   }
+
+  @JsonIgnore
+  public boolean isValid() {
+    return //this.id > 0 &&
+      !this.title.isBlank() && this.title != null &&
+      this.levelId > 0 &&
+      this.categoryId > 0 &&
+      this.startDate != null &&
+      this.endDate != null &&
+      this.credit >= 0 &&
+      this.hoursPerWeek >= 0 &&
+      !this.relatedCertification.isBlank() && this.relatedCertification != null &&
+      !this.description.isBlank() && this.description != null;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this)
+      return true;
+    if (obj == null || obj.getClass() != this.getClass())
+      return false;
+    var that = (Course) obj;
+    return this.id == that.id &&
+        this.title == that.title &&
+        this.levelId == that.levelId &&
+        this.categoryId == that.categoryId &&
+        this.startDate == that.startDate &&
+        this.endDate == that.endDate &&
+        this.credit == that.credit &&
+        this.hoursPerWeek == that.hoursPerWeek &&
+        this.relatedCertification == that.relatedCertification &&
+        this.description == that.description;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.id, this.title, this.levelId, this.categoryId, this.startDate, this.endDate, this.credit,
+        this.hoursPerWeek, this.relatedCertification, this.description);
+  }
+
+  @Override
+  public String toString() {
+    return "Course[" +
+        "id=" + this.id + ", " +
+        "name=" + this.title + ", " +
+        "levelId=" + this.levelId + ", " +
+        "categoryId=" + this.categoryId + ", " +
+        "startDate=" + this.startDate + ", " +
+        "endDate=" + this.endDate + ", " +
+        "credit=" + this.credit + ", " +
+        "hoursPerWeek=" + this.hoursPerWeek + ", " +
+        "relatedCertification=" + this.relatedCertification +
+        "description=" + this.description + ']';
+  }
 }

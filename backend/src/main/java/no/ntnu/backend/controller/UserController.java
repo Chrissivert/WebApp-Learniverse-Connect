@@ -1,4 +1,98 @@
-// package no.ntnu.backend.controller;
+package no.ntnu.backend.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import no.ntnu.backend.model.User;
+import no.ntnu.backend.service.UserService;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
+/**
+ * 
+ *
+ * @author 
+ * @version 30.03.2024
+ */
+@RestController
+@RequestMapping("/users")
+@CrossOrigin("http://localhost:5173")
+public class UserController {
+
+  @Autowired
+  private UserService userService;
+
+  /**
+   * 
+   *
+   * @param user
+   * @return
+   */
+  @PostMapping()
+  public ResponseEntity<String> createUser(@RequestBody User user) {
+    return this.userService.create(user);
+  }
+  
+  /**
+   * 
+   *
+   * @return
+   */
+  @GetMapping()
+  public List<User> readAllUsers() {
+    return this.userService.readAll();
+  }
+  
+  /**
+   * 
+   *
+   * @param id
+   * @return
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<User> readUserById(@PathVariable int id) {
+    return this.userService.readById(id);
+  }
+  
+  /**
+   * 
+   *
+   * @param id
+   * @param user
+   * @return
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
+    return this.userService.update(id, user);
+  }
+
+  /**
+   * 
+   *
+   * @param id
+   * @return
+   */
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteUser(@PathVariable int id) {
+    return this.userService.delete(id);
+  }
+}
+
+
+
+//KEEP THIS!!!
+
+
 
 // import no.ntnu.backend.dto.AuthRequest;
 // import no.ntnu.backend.dto.AuthResponse;
@@ -87,7 +181,4 @@
 //         userRepository.deleteById(id);
 //         return  "User with id "+id+" has been deleted success.";
 //     }
-
-
-    
 // }

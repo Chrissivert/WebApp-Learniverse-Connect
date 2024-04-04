@@ -1,120 +1,108 @@
 package no.ntnu.backend.model;
 
-
-import jakarta.persistence.*;
-// import org.springframework.security.core.GrantedAuthority;
-// import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.HashSet;
+import java.sql.Date;
 import java.util.Objects;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+/**
+ * 
+ *
+ * @author 
+ * @version 30.03.2024
+ */
 @Entity
-@Table(name = "user")
-public final class User{
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private int roleId;
+  private String username;
+  private Date startDate;
+  private String email;
+  private String password;
 
-    @Column(name = "role_id")
-    private int roleId;
-    
-    @Column(name = "username")
-    private String username;
+  public User() {
+  }
 
-    @Column(name = "start_date")
-    private String startDate;
+  public int getId() {
+    return this.id;
+  }
 
-    private String email;
-    private String password;
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public User() {
-    }
+  public int getRoleId() {
+    return this.roleId;
+  }
 
-    public User(int id, int roleId, String userName, String startDate, String email, String password) {
-        this.id = id;
-        this.roleId = roleId;
-        this.username = userName;
-        this.startDate = startDate;
-        this.email = email;
-        this.password = password;
-    }
+  public void setRoleId(int roleId) {
+    this.roleId = roleId;
+  }
 
+  public String getUsername() {
+    return this.username;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public int getId() {
-        return id;
-    }
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
+  public Date getStartDate() {
+    return this.startDate;
+  }
 
-    public int getRoleId() {
-        return roleId;
-    }
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getEmail() {
+    return this.email;
+  }
 
-    public void setUsername(String firstName) {
-        this.username = firstName;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
+  public String getPassword() {
+    return this.password;
+  }
 
-    public String getStartDate() {
-        return startDate;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
+  @JsonIgnore
+  public boolean isValid() {
+    return //this.id > 0 &&
+      this.roleId > 0;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this)
+      return true;
+    if (obj == null || obj.getClass() != this.getClass())
+      return false;
+    var that = (User) obj;
+    return this.id == that.id &&
+      this.roleId == that.roleId;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.id);
+  }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (User) obj;
-        return this.id == that.id &&
-                Objects.equals(this.username, that.username) &&
-                Objects.equals(this.email, that.email) &&
-                Objects.equals(this.password, that.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id,roleId, username, startDate, email, password);
-    }
-
-    @Override
-    public String toString() {
-        return "User[" +
-                "id=" + id + ", " +
-                "roleId=" + roleId + ", " +
-                "firstName=" + username + ", " +
-                "startDate=" + startDate + ", " +
-                "email=" + email + ", " +
-                "password=" + password + ']';
-    }
-
+  @Override
+  public String toString() {
+    return "User[" +
+        "id=" + this.id + ']';
+  }
 }

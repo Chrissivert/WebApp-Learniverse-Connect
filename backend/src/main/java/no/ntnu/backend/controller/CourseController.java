@@ -1,64 +1,89 @@
 package no.ntnu.backend.controller;
 
-import no.ntnu.backend.exception.CourseNotFoundException;
-import no.ntnu.backend.model.Course;
-import no.ntnu.backend.repository.CourseRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import no.ntnu.backend.model.Course;
+import no.ntnu.backend.service.CourseService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
+/**
+ * 
+ *
+ * @author 
+ * @version 29.03.2024
+ */
 @RestController
 @RequestMapping("/courses")
 @CrossOrigin("http://localhost:5173")
 public class CourseController {
-    // private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
+  
+  @Autowired
+  private CourseService courseService;
 
-    @Autowired
-    private CourseRepository courseRepository;
+  /**
+   * 
+   *
+   * @param course
+   * @return
+   */
+  @PostMapping()
+  public ResponseEntity<String> createCourse(@RequestBody Course course) {
+    return this.courseService.create(course);
+  }
 
-    @PostMapping("/course")
-    Course newCourse(@RequestBody Course newCourse) {
-        return courseRepository.save(newCourse);
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  @GetMapping()
+  public List<Course> readAllCourses() {
+    return this.courseService.readAll();
+  }
 
-    @GetMapping()
-    List<Course> getAllCourses() {
-        // logger.warn("Getting all courses");
-        return courseRepository.findAll();
-    }
+  /**
+   * 
+   *
+   * @param id
+   * @return
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<Course> readCourseById(@PathVariable int id) {
+    return this.courseService.readById(id);
+  }
 
-    @GetMapping("/{id}")
-    Course getCourseById(@PathVariable int id) {
-        return courseRepository.findById(id)
-                .orElseThrow(() -> new CourseNotFoundException(id));
-    }
+  /**
+   * 
+   *
+   * @param id
+   * @param course
+   * @return
+   */
+  @PutMapping("/{id}")
+  public ResponseEntity<String> updateCourse(@PathVariable int id, @RequestBody Course course) {
+    return this.courseService.update(id, course);
+  }
 
-    @PutMapping("/course/{id}")
-    Course updateCourse(@RequestBody Course newCourse, @PathVariable int id) {
-        return courseRepository.findById(id)
-                .map(course -> {
-                    course.setTitle(newCourse.getTitle());
-                    course.setLevelId(newCourse.getLevelId());
-                    course.setCategoryId(newCourse.getCategoryId());
-                    course.setStartDate(newCourse.getStartDate());
-                    course.setEndDate(newCourse.getEndDate());
-                    course.setCredit(newCourse.getCredit());
-                    course.setHoursPerWeek(newCourse.getHoursPerWeek());
-                    course.setDescription(newCourse.getDescription());
-                    course.setRelatedCertification(newCourse.getRelatedCertification());
-                    return courseRepository.save(course);
-                }).orElseThrow(() -> new CourseNotFoundException(id));
-    }
-
-    @DeleteMapping("/course/{id}")
-    String deleteCourse(@PathVariable int id){
-        if(!courseRepository.existsById(id)){
-            throw new CourseNotFoundException(id);
-        }
-        courseRepository.deleteById(id);
-        return  "Course with id "+id+" has been deleted success.";
-    }
+  /**
+   * 
+   *
+   * @param course
+   * @return
+   */
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteCourse(@PathVariable int id) {
+    return this.courseService.delete(id);
+  }
 }
