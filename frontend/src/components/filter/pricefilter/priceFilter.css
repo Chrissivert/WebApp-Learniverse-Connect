@@ -1,0 +1,26 @@
+
+
+.price-range-container {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .price-range-container label {
+    margin-right: 10px;
+  }
+  
+  .price-range-container input[type="number"],
+  .price-range-container input[type="range"] {
+    margin-right: 10px;
+  }
+  
+  .price-range-container input[type="range"] {
+    width: 200px;
+  }
+  
+  .price-range-container input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  

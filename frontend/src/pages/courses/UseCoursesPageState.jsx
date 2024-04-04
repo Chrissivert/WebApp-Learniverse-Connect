@@ -25,7 +25,6 @@ function useCoursesPageState() {
         const tagsData = await DataFetcher.fetchCourseTags();
   
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, cheapestPricesData, tagsData);
-        console.log("Combined", combinedCourses);
         setCourses(combinedCourses);
         setCourseTags(tagsData);
       } catch (error) {

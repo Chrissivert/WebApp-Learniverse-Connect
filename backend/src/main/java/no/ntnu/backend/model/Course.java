@@ -14,21 +14,19 @@ import jakarta.persistence.Id;
  * @version 29.03.2024
  */
 @Entity
-public final class Course {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-  private String title;
-  private int levelId;
-  private int categoryId;
-  private Date startDate;
-  private Date endDate;
-  private double credit;
-  private double hoursPerWeek;
-  private String relatedCertification;
-  private String description;
-  private String imageType;
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String title;
+    private int levelId;
+    private int categoryId;
+    private Date startDate;
+    private Date endDate;
+    private double credit;
+    private double hoursPerWeek;
+    private String description;
+    private String relatedCertification;
 
   /**
    * 
@@ -216,23 +214,23 @@ public final class Course {
     this.description = description;
   }
 
-  /**
-   * 
-   *
-   * @return
-   */
-  public String getImageType() {
-    return this.imageType;
-  }
+//   /**
+//    * 
+//    *
+//    * @return
+//    */
+//   public String getImageType() {
+//     return this.imageType;
+//   }
 
-  /**
-   * 
-   *
-   * @param imageType
-   */
-  public void setImageType(String imageType) {
-    this.imageType = imageType;
-  }
+//   /**
+//    * 
+//    *
+//    * @param imageType
+//    */
+//   public void setImageType(String imageType) {
+//     this.imageType = imageType;
+//   }
 
   @JsonIgnore
   public boolean isValid() {

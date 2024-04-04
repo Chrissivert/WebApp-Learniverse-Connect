@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './priceFilter.css'; // Import CSS file
 
 function PriceRangeFilter({ onPriceChange }) {
   const [useInput, setUseInput] = useState(false);
@@ -32,7 +33,7 @@ function PriceRangeFilter({ onPriceChange }) {
   }, [minValue, maxValue]);
 
   return (
-    <div>
+    <div className="price-range-container"> {/* Apply styling to container */}
       <div>
         <label>
           <input

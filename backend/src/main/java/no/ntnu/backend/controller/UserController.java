@@ -1,6 +1,5 @@
 package no.ntnu.backend.controller;
 
-
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.User;

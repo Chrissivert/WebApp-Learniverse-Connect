@@ -1,6 +1,5 @@
 package no.ntnu.backend.service;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;

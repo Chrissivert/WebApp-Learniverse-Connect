@@ -2,7 +2,6 @@ import DataFetcher from "../../fetcher/Datafetcher";
 
 const createCategories = async () => {
   try {
-    // Fetch tags
     const tags = await DataFetcher.fetchTags();
     
     // Map tagIds directly to categories

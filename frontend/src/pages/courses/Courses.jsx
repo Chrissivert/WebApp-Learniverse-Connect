@@ -2,15 +2,14 @@ import React, { useMemo } from "react";
 import './Courses.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
-import { filterAndSortCourses } from "./CoursesUtils.jsx";
+import { filterLogic } from "./FilterLogic.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
 
 function Courses({ courses, filters: tableFilters, currentPage }) {
   const perPage = 5;
-  console.log("INSIDE OF COURSOURS:", courses);
 
   const filteredCourses = useMemo(() => {
-    return filterAndSortCourses(courses, tableFilters);
+    return filterLogic(courses, tableFilters);
   }, [courses, tableFilters]);
   
   const { paginatedData } = paginationUtils(filteredCourses, currentPage, perPage);

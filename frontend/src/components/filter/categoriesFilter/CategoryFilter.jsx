@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './categoryFilter.css';
 
 function CategoryFilter({ onCategoryChange }) {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -10,9 +11,11 @@ function CategoryFilter({ onCategoryChange }) {
   };
 
   return (
+
+    
     <div>
-      <label htmlFor="categorySelect">Category:</label>
-      <select id="categorySelect" onChange={handleCategoryChange} value={selectedCategory}>
+      <label htmlFor="categorySelect"></label>
+      <select id="categorySelect" className="category-select" onChange={handleCategoryChange} value={selectedCategory}>
         <option value="">-- Select a category --</option>
         <option value="Databases">Databases</option>
         <option value="Programming">Programming</option>
