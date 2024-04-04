@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 import "./Profile.css";
+import axios from "axios";
 const skills = [
   {
     courses: "HTML+CSS",
@@ -137,3 +139,16 @@ function SocialMedia() {
     </div>
   );
 }
+
+useEffect(function () {
+  async function getUser() {
+    const res = await axios.get(`http://localhost:8080/user/${id}`);
+    const data = await res.json();
+
+    if (data.Response === "False") {
+      throw new Error(data.Error); // Throw an error if user not found
+    }
+
+    console.log(data);
+  }
+});
