@@ -1,41 +1,57 @@
-// package no.ntnu.backend.service;
+package no.ntnu.backend.service;
 
-// import java.util.Comparator;
-// import java.util.List;
-// import java.util.stream.Collectors;
+import java.util.List;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-// import no.ntnu.backend.model.Course;
-// import no.ntnu.backend.repository.CourseRepository;
+import no.ntnu.backend.model.Course;
 
-// @Service
-// public class CourseService {
+/**
+ * 
+ *
+ * @author 
+ * @version 29.03.2024
+ */
+@Service
+public interface CourseService {
 
-//     @Autowired
-//     private CourseRepository courseRepository;
+  /**
+   * POST
+   *
+   * @param course
+   * @return
+   */
+  public ResponseEntity<String> create(Course course);
 
-//     public List<Course> getAllCourses() {
-//         return courseRepository.findAll();
-//     }
+  /**
+   * GET
+   *
+   * @return
+   */
+  public List<Course> readAll(); 
 
-//      public List<Course> searchCoursesByQueryAndString(String query, String sortBy) {
-//         List<Course> courses = courseRepository.findByTitleContainingIgnoreCase(query);
-//         if (sortBy != null) {
-//             switch (sortBy) {
-//                 case "credits":
-//                     return courses.stream()
-//                             .sorted(Comparator.comparingDouble(Course::getCredits))
-//                             .collect(Collectors.toList());
-//                 case "title":
-//                     return courses.stream()
-//                             .sorted(Comparator.comparing(Course::getTitle))
-//                             .collect(Collectors.toList());
-//                 default:
-//                     break;
-//             }
-//         }
-//         return courses;
-//     }
-// }
+  /**
+   * GET
+   *
+   * @param id
+   * @return
+   */
+  public ResponseEntity<Course> readById(int id);
+
+  /**
+   * PUT
+   *
+   * @param id
+   * @param course
+   */
+  public ResponseEntity<String> update(int id, Course course);
+
+  /**
+   * DELETE
+   *
+   * @param id
+   * @return
+   */
+  public ResponseEntity<String> delete(int id);
+}

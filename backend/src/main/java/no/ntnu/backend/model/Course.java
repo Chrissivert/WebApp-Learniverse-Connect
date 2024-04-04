@@ -1,129 +1,290 @@
 package no.ntnu.backend.model;
-
+import java.sql.Date;
+import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.sql.Date;
-import java.util.Objects;
-
+/**
+ * 
+ *
+ * @author 
+ * @version 29.03.2024
+ */
 @Entity
-public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public final class Course {
 
-    private int id;
-    private String title;
-    private int levelId;
-    private int categoryId;
-    private Date startDate;
-    private Date endDate;
-    private double credit;
-    private double hoursPerWeek;
-    private String description;
-    private String relatedCertification;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private String title;
+  private int levelId;
+  private int categoryId;
+  private Date startDate;
+  private Date endDate;
+  private double credit;
+  private double hoursPerWeek;
+  private String relatedCertification;
+  private String description;
+  private String imageType;
 
-    public Course() {
-    }
+  /**
+   * 
+   */
+  public Course() {
+  }
 
-    /**
-     * id
-     */
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String name) {
-        this.title = name;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getId() {
+    return this.id;
+  }
 
-    public int getLevelId() {
-        return levelId;
-    }
+  /**
+   * 
+   *
+   * @param id
+   */
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setLevelId(int levelId) {
-        this.levelId = levelId;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getTitle() {
+    return this.title;
+  }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
+  /**
+   * 
+   *
+   * @param name
+   */
+  public void setTitle(String name) {
+    this.title = name;
+  }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getLevelId() {
+    return this.levelId;
+  }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+  /**
+   * 
+   *
+   * @param levelId
+   */
+  public void setLevelId(int levelId) {
+    this.levelId = levelId;
+  }
 
-    public Date getStartDate() {
-        return startDate;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public int getCategoryId() {
+    return this.categoryId;
+  }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+  /**
+   * 
+   *
+   * @param categoryId
+   */
+  public void setCategoryId(int categoryId) {
+    this.categoryId = categoryId;
+  }
 
-    public Date getEndDate() {
-        return endDate;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public Date getStartDate() {
+    return this.startDate;
+  }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
+  /**
+   * 
+   *
+   * @param startDate
+   */
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
 
-    public double getCredit() {
-        return credit;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public Date getEndDate() {
+    return this.endDate;
+  }
 
-    public void setHoursPerWeek(double hoursPerWeek) {
-        this.hoursPerWeek = hoursPerWeek;
-    }
+  /**
+   * 
+   *
+   * @param endDate
+   */
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
 
-    public double getHoursPerWeek() {
-        return hoursPerWeek;
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public double getCredit() {
+    return this.credit;
+  }
 
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public String getRelatedCertification() {
-        return relatedCertification;
-    }
-    public void setRelatedCertification(String relatedCertification) {
-        this.relatedCertification = relatedCertification;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Course) obj;
-        return this.id == that.id &&
-                Objects.equals(this.title, that.title) &&
-                this.description == that.description &&
-                this.relatedCertification == that.relatedCertification;
-    }
+  /**
+   * 
+   *
+   * @param credit
+   */
+  public void setCredit(double credit) {
+    this.credit = credit;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, relatedCertification);
-    }
-    @Override
-    public String toString() {
-        return "Course[" +
-                "id=" + id + ", " +
-                "name=" + title + ", " +
-                "description=" + description + ", " +
-                "duration=" + relatedCertification + ']';
-    }
+  /**
+   * 
+   *
+   * @return
+   */
+  public double getHoursPerWeek() {
+    return this.hoursPerWeek;
+  }
+
+  /**
+   * 
+   *
+   * @param hoursPerWeek
+   */
+  public void setHoursPerWeek(double hoursPerWeek) {
+    this.hoursPerWeek = hoursPerWeek;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getRelatedCertification() {
+    return this.relatedCertification;
+  }
+
+  /**
+   * 
+   *
+   * @param relatedCertification
+   */
+  public void setRelatedCertification(String relatedCertification) {
+    this.relatedCertification = relatedCertification;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getDescription() {
+    return this.description;
+  }
+
+  /**
+   * 
+   *
+   * @param description
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
+   * 
+   *
+   * @return
+   */
+  public String getImageType() {
+    return this.imageType;
+  }
+
+  /**
+   * 
+   *
+   * @param imageType
+   */
+  public void setImageType(String imageType) {
+    this.imageType = imageType;
+  }
+
+  @JsonIgnore
+  public boolean isValid() {
+    return //this.id > 0 &&
+      !this.title.isBlank() && this.title != null &&
+      this.levelId > 0 &&
+      this.categoryId > 0 &&
+      this.startDate != null &&
+      this.endDate != null &&
+      this.credit >= 0 &&
+      this.hoursPerWeek >= 0 &&
+      !this.relatedCertification.isBlank() && this.relatedCertification != null &&
+      !this.description.isBlank() && this.description != null;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this)
+      return true;
+    if (obj == null || obj.getClass() != this.getClass())
+      return false;
+    var that = (Course) obj;
+    return this.id == that.id &&
+        this.title == that.title &&
+        this.levelId == that.levelId &&
+        this.categoryId == that.categoryId &&
+        this.startDate == that.startDate &&
+        this.endDate == that.endDate &&
+        this.credit == that.credit &&
+        this.hoursPerWeek == that.hoursPerWeek &&
+        this.relatedCertification == that.relatedCertification &&
+        this.description == that.description;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.id, this.title, this.levelId, this.categoryId, this.startDate, this.endDate, this.credit,
+        this.hoursPerWeek, this.relatedCertification, this.description);
+  }
+
+  @Override
+  public String toString() {
+    return "Course[" +
+        "id=" + this.id + ", " +
+        "name=" + this.title + ", " +
+        "levelId=" + this.levelId + ", " +
+        "categoryId=" + this.categoryId + ", " +
+        "startDate=" + this.startDate + ", " +
+        "endDate=" + this.endDate + ", " +
+        "credit=" + this.credit + ", " +
+        "hoursPerWeek=" + this.hoursPerWeek + ", " +
+        "relatedCertification=" + this.relatedCertification +
+        "description=" + this.description + ']';
+  }
 }

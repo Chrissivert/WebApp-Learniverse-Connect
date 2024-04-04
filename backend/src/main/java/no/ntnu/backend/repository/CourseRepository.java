@@ -2,14 +2,9 @@ package no.ntnu.backend.repository;
 
 import no.ntnu.backend.model.Course;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Long> {
-    List<Course> findAll();
-    List<Course> findByTitleContainingIgnoreCase(String title);    
+public interface CourseRepository extends JpaRepository<Course, Integer> { 
 }
-
