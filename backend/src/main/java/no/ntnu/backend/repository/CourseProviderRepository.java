@@ -7,4 +7,5 @@ import no.ntnu.backend.model.CourseProvider;
 
 public interface CourseProviderRepository extends JpaRepository<CourseProvider, Long> {
     List<CourseProvider> findAll();
+    List<CourseProvider> findByCourseId(Long courseId);
 }

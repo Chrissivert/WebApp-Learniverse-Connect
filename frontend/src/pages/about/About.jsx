@@ -4,7 +4,10 @@ import './About.css';
 import Logo from '../../components/logo/Logo';
 
 
+// import { CartContext } from '../../pages/cart/CartContext.jsx';
+
 export default function About() {
+  
 
   // return (
     // <div className='about-container'>
@@ -47,6 +50,7 @@ export default function About() {
       </p>
       <div className="cta">
         <button className="btn-primary" onClick={handleButtonClick}>Search For Courses</button>
+        <h2>cart.length</h2> 
       </div>
     </div>
   );

@@ -11,22 +11,24 @@ import Profile from './pages/profile/Profile.jsx';
 import Register from './pages/register/Register.jsx';
 import Login from './pages/login/Login.jsx';
 import CoursesPage from './pages/courses/CoursesPage.jsx';
+import CartPage from './pages/cart/CartPage.jsx';
 
 export default function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/courses' element={<CoursesPage/>}/>
-        <Route path='/course/:id' element={<Course/>}/>
-        <Route path='*' element={<NotFound/>}/>
-        <Route path='profile' element={<Profile/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/courses' element={<CoursesPage />} />
+        <Route path='/course/:id' element={<Course />} />
+        <Route path='*' element={<NotFound />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }

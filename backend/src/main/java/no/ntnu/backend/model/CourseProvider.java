@@ -2,6 +2,7 @@ package no.ntnu.backend.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,8 +12,10 @@ import jakarta.persistence.Id;
 public class CourseProvider {
 
   @Id
-  private int course_id;
-  private int provider_id;
+  @Column (name = "course_id")
+  private int courseId;
+  @Column (name = "provider_id")
+  private int providerId;
   private double price;
   private String currency;
 
@@ -20,26 +23,26 @@ public class CourseProvider {
   }
 
   public CourseProvider(int course_id, int provider_id, double price, String currency) {
-    this.course_id = course_id;
-    this.provider_id = provider_id;
+    this.courseId = course_id;
+    this.providerId = provider_id;
     this.price = price;
     this.currency = currency;
   }
 
   public int getCourseId() {
-    return course_id;
+    return courseId;
   }
 
   public void setCourseId(int course_id) {
-    this.course_id = course_id;
+    this.courseId = course_id;
   }
 
   public int getProviderId() {
-    return provider_id;
+    return providerId;
   }
 
   public void setProviderId(int provider_id) {
-    this.provider_id = provider_id;
+    this.providerId = provider_id;
   }
 
   public double getPrice() {
@@ -63,21 +66,21 @@ public class CourseProvider {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (CourseProvider) obj;
-        return this.course_id == that.course_id &&
-                Objects.equals(this.provider_id, that.provider_id) &&
+        return this.courseId == that.courseId &&
+                Objects.equals(this.providerId, that.providerId) &&
                 Objects.equals(this.price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(course_id, provider_id, price);
+        return Objects.hash(courseId, providerId, price);
     }
 
     @Override
     public String toString() {
         return "User[" +
-                "course_id=" + course_id + ", " +
-                "provider_id=" + provider_id + ", " +
+                "course_id=" + courseId + ", " +
+                "provider_id=" + providerId + ", " +
                 "price=" + price + "]";
     }
 }
