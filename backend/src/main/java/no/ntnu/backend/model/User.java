@@ -2,33 +2,41 @@ package no.ntnu.backend.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public final class User {
+public final class User{
     @jakarta.persistence.Id
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "role_id")
     private int roleId;
+    
     @Column(name = "username")
     private String username;
 
+    @Column(name = "start_date")
     private String startDate;
+
     private String email;
     private String password;
 
     public User() {
-
     }
 
-    public User(int id, int roleId, String firstName, String lastName, String email, String password) {
+    public User(int id, int roleId, String userName, String startDate, String email, String password) {
         this.id = id;
         this.roleId = roleId;
-        this.username = firstName;
+        this.username = userName;
+        this.startDate = startDate;
         this.email = email;
         this.password = password;
     }
@@ -95,15 +103,18 @@ public final class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password);
+        return Objects.hash(id,roleId, username, startDate, email, password);
     }
 
     @Override
     public String toString() {
         return "User[" +
                 "id=" + id + ", " +
+                "roleId=" + roleId + ", " +
                 "firstName=" + username + ", " +
+                "startDate=" + startDate + ", " +
                 "email=" + email + ", " +
                 "password=" + password + ']';
     }
+
 }

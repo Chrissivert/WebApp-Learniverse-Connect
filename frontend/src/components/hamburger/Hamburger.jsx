@@ -31,9 +31,6 @@ export default function HamburgerMenu() {
               <Button text='Courses' src='/courses'/>
             </li>
             <li>
-              <Button text='Search' src='/Search'/>
-            </li>
-            <li>
               <Button text='Test [404]' src='/Error_404-Page_Not_Found'/>
             </li>
             <li>

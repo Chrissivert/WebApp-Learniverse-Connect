@@ -10,7 +10,6 @@
 
 // import no.ntnu.backend.model.User;
 // import no.ntnu.backend.repository.UserRepository;
-// import no.ntnu.backend.security.MyUserDetailsService;
 // import no.ntnu.backend.util.JwtTokenUtil;
 
 // @Service
@@ -41,8 +40,8 @@
 //             throw new RuntimeException("Email already exists");
 //         }
 
-//         String encryptedPassword = passwordEncoder.encode(user.getUserPassword());
-//         user.setUserPassword(encryptedPassword);
+//         String encryptedPassword = passwordEncoder.encode(user.getPassword());
+//         user.setPassword(encryptedPassword);
 
 //         userRepository.save(user);
 //     }
@@ -57,6 +56,7 @@
 //         }
 
 //         final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+
 //         return jwtTokenUtil.generateToken(userDetails);
 //     }
 // }

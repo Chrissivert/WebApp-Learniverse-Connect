@@ -1,13 +1,28 @@
-import React from "react";
-import './Coursecard.css'
+import React, { useState, useEffect } from "react";
+import "./Coursecard.css";
+import { loadImage } from "../../functions/ImageLoader"; // Adjusted the import path
 
 function Coursecard({ course }) {
+  const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    loadImage(course.title)
+      .then(url => setImageUrl(url))
+      .catch(error => console.error("Error loading image:", error));
+  }, [course.title]);
+
+  const { cheapestPrice } = course;
+  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+
   return (
-    <div className="coursecard">
-      <div className="card-body">
-        <h5 className="card-title">{course.title}</h5>
-        <p className="card-text">Start Date: {course.startDate}</p>
-        <p className="card-text">Related Certification: {course.relatedCertification}</p>
+    <div className="course-card">
+      <div className="image-section" style={{backgroundImage: `url(${imageUrl})`}}>
+        {/* Background image */}
+      </div>
+      <div className="text-section">
+        <h2>{course.title}</h2>
+        <p>Credits: {course.credit}</p>
+        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} NOK</p>}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 @Entity
 public class CourseTags {
 
+  @Id
   private int course_id;
   private int tag_id;
 
