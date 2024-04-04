@@ -36,6 +36,27 @@ const skills = [
 ];
 
 export default function Profile() {
+  useEffect(
+    function () {
+      async function getUser() {
+        try {
+          const res = await axios.get(`http://localhost:8080/user/${id}`);
+          const data = await res.data;
+
+          if (data.Response === "False") {
+            throw new Error(data.Error);
+          }
+
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
+      }
+
+      getUser();
+    },
+    [id]
+  );
   return (
     <div className="profilepage">
       <div className="card">
@@ -139,16 +160,3 @@ function SocialMedia() {
     </div>
   );
 }
-
-useEffect(function () {
-  async function getUser() {
-    const res = await axios.get(`http://localhost:8080/user/${id}`);
-    const data = await res.json();
-
-    if (data.Response === "False") {
-      throw new Error(data.Error); // Throw an error if user not found
-    }
-
-    console.log(data);
-  }
-});
