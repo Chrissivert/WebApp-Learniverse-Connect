@@ -2,40 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import "./Profile.css";
 import axios from "axios";
-const skills = [
-  {
-    courses: "HTML+CSS",
-    level: "advanced",
-    color: "orangered",
-  },
-  {
-    skill: "React",
-    level: "advanced",
-    color: "blue",
-  },
-  {
-    skill: "Web Design",
-    level: "advanced",
-    color: "#C3DCAF",
-  },
-  {
-    skill: "Java",
-    level: "intermediate",
-    color: "orange",
-  },
-  {
-    skill: "Svelte",
-    level: "beginner",
-    color: "#FF3B00",
-  },
-  {
-    skill: "Git and GitHub",
-    level: "intermediate",
-    color: "#E84F33",
-  },
-];
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
+  const { id } = useParams();
   useEffect(
     function () {
       async function getUser() {
