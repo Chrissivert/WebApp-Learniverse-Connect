@@ -6,12 +6,11 @@ import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const { id } = useParams();
-
   useEffect(
     function () {
-      async function getUsers() {
+      async function getUser() {
         try {
-          const res = await axios.get(`http://localhost:8080/users`);
+          const res = await axios.get(`http://localhost:8080/user/${id}`);
           const data = await res.data;
 
           if (data.Response === "False") {
@@ -20,15 +19,14 @@ export default function Profile() {
 
           console.log(data);
         } catch (error) {
-          console.error("Error fetching users:", error);
+          console.error("Error fetching user:", error);
         }
       }
 
-      getUsers();
+      getUser();
     },
     [id]
   );
-
   return (
     <div className="profilepage">
       <div className="card">
