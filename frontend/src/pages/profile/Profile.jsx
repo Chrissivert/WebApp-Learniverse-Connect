@@ -9,9 +9,9 @@ export default function Profile() {
 
   useEffect(
     function () {
-      async function getUsers() {
+      async function getUser() {
         try {
-          const res = await axios.get(`http://localhost:8080/users`);
+          const res = await axios.get(`http://localhost:8080/user/${id}`);
           const data = await res.data;
 
           if (data.Response === "False") {
@@ -20,11 +20,10 @@ export default function Profile() {
 
           console.log(data);
         } catch (error) {
-          console.error("Error fetching users:", error);
+          console.error("Error fetching user:", error);
         }
       }
-
-      getUsers();
+      getUser();
     },
     [id]
   );
@@ -132,3 +131,25 @@ function SocialMedia() {
     </div>
   );
 }
+
+/* useEffect(
+  function () {
+    async function getUsers() {
+      try {
+        const res = await axios.get(`http://localhost:8080/users`);
+        const data = await res.data;
+
+        if (data.Response === "False") {
+          throw new Error(data.Error);
+        }
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    }
+
+    getUsers();
+  },
+  [id]
+); */
