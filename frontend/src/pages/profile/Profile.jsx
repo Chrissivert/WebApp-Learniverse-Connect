@@ -1,39 +1,32 @@
 import React from "react";
+import { useEffect } from "react";
 import "./Profile.css";
-const skills = [
-  {
-    courses: "HTML+CSS",
-    level: "advanced",
-    color: "orangered",
-  },
-  {
-    skill: "React",
-    level: "advanced",
-    color: "blue",
-  },
-  {
-    skill: "Web Design",
-    level: "advanced",
-    color: "#C3DCAF",
-  },
-  {
-    skill: "Java",
-    level: "intermediate",
-    color: "orange",
-  },
-  {
-    skill: "Svelte",
-    level: "beginner",
-    color: "#FF3B00",
-  },
-  {
-    skill: "Git and GitHub",
-    level: "intermediate",
-    color: "#E84F33",
-  },
-];
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
+  const { id } = useParams();
+  useEffect(
+    function () {
+      async function getUser() {
+        try {
+          const res = await axios.get(`http://localhost:8080/user/${id}`);
+          const data = await res.data;
+
+          if (data.Response === "False") {
+            throw new Error(data.Error);
+          }
+
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
+      }
+
+      getUser();
+    },
+    [id]
+  );
   return (
     <div className="profilepage">
       <div className="card">
