@@ -1,10 +1,10 @@
-// package no.ntnu.backend.repository;
+package no.ntnu.backend.repository;
 
-// import java.util.List;
-// import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// import no.ntnu.backend.model.CourseProvider;
+import no.ntnu.backend.model.CourseProvider;
 
-// public interface CourseProviderRepository extends JpaRepository<CourseProvider, Long> {
-//     List<CourseProvider> findAll();
-// }
+public interface CourseProviderRepository extends JpaRepository<CourseProvider, Long> {
+    List<CourseProvider> findAll();
+}
