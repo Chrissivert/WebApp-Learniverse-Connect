@@ -49,10 +49,12 @@ function Course() {
 
   return (
     <div className="Course">
-      <Link to={`/courses`}>
-        <button>← Courses</button>
-      </Link>
-      <h2>{course.title}</h2>
+      <div className="head">
+        <Link to={`/courses`}>
+          <button className="goBackButton">← Courses</button>
+        </Link>
+        <h2 className="title">{course.title}</h2>
+      </div>
       <p>{course.description}</p>
       <p>Start Date: {course.startDate}</p>
       <p>Related Certification: {course.relatedCertification}</p>
