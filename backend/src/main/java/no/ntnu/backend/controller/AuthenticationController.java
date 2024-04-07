@@ -1,10 +1,10 @@
 package no.ntnu.backend.controller;
 
-import no.ntnu.dto.AuthenticationRequest;
-import no.ntnu.dto.AuthenticationResponse;
-import no.ntnu.dto.SignupDto;
-import no.ntnu.security.JwtUtil;
-import no.ntnu.services.AccessUserService;
+import no.ntnu.backend.dto.AuthenticationRequest;
+import no.ntnu.backend.dto.AuthenticationResponse;
+import no.ntnu.backend.dto.SignupDTO;
+import no.ntnu.backend.security.JwtUtil;
+import no.ntnu.backend.service.AccessUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +44,7 @@ public class AuthenticationController {
     }
 
     @PostMapping({"/api/signup"})
-    public ResponseEntity<String> signupProcess(@RequestBody SignupDto signupData) {
+    public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
         String errorMessage = this.userService.tryCreateNewUser(signupData.getUsername(), signupData.getPassword());
         ResponseEntity response;
         if (errorMessage == null) {

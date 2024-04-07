@@ -1,12 +1,12 @@
 package no.ntnu.backend.service;
 
 import java.util.Optional;
-import no.ntnu.dto.UserProfileDto;
-import no.ntnu.models.Role;
-import no.ntnu.models.User;
-import no.ntnu.repositories.RoleRepository;
-import no.ntnu.repositories.UserRepository;
-import no.ntnu.security.AccessUserDetails;
+import no.ntnu.backend.dto.UserProfileDto;
+import no.ntnu.backend.model.Role;
+import no.ntnu.backend.model.User;
+import no.ntnu.backend.repository.RoleRepository;
+import no.ntnu.backend.repository.UserRepository;
+import no.ntnu.backend.security.AccessUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;

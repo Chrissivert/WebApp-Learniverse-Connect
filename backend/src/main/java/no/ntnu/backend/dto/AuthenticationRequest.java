@@ -1,8 +1,6 @@
 package no.ntnu.backend.dto;
 
 
-package no.ntnu.dto;
-
 public class AuthenticationRequest {
   private String username;
   private String password;
