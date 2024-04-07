@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";  
 import { useParams } from "react-router-dom";
 import "./Course.css";
 import { CartContext } from "../cart/CartProvider";
@@ -48,6 +49,9 @@ function Course() {
 
   return (
     <div className="Course">
+      <Link to={`/courses`}>
+        <button>← Courses</button>
+      </Link>
       <h2>{course.title}</h2>
       <p>{course.description}</p>
       <p>Start Date: {course.startDate}</p>
