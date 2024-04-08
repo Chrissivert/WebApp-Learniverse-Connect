@@ -1,13 +1,15 @@
 package no.ntnu.backend.service;
 
 import java.util.Optional;
-import no.ntnu.backend.dto.UserProfileDto;
 import no.ntnu.backend.model.Role;
 import no.ntnu.backend.model.User;
 import no.ntnu.backend.repository.RoleRepository;
 import no.ntnu.backend.repository.UserRepository;
 import no.ntnu.backend.security.AccessUserDetails;
+import no.ntnu.backend.service.impl.RoleServiceImpl;
+import no.ntnu.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,19 +21,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccessUserService implements UserDetailsService {
+
     private static final int MIN_PASSWORD_LENGTH = 6;
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
     @Autowired
-    RoleService roleService;
+    RoleServiceImpl roleService;
+
 
     public AccessUserService() {
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = this.userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            return new AccessUserDetails((User)user.get());
+        return null;
+    }
+
+    /*
+    public UserDetails loadUserById(int id) throws UsernameNotFoundException {
+        ResponseEntity<User> user = this.userService.readById(id);
+        if (user != null) {
+            return new AccessUserDetails((User)user.);
         } else {
             throw new UsernameNotFoundException("User " + username + "not found");
         }
@@ -101,5 +111,7 @@ public class AccessUserService implements UserDetailsService {
         this.userRepository.save(user);
         return true;
     }
+
+     */
 }
 

@@ -5,6 +5,7 @@ import no.ntnu.backend.dto.AuthenticationResponse;
 import no.ntnu.backend.dto.SignupDTO;
 import no.ntnu.backend.security.JwtUtil;
 import no.ntnu.backend.service.AccessUserService;
+import no.ntnu.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,8 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private AccessUserService userService;
+    @Autowired
+    private UserServiceImpl userServiceImpl;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -45,7 +48,8 @@ public class AuthenticationController {
 
     @PostMapping({"/api/signup"})
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
-        String errorMessage = this.userService.tryCreateNewUser(signupData.getUsername(), signupData.getPassword());
+        //String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword());
+        String errorMessage = this.userServiceImpl.create(signupData.getEmail(), signupData.getPassword());
         ResponseEntity response;
         if (errorMessage == null) {
             response = new ResponseEntity(HttpStatus.OK);

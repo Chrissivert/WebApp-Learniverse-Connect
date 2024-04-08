@@ -9,7 +9,7 @@ public class SignupDTO {
         this.password = password;
     }
 
-    public String getUsername() {
+    public String getEmail() {
         return this.email;
     }
 
