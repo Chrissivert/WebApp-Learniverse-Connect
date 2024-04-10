@@ -2,22 +2,29 @@ package no.ntnu.backend.dto;
 
 
 public class AuthenticationRequest {
+
+  private int id;
   private String email;
   private String password;
 
   public AuthenticationRequest() {
   }
 
-  public AuthenticationRequest(String email, String password) {
+  public AuthenticationRequest(int id, String email, String password) {
+    this.id = id;
     this.email = email;
     this.password = password;
   }
 
-  public String getUsername() {
+  public int getId(){return this.id;}
+
+  public void setId(){this.id = id;}
+
+  public String getEmail() {
     return this.email;
   }
 
-  public void setUsername(String username) {
+  public void setEmail(String username) {
     this.email = email;
   }
 

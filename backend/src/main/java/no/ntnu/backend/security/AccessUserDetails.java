@@ -17,10 +17,10 @@ public class AccessUserDetails implements UserDetails {
     private final Set<GrantedAuthority> authorities = new HashSet();
 
     public AccessUserDetails(User user) {
-        this.email = user.getUsername();
+        this.email = user.getEmail();
         this.password = user.getPassword();
         this.isActive = user.isActive();
-        this.convertRoles(user.getRoles());
+        //this.convertRoles(user.getRoles());
     }
 
     private void convertRoles(Set<Role> roles) {
@@ -29,7 +29,7 @@ public class AccessUserDetails implements UserDetails {
 
         while(var3.hasNext()) {
             Role role = (Role)var3.next();
-            this.authorities.add(new SimpleGrantedAuthority(role.getName()));
+            this.authorities.add(new SimpleGrantedAuthority(role.getTitle()));
         }
 
     }

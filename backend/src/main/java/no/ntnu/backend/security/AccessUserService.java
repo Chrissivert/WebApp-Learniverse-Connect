@@ -1,4 +1,4 @@
-package no.ntnu.backend.service;
+package no.ntnu.backend.security;
 
 import java.util.Optional;
 import no.ntnu.backend.model.Role;
@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AccessUserService implements UserDetailsService {
 
@@ -27,55 +28,63 @@ public class AccessUserService implements UserDetailsService {
     UserServiceImpl userService;
     @Autowired
     RoleServiceImpl roleService;
+    @Autowired
+    UserRepository userRepository;
+    private RoleRepository roleRepository;
 
-
-    public AccessUserService() {
-    }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByUsername(email);
+        if (user.isPresent()) {
+            return new AccessUserDetails(user.get());
+        } else {
+            throw new UsernameNotFoundException("User " + user + "not found");
+        }
     }
 
     /*
+    @Override
     public UserDetails loadUserById(int id) throws UsernameNotFoundException {
         ResponseEntity<User> user = this.userService.readById(id);
         if (user != null) {
-            return new AccessUserDetails((User)user.);
+            return new AccessUserDetails((User)user.get());
         } else {
-            throw new UsernameNotFoundException("User " + username + "not found");
+            throw new UsernameNotFoundException("User " + user + "not found");
         }
     }
+     */
+
 
     public User getSessionUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        String username = authentication.getName();
-        return (User)this.userRepository.findByUsername(username).orElse((Object)null);
+        //The user's name isnt used here, we use the email.
+        String email = authentication.getName();
+        return (User)this.userRepository.findByUsername(email).orElse(null);
     }
 
-    private boolean userExists(String username) {
+    private boolean userExists(String email) {
         try {
-            this.loadUserByUsername(username);
+            this.loadUserByUsername(email);
             return true;
         } catch (UsernameNotFoundException var3) {
             return false;
         }
     }
 
-    public String tryCreateNewUser(String username, String password) {
+    public String tryCreateNewUser(String email, String password) {
         String errorMessage;
-        if ("".equals(username)) {
-            errorMessage = "Username can't be empty";
-        } else if (this.userExists(username)) {
-            errorMessage = "Username already taken";
+        if ("".equals(email)) {
+            errorMessage = "Email can't be empty";
+        } else if (this.userExists(email)) {
+            errorMessage = "Email already taken";
         } else {
             errorMessage = this.checkPasswordRequirements(password);
             if (errorMessage == null) {
-                this.createUser(username, password);
+                this.createUser(email, password);
             }
         }
-
         return errorMessage;
     }
 
@@ -92,26 +101,25 @@ public class AccessUserService implements UserDetailsService {
         return errorMessage;
     }
 
-    private void createUser(String username, String password) {
+    private void createUser(String email, String password) {
         Role userRole = this.roleRepository.findOneByName("ROLE_USER");
         if (userRole != null) {
-            User user = new User(username, this.createHash(password));
-            user.addRole(userRole);
+            User user = new User(email, this.createHash(password));
+            user.setRoleId(0);
             this.userRepository.save(user);
         }
-
     }
 
     private String createHash(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+    /*
     public boolean updateProfile(User user, UserProfileDto profileData) {
         user.setBio(profileData.getBio());
         this.userRepository.save(user);
         return true;
     }
-
-     */
+    */
 }
 
