@@ -6,7 +6,7 @@ import { filterLogic } from "./FilterLogic.jsx";
 import { paginationUtils } from "../../components/pagination/PaginationUtils.jsx";
 
 function Courses({ courses, filters: tableFilters, currentPage }) {
-  const perPage = 5;
+  const perPage = 6;
 
   const filteredCourses = useMemo(() => {
     return filterLogic(courses, tableFilters);
@@ -18,7 +18,7 @@ function Courses({ courses, filters: tableFilters, currentPage }) {
     <div className="Courses">
       {paginatedData.map((course) => (
         <Link to={`/course/${course.id}`} key={course.id}>
-          <Coursecard course={course} />
+          <Coursecard course={course}/>
         </Link>
       ))}
     </div>

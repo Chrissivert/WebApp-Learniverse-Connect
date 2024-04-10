@@ -51,3 +51,36 @@
   margin-top: 1rem;
   /* padding-top: 8rem; */
 }
+
+.image {
+  margin-top: 5%;
+}
+
+.toCourses {
+  position: absolute;
+  top: 35%;
+  left: 70%;
+  color:white;
+  background: rgb(151, 88, 163,0.6);
+  padding: 2%;
+  width: 25%;
+}
+
+.courseButton {
+  background-color: white;
+  margin: 5%;
+  border-radius: 8px;
+  color: black;
+}
+
+.link:link, .link:visited, .link:active {
+  text-decoration: none;
+}
+
+.courseButton:hover {
+  color:  rgb(151, 88, 163);
+}
+
+h2 {
+  font-size: large;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import { Link } from "react-router-dom";
 import FrontImage from '/home/front_image.png';
 
 export default function Home() {
@@ -15,6 +16,12 @@ export default function Home() {
         </a>
       </div> */}
       <img src={FrontImage} alt='front-image' className='image'/>
+      <div className='toCourses'>
+        <h2>Learniverse Connect</h2>
+        <Link to={`/courses`} className='link'>
+          <p className="courseButton">Find your course  →</p>
+        </Link>
+      </div>
       <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta laboriosam 
         quidem repellendus eum animi cupiditate quibusdam rerum explicabo nihil maiores
          qui cum fugiat voluptas harum sit cumque enim, libero autem. Lorem, ipsum dolor 
