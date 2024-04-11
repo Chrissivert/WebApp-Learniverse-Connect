@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartProvider';
 import './cartPage.css'; // Import the stylesheet for CartPage
+import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 

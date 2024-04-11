@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import './Courses.css';
+import '../../index.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import { filterLogic } from "./FilterLogic.jsx";

@@ -1,5 +1,6 @@
 import React from 'react';
 import Courses from './Courses';
+import '../../index.css';
 import FilterSection from '../../components/filter/FilterSection';
 import Pagination from '../../components/pagination/Pagination';
 import useCoursesPageState from './UseCoursesPageState';

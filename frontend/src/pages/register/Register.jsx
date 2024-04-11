@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import '../../index.css';
 
 function Register() {
     const [email, setEmail] = useState('');

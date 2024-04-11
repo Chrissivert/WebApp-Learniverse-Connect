@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import '../../index.css';
 import { Link } from "react-router-dom";
 import FrontImage from '/home/front_image.png';
 
