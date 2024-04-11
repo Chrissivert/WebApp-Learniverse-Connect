@@ -1,5 +1,5 @@
 import './Logo.css';
-import LogoImage from '/logo/learniverse_connect_logo.svg';
+import LogoImage from '/logo/white_icon.png';
 
 export default function Logo({home_src = false}) {
   return (
