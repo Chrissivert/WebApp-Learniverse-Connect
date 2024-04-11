@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './About.css';
 import '../../index.css';
-import Logo from '../../components/logo/Logo';
 
 
 // import { CartContext } from '../../pages/cart/CartContext.jsx';
@@ -35,7 +34,7 @@ export default function About() {
     <div className="about-container"> {/* Add className="about-container" here */}
       <h1>About Learniverse</h1>
       {/* <img src="/front-end/public/learniverse_connect_icon2.svg" alt="Logo" className="logo" /> */}
-      <Logo home_src={false}/>
+      <img src="/logo/learniverse_connect_logo.svg  " alt="Logo" className="logo"></img>
       <hr />
       <p>Learniverse Connect is an online course marketplace dedicated to facilitating lifelong 
         learning. We provide a diverse selection of courses from third-party providers, ensuring 
