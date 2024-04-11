@@ -21,7 +21,12 @@ export default function Header() {
           <FaShoppingCart className="cart-icon" /> {/* Cart icon */}
           <span className="cart-text">Cart ({cart.length})</span>
         </Link>
-        
+      </div>
+
+      <div className='login-container'>
+        <Link to="/login" className="login-link">
+          <img src="/login/login_white.png" alt="Login" className="login"></img>
+        </Link>
       </div>
       <HamburgerMenu/>
       
