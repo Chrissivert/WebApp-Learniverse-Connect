@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../../index.css';
+import './Login.css'
+
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -30,11 +32,21 @@ function Login() {
 
     return (
         <div>
-            <h2>Login</h2>
+            <h1>Login</h1>
+            
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <button type="submit">Login</button>
+                <div className="imgcontainer">
+                    <img src="/login/login.png" alt="Avatar" className="avatar"/>
+                </div>
+                <div className='form-container'>
+                    <label>Username</label>
+                    <input type="text" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+                    <label>Password</label>
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <button type="submit">Login</button>
+                </div>
+                
             </form>
         </div>
     );
