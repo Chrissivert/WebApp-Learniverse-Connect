@@ -15,10 +15,7 @@ export default function Header() {
       <div className="logo-container">
         <Logo home_src={true}/>
       </div>
-      <div className="button-container">
-        <Button text='Register' src='/register'/>
-        <Button text='Real login' src='/login'/>
-      </div>
+      
       <div className="cart-container">
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" /> {/* Cart icon */}
