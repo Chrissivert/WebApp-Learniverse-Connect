@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../index.css';
 import './Login.css'
 
@@ -46,7 +47,7 @@ function Login() {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     <button type="submit">Login</button>
                 </div>
-                
+                <p>No account? Sign in <Link to="/register" className='register-link'>here</Link>!</p>
             </form>
         </div>
     );
