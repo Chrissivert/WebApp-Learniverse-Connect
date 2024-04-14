@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import no.ntnu.backend.dto.CourseByEachProviderDTO;
 import no.ntnu.backend.model.CourseProvider;
 import no.ntnu.backend.model.CurrencyConversionResponse;
+import no.ntnu.backend.model.Provider;
 import no.ntnu.backend.repository.CourseProviderRepository;
+import no.ntnu.backend.repository.ProviderRepository;
 
 @Service
 public class CourseProviderService {
@@ -17,10 +21,35 @@ public class CourseProviderService {
     @Autowired
     private CourseProviderRepository courseProviderRepository;
 
-    // Cache for conversion rates, with separate maps for each base currency
+    @Autowired
+    private ProviderRepository providerRepository;
+
+    public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId) {
+        List<CourseProvider> courseProviders = courseProviderRepository.findByCourseId(courseId);
+        List<CourseByEachProviderDTO> providersDTO = new ArrayList<>();
+
+        for (CourseProvider courseProvider : courseProviders) {
+            CourseByEachProviderDTO dto = new CourseByEachProviderDTO();
+            dto.setCourseId(courseId);
+            dto.setPrice(courseProvider.getPrice());
+            dto.setCurrency(courseProvider.getCurrency());
+
+            Provider provider = providerRepository.findById(courseProvider.getProviderId()).orElse(null);
+            if (provider != null) {
+                dto.setProviderName(provider.getName());
+            } else {
+                dto.setProviderName("Unknown Provider");
+            }
+
+            providersDTO.add(dto);
+        }
+
+        return providersDTO;
+    }
+
+
     private Map<String, Map<String, Double>> conversionRatesMap = new HashMap<>();
 
-    // Cache for last update timestamp for each base currency
     private Map<String, Long> lastUpdatedMap = new HashMap<>();
 
     public List<CourseProvider> getConvertedCoursePrices(String targetCurrency) {
@@ -31,8 +60,7 @@ public class CourseProviderService {
             String baseCurrency = coursePrice.getCurrency(); // Fetch base currency from the database
             double conversionRateToTargetCurrency = getConversionRate(baseCurrency, targetCurrency);
             if (conversionRateToTargetCurrency == -1) {
-                // Handle error case, return original prices
-                return allCoursePrices; // Return original prices if conversion fails for any course
+                return allCoursePrices;
             }
 
             double convertedPrice = coursePrice.getPrice() * conversionRateToTargetCurrency;

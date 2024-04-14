@@ -4,7 +4,7 @@ public class CourseByEachProviderDTO {
 
     private double price;
     private String currency;
-    private int courseId;
+    private Long courseId;
     private String providerName;
 
     // Getters
@@ -16,7 +16,7 @@ public class CourseByEachProviderDTO {
         return currency;
     }
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
@@ -33,7 +33,7 @@ public class CourseByEachProviderDTO {
         this.currency = currency;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
