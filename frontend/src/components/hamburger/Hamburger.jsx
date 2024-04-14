@@ -20,23 +20,16 @@ export default function HamburgerMenu() {
           <Hamburger direction='right' toggled={isOpen}/>
         </div>
         <nav className={'menu' + (isOpen ? ' open' : '')}>
-          <ul>
-            <li>
-              <Button text='Home' src='/'/>
-            </li>
-            <li>
-              <Button text='About' src='/about'/>
-            </li>
-            <li>
-              <Button text='Courses' src='/courses'/>
-            </li>
-            <li>
-              <Button text='Test [404]' src='/Error_404-Page_Not_Found'/>
-            </li>
-            <li>
-              <Button text='Profile' src='/profile'/>
-            </li>
-          </ul>
+        <hr />
+        <div className="flex-container">
+          <div><Button text='Home' src='/'/></div>
+          <div><Button text='About' src='/about'/></div>
+          <div><Button text='Courses' src='/courses'/></div>  
+          <div><Button text='Test [404]' src='/Error_404-Page_Not_Found'/></div>
+          <div><Button text='Profile' src='/profile'/></div>
+          <div><Button text='Login' src='/login'/></div>
+          <div><Button text='Register' src='/register'/></div>
+        </div>
         </nav>
       </div>
     </>

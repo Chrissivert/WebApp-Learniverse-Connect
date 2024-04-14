@@ -14,23 +14,28 @@ export default function Header() {
 
   return (
     <header className="header-container">
-      <HamburgerMenu />
       <div className="logo-container">
         <Logo home_src={true} />
       </div>
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
       </div>
+      
       <div className="cart-container">
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
           <span className="cart-text">Cart ({cart.length})</span>
         </Link>
       </div>
-      <div className="button-container">
-        <Button text='Register' src='/register'/>
-        <Button text='Real login' src='/login'/>
+
+      <div className='login-container'>
+        <Link to="/login" className="login-link">
+          <img src="/login/login_white.png" alt="Login" className="login"></img>
+        </Link>
       </div>
+      <HamburgerMenu/>
+      
+      
     </header>
   );
 }
