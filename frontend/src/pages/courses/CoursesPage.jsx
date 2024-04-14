@@ -2,7 +2,9 @@ import React from 'react';
 import Courses from './Courses';
 import FilterSection from '../../components/filter/FilterSection';
 import Pagination from '../../components/pagination/Pagination';
-import useCoursesPageState from './UseCoursesPageState';
+import coursesPageLogic from './coursesPageLogic';
+
+
 
 function CoursesPage() {
   const {
@@ -15,7 +17,9 @@ function CoursesPage() {
     handleSearchQueryChange,
     handlePriceChange,
     handleCategoryChange,
-  } = useCoursesPageState();
+  } = coursesPageLogic();
+
+  
 
   return (
     <div>
@@ -25,8 +29,8 @@ function CoursesPage() {
         onSortChange={handleSortChange}
         onCategoryChange={handleCategoryChange}
         searchQuery={filters.searchQuery}
-        courses={courses} // Pass courses to FilterSection
-        filters={filters} // Pass filters to FilterSection
+        courses={courses}
+        filters={filters} 
       />
       <Courses
         filters={filters}

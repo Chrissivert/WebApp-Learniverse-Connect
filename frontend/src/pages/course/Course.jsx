@@ -62,7 +62,7 @@ function Course() {
       <ul>
         {providers.map(provider => (
           <li key={provider.providerId}>
-            {/* {provider.providerName} - Price: {provider.price} {provider.currency} */}
+            {provider.providerName} - Price: {provider.price} {provider.currency}
           </li>
         ))}
       </ul>

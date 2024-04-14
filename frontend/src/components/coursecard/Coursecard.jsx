@@ -11,18 +11,23 @@ function Coursecard({ course }) {
       .catch(error => console.error("Error loading image:", error));
   }, [course.title]);
 
-  const { cheapestPrice } = course;
+  const { cheapestPrice, cheapestPriceCurrency } = course;
   const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+
+  // Log roundedCheapestPrice and course
+  useEffect(() => {
+    console.log("roundedCheapestPrice:", roundedCheapestPrice);
+    console.log("course:", course);
+  }, [roundedCheapestPrice, course]);
 
   return (
     <div className="course-card">
       <div className="image-section" style={{backgroundImage: `url(${imageUrl})`}}>
-        {/* Background image */}
       </div>
       <div className="text-section">
         <h2>{course.title}</h2>
         <p>Credits: {course.credit}</p>
-        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} NOK</p>}
+        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
       </div>
     </div>
   );

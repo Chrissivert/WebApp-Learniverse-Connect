@@ -11,15 +11,15 @@ class DataFetcher {
       }
     }
   
-    static async fetchCheapestPrices() {
-        try {
-            const response = await fetch('http://localhost:8080/cheapest-course-prices');
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error fetching cheapest prices:', error);
-            throw error;
-        }
+    static async fetchCheapestPrices(targetCurrency) {
+      try {
+        const response = await fetch(`http://localhost:8080/cheapest-course-prices?targetCurrency=${targetCurrency}`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching cheapest prices:', error);
+        throw error;
+      }
     }
 
     static async fetchTags() {
