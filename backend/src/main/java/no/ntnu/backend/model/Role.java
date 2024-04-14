@@ -1,13 +1,12 @@
 package no.ntnu.backend.model;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Role {
@@ -16,8 +15,15 @@ public class Role {
   private int id;
   private String title;
 
+  @ManyToMany(
+          mappedBy = "roles"
+  )
+  private Set<User> users = new LinkedHashSet();
+
   public Role() {
   }
+
+  public Role(String title){this.title = title;}
 
   public int getId() {
     return this.id;
@@ -26,6 +32,8 @@ public class Role {
   public void setId(int id) {
     this.id = id;
   }
+
+  public void setUsers(Set<User> users){this.users = users;}
 
   public String getTitle() {
     return this.title;

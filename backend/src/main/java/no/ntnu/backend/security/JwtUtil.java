@@ -3,6 +3,7 @@ package no.ntnu.backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Component
+@Qualifier("JwtUtil")
 public class JwtUtil {
     @Value("${jwt_secret_key}")
     private String SECRET_KEY;

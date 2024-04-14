@@ -9,6 +9,7 @@ import no.ntnu.backend.security.AccessUserDetails;
 import no.ntnu.backend.service.impl.RoleServiceImpl;
 import no.ntnu.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -30,6 +31,7 @@ public class AccessUserService implements UserDetailsService {
     RoleServiceImpl roleService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
     private RoleRepository roleRepository;
 
 
@@ -73,6 +75,7 @@ public class AccessUserService implements UserDetailsService {
         }
     }
 
+    /*
     public String tryCreateNewUser(String email, String password) {
         String errorMessage;
         if ("".equals(email)) {
@@ -86,7 +89,7 @@ public class AccessUserService implements UserDetailsService {
             }
         }
         return errorMessage;
-    }
+    }*/
 
     private String checkPasswordRequirements(String password) {
         String errorMessage = null;
@@ -102,7 +105,7 @@ public class AccessUserService implements UserDetailsService {
     }
 
     private void createUser(String email, String password) {
-        Role userRole = this.roleRepository.findOneByName("ROLE_USER");
+        Role userRole = this.roleRepository.findOneByTitle("ROLE_USER");
         if (userRole != null) {
             User user = new User(email, this.createHash(password));
             user.setRoleId(0);

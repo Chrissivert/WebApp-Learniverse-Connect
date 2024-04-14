@@ -7,4 +7,5 @@ import no.ntnu.backend.model.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer>{
+    Role findOneByTitle(String title);
 }
