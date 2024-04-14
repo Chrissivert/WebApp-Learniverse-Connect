@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";  
 import { useParams } from "react-router-dom";
 import "./Course.css";
 import '../../index.css';
 import { CartContext } from "../cart/CartProvider";
+import DataFetcher from "../../components/fetcher/Datafetcher";
 
 function Course() {
   const { id } = useParams();
@@ -17,26 +17,18 @@ function Course() {
   };
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/courses/${id}`);
-        setCourse(response.data);
+        const courseData = await DataFetcher.fetchCourse(id);
+        const providerData = await DataFetcher.fetchProviders(id);
+        setCourse(courseData);
+        setProviders(providerData);
       } catch (error) {
-        console.error("Error fetching course:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchProviders = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/course/providers/${id}`);
-        setProviders(response.data);
-      } catch (error) {
-        console.error("Error fetching providers:", error);
-      }
-    };
-
-    fetchCourse();
-    fetchProviders();
+    fetchData();
 
     return () => {
       setCourse(null);
