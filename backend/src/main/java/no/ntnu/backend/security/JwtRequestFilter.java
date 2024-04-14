@@ -1,17 +1,9 @@
 package no.ntnu.backend.security;
 
-import io.jsonwebtoken.JwtException;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import no.ntnu.backend.security.JwtUtil;
-import org.hibernate.annotations.Filter;
+import javax.servlet.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,24 +11,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+import io.jsonwebtoken.JwtException;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Qualifier("JwtRequestFilter")
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class.getSimpleName());
+    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
     @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
-    public JwtRequestFilter() {
+    @Autowired
+    public JwtRequestFilter(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
 
         String authorizationHeader = request.getHeader("Authorization");
         String email = null;

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 public class AuthenticationController {
-    @Autowired
+    private final AccessUserService userService;
+    private final UserServiceImpl userServiceImpl;
+    private final JwtUtil jwtUtil;
     private AuthenticationManager authenticationManager;
-    @Autowired
-    private AccessUserService userService;
-    @Autowired
-    private UserServiceImpl userServiceImpl;
-    @Autowired
-    private JwtUtil jwtUtil;
 
-    public AuthenticationController() {
+    @Autowired
+    public AuthenticationController(AccessUserService userService, UserServiceImpl userServiceImpl, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager=authenticationManager;
     }
 
     @PostMapping({"/api/authenticate"})
@@ -41,12 +43,12 @@ public class AuthenticationController {
             return new ResponseEntity("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }
 
-        //ResponseEntity<User>
-        //UserDetails userDetails = this.userServiceImpl.readById(authenticationRequest.getId());
         UserDetails userDetails = this.userService.loadUserByUsername(authenticationRequest.getEmail());
         String jwt = this.jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
+    /*
 
     @PostMapping({"/api/signup"})
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
@@ -60,4 +62,6 @@ public class AuthenticationController {
         }
         return response;
     }
+
+     */
 }
