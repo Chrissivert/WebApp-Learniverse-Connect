@@ -26,17 +26,18 @@ public class CourseProviderService {
 
     private List<CourseProvider> listOfCourseProviders = new ArrayList<>();
 
-    public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId) {
-        List<CourseProvider> courseProviders = courseProviderRepository.findByCourseId(courseId);
-        List<CourseByEachProviderDTO> providersDTO = new ArrayList<>();
+    // Update CourseProviderService
 
-        for (CourseProvider courseProvider : courseProviders) {
+public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId, String targetCurrency) {
+    List<CourseProvider> convertedCoursePrices = getConvertedCoursePrices(targetCurrency);
+    List<CourseByEachProviderDTO> providersDTO = new ArrayList<>();
+
+    for (CourseProvider courseProvider : convertedCoursePrices) {
+        if (courseProvider.getCourseId().equals(courseId)) {
             CourseByEachProviderDTO dto = new CourseByEachProviderDTO();
-            for (int i = 0; i < listOfCourseProviders.size(); i++) {
-                dto.setCourseId(listOfCourseProviders.get(i).getCourseId());
-            dto.setPrice(listOfCourseProviders.get(i).getPrice());
-            dto.setCurrency(listOfCourseProviders.get(i).getCurrency());
-            } 
+            dto.setCourseId(courseProvider.getCourseId());
+            dto.setPrice(courseProvider.getPrice());
+            dto.setCurrency(courseProvider.getCurrency());
 
             Provider provider = providerRepository.findById(courseProvider.getProviderId()).orElse(null);
             if (provider != null) {
@@ -47,9 +48,11 @@ public class CourseProviderService {
 
             providersDTO.add(dto);
         }
-
-        return providersDTO;
     }
+
+    return providersDTO;
+}
+
 
 
     private Map<String, Map<String, Double>> conversionRatesMap = new HashMap<>();

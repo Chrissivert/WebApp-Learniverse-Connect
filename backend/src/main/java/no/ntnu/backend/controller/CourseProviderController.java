@@ -20,20 +20,16 @@ public class CourseProviderController {
     @Autowired
     private CourseProviderService courseProviderService;
 
-    @GetMapping("/course/providers/{courseId}")
-    public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId) {
-        return courseProviderService.getProvidersForCourse(courseId);
-    }
+    // Update CourseProviderController
+
+@GetMapping("/course/providers/{courseId}")
+public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId, @RequestParam String targetCurrency) {
+    return courseProviderService.getProvidersForCourse(courseId, targetCurrency);
+}
+
 
     @GetMapping("/cheapest-course-prices")
     public List<CourseProvider> getCheapestCoursePrices(@RequestParam String targetCurrency) {
         return courseProviderService.getConvertedCoursePrices(targetCurrency);
     }
-
-
-//     @GetMapping("/cheapest-course-prices")
-//         public List<CourseProvider> readAllProviders() {
-//         return courseProviderRepository.findAll();
-      
-// }
 }
