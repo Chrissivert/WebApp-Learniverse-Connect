@@ -4,18 +4,29 @@ import { useParams } from "react-router-dom";
 import "./Course.css";
 import '../../index.css';
 import { CartContext } from "../cart/CartProvider";
-import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext"; // Import CurrencyContext
+import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
 import DataFetcher from "../../components/fetcher/Datafetcher";
 
 function Course() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [providers, setProviders] = useState([]);
+  const [selectedProvider, setSelectedProvider] = useState(null); // State to store the selected provider
+  const [showWarning, setShowWarning] = useState(false); // State to control the warning message
   const { addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext(); 
 
+  const handleSelectProvider = (provider) => {
+    setSelectedProvider(provider);
+    setShowWarning(false); // Hide the warning when a provider is selected
+  };
+
   const handleAddToCart = () => {
-    addToCart(course);
+    if (selectedProvider) {
+      addToCart(selectedProvider);
+    } else {
+      setShowWarning(true); // Show the warning if no provider is selected
+    }
   };
 
   useEffect(() => {
@@ -55,13 +66,24 @@ function Course() {
       <p>Related Certification: {course.relatedCertification}</p>
       <h3>Providers:</h3>
       <ul>
-        {providers.map(provider => (
-          <li key={provider.providerId}>
-            {provider.providerName} - Price: {provider.price} {provider.currency}
-          </li>
-        ))}
+      {providers.map(provider => (
+  <li key={provider.providerId}>
+    <label htmlFor={provider.providerId} className="providerLabel">
+      <input
+        type="radio"
+        id={provider.providerId}
+        name="provider"
+        value={provider}
+        checked={selectedProvider === provider}
+        onChange={() => handleSelectProvider(provider)}
+      />
+      {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
+    </label>
+  </li>
+))}
       </ul>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      {showWarning && <div className="warning">Please select a provider before adding to cart.</div>}
+      <button className="addToCartButton" onClick={handleAddToCart}>Add to Cart</button>
     </div>
   );
 }

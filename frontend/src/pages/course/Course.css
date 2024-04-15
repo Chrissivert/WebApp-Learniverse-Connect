@@ -49,3 +49,27 @@
     padding: 10%;
 
   }
+
+  label:hover {
+    background-color: #f0f0f0; 
+    cursor: pointer; 
+  }
+
+  .providerLabel {
+    display: block; 
+    padding: 10px; 
+    cursor: pointer; 
+  }
+  
+  .providerLabel:hover {
+    background-color: #f0f0f0; 
+    cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .warning {
+    color: red;
+  }
