@@ -19,24 +19,24 @@ export default function App() {
   const [targetCurrency, setTargetCurrency] = useState('AUD'); // Default currency
 
   return (
-    <CartProvider> 
-      <CurrencyProvider>
-    <Router>
-      <Header targetCurrency={targetCurrency} setTargetCurrency={setTargetCurrency} />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/courses' element={<CoursesPage />} />
-        <Route path='/course/:id' element={<Course />} />
-        <Route path='*' element={<NotFound />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path="/cart" element={<CartPage />} />
-      </Routes>
-      <Footer />
-     </Router>
-     </CurrencyProvider> 
-    </CartProvider>
+    <CurrencyProvider>
+      <CartProvider> 
+        <Router>
+          <Header targetCurrency={targetCurrency} setTargetCurrency={setTargetCurrency} />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/courses' element={<CoursesPage />} />
+            <Route path='/course/:id' element={<Course />} />
+            <Route path='*' element={<NotFound />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </CartProvider>
+    </CurrencyProvider>
   );
 }

@@ -51,9 +51,9 @@ class DataFetcher {
     }
   }
 
-  static async fetchProviders(id) {
+  static async fetchProviders(id, targetCurrency) {
     try {
-      const response = await axios.get(`http://localhost:8080/course/providers/${id}`);
+      const response = await axios.get(`http://localhost:8080/course/providers/${id}?targetCurrency=${targetCurrency}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching providers:', error);

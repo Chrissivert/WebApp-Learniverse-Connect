@@ -4,13 +4,15 @@ import { useParams } from "react-router-dom";
 import "./Course.css";
 import '../../index.css';
 import { CartContext } from "../cart/CartProvider";
+import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext"; // Import CurrencyContext
 import DataFetcher from "../../components/fetcher/Datafetcher";
 
 function Course() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [providers, setProviders] = useState([]);
-  const { addToCart } = useContext(CartContext); // Use CartContext
+  const { addToCart } = useContext(CartContext);
+  const { targetCurrency } = useCurrencyContext(); 
 
   const handleAddToCart = () => {
     addToCart(course);
@@ -20,7 +22,7 @@ function Course() {
     const fetchData = async () => {
       try {
         const courseData = await DataFetcher.fetchCourse(id);
-        const providerData = await DataFetcher.fetchProviders(id);
+        const providerData = await DataFetcher.fetchProviders(id, targetCurrency);
         setCourse(courseData);
         setProviders(providerData);
       } catch (error) {
@@ -34,7 +36,7 @@ function Course() {
       setCourse(null);
       setProviders([]);
     };
-  }, [id]);
+  }, [id, targetCurrency]); // Include targetCurrency in the dependency array
 
   if (!course || !providers) {
     return <div>Loading...</div>;
