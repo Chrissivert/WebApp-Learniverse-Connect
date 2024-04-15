@@ -19,7 +19,7 @@ public class CourseProvider {
     public CourseProvider() {
     }
 
-    public CourseProvider(int courseId, int providerId, double price, String currency) {
+    public CourseProvider(Long courseId, int providerId, double price, String currency) {
         this.id = new CourseProviderId(courseId, providerId);
         this.price = price;
         this.currency = currency;
@@ -41,7 +41,7 @@ public class CourseProvider {
         this.currency = currency;
     }
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return this.id.getCourseId();
     }
     
@@ -53,7 +53,7 @@ public class CourseProvider {
     public static class CourseProviderId implements Serializable {
 
         @Column(name = "course_id", nullable = false)
-        private int courseId;
+        private Long courseId;
 
         @Column(name = "provider_id", nullable = false)
         private int providerId;
@@ -61,12 +61,12 @@ public class CourseProvider {
         public CourseProviderId() {
         }
 
-        public CourseProviderId(int courseId, int providerId) {
+        public CourseProviderId(Long courseId, int providerId) {
             this.courseId = courseId;
             this.providerId = providerId;
         }
 
-        public int getCourseId() {
+        public Long getCourseId() {
             return courseId;
         }
     

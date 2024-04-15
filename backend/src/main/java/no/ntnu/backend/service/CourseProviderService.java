@@ -24,15 +24,19 @@ public class CourseProviderService {
     @Autowired
     private ProviderRepository providerRepository;
 
+    private List<CourseProvider> listOfCourseProviders = new ArrayList<>();
+
     public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId) {
         List<CourseProvider> courseProviders = courseProviderRepository.findByCourseId(courseId);
         List<CourseByEachProviderDTO> providersDTO = new ArrayList<>();
 
         for (CourseProvider courseProvider : courseProviders) {
             CourseByEachProviderDTO dto = new CourseByEachProviderDTO();
-            dto.setCourseId(courseId);
-            dto.setPrice(courseProvider.getPrice());
-            dto.setCurrency(courseProvider.getCurrency());
+            for (int i = 0; i < listOfCourseProviders.size(); i++) {
+                dto.setCourseId(listOfCourseProviders.get(i).getCourseId());
+            dto.setPrice(listOfCourseProviders.get(i).getPrice());
+            dto.setCurrency(listOfCourseProviders.get(i).getCurrency());
+            } 
 
             Provider provider = providerRepository.findById(courseProvider.getProviderId()).orElse(null);
             if (provider != null) {
@@ -56,17 +60,19 @@ public class CourseProviderService {
         List<CourseProvider> allCoursePrices = courseProviderRepository.findAll();
         List<CourseProvider> convertedCoursePrices = new ArrayList<>();
 
-        for (CourseProvider coursePrice : allCoursePrices) {
-            String baseCurrency = coursePrice.getCurrency(); // Fetch base currency from the database
+        for (CourseProvider courseProvider : allCoursePrices) {
+            String baseCurrency = courseProvider.getCurrency(); // Fetch base currency from the database
             double conversionRateToTargetCurrency = getConversionRate(baseCurrency, targetCurrency);
             if (conversionRateToTargetCurrency == -1) {
                 return allCoursePrices;
             }
 
-            double convertedPrice = coursePrice.getPrice() * conversionRateToTargetCurrency;
-            coursePrice.setPrice(convertedPrice);
-            coursePrice.setCurrency(targetCurrency);
-            convertedCoursePrices.add(coursePrice);
+
+            double convertedPrice = courseProvider.getPrice() * conversionRateToTargetCurrency;
+            courseProvider.setPrice(convertedPrice);
+            courseProvider.setCurrency(targetCurrency);
+            convertedCoursePrices.add(courseProvider);
+            listOfCourseProviders.add(courseProvider);
         }
 
         return convertedCoursePrices;
