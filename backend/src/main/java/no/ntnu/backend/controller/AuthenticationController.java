@@ -19,9 +19,88 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @CrossOrigin
 @RestController
 public class AuthenticationController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private AccessUserService userService;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+
+    /**
+     * HTTP POST request to /authenticate.
+     *
+     * @param authenticationRequest The request JSON object containing username and password
+     * @return OK + JWT token; Or UNAUTHORIZED
+     */
+    @PostMapping("/api/authenticate")
+    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getEmail(),
+                    authenticationRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+        }
+        final UserDetails userDetails = userService.loadUserByUsername(
+                authenticationRequest.getEmail());
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    /**
+     * This method processes data received from the sign-up form (HTTP POST).
+     *
+     * @return Name of the template for the result page
+     */
+    @PostMapping({"/api/signup"})
+    public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
+        String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword());
+        //String errorMessage = this.userServiceImpl.addUser(signupData.getEmail(), signupData.getPassword());
+        ResponseEntity response;
+        if (errorMessage == null) {
+            response = new ResponseEntity(HttpStatus.OK);
+        } else {
+            response = new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+/*
+    @PostMapping("/api/signup")
+    public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
+        ResponseEntity<String> response;
+        try {
+            userService.tryCreateNewUser(signupData.getUsername(), signupData.getPassword());
+            response = new ResponseEntity<>(HttpStatus.OK);
+        } catch (IOException e) {
+            response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
+    /*
+    @PostMapping("/api/signup")
+    public ResponseEntity<String> signupProcess(@RequestBody SignupDto signupData) {
+        ResponseEntity<String> response;
+        try {
+            userService.tryCreateNewUser(signupData.getUsername(), signupData.getPassword());
+            response = new ResponseEntity<>(HttpStatus.OK);
+        } catch (IOException e) {
+            response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }*/
+
+
+
+
+    /*
     private final AccessUserService userService;
     private final UserServiceImpl userServiceImpl;
     private final JwtUtil jwtUtil;

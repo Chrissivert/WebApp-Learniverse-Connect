@@ -24,7 +24,7 @@ public class AuthenticationRequest {
     return this.email;
   }
 
-  public void setEmail(String username) {
+  public void setEmail(String email) {
     this.email = email;
   }
 
