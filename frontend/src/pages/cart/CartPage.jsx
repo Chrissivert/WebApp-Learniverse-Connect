@@ -32,8 +32,8 @@ function CartPage() {
             return (
               <div key={course.id} className="cart-item">
                 <Coursecard course={course} />
-                <p>Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
-                <button onClick={() => handleRemoveItem(course.id)}>Remove</button>
+                <p className="price">Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
+                <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
               </div>
             );
           })
