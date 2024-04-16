@@ -34,20 +34,14 @@ function CartPage() {
         <Button text="Go to Courses" src="/courses" />
       </div>
       <div className="cart-items">
-        {cart.length > 0 ? (
-          cart.map(({ course }) => { // Destructure course from each cart item
-            return (
-              <div key={course.id} className="cart-item">
-                <Coursecard course={course} />
-                <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
-                <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
-                <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
-              </div>
-            );
-          })
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+        {cart.map(({ course }) => ( // Using cart.map here
+          <div key={course.id} className="cart-item">
+            <Coursecard course={course.course} />
+            <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
+            <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
+            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
+          </div>
+        ))}
       </div>
       <div className="cart-summary">
         <div className="price-summary">
@@ -63,4 +57,3 @@ function CartPage() {
 }
 
 export default CartPage;
-
