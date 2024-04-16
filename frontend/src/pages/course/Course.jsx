@@ -23,7 +23,7 @@ function Course() {
 
   const handleAddToCart = () => {
     if (selectedProvider) {
-      addToCart(selectedProvider);
+      addToCart({course, selectedProvider });
     } else {
       setShowWarning(true); // Show the warning if no provider is selected
     }
@@ -66,22 +66,22 @@ function Course() {
       <p>Related Certification: {course.relatedCertification}</p>
       <h3>Providers:</h3>
       <ul>
-      {providers.map(provider => (
-  <li key={provider.providerId}>
-    <label htmlFor={provider.providerId} className="providerLabel">
-      <input
-        type="radio"
-        id={provider.providerId}
-        name="provider"
-        value={provider}
-        checked={selectedProvider === provider}
-        onChange={() => handleSelectProvider(provider)}
-      />
-      {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
-    </label>
-  </li>
-))}
-      </ul>
+  {providers.map(provider => (
+    <li key={provider.providerId}> {/* Assign a unique key */}
+      <label htmlFor={provider.providerId} className="providerLabel">
+        <input
+          type="radio"
+          id={provider.providerId}
+          name="provider"
+          value={provider}
+          checked={selectedProvider === provider}
+          onChange={() => handleSelectProvider(provider)}
+        />
+        {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
+      </label>
+    </li>
+  ))}
+</ul>
       {showWarning && <div className="warning">Please select a provider before adding to cart.</div>}
       <button className="addToCartButton" onClick={handleAddToCart}>Add to Cart</button>
     </div>

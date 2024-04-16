@@ -17,7 +17,15 @@ function CartPage() {
   };
 
   // Calculate total price
-  const totalPrice = cart.reduce((total, course) => total + course.cheapestPrice, 0);
+  const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
+  
+  // Log course objects and cheapestPrice
+  console.log("Cart:", cart);
+  cart.forEach(({ course }) => {
+    console.log("Course ID:", course.id);
+    console.log("Course Object:", course);
+    console.log("Cheapest Price:", course.selectedProvider.price);
+  });
 
   return (
     <div className="cart-page">
@@ -27,12 +35,12 @@ function CartPage() {
       </div>
       <div className="cart-items">
         {cart.length > 0 ? (
-          cart.map((course) => {
-            console.log(course); // Print the course object in the console
+          cart.map(({ course }) => { // Destructure course from each cart item
             return (
               <div key={course.id} className="cart-item">
                 <Coursecard course={course} />
-                <p className="price">Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
+                <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
+                <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
                 <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
               </div>
             );
@@ -55,3 +63,4 @@ function CartPage() {
 }
 
 export default CartPage;
+
