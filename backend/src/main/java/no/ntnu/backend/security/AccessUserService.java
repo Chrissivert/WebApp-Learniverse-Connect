@@ -61,7 +61,7 @@ public class AccessUserService implements UserDetailsService {
     public User getSessionUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        //The user's name isnt used here, we use the email.
+        //The user's name isnt used here, the email is used instead.
         String email = authentication.getName();
         return (User)this.userRepository.findByUsername(email).orElse(null);
     }
