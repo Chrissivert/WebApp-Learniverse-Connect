@@ -20,6 +20,8 @@ export default function Header() {
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
       </div>
+
+
       
       <div className="cart-container">
         <Link to="/cart" className="cart-link">
