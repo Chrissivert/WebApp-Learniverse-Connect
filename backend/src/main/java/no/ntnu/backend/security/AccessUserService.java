@@ -19,6 +19,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 
 @Service
@@ -37,7 +42,7 @@ public class AccessUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(email);
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
             return new AccessUserDetails(user.get());
         } else {
@@ -75,8 +80,8 @@ public class AccessUserService implements UserDetailsService {
         }
     }
 
-    /*
-    public String tryCreateNewUser(String email, String password) {
+
+    public String tryCreateNewUser(String email, String password, String username) {
         String errorMessage;
         if ("".equals(email)) {
             errorMessage = "Email can't be empty";
@@ -85,11 +90,11 @@ public class AccessUserService implements UserDetailsService {
         } else {
             errorMessage = this.checkPasswordRequirements(password);
             if (errorMessage == null) {
-                this.createUser(email, password);
+                this.createUser(email, password,username);
             }
         }
         return errorMessage;
-    }*/
+    }
 
     private String checkPasswordRequirements(String password) {
         String errorMessage = null;
@@ -104,11 +109,24 @@ public class AccessUserService implements UserDetailsService {
         return errorMessage;
     }
 
-    private void createUser(String email, String password) {
-        Role userRole = this.roleRepository.findOneByTitle("ROLE_USER");
+    private void createUser(String email, String password, String username) {
+        Role userRole = this.roleRepository.findOneById(1);
         if (userRole != null) {
             User user = new User(email, this.createHash(password));
-            user.setRoleId(0);
+            user.addRole(userRole);
+            user.setUsername(username);
+
+            String dateString = "2024-04-18"; // Replace this with your date string
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date date = (Date) dateFormat.parse(dateString);
+                DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = outputFormat.format(date);
+                System.out.println(formattedDate); // This prints the date in the specified format
+            } catch (ParseException e) {
+                System.out.println("Invalid date format");
+                e.printStackTrace();
+            }
             this.userRepository.save(user);
         }
     }

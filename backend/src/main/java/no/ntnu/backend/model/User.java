@@ -20,13 +20,13 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-  private int roleId;
+
+
   private String username;
   private Date startDate;
   private String email;
   private String password;
-
-  private boolean active = true;
+  private boolean active;
 
   @ManyToMany(
           fetch = FetchType.EAGER
@@ -66,13 +66,17 @@ public class User {
     this.id = id;
   }
 
-  public int getRoleId() {
+  public void addRole(Role role){
+    this.roles.add(role);
+  }
+
+  /*public int getRoleId() {
     return this.roleId;
   }
 
   public void setRoleId(int roleId) {
     this.roleId = roleId;
-  }
+  }*/
 
 
 
@@ -109,11 +113,11 @@ public class User {
     this.password = password;
   }
 
-  @JsonIgnore
+  /*@JsonIgnore
   public boolean isValid() {
     return //this.id > 0 &&
       this.roleId > 0;
-  }
+  }*/
 
   @Override
   public boolean equals(Object obj) {
@@ -123,7 +127,7 @@ public class User {
       return false;
     var that = (User) obj;
     return this.id == that.id &&
-      this.roleId == that.roleId;
+      this.roles.equals(that.roles);
   }
 
   @Override

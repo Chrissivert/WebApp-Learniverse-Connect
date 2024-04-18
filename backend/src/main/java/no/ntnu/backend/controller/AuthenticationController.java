@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import no.ntnu.backend.dto.AuthenticationRequest;
 import no.ntnu.backend.dto.AuthenticationResponse;
 import no.ntnu.backend.dto.SignupDTO;
@@ -25,6 +26,8 @@ import java.io.IOException;
 @RestController
 public class AuthenticationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -41,16 +44,23 @@ public class AuthenticationController {
      */
     @PostMapping("/api/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+        logger.info("Received authentication request for email: {}", authenticationRequest.getEmail());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+
                     authenticationRequest.getEmail(),
                     authenticationRequest.getPassword()));
+            logger.info("Authentication successful for email: {}", authenticationRequest.getEmail());
         } catch (BadCredentialsException e) {
+            logger.error("Authentication failed for email: {}", authenticationRequest.getEmail(), e);
             return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+        } catch(Exception e){
+            logger.error("E");
         }
         final UserDetails userDetails = userService.loadUserByUsername(
                 authenticationRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetails);
+        logger.info("JWT token generated successfully for email: {}", authenticationRequest.getEmail());
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
@@ -61,7 +71,7 @@ public class AuthenticationController {
      */
     @PostMapping({"/api/signup"})
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
-        String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword());
+        String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(),signupData.getUsername());
         //String errorMessage = this.userServiceImpl.addUser(signupData.getEmail(), signupData.getPassword());
         ResponseEntity response;
         if (errorMessage == null) {

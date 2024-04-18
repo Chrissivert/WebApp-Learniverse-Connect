@@ -15,10 +15,10 @@ public class Role {
   private int id;
   private String title;
 
-  @ManyToMany(
-          mappedBy = "roles"
-  )
-  private Set<User> users = new LinkedHashSet();
+//  @ManyToMany(
+//          mappedBy = "roles"
+//  )
+//  private Set<User> users = new LinkedHashSet();
 
   public Role() {
   }
@@ -33,7 +33,7 @@ public class Role {
     this.id = id;
   }
 
-  public void setUsers(Set<User> users){this.users = users;}
+  //public void setUsers(Set<User> users){this.users = users;}
 
   public String getTitle() {
     return this.title;
