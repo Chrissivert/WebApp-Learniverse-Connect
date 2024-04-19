@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 const TextSizeController = () => {
-  const [baseFontSize, setBaseFontSize] = useState(16); // Initial base font size in pixels
+  useEffect(() => {
+    // Set default font size and scale when the component mounts
+    document.documentElement.style.setProperty('--base-font-size', '20px');
+    document.documentElement.style.setProperty('--dropdown-scale', '1.3');
+  }, []);
 
-  const increaseFontSize = () => {
-    setBaseFontSize(prevSize => prevSize + 2); // Increase base font size by 2 pixels
-    document.documentElement.style.setProperty('--base-font-size', `${baseFontSize + 2}px`);
-  };
-
-  const decreaseFontSize = () => {
-    setBaseFontSize(prevSize => Math.max(12, prevSize - 2)); // Decrease base font size by 2 pixels, but ensure it doesn't go below 12 pixels
-    document.documentElement.style.setProperty('--base-font-size', `${Math.max(12, baseFontSize - 2)}px`);
+  const handleFontSizeChange = (event) => {
+    const selectedSize = event.target.value;
+    let scale = 1.3; // Default scale for medium size
+    if (selectedSize === '14px') {
+      scale = 1; // Small
+    } else if (selectedSize === '26px') {
+      scale = 1.6; // Large
+    }
+    document.documentElement.style.setProperty('--base-font-size', selectedSize);
+    document.documentElement.style.setProperty('--dropdown-scale', scale);
   };
 
   return (
     <div>
-      <button onClick={increaseFontSize}>Increase Font Size</button>
-      <button onClick={decreaseFontSize}>Decrease Font Size</button>
-      <p>Sample Text</p>
+      <label htmlFor="fontSize">Select Font Size:</label>
+      <select id="fontSize" onChange={handleFontSizeChange} defaultValue="20px">
+        <option value="14px">Small</option>
+        <option value="20px">Medium</option>
+        <option value="26px">Large</option>
+      </select>
     </div>
   );
 };

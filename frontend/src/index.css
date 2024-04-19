@@ -1,5 +1,6 @@
 :root {
   --base-font-size: 16px; /* Define a CSS variable for base font size */
+  --dropdown-scale: 1;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -42,4 +43,11 @@ button:hover {
 
 a:link, a:visited, a:active {
   text-decoration: none;
+}
+
+
+select {
+  transform: scale(var(--dropdown-scale));
+  transform-origin: left center;
+  min-width: 120px;
 }
