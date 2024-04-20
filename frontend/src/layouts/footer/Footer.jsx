@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <footer>
       <TextSizeController />
+
       This is a footer
       <br/>This is a br in a footer
       <div>

@@ -14,11 +14,13 @@ import CartPage from './pages/cart/CartPage.jsx';
 import './index.css';
 import { CurrencyProvider } from './components/currencySelector/TargetCurrencyContext.jsx';
 import CartProvider from './pages/cart/CartProvider.jsx';
+import { SpeakingProvider } from './components/textReader/speakingContext.jsx';
 
 export default function App() {  
-  const [targetCurrency, setTargetCurrency] = useState('AUD'); // Default currency
+  const [targetCurrency, setTargetCurrency] = useState('AUD'); 
 
   return (
+    <SpeakingProvider>
     <CurrencyProvider>
       <CartProvider> 
         <Router>
@@ -38,5 +40,6 @@ export default function App() {
         </Router>
       </CartProvider>
     </CurrencyProvider>
+    </SpeakingProvider>
   );
 }
