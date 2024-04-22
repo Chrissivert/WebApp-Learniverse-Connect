@@ -10,27 +10,21 @@ const SpeakingComponent = ({ text, onEvent }) => {
   useEffect(() => {
     return () => {
       if (utteranceRef.current) {
-        // If there is a current utterance, stop it when unmounting
-        utteranceRef.current.onend = null; // Remove onend event listener to prevent memory leak
+        utteranceRef.current.onend = null; 
         window.speechSynthesis.cancel();
       }
     };
   }, []);
 
   const speak = (text) => {
-  const utterance = new SpeechSynthesisUtterance(text);
-  
-  // Set language to German
-  utterance.lang = 'no-NO';
-
-  utterance.onend = () => {
-    setSpeakingInProgress(false); // Speaking has finished
+    const utterance = new SpeechSynthesisUtterance(text);
+    utteranceRef.current = utterance; 
+    utterance.onend = () => {
+      setSpeakingInProgress(false); 
+    };
+    window.speechSynthesis.speak(utterance);
+    setSpeakingInProgress(true); 
   };
-
-  window.speechSynthesis.speak(utterance);
-
-  setSpeakingInProgress(true);
-};
 
   const handleHover = () => {
     if (speakingEnabled) {
