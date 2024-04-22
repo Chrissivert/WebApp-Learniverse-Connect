@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import java.util.List;
 
+import no.ntnu.backend.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,17 @@ import no.ntnu.backend.service.CourseProviderService;
 @CrossOrigin("http://localhost:5173")
 public class CourseProviderController {
 
-    @Autowired
-    private CourseProviderService courseProviderService;
+    private final CourseProviderService courseProviderService;
 
+    @Autowired
+    public CourseProviderController(CourseProviderService courseProviderService){
+        this.courseProviderService = courseProviderService;
+
+    }
     // Update CourseProviderController
 
-@GetMapping("/course/providers/{courseId}")
-public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId, @RequestParam String targetCurrency) {
+    @GetMapping("/course/providers/{courseId}")
+    public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId, @RequestParam String targetCurrency) {
     return courseProviderService.getProvidersForCourse(courseId, targetCurrency);
 }
 

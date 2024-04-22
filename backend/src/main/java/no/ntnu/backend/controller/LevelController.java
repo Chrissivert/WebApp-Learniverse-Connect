@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Level;
@@ -28,9 +29,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/levels")
 @CrossOrigin("http://localhost:5173")
 public class LevelController {
-  
+
+  private final LevelService levelService;
+
   @Autowired
-  private LevelService levelService;
+  public LevelController(LevelService levelService){
+    this.levelService = levelService;
+
+  }
 
   /**
    * 

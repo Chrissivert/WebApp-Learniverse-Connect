@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.User;
@@ -29,8 +30,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 @CrossOrigin("http://localhost:5173")
 public class UserController {
 
+  private final UserService userService;
+
   @Autowired
-  private UserService userService;
+  public UserController(UserService userService){
+    this.userService = userService;
+
+  }
 
   /**
    * 

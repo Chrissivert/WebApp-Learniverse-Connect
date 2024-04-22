@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Provider;
@@ -23,9 +24,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/providers")
 @CrossOrigin("http://localhost:5173")
 public class ProviderController {
-  
+
+  private final ProviderService providerService;
+
   @Autowired
-  private ProviderService providerService;
+  public ProviderController(ProviderService providerService){
+    this.providerService = providerService;
+
+  }
 
   @PostMapping()
   public ResponseEntity<String> cretaeProvider(@RequestBody Provider provider) {

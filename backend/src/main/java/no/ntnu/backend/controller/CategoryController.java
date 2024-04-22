@@ -1,6 +1,7 @@
 package no.ntnu.backend.controller;
 
 
+import no.ntnu.backend.service.CourseService;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Category;
@@ -29,9 +30,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/categories")
 @CrossOrigin("http://localhost:5173")
 public class CategoryController {
-  
+
+  private final CategoryService categoryService;
+
   @Autowired
-  private CategoryService categoryService;
+  public CategoryController(CategoryService categoryService){
+    this.categoryService = categoryService;
+
+  }
 
   /**
    * 

@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import java.util.List;
 
+import no.ntnu.backend.service.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,10 +29,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/courses")
 @CrossOrigin("http://localhost:5173")
 public class CourseController {
-  
-  @Autowired
-  private CourseService courseService;
 
+  private final CourseService courseService;
+
+  @Autowired
+  public CourseController(CourseService courseService){
+    this.courseService = courseService;
+
+  }
   /**
    * 
    *
@@ -79,7 +84,6 @@ public class CourseController {
   /**
    * 
    *
-   * @param course
    * @return
    */
   @DeleteMapping("/{id}")

@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import java.util.List;
 
+import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,9 +24,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/roles")
 @CrossOrigin("http://localhost:5173")
 public class RoleController {
-  
+
+  private final RoleService roleService;
+
   @Autowired
-  private RoleService roleService;
+  public RoleController(RoleService roleService){
+    this.roleService = roleService;
+
+  }
 
   @PostMapping()
   public ResponseEntity<String> createRole(@RequestBody Role role) {

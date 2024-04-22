@@ -23,10 +23,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/tags")
 @CrossOrigin("http://localhost:5173")
 public class TagsController {
-  
-  @Autowired
-  private TagsService tagsService;
 
+  private final TagsService tagsService;
+
+  @Autowired
+  public TagsController(TagsService tagsService){
+    this.tagsService = tagsService;
+
+  }
   @PostMapping()
   public ResponseEntity<String> createTag(@RequestBody Tags tags) {
     return this.tagsService.create(tags);

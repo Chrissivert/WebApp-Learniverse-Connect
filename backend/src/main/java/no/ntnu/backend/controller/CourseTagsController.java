@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import java.util.List;
 
+import no.ntnu.backend.service.CourseTagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,13 @@ import no.ntnu.backend.repository.CourseTagsRepository;
 @CrossOrigin("http://localhost:5173")
 public class CourseTagsController {
 
+    private final CourseTagsRepository courseTagsRepository;
+
     @Autowired
-    private CourseTagsRepository courseTagsRepository;
+    public CourseTagsController(CourseTagsRepository courseTagsRepository){
+        this.courseTagsRepository = courseTagsRepository;
+
+    }
 
     @GetMapping("/course-tags")
     List<CourseTags> getAllCourses() {
