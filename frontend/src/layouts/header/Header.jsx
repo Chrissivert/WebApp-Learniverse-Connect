@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="header-container">
       <div className="logo-container">
-        <Logo home_src={true} />
+        <Logo home_src={true} aria-label="Homepage-button" />
         <SpeakingComponent text="Home Page" />
       </div>
       <div className="currency-selector-container">
@@ -29,9 +29,9 @@ export default function Header() {
       </div>
 
       <div className='login-container'>
-        <img src="/login/login_white.png" alt="Login" className="login"></img>
-        <SpeakingComponent text="Login" />
-      </div>
+  <img src="/login/login_white.png" alt="Login-button" className="login" aria-label="Login-button"></img>
+  <SpeakingComponent text="Login" />
+</div>
 
       <div className="speak-toggle">
         <button onClick={toggleSpeaking}>
