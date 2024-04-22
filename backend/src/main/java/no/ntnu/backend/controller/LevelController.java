@@ -1,6 +1,5 @@
 package no.ntnu.backend.controller;
 
-import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Level;
@@ -20,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 /**
- * 
+ * Controller class for managing operations related to levels.
+ * Handles HTTP requests/responses for level-related endpoints.
  *
- * @author 
- * @version 30.03.2024
+ * @author Group 01
+ * @version 23.05.2024
  */
 @RestController
 @RequestMapping("/levels")
@@ -32,6 +32,11 @@ public class LevelController {
 
   private final LevelService levelService;
 
+  /**
+   * Constructor for LevelController.
+   *
+   * @param levelService The LevelService to be injected.
+   */
   @Autowired
   public LevelController(LevelService levelService){
     this.levelService = levelService;
@@ -39,10 +44,10 @@ public class LevelController {
   }
 
   /**
-   * 
+   * Creates a new level.
    *
-   * @param level
-   * @return
+   * @param level The level object to be created.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PostMapping()
   public ResponseEntity<String> createLevel(@RequestBody Level level) {
@@ -50,9 +55,9 @@ public class LevelController {
   }
 
   /**
-   * 
+   * Retrieves all levels.
    *
-   * @return
+   * @return List of Level containing information about all levels.
    */
   @GetMapping()
   public List<Level> readAllLevels() {
@@ -60,10 +65,10 @@ public class LevelController {
   }
 
   /**
-   * 
+   * Retrieves a level by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the level to retrieve.
+   * @return ResponseEntity containing the requested level, if found.
    */
   @GetMapping("/{id}")
   public ResponseEntity<Level> readLevelById(@PathVariable int id) {
@@ -71,11 +76,11 @@ public class LevelController {
   }
 
   /**
-   * 
+   * Updates an existing level.
    *
-   * @param id
-   * @param level
-   * @return
+   * @param id    The ID of the level to be updated.
+   * @param level The updated level object.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> updateLevel(@PathVariable int id, @RequestBody Level level) {
@@ -83,10 +88,10 @@ public class LevelController {
   }
 
   /**
-   * 
+   * Deletes a level by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the level to be deleted.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteLevel(@PathVariable int id) {

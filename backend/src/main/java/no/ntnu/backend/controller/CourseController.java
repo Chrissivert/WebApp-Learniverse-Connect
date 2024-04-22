@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 /**
- * 
+ * Controller class for managing CRUD operations related to courses.
+ * Handles HTTP requests/responses for course-related endpoints.
  *
- * @author 
- * @version 29.03.2024
+ * @author Group 01
+ * @version 23.05.2024
  */
 @RestController
 @RequestMapping("/courses")
@@ -32,16 +33,21 @@ public class CourseController {
 
   private final CourseService courseService;
 
+  /**
+   * Constructor for CourseController.
+   *
+   * @param courseService The CourseService to be injected.
+   */
   @Autowired
   public CourseController(CourseService courseService){
     this.courseService = courseService;
 
   }
   /**
-   * 
+   * Creates a new course.
    *
-   * @param course
-   * @return
+   * @param course The course object to be created.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PostMapping()
   public ResponseEntity<String> createCourse(@RequestBody Course course) {
@@ -49,9 +55,9 @@ public class CourseController {
   }
 
   /**
-   * 
+   * Retrieves all courses.
    *
-   * @return
+   * @return List of all courses.
    */
   @GetMapping()
   public List<Course> readAllCourses() {
@@ -59,10 +65,10 @@ public class CourseController {
   }
 
   /**
-   * 
+   * Retrieves a course by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the course to retrieve.
+   * @return ResponseEntity containing the requested course, if found.
    */
   @GetMapping("/{id}")
   public ResponseEntity<Course> readCourseById(@PathVariable int id) {
@@ -70,11 +76,11 @@ public class CourseController {
   }
 
   /**
-   * 
+   * Updates an existing course.
    *
-   * @param id
-   * @param course
-   * @return
+   * @param id     The ID of the course to be updated.
+   * @param course The updated course object.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCourse(@PathVariable int id, @RequestBody Course course) {
@@ -82,9 +88,10 @@ public class CourseController {
   }
 
   /**
-   * 
+   * Deletes a course by its ID.
    *
-   * @return
+   * @param id The ID of the course to be deleted.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteCourse(@PathVariable int id) {

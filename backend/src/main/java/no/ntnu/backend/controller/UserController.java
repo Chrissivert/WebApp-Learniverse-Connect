@@ -1,6 +1,5 @@
 package no.ntnu.backend.controller;
 
-import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.User;
@@ -20,10 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 /**
- * 
+ * Controller class for managing operations related to users.
+ * Handles HTTP requests/responses for user-related endpoints.
  *
- * @author 
- * @version 30.03.2024
+ * @author Group 01
+ * @version 23.05.2024
  */
 @RestController
 @RequestMapping("/users")
@@ -32,6 +32,11 @@ public class UserController {
 
   private final UserService userService;
 
+  /**
+   * Constructor for UserController.
+   *
+   * @param userService The UserService to be injected.
+   */
   @Autowired
   public UserController(UserService userService){
     this.userService = userService;
@@ -39,43 +44,43 @@ public class UserController {
   }
 
   /**
-   * 
+   * Creates a new user.
    *
-   * @param user
-   * @return
+   * @param user The user object to be created.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PostMapping()
   public ResponseEntity<String> createUser(@RequestBody User user) {
     return this.userService.create(user);
   }
-  
+
   /**
-   * 
+   * Retrieves all users.
    *
-   * @return
+   * @return List of User containing information about all users.
    */
   @GetMapping()
   public List<User> readAllUsers() {
     return this.userService.readAll();
   }
-  
+
   /**
-   * 
+   * Retrieves a user by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the user to retrieve.
+   * @return ResponseEntity containing the requested user, if found.
    */
   @GetMapping("/{id}")
   public ResponseEntity<User> readUserById(@PathVariable int id) {
     return this.userService.readById(id);
   }
-  
+
   /**
-   * 
+   * Updates an existing user.
    *
-   * @param id
-   * @param user
-   * @return
+   * @param id   The ID of the user to be updated.
+   * @param user The updated user object.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
@@ -83,10 +88,10 @@ public class UserController {
   }
 
   /**
-   * 
+   * Deletes a user by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the user to be deleted.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteUser(@PathVariable int id) {

@@ -1,7 +1,5 @@
 package no.ntnu.backend.controller;
 
-
-import no.ntnu.backend.service.CourseService;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Category;
@@ -21,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 /**
- * 
+ * Controller class for handling CRUD operations related to categories.
+ * Handles HTTP requests/responses for category-related endpoints.
  *
- * @author 
- * @version 30.03.2024
+ * @author Group 01
+ * @version 23.05.2024
  */
 @RestController
 @RequestMapping("/categories")
@@ -33,6 +32,11 @@ public class CategoryController {
 
   private final CategoryService categoryService;
 
+  /**
+   * Constructor for CategoryController.
+   *
+   * @param categoryService The CategoryService to be injected.
+   */
   @Autowired
   public CategoryController(CategoryService categoryService){
     this.categoryService = categoryService;
@@ -40,20 +44,20 @@ public class CategoryController {
   }
 
   /**
-   * 
+   * Creates a new category.
    *
-   * @param category
-   * @return
+   * @param category The category object to be created.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PostMapping()
   public ResponseEntity<String> createCategory(@RequestBody Category category) {
     return this.categoryService.create(category);
   }
-  
+
   /**
-   * 
+   * Retrieves all categories.
    *
-   * @return
+   * @return List of all categories.
    */
   @GetMapping()
   public List<Category> readAllCategories() {
@@ -61,10 +65,10 @@ public class CategoryController {
   }
 
   /**
-   * 
+   * Retrieves a category by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the category to retrieve.
+   * @return ResponseEntity containing the requested category, if found.
    */
   @GetMapping("/{id}")
   public ResponseEntity<Category> readCategoryById(@PathVariable int id) {
@@ -72,11 +76,11 @@ public class CategoryController {
   }
 
   /**
-   * 
+   * Updates an existing category.
    *
-   * @param id
-   * @param category
-   * @return
+   * @param id       The ID of the category to be updated.
+   * @param category The updated category object.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCategory(@PathVariable int id, @RequestBody Category category) {
@@ -84,10 +88,10 @@ public class CategoryController {
   }
 
   /**
-   * 
+   * Deletes a category by its ID.
    *
-   * @param id
-   * @return
+   * @param id The ID of the category to be deleted.
+   * @return ResponseEntity indicating the success/failure of the operation.
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteCategory(@PathVariable int id) {
