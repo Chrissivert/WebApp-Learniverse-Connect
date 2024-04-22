@@ -31,7 +31,6 @@ public class AccessUserDetails implements UserDetails {
             Role role = (Role)var3.next();
             this.authorities.add(new SimpleGrantedAuthority(role.getTitle()));
         }
-
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

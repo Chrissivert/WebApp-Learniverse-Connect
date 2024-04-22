@@ -1,5 +1,6 @@
 package no.ntnu.backend.security;
 
+import java.util.Date;
 import java.util.Optional;
 import no.ntnu.backend.model.Role;
 import no.ntnu.backend.model.User;
@@ -23,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 
 
 @Service
@@ -109,25 +109,41 @@ public class AccessUserService implements UserDetailsService {
         return errorMessage;
     }
 
+//    private void createUser(String email, String password, String username) {
+//        Role userRole = this.roleRepository.findOneById(1);
+//        if (userRole != null) {
+//            User user = new User(email, this.createHash(password));
+//            user.addRole(userRole);
+//            user.setUsername(username);
+//
+//            String dateString = "2024-04-18";
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            try {
+//                Date date = dateFormat.parse(dateString);
+//                System.out.println("Parsed Date: " + date);
+//
+//                // If you want to format it back to a string in the same format
+//                String formattedDateString = dateFormat.format(date);
+//                System.out.println("Formatted Date String: " + formattedDateString);
+//            } catch (ParseException e) {
+//                System.out.println("Error parsing date: " + e.getMessage());
+//                e.printStackTrace();
+//            }
+//            this.userRepository.save(user);
+//        }
+//    }
+
     private void createUser(String email, String password, String username) {
         Role userRole = this.roleRepository.findOneById(1);
         if (userRole != null) {
             User user = new User(email, this.createHash(password));
+            java.sql.Date dateOfBirth = java.sql.Date.valueOf("2024-04-18");
             user.addRole(userRole);
             user.setUsername(username);
+            user.setStartDate(dateOfBirth);
 
-            String dateString = "2024-04-18"; // Replace this with your date string
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date date = (Date) dateFormat.parse(dateString);
-                DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String formattedDate = outputFormat.format(date);
-                System.out.println(formattedDate); // This prints the date in the specified format
-            } catch (ParseException e) {
-                System.out.println("Invalid date format");
-                e.printStackTrace();
-            }
-            this.userRepository.save(user);
+            this.userRepository.saveAndFlush(user);
         }
     }
 
