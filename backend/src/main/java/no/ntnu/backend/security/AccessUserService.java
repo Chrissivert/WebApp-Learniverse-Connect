@@ -138,10 +138,11 @@ public class AccessUserService implements UserDetailsService {
         Role userRole = this.roleRepository.findOneById(1);
         if (userRole != null) {
             User user = new User(email, this.createHash(password));
-            java.sql.Date dateOfBirth = java.sql.Date.valueOf("2024-04-18");
             user.addRole(userRole);
             user.setUsername(username);
-            user.setStartDate(dateOfBirth);
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            user.setStartDate(sqlDate);
 
             this.userRepository.saveAndFlush(user);
         }
