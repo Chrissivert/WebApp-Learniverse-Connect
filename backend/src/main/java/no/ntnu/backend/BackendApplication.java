@@ -6,10 +6,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@SpringBootApplication(
-		exclude = {SecurityAutoConfiguration.class }
-)
-
 /**
  * Main class to bootstrap and run the backend application.
  *
@@ -17,7 +13,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * @version 23.05.2024
  */
 
-@SpringBootApplication
+@SpringBootApplication(
+		exclude = {SecurityAutoConfiguration.class }
+)
 @CrossOrigin("http://localhost:5173")
 public class BackendApplication {
 
