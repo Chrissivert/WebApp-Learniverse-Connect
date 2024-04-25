@@ -1,7 +1,6 @@
 package no.ntnu.backend.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,13 @@ import no.ntnu.backend.model.User;
 import no.ntnu.backend.repository.UserRepository;
 import no.ntnu.backend.service.UserService;
 
+
+/**
+ * 
+ *
+ * @author 
+ * @version 30.03.2024
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -41,12 +47,13 @@ public class UserServiceImpl implements UserService {
   public ResponseEntity<User> readById(int id) {
     ResponseEntity<User> response;
 
-    Optional<User> user = this.getUserById(id);
-    if (user.isPresent()) {
-      response = new ResponseEntity<>(user.get(), HttpStatus.OK);
+    User user = this.getUserById(id);
+    if (user.isValid() && user != null) {
+      response = new ResponseEntity<>(user, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     return response;
   }
 
@@ -77,32 +84,50 @@ public class UserServiceImpl implements UserService {
     return response;
   }
 
-  private Optional<User> getUserById(int id) {
-    return this.userRepository.findById(id);
+  /**
+   * 
+   *
+   * @param id
+   * @return
+   */
+  private User getUserById(int id) {
+    return this.userRepository.findById(id).get();
   }
 
+  /**
+   * 
+   *
+   * @param course
+   * @throws IllegalArgumentException
+   */
   private void addUser(User user) throws IllegalArgumentException {
-    if (user == null) {
+    if (!user.isValid() || user == null) {
       throw new IllegalArgumentException("User is invalid");
     }
     this.userRepository.save(user);
-
   }
 
+  /**
+   * 
+   *
+   * @param id
+   * @param course
+   * @throws IllegalArgumentException
+   */
   private void updateUser(int id, User user) throws IllegalArgumentException {
-    Optional<User> existingUser = this.getUserById(id);
+    User existingUser = this.getUserById(id);
 
-    if (existingUser.isEmpty()) {
+    if (existingUser == null) {
       throw new IllegalArgumentException("No user with ID: " + id + " was found");
     }
-    if (user == null) {
+    if (user == null || !user.isValid()) {
       throw new IllegalArgumentException("wrong data in request body");
     }
     if ((user.getId()) != id) {
       throw new IllegalArgumentException("User ID in URL does not match the ID in JSON data");
     }
 
-    user.setId(existingUser.get().getId());
+    user.setId(existingUser.getId());
     this.userRepository.save(user);
   }
 
@@ -116,7 +141,7 @@ public class UserServiceImpl implements UserService {
     boolean result = false;
 
     try {
-      this.userRepository.deleteById(id);
+      this.userRepository.delete(this.getUserById(id));
       result = true;
     } catch (Exception e) {
       throw new IllegalArgumentException("Invalid ID");

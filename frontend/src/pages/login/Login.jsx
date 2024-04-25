@@ -5,31 +5,31 @@ import './Login.css'
 
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:8080/api/authenticate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      alert("Login successful!");
-      window.location.href = "/";
-    } catch (error) {
-      console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:8080/public/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            alert('Login successful!');
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert('Login failed. Please try again.');
+        }
+    };
 
     return (
         <div>
