@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartProvider';
 import './cartPage.css'; // Import the stylesheet for CartPage
+import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 
@@ -16,7 +17,15 @@ function CartPage() {
   };
 
   // Calculate total price
-  const totalPrice = cart.reduce((total, course) => total + course.cheapestPrice, 0);
+  const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
+  
+  // Log course objects and cheapestPrice
+  console.log("Cart:", cart);
+  cart.forEach(({ course }) => {
+    console.log("Course ID:", course.id);
+    console.log("Course Object:", course);
+    console.log("Cheapest Price:", course.selectedProvider.price);
+  });
 
   return (
     <div className="cart-page">
@@ -25,20 +34,14 @@ function CartPage() {
         <Button text="Go to Courses" src="/courses" />
       </div>
       <div className="cart-items">
-        {cart.length > 0 ? (
-          cart.map((course) => {
-            console.log(course); // Print the course object in the console
-            return (
-              <div key={course.id} className="cart-item">
-                <Coursecard course={course} />
-                <p>Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
-                <button onClick={() => handleRemoveItem(course.id)}>Remove</button>
-              </div>
-            );
-          })
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+        {cart.map(({ course }) => ( // Using cart.map here
+          <div key={course.id} className="cart-item">
+            <Coursecard course={course.course} />
+            <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
+            <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
+            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
+          </div>
+        ))}
       </div>
       <div className="cart-summary">
         <div className="price-summary">

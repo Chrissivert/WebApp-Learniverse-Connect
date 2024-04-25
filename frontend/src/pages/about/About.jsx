@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './About.css';
-import Logo from '../../components/logo/Logo';
+import '../../index.css';
 
 
 // import { CartContext } from '../../pages/cart/CartContext.jsx';
@@ -27,14 +27,14 @@ export default function About() {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/search'); // Redirecting users to the search page
+    navigate('/courses'); // Redirecting users to the search page
   };
 
   return (
     <div className="about-container"> {/* Add className="about-container" here */}
       <h1>About Learniverse</h1>
       {/* <img src="/front-end/public/learniverse_connect_icon2.svg" alt="Logo" className="logo" /> */}
-      <Logo home_src={false}/>
+      <img src="/logo/learniverse_connect_logo.svg  " alt="Logo" className="logo"></img>
       <hr />
       <p>Learniverse Connect is an online course marketplace dedicated to facilitating lifelong 
         learning. We provide a diverse selection of courses from third-party providers, ensuring 
@@ -49,8 +49,7 @@ export default function About() {
         Connect.
       </p>
       <div className="cta">
-        <button className="btn-primary" onClick={handleButtonClick}>Search For Courses</button>
-        <h2>cart.length</h2> 
+        <button className="searchBtn" onClick={handleButtonClick}>Search For Courses</button>
       </div>
     </div>
   );

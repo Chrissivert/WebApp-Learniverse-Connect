@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import "./Profile.css";
+//import '../../index.css';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const { id } = useParams();
-
   useEffect(
     function () {
       async function getUser() {
@@ -27,7 +27,6 @@ export default function Profile() {
     },
     [id]
   );
-
   return (
     <div className="profilepage">
       <div className="card">
