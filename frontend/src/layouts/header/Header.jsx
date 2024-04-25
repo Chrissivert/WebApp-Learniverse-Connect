@@ -1,5 +1,6 @@
 // Header.jsx
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
 import Logo from '../../components/logo/Logo.jsx';
@@ -16,22 +17,28 @@ export default function Header() {
   return (
     <header className="header-container">
       <div className="logo-container">
-        <Logo home_src={true} aria-label="Homepage-button" />
-        <SpeakingComponent text="Home Page" />
+        <Link to="/" className="logo-link"> {/* Add className="logo-link" */}
+          <Logo home_src={true} aria-label="Homepage-button" />
+          <SpeakingComponent text="Home Page" />
+        </Link>
       </div>
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
       </div>
 
       <div className="cart-container">
-        <FaShoppingCart className="cart-icon" />
-        <SpeakingComponent text={`Cart (${cart.length})`} />
+        <Link to="/cart" className="cart-link">
+          <FaShoppingCart className="cart-icon" />
+          <SpeakingComponent text={`Cart (${cart.length})`} />
+        </Link>
       </div>
 
       <div className='login-container'>
-  <img src="/login/login_white.png" alt="Login-button" className="login" aria-label="Login-button"></img>
-  <SpeakingComponent text="Login" />
-</div>
+        <Link to="/login" className="login-link">
+          <img src="/login/login_white.png" alt="Login" className="login"></img>
+          <SpeakingComponent text="Login" />
+        </Link>
+      </div>
 
       <div className="speak-toggle">
         <button onClick={toggleSpeaking}>
@@ -39,7 +46,7 @@ export default function Header() {
         </button>
       </div>
 
-      <HamburgerMenu/>
+      <HamburgerMenu />
     </header>
   );
 }
