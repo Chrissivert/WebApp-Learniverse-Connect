@@ -12,18 +12,18 @@ import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
 
 export default function Header() {
   const { cart } = useContext(CartContext);
-  const { toggleSpeaking, speakingEnabled } = useSpeaking(); // Use speakingEnabled to show status
+  const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
 
   return (
     <header className="header-container">
       <div className="logo-container">
-        <Link to="/" className="logo-link"> {/* Add className="logo-link" */}
+        <Link to="/" className="logo-link">
           <Logo home_src={true} aria-label="Homepage-button" />
           <SpeakingComponent text="Home Page" />
         </Link>
       </div>
       <div className="currency-selector-container">
-        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
+        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
       </div>
 
       <div className="cart-container">

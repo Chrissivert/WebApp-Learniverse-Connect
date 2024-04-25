@@ -1,195 +1,54 @@
 package no.ntnu.backend.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.backend.model.User;
 import no.ntnu.backend.service.UserService;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-
-/**
- * Controller class for managing operations related to users.
- * Handles HTTP requests/responses for user-related endpoints.
- *
- * @author Group 01
- * @version 23.05.2024
- */
 @RestController
 @RequestMapping("/users")
 @CrossOrigin("http://localhost:5173")
 public class UserController {
 
-  private final UserService userService;
+    private final UserService userService;
 
-  /**
-   * Constructor for UserController.
-   *
-   * @param userService The UserService to be injected.
-   */
-  @Autowired
-  public UserController(UserService userService){
-    this.userService = userService;
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-  }
+    @Operation(summary = "Creates a new user", description = "Creates a new user.")
+    @PostMapping()
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        return this.userService.create(user);
+    }
 
-  /**
-   * Creates a new user.
-   *
-   * @param user The user object to be created.
-   * @return ResponseEntity indicating the success/failure of the operation.
-   */
-  @PostMapping()
-  public ResponseEntity<String> createUser(@RequestBody User user) {
-    return this.userService.create(user);
-  }
+    @Operation(summary = "Retrieves all users", description = "Retrieves all users.")
+    @GetMapping()
+    public List<User> readAllUsers() {
+        return this.userService.readAll();
+    }
 
-  /**
-   * Retrieves all users.
-   *
-   * @return List of User containing information about all users.
-   */
-  @GetMapping()
-  public List<User> readAllUsers() {
-    return this.userService.readAll();
-  }
+    @Operation(summary = "Retrieves a user by its ID", description = "Retrieves a user by its ID.")
+    @GetMapping("/{id}")
+    public ResponseEntity<User> readUserById(@PathVariable int id) {
+        return this.userService.readById(id);
+    }
 
-  /**
-   * Retrieves a user by its ID.
-   *
-   * @param id The ID of the user to retrieve.
-   * @return ResponseEntity containing the requested user, if found.
-   */
-  @GetMapping("/{id}")
-  public ResponseEntity<User> readUserById(@PathVariable int id) {
-    return this.userService.readById(id);
-  }
+    @Operation(summary = "Updates an existing user", description = "Updates an existing user.")
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
+        return this.userService.update(id, user);
+    }
 
-  /**
-   * Updates an existing user.
-   *
-   * @param id   The ID of the user to be updated.
-   * @param user The updated user object.
-   * @return ResponseEntity indicating the success/failure of the operation.
-   */
-  @PutMapping("/{id}")
-  public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
-    return this.userService.update(id, user);
-  }
-
-  /**
-   * Deletes a user by its ID.
-   *
-   * @param id The ID of the user to be deleted.
-   * @return ResponseEntity indicating the success/failure of the operation.
-   */
-  @DeleteMapping("/{id}")
-  public ResponseEntity<String> deleteUser(@PathVariable int id) {
-    return this.userService.delete(id);
-  }
+    @Operation(summary = "Deletes a user by its ID", description = "Deletes a user by its ID.")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+        return this.userService.delete(id);
+    }
 }
-
-
-
-//KEEP THIS!!!
-
-
-
-// import no.ntnu.backend.dto.AuthRequest;
-// import no.ntnu.backend.dto.AuthResponse;
-// import no.ntnu.backend.exception.UserNotFoundException;
-// import no.ntnu.backend.model.User;
-// import no.ntnu.backend.repository.UserRepository;
-// import no.ntnu.backend.service.UserService;
-
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
-
-// import java.util.List;
-
-// @RestController
-// @CrossOrigin("http://localhost:5173")
-// @RequestMapping("/public")
-// public class UserController {
-
-//     private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
-    
-//     @Autowired
-//     private UserRepository userRepository;
-
-//     @Autowired
-//     private UserService userService;
-
-//      @PostMapping("/register")
-//     public ResponseEntity<?> registerUser(@RequestBody User user) {
-//         try {
-//             userService.registerUser(user);
-//             return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
-//         } catch (Exception e) {
-//             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register user");
-//         }
-//     }
-
-//     @PostMapping("/login")
-//     public ResponseEntity<?> authenticateUser(@RequestBody AuthRequest authRequest) {
-//         try {
-//             System.out.println("AuthRequest:++ " + authRequest.getEmail() + " " + authRequest.getPassword());
-//             String jwtToken = userService.loginUser(authRequest.getEmail(), authRequest.getPassword());
-//             return ResponseEntity.ok(new AuthResponse(jwtToken));
-//         } catch (Exception e) {
-//             System.out.println(("Authentication faileddddd: " + e.getMessage()));
-//             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
-//         }
-//     }
-
-//     @PostMapping("/user")
-//     User newUser(@RequestBody User newUser) {
-//         return userRepository.save(newUser);
-//     }
-
-//     @GetMapping("/users")
-//     List<User> getAllUsers() {
-//         return userRepository.findAll();
-//     }
-//     @GetMapping("/user/{id}")
-//     User getUserById(@PathVariable Long id) {
-//         logger.warn("Getting a user");
-//         return userRepository.findById(id)
-//                 .orElseThrow(() -> new UserNotFoundException(id));
-//     }
-//     @PutMapping("/user/{id}")
-//     User updateUser(@RequestBody User newUser, @PathVariable Long id) {
-//         return userRepository.findById(id)
-//                 .map(user -> {
-//                     user.setRoleId(newUser.getRoleId());
-//                     user.setUsername(newUser.getUsername());
-//                     user.setStartDate(newUser.getStartDate());
-//                     user.setEmail(newUser.getEmail());
-//                     user.setPassword(newUser.getPassword());
-//                     return userRepository.save(user);
-//                 }).orElseThrow(() -> new UserNotFoundException(id));
-//     }
-
-//     @DeleteMapping("/user/{id}")
-//     String deleteUser(@PathVariable Long id){
-//         if(!userRepository.existsById(id)){
-//             throw new UserNotFoundException(id);
-//         }
-//         userRepository.deleteById(id);
-//         return  "User with id "+id+" has been deleted success.";
-//     }
-// }
