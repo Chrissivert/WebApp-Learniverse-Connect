@@ -22,6 +22,28 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- New stuff -->
+		<!-- For JSON Web Token generation -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>6.2.3</version> <!-- Use the appropriate version -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- End of new stuff-->
+
 		<!-- For MySQL access and JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -33,6 +55,17 @@
 			<version>8.3.0</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+		<!-- <dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>6.2.3</version>
+		</dependency> -->
 
 		<!-- <dependency>
     <groupId>org.springframework.security</groupId>
@@ -45,12 +78,6 @@
     <version>4.0.4</version>
     <scope>provided</scope>
 </dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
