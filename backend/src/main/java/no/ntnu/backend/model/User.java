@@ -26,7 +26,7 @@ public class User {
   private Date startDate;
   private String email;
   private String password;
-  private boolean active;
+  private boolean active = true;
 
   @ManyToMany(
           fetch = FetchType.EAGER
@@ -142,7 +142,7 @@ public class User {
   }
 
   public boolean isActive() {
-    return active;
+    return this.active;
   }
 
   public void setActive(boolean active) {
