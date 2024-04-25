@@ -2,6 +2,7 @@ package no.ntnu.backend.service.impl;
 
 import java.util.List;
 
+import no.ntnu.backend.exception.CourseNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,6 +94,9 @@ public class CourseServiceImpl implements CourseService {
    * @return
    */
   private Course getCourseById(int id) {
+    if (!courseRepository.findById(id).isPresent()) {
+      throw new CourseNotFoundException(id);
+    }
     return this.courseRepository.findById(id).get();
   }
 
