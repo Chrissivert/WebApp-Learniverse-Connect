@@ -1,6 +1,7 @@
 package no.ntnu.backend.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import no.ntnu.backend.exception.CourseNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,7 @@ public class CourseServiceImpl implements CourseService {
    * @throws IllegalArgumentException
    */
   private void addCourse(Course course) throws IllegalArgumentException {
-    if (!course.isValid() || course == null) {
+    if (course == null || !course.isValid()) {
       throw new IllegalArgumentException("Course is invalid");
     }
 
@@ -145,15 +146,15 @@ public class CourseServiceImpl implements CourseService {
    * @return
    */
   private boolean removeCourse(int id) {
-    boolean result = false;
-
     try {
-      this.courseRepository.delete(this.getCourseById(id));
-      result = true;
+      Optional<Course> courseToRemove = this.courseRepository.findById(id);
+      if (!courseToRemove.isPresent()) {
+        throw new CourseNotFoundException(id);
+      }
+      this.courseRepository.deleteById(id);
+      return courseToRemove.isPresent();
     } catch (Exception e) {
-      throw new IllegalArgumentException("Invalid ID");
+      throw new CourseNotFoundException(id);
     }
-
-    return result;
   }
 }
