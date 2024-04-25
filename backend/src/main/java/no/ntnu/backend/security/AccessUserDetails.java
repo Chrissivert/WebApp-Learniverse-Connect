@@ -1,63 +1,71 @@
-package no.ntnu.backend.security;
+// package no.ntnu.backend.security;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import no.ntnu.backend.model.Role;
-import no.ntnu.backend.model.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import java.util.Collection;
+// import java.util.HashSet;
+// import java.util.Set;
 
-public class AccessUserDetails implements UserDetails {
-    private final String email;
-    private final String password;
-    private final boolean isActive;
-    private final Set<GrantedAuthority> authorities = new HashSet();
 
-    public AccessUserDetails(User user) {
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.isActive = user.isActive();
-        //this.convertRoles(user.getRoles());
-    }
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
-    private void convertRoles(Set<Role> roles) {
-        this.authorities.clear();
-        Iterator var3 = roles.iterator();
+// import no.ntnu.backend.model.User;
 
-        while(var3.hasNext()) {
-            Role role = (Role)var3.next();
-            this.authorities.add(new SimpleGrantedAuthority(role.getTitle()));
-        }
-    }
+// /**
+//  * Contains authentication information, needed by UserDetailsService.
+//  */
+// public class AccessUserDetails implements UserDetails {
+//   private final String email;
+//   private final String password;
+// //   private final boolean isActive;
+//   private final Set<GrantedAuthority> authorities = new HashSet<>();
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
-    }
+//   public AccessUserDetails(User user) {
+//     this.email = user.getEmail();
+//     this.password = user.getPassword();
+//     // this.isActive = user.isActive();
+//     // this.convertRoles(user.getRoles());
+//   }
 
-    public String getPassword() {
-        return this.password;
-    }
+//   // private void convertRoles(Set<Role> roles) {
+//   //   authorities.clear();
+//   //   for (Role role : roles) {
+//   //     authorities.add(new SimpleGrantedAuthority(role.getName()));
+//   //   }
+//   // }
 
-    public String getUsername() {
-        return this.email;
-    }
+//   @Override
+//   public Collection<? extends GrantedAuthority> getAuthorities() {
+//     return authorities;
+//   }
 
-    public boolean isAccountNonExpired() {
-        return this.isActive;
-    }
+//   @Override
+//   public String getPassword() {
+//     return password;
+//   }
 
-    public boolean isAccountNonLocked() {
-        return this.isActive;
-    }
+//   @Override
+//   public String getUsername() {
+//     return email;
+//   }
 
-    public boolean isCredentialsNonExpired() {
-        return this.isActive;
-    }
+//   @Override
+//   public boolean isAccountNonExpired() {
+//     return true; //isActive;
+//   }
 
-    public boolean isEnabled() {
-        return true;
-    }
-}
+//   @Override
+//   public boolean isAccountNonLocked() {
+//     return true; //isActive;
+//   }
+
+//   @Override
+//   public boolean isCredentialsNonExpired() {
+//     return true; //isActive;
+//   }
+
+//   @Override
+//   public boolean isEnabled() {
+//     return true;
+//   }
+// }
