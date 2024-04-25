@@ -73,13 +73,6 @@
   color: black;
 }
 
-.link:link, .link:visited, .link:active {
-  text-decoration: none;
-}
-
-.courseButton:hover {
-  color:  rgb(151, 88, 163);
-}
 
 h2 {
   font-size: large;

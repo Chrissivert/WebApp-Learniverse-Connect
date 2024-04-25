@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import "./Profile.css";
-import '../../index.css';
+//import '../../index.css';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 

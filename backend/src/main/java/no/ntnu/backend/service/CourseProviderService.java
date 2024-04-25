@@ -1,16 +1,19 @@
 package no.ntnu.backend.service;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import no.ntnu.backend.dto.CourseByEachProviderDTO;
 import no.ntnu.backend.model.CourseProvider;
 import no.ntnu.backend.model.CurrencyConversionResponse;
+import no.ntnu.backend.model.Provider;
 import no.ntnu.backend.repository.CourseProviderRepository;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import no.ntnu.backend.repository.ProviderRepository;
 
 @Service
 public class CourseProviderService {
@@ -18,43 +21,84 @@ public class CourseProviderService {
     @Autowired
     private CourseProviderRepository courseProviderRepository;
 
-    private Map<String, Double> conversionRates; // Cache for conversion rates
-    private long lastUpdated; // Timestamp of the last update
+    @Autowired
+    private ProviderRepository providerRepository;
+
+    private List<CourseProvider> listOfCourseProviders = new ArrayList<>();
+
+    // Update CourseProviderService
+
+public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId, String targetCurrency) {
+    List<CourseProvider> convertedCoursePrices = getConvertedCoursePrices(targetCurrency);
+    List<CourseByEachProviderDTO> providersDTO = new ArrayList<>();
+
+    for (CourseProvider courseProvider : convertedCoursePrices) {
+        if (courseProvider.getCourseId().equals(courseId)) {
+            CourseByEachProviderDTO dto = new CourseByEachProviderDTO();
+            dto.setCourseId(courseProvider.getCourseId());
+            dto.setPrice(courseProvider.getPrice());
+            dto.setCurrency(courseProvider.getCurrency());
+
+            Provider provider = providerRepository.findById(courseProvider.getProviderId()).orElse(null);
+            if (provider != null) {
+                dto.setProviderName(provider.getName());
+            } else {
+                dto.setProviderName("Unknown Provider");
+            }
+
+            providersDTO.add(dto);
+        }
+    }
+
+    return providersDTO;
+}
+
+
+
+    private Map<String, Map<String, Double>> conversionRatesMap = new HashMap<>();
+
+    private Map<String, Long> lastUpdatedMap = new HashMap<>();
 
     public List<CourseProvider> getConvertedCoursePrices(String targetCurrency) {
-        List<CourseProvider> allCoursePrices = courseProviderRepository.findAll(); // Using repository method here
+        List<CourseProvider> allCoursePrices = courseProviderRepository.findAll();
         List<CourseProvider> convertedCoursePrices = new ArrayList<>();
 
-        double conversionRate = getConversionRate(targetCurrency);
-        if (conversionRate == -1) {
-            // Handle error case, return original prices
-            return allCoursePrices;
+        for (CourseProvider courseProvider : allCoursePrices) {
+            String baseCurrency = courseProvider.getCurrency(); // Fetch base currency from the database
+            double conversionRateToTargetCurrency = getConversionRate(baseCurrency, targetCurrency);
+            if (conversionRateToTargetCurrency == -1) {
+                return allCoursePrices;
+            }
+
+
+            double convertedPrice = courseProvider.getPrice() * conversionRateToTargetCurrency;
+            courseProvider.setPrice(convertedPrice);
+            courseProvider.setCurrency(targetCurrency);
+            convertedCoursePrices.add(courseProvider);
+            listOfCourseProviders.add(courseProvider);
         }
 
-        for (CourseProvider coursePrice : allCoursePrices) {
-            if ("USD".equals(coursePrice.getCurrency())) {
-                double convertedPrice = coursePrice.getPrice() * conversionRate;
-                if (convertedPrice >= 0) {
-                    coursePrice.setPrice(convertedPrice);
-                    coursePrice.setCurrency(targetCurrency);
-                }
-            }
-            convertedCoursePrices.add(coursePrice);
-        }
         return convertedCoursePrices;
     }
 
-    private double getConversionRate(String targetCurrency) {
+    private double getConversionRate(String baseCurrency, String targetCurrency) {
+        Map<String, Double> conversionRates = conversionRatesMap.get(baseCurrency);
+        Long lastUpdated = lastUpdatedMap.getOrDefault(baseCurrency, 0L);
+
         if (conversionRates == null || System.currentTimeMillis() - lastUpdated > 3600000) {
             // Fetch conversion rates if cache is empty or rates are outdated (1 hour in this example)
             try {
                 String apiKey = "fca_live_g7qLJhzahQOmCMlAPGQZZTfLIAfLccPFjRrqS4mu";
-                String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=" + apiKey + "&base_currency=USD";
+                String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=" + apiKey + "&base_currency=" + baseCurrency;
                 RestTemplate restTemplate = new RestTemplate();
                 CurrencyConversionResponse response = restTemplate.getForObject(apiUrl, CurrencyConversionResponse.class);
 
                 conversionRates = response.getData();
                 lastUpdated = System.currentTimeMillis();
+
+                // Update cache
+                conversionRatesMap.put(baseCurrency, conversionRates);
+                lastUpdatedMap.put(baseCurrency, lastUpdated);
             } catch (Exception e) {
                 System.err.println("Error fetching conversion rates: " + e.getMessage());
                 e.printStackTrace();

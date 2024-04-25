@@ -1,5 +1,4 @@
 img {
-  height: 4rem;
   will-change: filter;
   transition: filter 300ms;
 }

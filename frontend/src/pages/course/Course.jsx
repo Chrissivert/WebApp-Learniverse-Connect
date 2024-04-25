@@ -1,48 +1,58 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./Course.css";
-import '../../index.css';
+import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
+import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
+import DataFetcher from "../../components/fetcher/Datafetcher";
 
 function Course() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [providers, setProviders] = useState([]);
-  const { addToCart } = useContext(CartContext); // Use CartContext
+  const [selectedProvider, setSelectedProvider] = useState(null);
+  const [showWarning, setShowWarning] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const { addToCart } = useContext(CartContext);
+  const { targetCurrency } = useCurrencyContext();
+
+  const handleSelectProvider = (provider) => {
+    setSelectedProvider(provider);
+    setShowWarning(false);
+  };
 
   const handleAddToCart = () => {
-    addToCart(course);
+    if (selectedProvider) {
+      addToCart({ course, selectedProvider });
+      setShowSuccessMessage(true);
+    } else {
+      setShowWarning(true);
+    }
   };
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/courses/${id}`);
-        setCourse(response.data);
+        const courseData = await DataFetcher.fetchCourse(id);
+        const providerData = await DataFetcher.fetchProviders(
+          id,
+          targetCurrency
+        );
+        setCourse(courseData);
+        setProviders(providerData);
       } catch (error) {
-        console.error("Error fetching course:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchProviders = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/course/providers/${id}`);
-        setProviders(response.data);
-      } catch (error) {
-        console.error("Error fetching providers:", error);
-      }
-    };
-
-    fetchCourse();
-    fetchProviders();
+    fetchData();
 
     return () => {
       setCourse(null);
       setProviders([]);
     };
-  }, [id]);
+  }, [id, targetCurrency]);
 
   if (!course || !providers) {
     return <div>Loading...</div>;
@@ -61,13 +71,38 @@ function Course() {
       <p>Related Certification: {course.relatedCertification}</p>
       <h3>Providers:</h3>
       <ul>
-        {providers.map(provider => (
+        {providers.map((provider) => (
           <li key={provider.providerId}>
-            {/* {provider.providerName} - Price: {provider.price} {provider.currency} */}
+            <label htmlFor={provider.providerId} className="providerLabel">
+              <input
+                type="radio"
+                id={provider.providerId}
+                name="provider"
+                value={provider}
+                checked={selectedProvider === provider}
+                onChange={() => handleSelectProvider(provider)}
+                aria-labelledby={`provider-label-${provider.providerId}`}
+                aria-checked={selectedProvider === provider ? "true" : "false"}
+              />
+              {provider.providerName} - Price:{" "}
+              {Math.ceil(provider.price)} {provider.currency}
+            </label>
           </li>
         ))}
       </ul>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      {showWarning && (
+        <div className="warning" role="alert">
+          Please select a provider before adding to cart.
+        </div>
+      )}
+      {showSuccessMessage && (
+        <div className="success-message" role="alert" aria-live="assertive">
+          Course added to cart successfully!
+        </div>
+      )}
+      <button className="addToCartButton" onClick={handleAddToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 }

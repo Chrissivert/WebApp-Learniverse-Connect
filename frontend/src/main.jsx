@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import CartProvider from './pages/cart/CartProvider.jsx';
 
 // Wrap the App component with CartProvider
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <CartProvider>
       <App />
-    </CartProvider>
   </React.StrictMode>
 );

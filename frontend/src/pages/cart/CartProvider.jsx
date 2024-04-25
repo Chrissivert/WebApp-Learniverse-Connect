@@ -24,8 +24,8 @@ const CartProvider = ({ children }) => {
     }
   }, [cart]); // Dependency array ensures this runs only when cart changes
 
-  const addToCart = (course) => {
-    setCart(currentCart => [...currentCart, course]);
+  const addToCart = (course, provider) => {
+    setCart(currentCart => [...currentCart, { course, provider }]);
   };
 
   const removeFromCart = (courseId) => {

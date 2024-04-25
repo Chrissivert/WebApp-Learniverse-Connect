@@ -1,51 +1,133 @@
 @keyframes fadeIn {
-    from {
+  from {
       opacity: 0;
-    }
-    to {
+  }
+  to {
       opacity: 1;
-    }
   }
-  
-  .Course {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-    opacity: 0; /* Start invisible for animation */
-    animation: fadeIn 1s ease-out forwards; /* Animation */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
-  }
-  
-  .Course:hover {
-    transform: translateY(-5px); /* Slight lift */
-    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow */
-  }
-  
-  .Course h2 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .Course p {
-    color: #666;
-    line-height: 1.6;
-  }
-  
-  .Loading {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .head {
-    display: flex;
-    
-  }
+}
 
-  .title {
-    padding: 10%;
-
+@keyframes pop {
+  0% {
+      transform: scale(1);
   }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.Course {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Course:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.Course h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.Course p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.Loading {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.head {
+  display: flex;
+}
+
+.title {
+  padding: 10%;
+}
+
+label:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.providerLabel {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.providerLabel:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.warning {
+  color: red;
+}
+
+.success-message {
+  color: green;
+  opacity: 1; 
+  animation: fadeOut 7s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
+  71% {
+      opacity: 1; 
+  }
+  100% {
+      opacity: 0; 
+  }
+}
+.cart-logo-container {
+  position: relative;
+}
+
+.cart-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  opacity: 0;
+}
+
+.cart-logo.show {
+  opacity: 1;
+  animation: pop 0.5s ease forwards; /* Add animation */
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.2);
+  }
+  50% {
+    transform: scale(1.5); /* Change the scale to make it larger */
+  }
+  100% {
+    transform: scale(1);
+  }
+}

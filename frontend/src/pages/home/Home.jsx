@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import '../../index.css';
 import { Link } from "react-router-dom";
 import FrontImage from '/home/front_image.png';
+import PostImage from '../../components/crudTest/post/image/PostImage';
+import PostUser from '../../components/crudTest/post/user/PostUser';
+import PostCourse from '../../components/crudTest/post/course/PostCourse';
+import Coursecard from '../../components/coursecard/Coursecard';
+import axios from 'axios';
+import { sendApiGetRequest } from '../../services/api-requests';
+import { getImageFromServer } from '../../services/image-service';
 
 export default function Home() {
+
+  // sendApiGetRequest("/courses")
+
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
+
+  const fetchImages = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/images/1`);
+      setImage(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
     <div className='home-container'>
@@ -28,7 +54,22 @@ export default function Home() {
          qui cum fugiat voluptas harum sit cumque enim, libero autem. Lorem, ipsum dolor 
          sit amet consectetur adipisicing elit. Illo provident hic aperiam sed veniam. 
          Tempore, voluptatem! Possimus quaerat adipisci ipsa assumenda. Magnam eius 
-         dolor eaque fugiat, doloremque est voluptatum hic.</h2>    
+         dolor eaque fugiat, doloremque est voluptatum hic.</h2> 
+
+        {/* <PostImage/> 
+        <PostCourse/> */}
+        <div>
+          {/* {images.map((image) => (
+            <Link to={`/course/${image.id}`} key={image.id}>
+              <Coursecard course={image}/>
+            </Link>
+          ))} */}
+
+          <img src={image}/>
+
+          <PostImage/>
+          
+        </div>
     </div>
   );
 }

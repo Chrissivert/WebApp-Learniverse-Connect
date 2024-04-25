@@ -27,6 +27,7 @@ public class Course {
     private double hoursPerWeek;
     private String description;
     private String relatedCertification;
+    //private int imageId;
 
   /**
    * 
