@@ -11,21 +11,28 @@ header {
   left: 0;
   right: 0;
   height: 6rem;
-  /* z-index: 1000; */
   transition: 0.3s;
   z-index: 1000;
 }
 
-.cart-container {
+.cart-container,
+.login-container { /* Adjust for login-container for consistency */
   display: flex;
   align-items: center;
 }
 
-.cart-link {
+.cart-link,
+.login-link { /* Combine cart-link and login-link */
   display: flex;
   align-items: center;
   color: #fff;
   text-decoration: none;
+  transition: color 0.3s, filter 0.3s; /* Add transition for color and filter */
+}
+
+.cart-link:hover,
+.login-link:hover { /* Define hover styles for both links */
+  filter: brightness(0.8); /* Slightly decrease brightness on hover */
 }
 
 .cart-icon {
