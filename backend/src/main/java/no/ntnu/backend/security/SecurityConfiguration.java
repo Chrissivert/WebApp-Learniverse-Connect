@@ -1,5 +1,8 @@
 package no.ntnu.backend.security;
 
+import no.ntnu.backend.config.CorsConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +42,8 @@ public class SecurityConfiguration {
      * @param auth Authentication builder
      * @throws Exception When user service is not found
      */
+
+    private static final Logger logger = LoggerFactory.getLogger(CorsConfig.class);
     @Autowired
     protected void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -52,6 +57,7 @@ public class SecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain configureAuthorizationFilterChain(HttpSecurity http) throws Exception {
+        logger.info("Using SecurityFilterChain...");
         http
                 // Disable CSRF and CORS checks. Without this it will be hard to make automated tests.
                 .csrf(AbstractHttpConfigurer::disable)
@@ -60,6 +66,12 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
                 // SignUp URL is accessible for everyone
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
+                //Courses URL is accessible for everyone
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/courses").permitAll())
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/course-tags").permitAll())
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/tags").permitAll())
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/cheapest-course-prices").permitAll())
+                //.authorizeHttpRequests((auth) -> auth.requestMatchers("/courses").permitAll())
                 // Any other request will be authenticated with a stateless policy
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
                 // Enable stateless session policy
