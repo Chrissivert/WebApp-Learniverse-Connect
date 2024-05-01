@@ -27,7 +27,7 @@ export default function About() {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/search'); // Redirecting users to the search page
+    navigate('/courses'); // Redirecting users to the search page
   };
 
   return (
@@ -49,8 +49,7 @@ export default function About() {
         Connect.
       </p>
       <div className="cta">
-        <button className="btn-primary" onClick={handleButtonClick}>Search For Courses</button>
-        <h2>cart.length</h2> 
+        <button className="searchBtn" onClick={handleButtonClick}>Search For Courses</button>
       </div>
     </div>
   );

@@ -16,6 +16,8 @@ function CartPage() {
     clearCart();
   };
 
+  const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
+  const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
   // Calculate total price
   const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   
@@ -38,6 +40,14 @@ function CartPage() {
           <div key={course.id} className="cart-item">
             <Coursecard course={course.course} />
             <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
+            <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p> {/* Display provider price and currency */}
+            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
+          </div>
+        ))}
+        {cart.map(({ course }) => ( // Using cart.map here
+          <div key={course.id} className="cart-item">
+            <Coursecard course={course.course} />
+            <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
             <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
             <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
           </div>
@@ -45,7 +55,7 @@ function CartPage() {
       </div>
       <div className="cart-summary">
         <div className="price-summary">
-          <p>Total Price: ${totalPrice}</p> {/* Display total price */}
+          <p>Total Price: {currency} {Math.ceil(totalPrice)}</p> {/* Display total price */}
         </div>
         <div className="action-buttons">
           <button onClick={handleClearCart}>Clear Cart</button>

@@ -1,14 +1,13 @@
+
 package no.ntnu.backend.controller;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.backend.model.CourseTags;
 import no.ntnu.backend.repository.CourseTagsRepository;
+
 
 /**
  * Controller class for managing operations related to course tags.
@@ -23,6 +22,8 @@ public class CourseTagsController {
 
     private final CourseTagsRepository courseTagsRepository;
 
+    private final CourseTagsRepository courseTagsRepository;
+
     /**
      * Constructor for CourseTagsController.
      *
@@ -31,9 +32,14 @@ public class CourseTagsController {
     @Autowired
     public CourseTagsController(CourseTagsRepository courseTagsRepository){
         this.courseTagsRepository = courseTagsRepository;
+    }
+    public CourseTagsController(CourseTagsRepository courseTagsRepository){
+        this.courseTagsRepository = courseTagsRepository;
 
     }
 
+    @Operation(summary = "Retrieves all course tags",
+               description = "Retrieves all course tags.")
     /**
      * Retrieves all course tags.
      *
@@ -44,5 +50,3 @@ public class CourseTagsController {
         return courseTagsRepository.findAll();
     }
 }
-
-

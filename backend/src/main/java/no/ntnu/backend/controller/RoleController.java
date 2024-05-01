@@ -18,6 +18,7 @@ import no.ntnu.backend.service.RoleService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * Controller class for managing operations related to roles.
@@ -33,12 +34,20 @@ public class RoleController {
 
   private final RoleService roleService;
 
+
+  private final RoleService roleService;
+
   /**
    * Constructor for RoleController.
    *
    * @param roleService The RoleService to be injected.
    */
   @Autowired
+  public RoleController(RoleService roleService) {
+    this.roleService = roleService;
+  }
+
+  @Operation(summary = "Create a new role", description = "Creates a new role object in the system.")
   public RoleController(RoleService roleService){
     this.roleService = roleService;
 
@@ -52,9 +61,10 @@ public class RoleController {
    */
   @PostMapping()
   public ResponseEntity<String> createRole(@RequestBody Role role) {
-    return this.roleService.create(role);
+    return roleService.create(role);
   }
 
+  @Operation(summary = "Retrieves all roles", description = "Retrieves a list of all role objects in the system.")
   /**
    * Retrieves all roles.
    *
@@ -62,9 +72,10 @@ public class RoleController {
    */
   @GetMapping()
   public List<Role> readAllRoles() {
-    return this.roleService.readAll();
+    return roleService.readAll();
   }
 
+  @Operation(summary = "Retrieve a role by ID", description = "Retrieves a specific role object based on its ID.")
   /**
    * Retrieves a role by its ID.
    *
@@ -73,9 +84,10 @@ public class RoleController {
    */
   @GetMapping("/{id}")
   public ResponseEntity<Role> readRoleById(@PathVariable int id) {
-    return this.roleService.readById(id);
+    return roleService.readById(id);
   }
 
+  @Operation(summary = "Update a role", description = "Updates an existing role object in the system.")
   /**
    * Updates an existing role.
    *
@@ -85,9 +97,10 @@ public class RoleController {
    */
   @PutMapping("/{id}")
   public ResponseEntity<String> updateRole(@PathVariable int id, @RequestBody Role role) {
-    return this.roleService.update(id, role);
+    return roleService.update(id, role);
   }
 
+  @Operation(summary = "Delete a role", description = "Deletes a role object from the system based on its ID.")
   /**
    * Deletes a role by its ID.
    *
@@ -96,6 +109,6 @@ public class RoleController {
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteRole(@PathVariable int id) {
-    return this.roleService.delete(id);
+    return roleService.delete(id);
   }
 }
