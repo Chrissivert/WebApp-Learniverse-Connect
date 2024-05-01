@@ -19,7 +19,6 @@ function CartPage() {
   const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
   // Calculate total price
-  const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   
   // Log course objects and cheapestPrice
   console.log("Cart:", cart);
