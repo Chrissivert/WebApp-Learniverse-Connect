@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface CourseTagsRepository extends JpaRepository<CourseTags, Long> {
+public interface CourseTagsRepository extends JpaRepository<CourseTags, Integer> {
     List<CourseTags> findAll();    
 }
