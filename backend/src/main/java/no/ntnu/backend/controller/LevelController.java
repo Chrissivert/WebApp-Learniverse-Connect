@@ -34,9 +34,6 @@ public class LevelController {
 
   private final LevelService levelService;
 
-
-  private final LevelService levelService;
-
   /**
    * Constructor for LevelController.
    *
@@ -47,47 +44,41 @@ public class LevelController {
     this.levelService = levelService;
   }
 
-  @Operation(summary = "Create a new level", description = "Creates a new level object in the system.")
-  public LevelController(LevelService levelService){
-    this.levelService = levelService;
-
-  }
-
   /**
    * Creates a new level.
    *
    * @param level The level object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Create a new level", description = "Creates a new level object in the system.")
   @PostMapping()
   public ResponseEntity<String> createLevel(@RequestBody Level level) {
     return levelService.create(level);
   }
 
-  @Operation(summary = "Retrieves all levels", description = "Retrieves a list of all level objects in the system.")
   /**
    * Retrieves all levels.
    *
    * @return List of Level containing information about all levels.
    */
+  @Operation(summary = "Retrieves all levels", description = "Retrieves a list of all level objects in the system.")
   @GetMapping()
   public List<Level> readAllLevels() {
     return levelService.readAll();
   }
 
-  @Operation(summary = "Retrieve a level by ID", description = "Retrieves a specific level object based on its ID.")
   /**
    * Retrieves a level by its ID.
    *
    * @param id The ID of the level to retrieve.
    * @return ResponseEntity containing the requested level, if found.
    */
+  @Operation(summary = "Retrieve a level by ID", description = "Retrieves a specific level object based on its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Level> readLevelById(@PathVariable int id) {
     return levelService.readById(id);
   }
 
-  @Operation(summary = "Update a level", description = "Updates an existing level object in the system.")
   /**
    * Updates an existing level.
    *
@@ -95,18 +86,19 @@ public class LevelController {
    * @param level The updated level object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Update a level", description = "Updates an existing level object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateLevel(@PathVariable int id, @RequestBody Level level) {
     return levelService.update(id, level);
   }
 
-  @Operation(summary = "Delete a level", description = "Deletes a level object from the system based on its ID.")
   /**
    * Deletes a level by its ID.
    *
    * @param id The ID of the level to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Delete a level", description = "Deletes a level object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteLevel(@PathVariable int id) {
     return levelService.delete(id);

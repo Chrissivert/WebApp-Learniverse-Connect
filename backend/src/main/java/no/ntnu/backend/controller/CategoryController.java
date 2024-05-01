@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,25 +34,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @Autowired
-    public CategoryController(CategoryService categoryService){
-        this.categoryService = categoryService;
-    }
-
-    @Operation(summary = "Creates a new category", description = "Creates a new category.")
-    @PostMapping()
-    public ResponseEntity<String> createCategory(@RequestBody Category category) {
-        return this.categoryService.create(category);
-    }
-
-    @Operation(summary = "Retrieves all categories", description = "Retrieves all categories.")
-    @GetMapping()
-    public List<Category> readAllCategories() {
-        return this.categoryService.readAll();
-    }
-
-  private final CategoryService categoryService;
-
   /**
    * Constructor for CategoryController.
    *
@@ -62,7 +42,6 @@ public class CategoryController {
   @Autowired
   public CategoryController(CategoryService categoryService){
     this.categoryService = categoryService;
-
   }
 
   /**
@@ -71,6 +50,7 @@ public class CategoryController {
    * @param category The category object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Creates a new category", description = "Creates a new category.")
   @PostMapping()
   public ResponseEntity<String> createCategory(@RequestBody Category category) {
     return this.categoryService.create(category);
@@ -81,32 +61,24 @@ public class CategoryController {
    *
    * @return List of all categories.
    */
+  @Operation(summary = "Retrieves all categories", description = "Retrieves all categories.")
   @GetMapping()
   public List<Category> readAllCategories() {
     return this.categoryService.readAll();
   }
 
-    @Operation(summary = "Retrieves a category by its ID", description = "Retrieves a category by its ID.")
-    @GetMapping("/{id}")
-    public ResponseEntity<Category> readCategoryById(@PathVariable int id) {
-        return this.categoryService.readById(id);
-    }
   /**
    * Retrieves a category by its ID.
    *
    * @param id The ID of the category to retrieve.
    * @return ResponseEntity containing the requested category, if found.
    */
+  @Operation(summary = "Retrieves a category by its ID", description = "Retrieves a category by its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Category> readCategoryById(@PathVariable int id) {
     return this.categoryService.readById(id);
   }
 
-    @Operation(summary = "Updates an existing category", description = "Updates an existing category.")
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateCategory(@PathVariable int id, @RequestBody Category category) {
-        return this.categoryService.update(id, category);
-    }
   /**
    * Updates an existing category.
    *
@@ -114,22 +86,19 @@ public class CategoryController {
    * @param category The updated category object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Updates an existing category", description = "Updates an existing category.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCategory(@PathVariable int id, @RequestBody Category category) {
     return this.categoryService.update(id, category);
   }
 
-    @Operation(summary = "Deletes a category by its ID", description = "Deletes a category by its ID.")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable int id) {
-        return this.categoryService.delete(id);
-    }
   /**
    * Deletes a category by its ID.
    *
    * @param id The ID of the category to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Deletes a category by its ID", description = "Deletes a category by its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteCategory(@PathVariable int id) {
     return this.categoryService.delete(id);

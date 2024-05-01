@@ -31,43 +31,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 @CrossOrigin("http://localhost:5173")
 public class TagsController {
 
-    private final TagsService tagsService;
-
-    @Autowired
-    public TagsController(TagsService tagsService){
-        this.tagsService = tagsService;
-    }
-
-    @Operation(summary = "Creates a new tag", description = "Creates a new tag.")
-    @PostMapping()
-    public ResponseEntity<String> createTag(@RequestBody Tags tags) {
-        return this.tagsService.create(tags);
-    }
-
-    @Operation(summary = "Retrieves all tags", description = "Retrieves all tags.")
-    @GetMapping()
-    public List<Tags> readAllTags() {
-        return this.tagsService.readAll();
-    }
-
-    @Operation(summary = "Retrieves a tag by its ID", description = "Retrieves a tag by its ID.")
-    @GetMapping("/{id}")
-    public ResponseEntity<Tags> readTagById(@PathVariable int id) {
-        return this.tagsService.readById(id);
-    }
-
-    @Operation(summary = "Updates an existing tag", description = "Updates an existing tag.")
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateTag(@PathVariable int id, @RequestBody Tags tags) {
-        return this.tagsService.update(id, tags);
-    }
-
-    @Operation(summary = "Deletes a tag by its ID", description = "Deletes a tag by its ID.")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTag(@PathVariable int id) {
-        return this.tagsService.delete(id);
-    }
-
   private final TagsService tagsService;
 
   /**
@@ -76,39 +39,45 @@ public class TagsController {
    * @param tagsService The TagsService to be injected.
    */
   @Autowired
-  public TagsController(TagsService tagsService){
+  public TagsController(TagsService tagsService) {
     this.tagsService = tagsService;
-
   }
+
   /**
    * Creates a new tag.
    *
    * @param tags The tag object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Creates a new tag", description = "Creates a new tag.")
   @PostMapping()
   public ResponseEntity<String> createTag(@RequestBody Tags tags) {
     return this.tagsService.create(tags);
   }
+
   /**
    * Retrieves all tags.
    *
    * @return List of Tags containing information about all tags.
    */
+  @Operation(summary = "Retrieves all tags", description = "Retrieves all tags.")
   @GetMapping()
   public List<Tags> readAllTags() {
     return this.tagsService.readAll();
   }
+
   /**
    * Retrieves a tag by its ID.
    *
    * @param id The ID of the tag to retrieve.
    * @return ResponseEntity containing the requested tag, if found.
    */
+  @Operation(summary = "Retrieves a tag by its ID", description = "Retrieves a tag by its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Tags> readTagById(@PathVariable int id) {
     return this.tagsService.readById(id);
   }
+
   /**
    * Updates an existing tag.
    *
@@ -116,16 +85,19 @@ public class TagsController {
    * @param tags The updated tag object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Updates an existing tag", description = "Updates an existing tag.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateTag(@PathVariable int id, @RequestBody Tags tags) {
     return this.tagsService.update(id, tags);
   }
+
   /**
    * Deletes a tag by its ID.
    *
    * @param id The ID of the tag to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @Operation(summary = "Deletes a tag by its ID", description = "Deletes a tag by its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteTag(@PathVariable int id) {
     return this.tagsService.delete(id);
