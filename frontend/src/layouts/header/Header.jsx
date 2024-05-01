@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="header-container">
-      <div className="logo-container">
+      {/* <div className="logo-container">
         <Link to="/" className="logo-link">
           <Logo home_src={true} aria-label="Homepage-button" />
           <SpeakingComponent text="Home Page" />
@@ -23,27 +23,27 @@ export default function Header() {
       </div>
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
-      </div>
+      </div> */}
 
-      <div className="cart-container">
+      {/* <div className="cart-container">
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
           <SpeakingComponent text={`Cart (${cart.length})`} />
         </Link>
-      </div>
+      </div> */}
 
-      <div className='login-container'>
+      {/* <div className='login-container'>
         <Link to="/login" className="login-link">
           <img src="/login/login_white.png" alt="Login" className="login"></img>
           <SpeakingComponent text="Login" />
         </Link>
-      </div>
+      </div> */}
 
-      <div className="speak-toggle">
+      {/* <div className="speak-toggle">
         <button onClick={toggleSpeaking}>
           {speakingEnabled ? "Speaking ON" : "Speaking OFF"}
         </button>
-      </div>
+      </div> */}
 
       <HamburgerMenu />
     </header>
