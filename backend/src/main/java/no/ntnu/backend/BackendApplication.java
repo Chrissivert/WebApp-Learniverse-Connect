@@ -2,8 +2,6 @@ package no.ntnu.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
@@ -13,9 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * @version 23.05.2024
  */
 
-@SpringBootApplication(
-		exclude = {SecurityAutoConfiguration.class }
-)
+@SpringBootApplication
 @CrossOrigin("http://localhost:5173")
 public class BackendApplication {
 
