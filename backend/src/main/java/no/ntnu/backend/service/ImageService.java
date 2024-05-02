@@ -23,7 +23,6 @@ public class ImageService {
 
     try {
       Image image = new Image();
-      //image.setId(file.getOriginalFilename().hashCode());
       image.setFileName(file.getOriginalFilename());
       image.setData(file.getBytes());
       image.setContentType(file.getContentType());
@@ -45,7 +44,7 @@ public class ImageService {
     ResponseEntity<Image> response;
 
     Image image = this.getImageById(id);
-    if (image.isValid() && image != null) {
+    if (image != null && image.isValid()) {
       response = new ResponseEntity<>(image, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
