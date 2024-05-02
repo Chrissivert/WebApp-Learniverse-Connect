@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.backend.model.Image;
 import no.ntnu.backend.service.ImageService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @CrossOrigin
@@ -33,13 +36,23 @@ public class ImageController {
     return this.imageService.create(file);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<Image> readImageById(@PathVariable Integer id) {
-    return this.imageService.readById(id);
-  }
-
   @GetMapping()
   public List<Image> readAllImages() {
     return this.imageService.readAll();
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Image> readImageById(@PathVariable int id) {
+    return this.imageService.readById(id);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile file) throws IOException {
+    return this.imageService.update(id, file);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteImage(@PathVariable int id) {
+    return this.imageService.delete(id);
   }
 }
