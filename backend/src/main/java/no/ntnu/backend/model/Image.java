@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
 
 @Entity
 public class Image {
@@ -16,6 +15,7 @@ public class Image {
   private byte[] data;
   private String fileName;
   private String contentType;
+  private String alt;
 
   public Image() {
   }
@@ -50,6 +50,14 @@ public class Image {
 
   public void setFileName(String fileName) {
     this.fileName = fileName;
+  }
+
+  public String getAlt() {
+    return this.alt;
+  }
+
+  public void setAlt(String alt) {
+    this.alt = alt;
   }
 
   public boolean isValid() {
