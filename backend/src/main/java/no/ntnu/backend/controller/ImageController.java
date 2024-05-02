@@ -46,8 +46,8 @@ public class ImageController {
    */
   @Operation(summary = "Upload a new image", description = "Uploads a new image object in the system.")
   @PostMapping()
-  public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-    return this.imageService.create(file);
+  public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("alt") String altText) throws IOException {
+    return this.imageService.create(file, altText);
   }
 
   /**
