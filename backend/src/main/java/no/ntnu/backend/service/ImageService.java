@@ -19,7 +19,7 @@ public class ImageService {
   @Autowired
   private ImageRepository imageRepository;
 
-  public ResponseEntity<String> create(MultipartFile file) throws IOException{
+  public ResponseEntity<String> create(MultipartFile file, String altText) throws IOException{
     ResponseEntity<String> response;
 
     try {
@@ -27,6 +27,7 @@ public class ImageService {
       image.setFileName(file.getOriginalFilename());
       image.setData(file.getBytes());
       image.setContentType(file.getContentType());
+      image.setAlt(altText);
 
       this.addImage(image);
       response = new ResponseEntity<>(file.toString(), HttpStatus.OK);
