@@ -44,6 +44,7 @@ public class ImageController {
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
+  @Operation(summary = "Upload a new image", description = "Uploads a new image object in the system.")
   @PostMapping()
   public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
     return this.imageService.create(file);
@@ -54,6 +55,7 @@ public class ImageController {
    *
    * @return List of Images containing information about all images.
    */
+  @Operation(summary = "Retrieves all images", description = "Retrieves a list of all image objects in the system.")
   @GetMapping()
   public List<Image> readAllImages() {
     return this.imageService.readAll();
@@ -65,6 +67,7 @@ public class ImageController {
    * @param id The ID of the image to retrieve.
    * @return ResponseEntity indication the success/failure of the operation.
    */
+  @Operation(summary = "Retrieve an image by ID", description = "Retrieves a specific image object based on its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Image> readImageById(@PathVariable int id) {
     return this.imageService.readById(id);
@@ -73,13 +76,15 @@ public class ImageController {
   /**
    * Updates an existing image.
    *
-   * @param id The ID of the image to update.
+   * @param id   The ID of the image to update.
    * @param file The file to be updated.
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
+  @Operation(summary = "Update an image", description = "Update an existing image object in the system.")
   @PutMapping("/{id}")
-  public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile file) throws IOException {
+  public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile file)
+      throws IOException {
     return this.imageService.update(id, file);
   }
 
@@ -89,6 +94,7 @@ public class ImageController {
    * @param id The ID of the image to delete.
    * @return ResponseEntity indication the success/failure of the operation.
    */
+  @Operation(summary = "Delete an image", description = "Deletes an image object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteImage(@PathVariable int id) {
     return this.imageService.delete(id);
