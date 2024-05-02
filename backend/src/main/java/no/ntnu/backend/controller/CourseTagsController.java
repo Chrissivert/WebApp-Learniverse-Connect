@@ -9,7 +9,7 @@ import no.ntnu.backend.model.CourseTags;
 import no.ntnu.backend.repository.CourseTagsRepository;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class CourseTagsController {
 
     private final CourseTagsRepository courseTagsRepository;

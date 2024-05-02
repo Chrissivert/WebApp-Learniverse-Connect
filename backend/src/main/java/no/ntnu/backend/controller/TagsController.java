@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tags")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class TagsController {
 
     private final TagsService tagsService;

@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/providers")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class ProviderController {
 
   private final ProviderService providerService;

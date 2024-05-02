@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/roles")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class RoleController {
 
   private final RoleService roleService;

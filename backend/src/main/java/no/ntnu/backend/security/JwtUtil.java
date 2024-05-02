@@ -18,8 +18,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class JwtUtil {
-    @Value("${jwt_secret_key}")
-    private String secretKey;
+    @Value("${JWT_SECRET_KEY}")
+
+    private String JWT_SECRET_KEY;
     /**
      * Key inside JWT token where roles are stored.
      */
@@ -46,7 +47,7 @@ public class JwtUtil {
     }
 
     private SecretKey getSigningKey() {
-        byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+        byte[] keyBytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
         return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class CourseProviderController {
 
     private final CourseProviderService courseProviderService;

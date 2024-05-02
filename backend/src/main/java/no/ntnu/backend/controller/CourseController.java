@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/courses")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class CourseController {
 
     private final CourseService courseService;
