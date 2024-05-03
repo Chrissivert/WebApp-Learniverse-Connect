@@ -9,29 +9,10 @@ import PostCourse from '../../components/crudTest/post/course/PostCourse';
 import Coursecard from '../../components/coursecard/Coursecard';
 import axios from 'axios';
 import { sendApiGetRequest } from '../../services/api-requests';
-import { getImageFromServer } from '../../services/image-service';
+// import { generateImageUrl, getImageFromServer } from '../../services/image-service';
+import GetImage from '../../components/crudTest/post/image/GetImage';
 
 export default function Home() {
-
-  // sendApiGetRequest("/courses")
-
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState("");
-
-  const fetchImages = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/images/1`);
-      setImage(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
   return (
     <div className='home-container'>
       {/* <div>
@@ -65,10 +46,8 @@ export default function Home() {
             </Link>
           ))} */}
 
-          <img src={image}/>
-
           <PostImage/>
-          
+          <GetImage/>
         </div>
     </div>
   );
