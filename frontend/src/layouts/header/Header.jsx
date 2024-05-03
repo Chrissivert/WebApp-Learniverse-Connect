@@ -7,21 +7,21 @@ import CurrencySelector from '../../components/currencySelector/CurrencySelector
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
-// import SpeakingComponent from '../../components/textReader/TextSpeaker.jsx';
-// import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
+import SpeakingComponent from '../../components/textReader/TextSpeaker.jsx';
+import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
 
 export default function Header() {
-  // const { cart } = useContext(CartContext);
-  // const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
+  const { cart } = useContext(CartContext);
+  const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
 
   return (
     <header className="header-container">
-      {/* <div className="logo-container"> */}
+      <div className="logo-container">
         {/* <Link to="/" className="logo-link"> */}
           <Logo home_src={true} aria-label="Homepage-button" />
           {/* <SpeakingComponent text="Home Page" /> */}
         {/* </Link> */}
-      {/* </div> */}
+      </div>
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
       </div>
