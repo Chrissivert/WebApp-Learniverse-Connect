@@ -25,7 +25,7 @@ public class SignupDTO {
         return this.password;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
