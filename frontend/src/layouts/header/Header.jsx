@@ -6,38 +6,39 @@ import Logo from '../../components/logo/Logo.jsx';
 import CurrencySelector from '../../components/currencySelector/CurrencySelector.jsx';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
-import SpeakingComponent from '../../components/textReader/TextSpeaker.jsx';
-import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
+import { Link } from 'react-router-dom';
+// import SpeakingComponent from '../../components/textReader/TextSpeaker.jsx';
+// import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
-  const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
+  // const { cart } = useContext(CartContext);
+  // const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
 
   return (
     <header className="header-container">
-      {/* <div className="logo-container">
-        <Link to="/" className="logo-link">
+      {/* <div className="logo-container"> */}
+        {/* <Link to="/" className="logo-link"> */}
           <Logo home_src={true} aria-label="Homepage-button" />
-          <SpeakingComponent text="Home Page" />
-        </Link>
-      </div>
+          {/* <SpeakingComponent text="Home Page" /> */}
+        {/* </Link> */}
+      {/* </div> */}
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
-      </div> */}
+      </div>
 
-      {/* <div className="cart-container">
+      <div className="cart-container">
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
-          <SpeakingComponent text={`Cart (${cart.length})`} />
+          {/* <SpeakingComponent text={`Cart (${cart.length})`} /> */}
         </Link>
-      </div> */}
+      </div>
 
-      {/* <div className='login-container'>
+      <div className='login-container'>
         <Link to="/login" className="login-link">
           <img src="/login/login_white.png" alt="Login" className="login"></img>
-          <SpeakingComponent text="Login" />
+          {/* <SpeakingComponent text="Login" /> */}
         </Link>
-      </div> */}
+      </div>
 
       {/* <div className="speak-toggle">
         <button onClick={toggleSpeaking}>
