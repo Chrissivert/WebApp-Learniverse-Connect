@@ -6,12 +6,28 @@ import no.ntnu.backend.dto.CourseByEachProviderDTO;
 import no.ntnu.backend.model.CourseProvider;
 import no.ntnu.backend.service.CourseProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+/**
+ * Controller class for managing operations related to course providers.
+ * Handles HTTP requests/responses for course provider-related endpoints.
+ *
+ * @author Group 01
+ * @version 23.05.2024
+ */
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:5173")
 public class CourseProviderController {
 
     private final CourseProviderService courseProviderService;

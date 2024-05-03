@@ -50,22 +50,27 @@ export default function PostUser() {
           Role id
           <input id='roleId' type='number' value={formData.roleId} onChange={handleChange} />
         </label>
+
         <label htmlFor='username'>
           Username
           <input id='username' value={formData.username} onChange={handleChange} />
         </label>
+
         <label htmlFor='start-date'>
           Start data
           <input type='date' id='startDate' value={formData.startDate} onChange={handleChange} />
         </label>
+
         <label htmlFor='email'>
           Email
           <input type='email' id='email' value={formData.email} onChange={handleChange} />
         </label>
+
         <label htmlFor='password'>
           Password
           <input type='password' id='password' value={formData.password} onChange={handleChange} />
         </label>
+        
         <button type='submit'>Submit</button>
       </form>
     </>

@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
     ResponseEntity<Course> response;
 
     Course course = this.getCourseById(id);
-    if (course.isValid() && course != null) {
+    if (course != null && course.isValid()) {
       response = new ResponseEntity<>(course, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -103,7 +103,7 @@ public class CourseServiceImpl implements CourseService {
    * @throws IllegalArgumentException
    */
   private void addCourse(Course course) throws IllegalArgumentException {
-    if (!course.isValid() || course == null) {
+    if (course == null || !course.isValid()) {
       throw new IllegalArgumentException("Course is invalid");
     }
 
