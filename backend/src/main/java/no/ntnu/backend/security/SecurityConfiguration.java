@@ -62,18 +62,11 @@ public class SecurityConfiguration {
                 // Disable CSRF and CORS checks. Without this it will be hard to make automated tests.
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                // Authentication URL is accessible for everyone
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
-                // SignUp URL is accessible for everyone
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
-                //Courses URL is accessible for everyone
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/courses").permitAll())
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/course-tags").permitAll())
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/tags").permitAll())
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/cheapest-course-prices").permitAll())
-                //.authorizeHttpRequests((auth) -> auth.requestMatchers("/courses").permitAll())
-                // Any other request will be authenticated with a stateless policy
-                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+                // Admin URL is accessible only for Admin role
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/admin/**").hasRole("ADMIN"))
+                // Other URLs are accessible by everyone.
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
+
                 // Enable stateless session policy
                 .sessionManagement((session) ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
