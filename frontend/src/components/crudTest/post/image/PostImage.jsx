@@ -8,7 +8,8 @@ export default function PostImage() {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setImage(URL.createObjectURL(e.target.files[0]));
+    const chosenImage = e.target.files[0];
+    setImage(URL.createObjectURL(chosenImage));
   };
 
   const handleAltTextChange = (e) => {
@@ -18,7 +19,7 @@ export default function PostImage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file || !altText) {
+    if (!image || !altText) {
       console.error("Please select a file and enter an image description.")
       return;
     }
