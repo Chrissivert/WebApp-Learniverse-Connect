@@ -84,17 +84,16 @@ public class ImageService {
     return response;
   }
 
-  private boolean removeImage(int id) {
-    boolean result = false;
-
-    try {
-      this.imageRepository.delete(this.getImageById(id));
-      result = true;
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Invalid ID");
+  private void addImage(Image image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image is invalid");
     }
 
-    return result;
+    this.imageRepository.save(image);
+  } 
+
+  private Image getImageById(int id) {
+    return this.imageRepository.findById(id).get();
   }
 
   private void updateImage(int id, Image image) {
@@ -114,15 +113,16 @@ public class ImageService {
     this.imageRepository.save(image);
   }
 
-  private void addImage(Image image) throws IllegalArgumentException {
-    if (image == null) {
-      throw new IllegalArgumentException("Image is invalid");
+  private boolean removeImage(int id) {
+    boolean result = false;
+
+    try {
+      this.imageRepository.delete(this.getImageById(id));
+      result = true;
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid ID");
     }
 
-    this.imageRepository.save(image);
-  } 
-
-  public Image getImageById(int id) {
-    return this.imageRepository.findById(id).get();
+    return result;
   }
 }
