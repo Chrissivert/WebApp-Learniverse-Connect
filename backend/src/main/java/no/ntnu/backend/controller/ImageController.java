@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -71,6 +72,18 @@ public class ImageController {
   @GetMapping("/{id}")
   public ResponseEntity<Image> readImageById(@PathVariable int id) {
     return this.imageService.readById(id);
+  }
+
+  @GetMapping("/{id}/data")
+  public ResponseEntity<byte[]> getImageDataById(@PathVariable int id) {
+    Image image = this.imageService.readById(id).getBody();
+    if (image != null && image.getData() != null) {
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.valueOf(image.getContentType()));
+      return new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   /**
