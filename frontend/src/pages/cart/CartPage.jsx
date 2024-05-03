@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartProvider';
 import './cartPage.css'; // Import the stylesheet for CartPage
+import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 
@@ -15,8 +16,8 @@ function CartPage() {
     clearCart();
   };
 
-  // Calculate total price
-  const totalPrice = cart.reduce((total, course) => total + course.cheapestPrice, 0);
+  const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
+  const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
 
   return (
     <div className="cart-page">
@@ -25,24 +26,18 @@ function CartPage() {
         <Button text="Go to Courses" src="/courses" />
       </div>
       <div className="cart-items">
-        {cart.length > 0 ? (
-          cart.map((course) => {
-            console.log(course); // Print the course object in the console
-            return (
-              <div key={course.id} className="cart-item">
-                <Coursecard course={course} />
-                <p>Price: ${course.cheapestPrice}</p> {/* Display price of each course */}
-                <button onClick={() => handleRemoveItem(course.id)}>Remove</button>
-              </div>
-            );
-          })
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+        {cart.map(({ course }) => ( // Using cart.map here
+          <div key={course.id} className="cart-item">
+            <Coursecard course={course.course} />
+            <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
+            <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p> {/* Display provider price and currency */}
+            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
+          </div>
+        ))}
       </div>
       <div className="cart-summary">
         <div className="price-summary">
-          <p>Total Price: ${totalPrice}</p> {/* Display total price */}
+          <p>Total Price: {currency} {Math.ceil(totalPrice)}</p> {/* Display total price */}
         </div>
         <div className="action-buttons">
           <button onClick={handleClearCart}>Clear Cart</button>

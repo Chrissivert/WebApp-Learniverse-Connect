@@ -1,27 +1,28 @@
-// package no.ntnu.backend.controller;
 
-// import java.util.List;
+package no.ntnu.backend.controller;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import no.ntnu.backend.model.CourseTags;
+import no.ntnu.backend.repository.CourseTagsRepository;
 
-// import no.ntnu.backend.model.CourseTags;
-// import no.ntnu.backend.repository.CourseTagsRepository;
+@RestController
+@CrossOrigin
+public class CourseTagsController {
 
+    private final CourseTagsRepository courseTagsRepository;
 
-// @RestController
-// @CrossOrigin("http://localhost:5173")
-// public class CourseTagsController {
+    @Autowired
+    public CourseTagsController(CourseTagsRepository courseTagsRepository){
+        this.courseTagsRepository = courseTagsRepository;
+    }
 
-//     @Autowired
-//     private CourseTagsRepository courseTagsRepository;
-
-//     @GetMapping("/course-tags")
-//     List<CourseTags> getAllCourses() {
-//         return courseTagsRepository.findAll();
-//     }
-// }
-
-
+    @Operation(summary = "Retrieves all course tags",
+               description = "Retrieves all course tags.")
+    @GetMapping("/course-tags")
+    List<CourseTags> getAllCourses() {
+        return courseTagsRepository.findAll();
+    }
+}

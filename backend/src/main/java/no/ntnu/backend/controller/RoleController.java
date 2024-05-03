@@ -17,38 +17,48 @@ import no.ntnu.backend.service.RoleService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import io.swagger.v3.oas.annotations.Operation;
 
 
 @RestController
 @RequestMapping("/roles")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class RoleController {
-  
-  @Autowired
-  private RoleService roleService;
 
+  private final RoleService roleService;
+
+  @Autowired
+  public RoleController(RoleService roleService) {
+    this.roleService = roleService;
+  }
+
+  @Operation(summary = "Create a new role", description = "Creates a new role object in the system.")
   @PostMapping()
   public ResponseEntity<String> createRole(@RequestBody Role role) {
-    return this.roleService.create(role);
+    return roleService.create(role);
   }
 
+  @Operation(summary = "Retrieves all roles", description = "Retrieves a list of all role objects in the system.")
   @GetMapping()
   public List<Role> readAllRoles() {
-    return this.roleService.readAll();
+    return roleService.readAll();
   }
 
+  @Operation(summary = "Retrieve a role by ID", description = "Retrieves a specific role object based on its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Role> readRoleById(@PathVariable int id) {
-    return this.roleService.readById(id);
+    return roleService.readById(id);
   }
 
+  @Operation(summary = "Update a role", description = "Updates an existing role object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateRole(@PathVariable int id, @RequestBody Role role) {
-    return this.roleService.update(id, role);
+    return roleService.update(id, role);
   }
 
+  @Operation(summary = "Delete a role", description = "Deletes a role object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteRole(@PathVariable int id) {
-    return this.roleService.delete(id);
+    return roleService.delete(id);
   }
 }

@@ -1,31 +1,52 @@
+// Header.jsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
 import Logo from '../../components/logo/Logo.jsx';
-import Button from '../../components/button/Button.jsx';
+import CurrencySelector from '../../components/currencySelector/CurrencySelector.jsx';
+import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
-import { FaShoppingCart } from 'react-icons/fa'; // Import the cart icon from react-icons
+import SpeakingComponent from '../../components/textReader/TextSpeaker.jsx';
+import { useSpeaking } from '../../components/textReader/speakingContext.jsx';
 
 export default function Header() {
   const { cart } = useContext(CartContext);
+  const { toggleSpeaking, speakingEnabled } = useSpeaking(); 
 
   return (
     <header className="header-container">
-      <HamburgerMenu/>
       <div className="logo-container">
-        <Logo home_src={true}/>
-      </div>
-      <div className="cart-container">
-        <Link to="/cart" className="cart-link">
-          <FaShoppingCart className="cart-icon" /> {/* Cart icon */}
-          <span className="cart-text">Cart ({cart.length})</span>
+        <Link to="/" className="logo-link">
+          <Logo home_src={true} aria-label="Homepage-button" />
+          <SpeakingComponent text="Home Page" />
         </Link>
       </div>
-      <div className="button-container">
-        <Button text='Register' src='/register'/>
-        <Button text='Real login' src='/login'/>
+      <div className="currency-selector-container">
+        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
       </div>
+
+      <div className="cart-container">
+        <Link to="/cart" className="cart-link">
+          <FaShoppingCart className="cart-icon" />
+          <SpeakingComponent text={`Cart (${cart.length})`} />
+        </Link>
+      </div>
+
+      <div className='login-container'>
+        <Link to="/login" className="login-link">
+          <img src="/login/login_white.png" alt="Login" className="login"></img>
+          <SpeakingComponent text="Login" />
+        </Link>
+      </div>
+
+      <div className="speak-toggle">
+        <button onClick={toggleSpeaking}>
+          {speakingEnabled ? "Speaking ON" : "Speaking OFF"}
+        </button>
+      </div>
+
+      <HamburgerMenu />
     </header>
   );
 }
