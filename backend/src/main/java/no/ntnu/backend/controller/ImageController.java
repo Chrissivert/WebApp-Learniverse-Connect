@@ -40,14 +40,14 @@ public class ImageController {
   /**
    * Uploads a new image.
    *
-   * @param file The file to be uploaded.
+   * @param image The image to be uploaded.
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
   @Operation(summary = "Upload a new image", description = "Uploads a new image object in the system.")
   @PostMapping()
-  public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("alt") String altText) throws IOException {
-    return this.imageService.create(file, altText);
+  public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile image, @RequestParam("alt") String altText) throws IOException {
+    return this.imageService.create(image, altText);
   }
 
   /**
@@ -77,15 +77,15 @@ public class ImageController {
    * Updates an existing image.
    *
    * @param id   The ID of the image to update.
-   * @param file The file to be updated.
+   * @param image The image to be updated.
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
   @Operation(summary = "Update an image", description = "Update an existing image object in the system.")
   @PutMapping("/{id}")
-  public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile file)
+  public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile image)
       throws IOException {
-    return this.imageService.update(id, file);
+    return this.imageService.update(id, image);
   }
 
   /**
