@@ -20,10 +20,6 @@ export function uploadImageToServer(image) {
   return sendApiFileUploadRequest(IMAGE_URL, image);
 }
 
-export function getImageFromServer(id) {
-  return sendApiGetRequest(IMAGE_URL + "/" + id);
-}
-
 /**
  * 
  *
