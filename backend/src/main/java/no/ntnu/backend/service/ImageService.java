@@ -89,7 +89,8 @@ public class ImageService {
       throw new IllegalArgumentException("Image is invalid");
     }
 
-    this.imageRepository.save(image);
+    //this.imageRepository.save(image);
+    this.addToRepo(image);
   } 
 
   private Image getImageById(int id) {
@@ -110,7 +111,8 @@ public class ImageService {
     }
 
     image.setId(existingImage.getId());
-    this.imageRepository.save(image);
+    //this.imageRepository.save(image);
+    this.addToRepo(existingImage);
   }
 
   private boolean removeImage(int id) {
@@ -124,5 +126,23 @@ public class ImageService {
     }
 
     return result;
+  }
+
+  private void addToRepo(Image image) {
+    if (!isImage(image)) {
+      throw new IllegalArgumentException("Image does not have valid content type.");
+    }
+
+    this.imageRepository.save(image);
+  }
+
+  private boolean isImage(Image image) {
+    return image != null && this.isImageContentType(image.getContentType());
+  }
+
+  private static final String[] IMAGE_CONTENT_TYPES = {"image/png", "image/jpg", "image/jpeg", "image/webp", "image/svg+xml"};
+
+  private boolean isImageContentType(String contentType) {
+    return Arrays.asList(IMAGE_CONTENT_TYPES).contains(contentType);
   }
 }
