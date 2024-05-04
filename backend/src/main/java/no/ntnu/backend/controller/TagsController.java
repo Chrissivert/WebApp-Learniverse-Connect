@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @RestController
 @RequestMapping("/tags")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class TagsController {
 
   private final TagsService tagsService;

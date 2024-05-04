@@ -1,14 +1,13 @@
 package no.ntnu.backend.model;
 
 import java.sql.Date;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * 
@@ -21,13 +20,42 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-  private int roleId;
+
+
   private String username;
   private Date startDate;
   private String email;
   private String password;
+  private boolean active = true;
+
+  @ManyToMany(
+          fetch = FetchType.EAGER
+  )
+  @JoinTable(
+          name = "user_role",
+          joinColumns = {@JoinColumn(
+                  name = "user_id"
+          )},
+          inverseJoinColumns = {@JoinColumn(
+                  name = "role_id"
+          )}
+  )
+  private Set<Role> roles = new LinkedHashSet();
 
   public User() {
+  }
+
+  public User(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
+
+  public void setRoles(Set<Role> roles) {
+    this.roles = roles;
+  }
+
+  public Set<Role> getRoles() {
+    return this.roles;
   }
 
   public int getId() {
@@ -38,13 +66,20 @@ public class User {
     this.id = id;
   }
 
-  public int getRoleId() {
+  public void addRole(Role role){
+    this.roles.add(role);
+  }
+
+  /*public int getRoleId() {
     return this.roleId;
   }
 
   public void setRoleId(int roleId) {
     this.roleId = roleId;
-  }
+  }*/
+
+
+
 
   public String getUsername() {
     return this.username;
@@ -78,11 +113,11 @@ public class User {
     this.password = password;
   }
 
-  @JsonIgnore
+  /*@JsonIgnore
   public boolean isValid() {
     return //this.id > 0 &&
       this.roleId > 0;
-  }
+  }*/
 
   @Override
   public boolean equals(Object obj) {
@@ -92,7 +127,7 @@ public class User {
       return false;
     var that = (User) obj;
     return this.id == that.id &&
-      this.roleId == that.roleId;
+      this.roles.equals(that.roles);
   }
 
   @Override
@@ -104,5 +139,13 @@ public class User {
   public String toString() {
     return "User[" +
         "id=" + this.id + ']';
+  }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 }

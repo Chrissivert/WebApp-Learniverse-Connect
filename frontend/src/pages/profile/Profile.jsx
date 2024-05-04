@@ -131,3 +131,25 @@ function SocialMedia() {
     </div>
   );
 }
+
+/* useEffect(
+  function () {
+    async function getUsers() {
+      try {
+        const res = await axios.get(`http://localhost:8080/users`);
+        const data = await res.data;
+
+        if (data.Response === "False") {
+          throw new Error(data.Error);
+        }
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    }
+
+    getUsers();
+  },
+  [id]
+); */
