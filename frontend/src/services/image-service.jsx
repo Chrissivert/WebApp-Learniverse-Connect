@@ -6,6 +6,7 @@ const IMAGE_URL = "/images";
  * 
  *
  * @param {int} imageId
+ * @returns
  */
 export function deleteImageOnServer(imageId) {
   return sendApiDeleteRequest(IMAGE_URL + "/" + imageId);
@@ -14,7 +15,19 @@ export function deleteImageOnServer(imageId) {
 /**
  * 
  *
+ * @param {*} imageId 
+ * @param {*} image 
+ * @returns 
+ */
+export function updateImageOnServer(imageId, image) {
+  return null
+}
+
+/**
+ * 
+ *
  * @param {byte[]} image 
+ * @returns
  */
 export function uploadImageToServer(image) {
   return sendApiFileUploadRequest(IMAGE_URL, image);
