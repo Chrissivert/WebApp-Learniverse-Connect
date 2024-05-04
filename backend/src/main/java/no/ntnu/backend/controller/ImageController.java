@@ -74,16 +74,24 @@ public class ImageController {
     return this.imageService.readById(id);
   }
 
+  /**
+   * Retrieved an image by its ID.
+   *
+   * @param id The ID of the image to retrieve.
+   * @return ResponseEntity indication the success/failure of the operation.
+   */
+  @Operation(summary = "Retrieve an image by ID", description = "Retrieves a specific image object based on its ID.")
   @GetMapping("/{id}/data")
   public ResponseEntity<byte[]> getImageDataById(@PathVariable int id) {
-    Image image = this.imageService.readById(id).getBody();
-    if (image != null && image.getData() != null) {
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.valueOf(image.getContentType()));
-      return new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    // Image image = this.imageService.readById(id).getBody();
+    // if (image != null && image.getData() != null) {
+    //   HttpHeaders headers = new HttpHeaders();
+    //   headers.setContentType(MediaType.valueOf(image.getContentType()));
+    //   return new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
+    // } else {
+    //   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    // }
+    return this.imageService.readImageById(id);
   }
 
   /**
