@@ -28,7 +28,7 @@ export function uploadImageToServer(image) {
  */
 export function generateImageUrl(imageId) {
   if (imageId > 0) {
-    return API_BASE_URL + IMAGE_URL + "/" + imageId;
+    return API_BASE_URL + IMAGE_URL + "/" + imageId + "/data";
   } else {
     return null;
   }
