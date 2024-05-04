@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +50,21 @@ public class ImageService {
     Image image = this.getImageById(id);
     if (image != null && image.isValid()) {
       response = new ResponseEntity<>(image, HttpStatus.OK);
+    } else {
+      response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return response;
+  }
+
+  public ResponseEntity<byte[]> readImageById(int id) {
+    ResponseEntity<byte[]> response;
+
+    Image image = this.getImageById(id);
+    if (image != null && image.getData() != null && image.isValid()) {
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.valueOf(image.getContentType()));
+      response = new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
     } else {
       response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
