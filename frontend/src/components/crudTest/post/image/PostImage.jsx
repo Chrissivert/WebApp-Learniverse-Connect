@@ -7,8 +7,8 @@ export default function PostImage() {
   const [image, setImage] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
     const chosenImage = e.target.files[0];
+    setFile(chosenImage);
     setImage(URL.createObjectURL(chosenImage));
   };
 
@@ -45,13 +45,15 @@ export default function PostImage() {
       <form onSubmit={handleSubmit}>
         <label>
           Upload File
-          <input type="file" name="file" onChange={handleFileChange}/>
+          <input type="file" name="file" accept=".png, .jpg, .jpeg, .webp, .svg" onChange={handleFileChange}/>
         </label><br/>
         <label>
           Image Description
           <input value={altText} onChange={handleAltTextChange}/>
         </label><br/>
-        <img src={image} width={300}/>
+        <div>
+          <img src={image} width={300} alt={image ? 'Image Preview' : null}/>
+        </div>
         <button type='submit'>Upload</button>
       </form>
     </div>
