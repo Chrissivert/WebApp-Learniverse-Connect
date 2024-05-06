@@ -28,7 +28,7 @@ export default function GetImage({imageId}) {
   }, [imageId]);
 
   return (
-    <div>
+    <div className="image">
       <img src={`http://localhost:8080/images/${imageId}/data`} width={300} alt={altText}/>
     </div>
   )
