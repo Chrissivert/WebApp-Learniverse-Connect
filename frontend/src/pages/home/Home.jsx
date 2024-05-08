@@ -7,7 +7,6 @@ import PostImage from '../../components/crudTest/post/image/PostImage';
 import PostUser from '../../components/crudTest/post/user/PostUser';
 import PostCourse from '../../components/crudTest/post/course/PostCourse';
 import Coursecard from '../../components/coursecard/Coursecard';
-import axios from 'axios';
 import { sendApiGetRequest } from '../../services/api-requests';
 // import { generateImageUrl, getImageFromServer } from '../../services/image-service';
 import GetImage from '../../components/crudTest/post/image/GetImage';
