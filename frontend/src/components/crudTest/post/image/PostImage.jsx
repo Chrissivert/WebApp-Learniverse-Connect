@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { React, useState } from 'react';
+import { uploadImageToServer } from '../../../../services/image-service';
 
+/**
+ * 
+ *
+ * @returns 
+ */
 export default function PostImage() {
   const [file, setFile] = useState(null);
   const [altText, setAltText] = useState("");
-  const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const handleFileChange = (e) => {
     const chosenImage = e.target.files[0];
     setFile(chosenImage);
-    setImage(URL.createObjectURL(chosenImage));
+    setPreviewImage(URL.createObjectURL(chosenImage));
   };
 
   const handleAltTextChange = (e) => {
@@ -19,22 +24,17 @@ export default function PostImage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!image || !altText) {
+    if (!previewImage || !altText) {
       console.error("Please select a file and enter an image description.")
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('alt', altText)
+    formData.append('alt', altText);
 
     try {
-      await axios.post(`http://localhost:8080/images`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log("File uploaded successfully");
+      uploadImageToServer(formData);
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -52,7 +52,7 @@ export default function PostImage() {
           <input value={altText} onChange={handleAltTextChange}/>
         </label><br/>
         <div>
-          <img src={image} width={300} alt={image ? 'Image Preview' : null}/>
+          <img src={previewImage} width={300} alt={previewImage ? 'Image Preview' : null}/>
         </div>
         <button type='submit'>Upload</button>
       </form>

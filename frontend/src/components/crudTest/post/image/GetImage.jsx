@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { generateImageUrl, getImageDataFromServer } from "../../../../services/image-service";
 
 /**
@@ -27,8 +26,6 @@ export default function GetImage({imageId}) {
   useEffect(() => {
     getAltText();
   }, [imageId]);
-
-  
 
   return (
     <div className="image">
