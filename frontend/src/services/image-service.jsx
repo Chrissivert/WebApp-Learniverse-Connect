@@ -39,6 +39,16 @@ export function uploadImageToServer(image) {
  * @param {int} imageId 
  * @returns 
  */
+export function getImageDataFromServer(imageId) {
+  return sendApiGetRequest(IMAGE_URL + "/" + imageId);
+}
+
+/**
+ * 
+ *
+ * @param {int} imageId 
+ * @returns 
+ */
 export function generateImageUrl(imageId) {
   if (imageId > 0) {
     return API_BASE_URL + IMAGE_URL + "/" + imageId + "/data";
