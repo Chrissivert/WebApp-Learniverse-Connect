@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
+import { generateImageUrl, getImageDataFromServer } from "../../../../services/image-service";
 
 /**
  * 
@@ -14,7 +15,7 @@ export default function GetImage({imageId}) {
    * Gets alt-text from database
    */
   function getAltText() {
-    axios.get(`http://localhost:8080/images/${imageId}`)
+    getImageDataFromServer(imageId)
     .then(response => {
       const alt = response.data.alt;
       setAltText(alt);
@@ -27,9 +28,11 @@ export default function GetImage({imageId}) {
     getAltText();
   }, [imageId]);
 
+  
+
   return (
     <div className="image">
-      <img src={`http://localhost:8080/images/${imageId}/data`} width={300} alt={altText}/>
+      <img src={generateImageUrl(imageId)} width={300} alt={altText}/>
     </div>
   )
 }
