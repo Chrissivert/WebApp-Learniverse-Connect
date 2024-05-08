@@ -74,7 +74,6 @@ async function sendApiJsonRequest(method, url, requestBody) {
       baseURL: API_BASE_URL,
       url: url,
       data: (method === 'get' || 'delete') ? null : requestBody,
-      // responseType: (file === null) ? 'json' : 'blob'
     };
 
     const response = await axios(config);
