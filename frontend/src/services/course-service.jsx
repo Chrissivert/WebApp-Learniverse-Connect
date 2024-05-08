@@ -3,50 +3,51 @@ import { sendApiPostRequest, sendApiGetRequest, sendApiPutRequest, sendApiDelete
 const COURSE_URL = "/courses";
 
 /**
- * 
+ * Adds a course to the server.
  *
- * @returns 
- */
-export function getCoursesFromServer() {
-  return sendApiGetRequest(COURSE_URL);
-}
-
-/**
- * 
- *
- * @param {int} id 
- * @returns 
- */
-export function getOneCourseFromServer(id) {
-  return sendApiGetRequest(COURSE_URL + "/" + id);
-}
-
-/**
- * 
- *
- * @param {json} course 
- * @returns 
+ * @param {FormData} course The course to be added.
+ * @returns The outcome of the post request.
  */
 export function addCourseToServer(course) {
   return sendApiPostRequest(COURSE_URL, course);
 }
 
 /**
- * 
+ * Retrieves the courses from the server.
  *
- * @param {json} course 
- * @returns 
+ * @returns The outcome of the get request.
  */
-export function updateCourseOnServer(course) {
-  return sendApiPutRequest(COURSE_URL + "/" + course.id, course);
+export function getCoursesFromServer() {
+  return sendApiGetRequest(COURSE_URL);
 }
 
 /**
- * 
+ * Retrives a course from the server.
  *
- * @param {int} id 
- * @returns 
+ * @param {int} courseId The ID of the course to be retrieved.
+ * @returns The outcome of the get request.
  */
-export function deleteCourseOnServer(id) {
-  return sendApiDeleteRequest(COURSE_URL + "/" + id);
+export function getOneCourseFromServer(courseId) {
+  return sendApiGetRequest(COURSE_URL + "/" + courseId);
+}
+
+/**
+ * Updates a course on the server.
+ *
+ * @param {int} courseID The ID of the course to be updated.
+ * @param {FormData} course The updates course to be sent.
+ * @returns The outcome of the put request.
+ */
+export function updateCourseOnServer(courseId, course) {
+  return sendApiPutRequest(COURSE_URL + "/" + courseId, course);
+}
+
+/**
+ * Deletes a course from the server.
+ *
+ * @param {int} courseId The ID of the course to be deleted.
+ * @returns The outcome of the delete request.
+ */
+export function deleteCourseOnServer(courseId) {
+  return sendApiDeleteRequest(COURSE_URL + "/" + courseId);
 }
