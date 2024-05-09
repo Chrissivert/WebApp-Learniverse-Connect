@@ -60,6 +60,17 @@ class DataFetcher {
       throw error;
     }
   }
+
+
+static async fetchCategories() {
+  try {
+    const response = await axios.get(`http://localhost:8080/categories`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching providers:', error);
+    throw error;
+  }
+}
 }
 
 export default DataFetcher;

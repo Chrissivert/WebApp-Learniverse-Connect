@@ -17,20 +17,19 @@ function coursesPageLogic() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(5); // Number of courses per page - hardcoded
   const [courses, setCourses] = useState([]);
-  const [courseTags, setCourseTags] = useState([]);
+  const [courseTags, setCategory] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
       try {
         const coursesData = await DataFetcher.fetchCourses();
         const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency); // Pass target currency
-        const tagsData = await DataFetcher.fetchCourseTags();''
-
-        console.log('Course Provider Data:', courseProviderData); // Logging course provider data
+        const categoriesData = await DataFetcher.fetchCategories();
   
-        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, tagsData);
+        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
+        console.log('Combined Courses:', combinedCourses); // Logging combined courses
         setCourses(combinedCourses);
-        setCourseTags(tagsData);
+        setCategory(categoriesData);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -66,6 +65,7 @@ function coursesPageLogic() {
       const cheapestPricesData = await DataFetcher.fetchCheapestPrices(currency); // Fetch prices for selected currency
       const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(courses, cheapestPricesData, courseTags);
       setCourses(combinedCourses); // Update courses with new prices
+      console.log('Courses with new prices:', combinedCourses); // Logging courses with new prices
     } catch (error) {
       console.error('Error fetching prices:', error);
     }

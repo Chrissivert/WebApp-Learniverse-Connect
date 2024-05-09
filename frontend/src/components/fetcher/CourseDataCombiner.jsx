@@ -1,31 +1,32 @@
-import { createCategories } from "../filter/categoriesFilter/Category";
-
 class CourseDataCombiner {
-  static async combineCoursesWithPricesAndCategories(courses, courseProvider, courseTags) {
+  static async combineCoursesWithPricesAndCategories(courses, courseProvider, category) {
     try {
-      const tagIdToCategoryMap = await createCategories();
+      // Create a map of category IDs to category names
+      const categoryIdToNameMap = category.reduce((map, cat) => {
+        map[cat.id] = cat.subject;
+        return map;
+      }, {});
 
-      // Assign categories to courses based on their tag IDs
+      // Assign categories to courses based on their categoryId
       const coursesWithData = courses.map((course) => {
-        // Get tagIds for current course
-        const tagIds = courseTags.filter(tag => tag.courseId === course.id).map(tag => tag.tagId);
-        // Map tagIds to their categories
-        const categories = tagIds.map(tagId => tagIdToCategoryMap[tagId] || "Other");
+        // Get the category name for the course's categoryId
+        const categoryName = categoryIdToNameMap[course.categoryId] || "Other";
 
-        // Find the course data from the courseProvider by matching courseId
         const courseDataFromProvider = courseProvider.find(courseProvider => courseProvider.courseId === course.id);
 
-        return {
+        const courseWithCategory = {
           ...course,
+          categoryName: categoryName, 
           cheapestPrice: courseDataFromProvider ? courseDataFromProvider.price : null,
-          cheapestPriceCurrency: courseDataFromProvider ? courseDataFromProvider.currency : null,
-          categories: categories, // Array of categories based on the course's tag IDs
+          currency: courseDataFromProvider ? courseDataFromProvider.currency : null,
         };
-      });
 
+        return courseWithCategory;
+      });
+    
       return coursesWithData;
     } catch (error) {
-      console.error('Error combining courses with prices and categories:', error);
+      console.error('Error combining courses with prices and/or categories provider:', error);
       return [];
     }
   }
