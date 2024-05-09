@@ -19,42 +19,85 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import io.swagger.v3.oas.annotations.Operation;
 
+
+/**
+ * Controller class for managing operations related to levels.
+ * Handles HTTP requests/responses for level-related endpoints.
+ *
+ * @author Group 01
+ * @version 23.05.2024
+ */
 @RestController
 @RequestMapping("/levels")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class LevelController {
 
   private final LevelService levelService;
 
+  /**
+   * Constructor for LevelController.
+   *
+   * @param levelService The LevelService to be injected.
+   */
   @Autowired
   public LevelController(LevelService levelService) {
     this.levelService = levelService;
   }
 
+  /**
+   * Creates a new level.
+   *
+   * @param level The level object to be created.
+   * @return ResponseEntity indicating the success/failure of the operation.
+   */
   @Operation(summary = "Create a new level", description = "Creates a new level object in the system.")
   @PostMapping()
   public ResponseEntity<String> createLevel(@RequestBody Level level) {
     return levelService.create(level);
   }
 
+  /**
+   * Retrieves all levels.
+   *
+   * @return List of Level containing information about all levels.
+   */
   @Operation(summary = "Retrieves all levels", description = "Retrieves a list of all level objects in the system.")
   @GetMapping()
   public List<Level> readAllLevels() {
     return levelService.readAll();
   }
 
+  /**
+   * Retrieves a level by its ID.
+   *
+   * @param id The ID of the level to retrieve.
+   * @return ResponseEntity containing the requested level, if found.
+   */
   @Operation(summary = "Retrieve a level by ID", description = "Retrieves a specific level object based on its ID.")
   @GetMapping("/{id}")
   public ResponseEntity<Level> readLevelById(@PathVariable int id) {
     return levelService.readById(id);
   }
 
+  /**
+   * Updates an existing level.
+   *
+   * @param id    The ID of the level to be updated.
+   * @param level The updated level object.
+   * @return ResponseEntity indicating the success/failure of the operation.
+   */
   @Operation(summary = "Update a level", description = "Updates an existing level object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateLevel(@PathVariable int id, @RequestBody Level level) {
     return levelService.update(id, level);
   }
 
+  /**
+   * Deletes a level by its ID.
+   *
+   * @param id The ID of the level to be deleted.
+   * @return ResponseEntity indicating the success/failure of the operation.
+   */
   @Operation(summary = "Delete a level", description = "Deletes a level object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteLevel(@PathVariable int id) {

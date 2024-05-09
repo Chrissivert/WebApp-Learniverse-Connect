@@ -136,5 +136,47 @@ models. Chris Sivert will try to make cart page work as intended (able to add co
 We have a good plan of what to do forward, and understand what happens pretty well. There is a lot to do and a little stressed with the time left. 
 
 
+## Week 17: 
+
+Date: 25th April 
+Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
+
+### What was accomplished: 
+
+* Added speech mechanism
+* Added ability to change font-size
+* Added some ARIA elements
+* Fixed ability to register and login (showcases if user is active or not, added startdate)
+* Added ability to add course from multiple providers
+* Added api documentation (swagger)
+* Began creating tests in Postman
+* Began having ability to store images in database
+
+
+### What didn’t go well: 
+
+* application.properties changed after merging
+* Other files and folders were duplicated when merging
+* Problem with cycle errors due to autowiring (jwtRequestFilter-->jwtUtil-->Securityconfig--> jwtRequestFilter)
+* Trouble adding Postman tests due to foreign keys (fixed now)
+* Id apparently needs to be determined by coursename
+* Difficult with styling and different sizes of screens
+* Retrieving images from db is hard
+* Solving authentication was hard
+
+
+### What to do: 
+
+* Add ability to add admin (perhaps have a superadmin)
+* Add ability to change user credentials
+* Show the correct info on userpage once user is logged in (Øystein)
+* Add ability for user to add favorite courses (Chris Sivert)
+* Remove Impl-classes
+* Combine AccessUserService and UserService (Øystein)
+* Retrieve images from database (Vegard)
+
+## Discussion: 
+Great to have finished the registration and login. Plan to change how axios fetches. Focus on acheving the mandatory tasks such as adding HTTPS, having a page for each role, adding design guideline and so on. Perhaps admin needs to have their own page showing overview of courses and users.
+
 
  

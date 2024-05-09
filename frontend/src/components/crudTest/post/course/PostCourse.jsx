@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
-    id: '',
+    id: 0,
     title: '',
     levelId: '',
     categoryId: '',
@@ -12,8 +12,7 @@ export default function PostCourse() {
     credit: '',
     hoursPerWeek: '',
     relatedCertification: '',
-    description: '',
-    imageType: ''
+    description: ''
   });
 
   const handleChange = (e) => {
@@ -37,8 +36,7 @@ export default function PostCourse() {
         credit: data.credit,
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
-        description: data.description,
-        imageType: data.imageType
+        description: data.description
       };
 
       axios.post(`http://localhost:8080/courses`, userData)
@@ -91,10 +89,6 @@ export default function PostCourse() {
         <label htmlFor='description'>
           Description
           <input id='description' value={data.description} onChange={handleChange} />
-        </label>
-        <label htmlFor='image-type'>
-          Image type
-          <input id='imageType' value={data.imageType} onChange={handleChange} />
         </label>
         <button type='submit'>Post</button>
       </form>
