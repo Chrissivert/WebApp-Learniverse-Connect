@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "./Coursecard.css";
-import { loadImage } from "../../functions/ImageLoader"; // Adjusted the import path
+import { loadImage } from "../../functions/ImageLoader"; 
+import CourseCardSkeleton from "./CourseCardSkeleton"; 
 
 function Coursecard({ course }) {
   const [imageUrl, setImageUrl] = useState(null);
-
+  const [loading, setLoading] = useState(true); 
+  
   useEffect(() => {
     loadImage(course.title)
-      .then(url => setImageUrl(url))
-      .catch(error => console.error("Error loading image:", error));
+      .then(url => {
+        setImageUrl(url);
+        setLoading(false); 
+      })
+      .catch(error => {
+        console.error("Error loading image:", error);
+        setLoading(false); 
+      });
   }, [course.title]);
+
+  useEffect(() => {
+    console.log("Course details:", course);
+    console.log("Image URL:", imageUrl);
+  }, [course, imageUrl]);
+
+  if (loading) {
+    return <CourseCardSkeleton />;
+  }
 
   const { cheapestPrice, cheapestPriceCurrency } = course;
   const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
-
-  // Log roundedCheapestPrice and course
-  useEffect(() => {
-    console.log("roundedCheapestPrice:", roundedCheapestPrice);
-    console.log("course:", course);
-    console.log("imageUrl:", imageUrl);
-    console.log("title:", course.title);
-    console.log("credit:", course.credit);
-    console.log("cheapestPrice:", cheapestPrice);
-    console.log("cheapestPriceCurrency:", cheapestPriceCurrency);
-  }, [roundedCheapestPrice, course, imageUrl]);
 
   return (
     <div className="course-card">

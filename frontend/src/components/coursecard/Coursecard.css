@@ -1,4 +1,6 @@
-.course-card {
+/* Coursecard.css */
+.course-card,
+.course-card-skeleton {
   display: flex;
   flex-direction: column;
   border-radius: 25px;
@@ -7,48 +9,64 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   border: 2px solid #8a2be2;
-  height: 400px; /* Adjusted height */
 }
 
 .course-card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.course-card h2 {
+.course-card h2,
+.course-card-skeleton h2 {
   font-size: 20px;
   margin-bottom: 8px;
   color: #333;
 }
 
-.course-card p {
+.course-card p,
+.course-card-skeleton p {
   margin: 4px 0;
   color: #666;
 }
 
-.course-card .cheapest-price {
+.course-card .cheapest-price,
+.course-card-skeleton .cheapest-price {
   font-weight: bold;
   color: green;
 }
 
-.image-section {
+.image-section,
+.skeleton-image {
   flex: 1;
   background-size: cover;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
 
-.text-section {
+.text-section,
+.skeleton-text {
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.text-section h2 {
+.text-section h2,
+.skeleton-text h2 {
   font-size: 24px;
   margin-bottom: 8px;
 }
 
-.text-section p {
+.text-section p,
+.skeleton-text p {
   margin: 4px 0;
+}
+
+.course-card {
+  height: 400px; /* Adjusted height */
+}
+
+.course-card-skeleton {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
 }
