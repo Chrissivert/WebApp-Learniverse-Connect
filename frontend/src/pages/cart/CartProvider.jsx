@@ -3,7 +3,6 @@ import React, { useState, createContext, useEffect } from 'react';
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-  // Initialize cart state with data from localStorage if available
   const [cart, setCart] = useState(() => {
     try {
       const localData = localStorage.getItem('cart');
@@ -14,7 +13,8 @@ const CartProvider = ({ children }) => {
     }
   });
 
-  // Use useEffect to update localStorage whenever the cart state changes
+  const [cartPopped, setCartPopped] = useState(false); // State for cart animation
+
   useEffect(() => {
     try {
       const data = JSON.stringify(cart);
@@ -22,10 +22,14 @@ const CartProvider = ({ children }) => {
     } catch (error) {
       console.error("Could not save cart data to localStorage:", error);
     }
-  }, [cart]); // Dependency array ensures this runs only when cart changes
+  }, [cart]);
 
   const addToCart = (course, provider) => {
     setCart(currentCart => [...currentCart, { course, provider }]);
+    setCartPopped(true); // Trigger the cart animation
+    setTimeout(() => {
+      setCartPopped(false);
+    }, 300); // Adjust timing to match CSS animation duration
   };
 
   const removeFromCart = (courseId) => {
@@ -37,7 +41,7 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, cartPopped }}>
       {children}
     </CartContext.Provider>
   );
