@@ -29,9 +29,9 @@ function CoursesPage() {
         onPriceChange={handlePriceChange}
         onSortChange={handleSortChange}
         onCategoryChange={handleCategoryChange}
-        searchQuery={filters.searchQuery}
         courses={courses}
-        filters={filters} 
+        filters={filters}
+        maxPrice={filters.maxPrice}
       />
       <Courses
         filters={filters}

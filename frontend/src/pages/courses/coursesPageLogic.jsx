@@ -9,7 +9,7 @@ function useCoursesPageLogic() {
   const [filters, setFilters] = useState({
     searchQuery: '',
     minPrice: 0,
-    maxPrice: 100000,
+    maxPrice: 100000, // Initialize with a default value
     sortBy: '',
     sortOrder: 'asc',
     category: ''
@@ -19,6 +19,7 @@ function useCoursesPageLogic() {
   const [perPage] = useState(5);
   const [allCourses, setAllCourses] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [maxPrice, setMaxPrice] = useState(100000); // Initialize with a default value
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +36,12 @@ function useCoursesPageLogic() {
         console.log('Combined Courses:', combinedCourses);
 
         setAllCourses(combinedCourses);
+
+        // Calculate the maximum price from courseProviderData
+        if (courseProviderData.length > 0) {
+          const maxPriceValue = Math.max(...courseProviderData.map(provider => provider.price));
+          setMaxPrice(maxPriceValue);
+        }
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -44,7 +51,7 @@ function useCoursesPageLogic() {
   }, [targetCurrency]);
 
   useEffect(() => {
-    const filteredCourses = filterLogic(allCourses, filters); // Use filterLogic function here
+    const filteredCourses = filterLogic(allCourses, filters);
     setCourses(filteredCourses);
   }, [filters, allCourses]);
 
@@ -69,7 +76,7 @@ function useCoursesPageLogic() {
   };
 
   return {
-    filters,
+    filters: { ...filters, maxPrice }, // include maxPrice in filters
     currentPage,
     perPage,
     courses,
