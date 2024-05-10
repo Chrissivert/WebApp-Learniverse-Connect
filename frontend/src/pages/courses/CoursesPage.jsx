@@ -5,8 +5,6 @@ import FilterSection from '../../components/filter/FilterSection';
 import Pagination from '../../components/pagination/Pagination';
 import coursesPageLogic from './coursesPageLogic';
 
-
-
 function CoursesPage() {
   const {
     filters,
@@ -20,7 +18,9 @@ function CoursesPage() {
     handleCategoryChange,
   } = coursesPageLogic();
 
-  
+  // Add console logs here
+  console.log("Filters:", filters);
+  console.log("Courses:", courses);
 
   return (
     <div>

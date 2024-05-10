@@ -5,10 +5,11 @@ export function filterLogic(courses, filters) {
     course.cheapestPrice >= filters.minPrice &&
     course.cheapestPrice <= filters.maxPrice &&
     (!filters.category || // Check if category is undefined or empty
-      (course.categories && // Check if course.categories exists
-        course.categories.includes(filters.category))
+      ( // Check if course.categories exists
+        course.categoryName.includes(filters.category))
     )
   );
+
 
   // Sort the filtered courses based on the selected attribute and sort order
   if (filters.sortBy === 'title') {
@@ -27,7 +28,6 @@ export function filterLogic(courses, filters) {
 
   return filtered;
 }
-
 
 function getValueByAttribute(course, attribute) {
   if (attribute === 'price') {
