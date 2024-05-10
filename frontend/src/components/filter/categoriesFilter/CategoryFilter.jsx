@@ -20,7 +20,6 @@ function CategoryFilter({ onCategoryChange }) {
         <option value="Digital Marketing">Digital Marketing</option>
         <option value="Business and Entrepreneurship">Business and Entrepreneurship</option>
         <option value="Data Science and Analytics">Data Science and Analytics</option>
-        <option value="Other">Other</option>
       </select>
     </div>
   );
