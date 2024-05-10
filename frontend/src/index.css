@@ -5,7 +5,7 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(100, 65, 65, 0.87);
   background-color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,6 +39,7 @@ button {
 
 button:hover {
   color:  rgb(255, 255, 255);
+  background-color: rgb(192, 70, 244);
 }
 
 a:link, a:visited, a:active {

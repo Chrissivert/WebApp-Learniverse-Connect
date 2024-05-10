@@ -9,7 +9,6 @@ import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
   const { cartPopped } = useContext(CartContext);
 
   return (

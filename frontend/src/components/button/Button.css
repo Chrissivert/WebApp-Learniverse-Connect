@@ -1,14 +1,13 @@
-/* a:hover {
-  color: rgb(19, 11, 11);
-}
 
-button {
-  background-color: rgb(241, 0, 0);
+/* button {
+  background-color: rgb(246, 88, 88);
   color: rgb(0, 0, 0);
 }
 
 button:hover {
   background-color: rgb(26, 0, 0);
-  color: black;
+  color: rgb(238, 56, 56);
   /* text-decoration: solid; */
-} */
+/* } */
+
+/* ER DET IKKE BEDRE Å BARE BRUKE INDEX.CSS ISTEDET? */

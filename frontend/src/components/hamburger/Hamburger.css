@@ -42,6 +42,15 @@
   border-bottom: none;
 }
 
+
+/* Rest of your CSS remains unchanged */
+
+.menu button:hover {
+  color: rgb(255, 255, 255); /* Reset the color */
+  background-color: rgb(151, 88, 163);
+}
+
+
 .hamburger-react {
   display: flex;
   flex-direction: column;
