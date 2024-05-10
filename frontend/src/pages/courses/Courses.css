@@ -1,13 +1,18 @@
 .Courses {
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    gap: 3%;
-    align-items: center;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust column widths */
+  gap: 3%;
+  align-items: center;
+}
 
-  @media (max-width: 800px) {
-    .Courses {
-      flex-direction: column;
-    }
+@media (max-width: 1000px) {
+  .Courses {
+    grid-template-columns: repeat(2, 1fr); /* Two course cards per row */
   }
+}
 
+@media (max-width: 700px) {
+  .Courses {
+    grid-template-columns: 1fr; /* One course card per row */
+  }
+}
