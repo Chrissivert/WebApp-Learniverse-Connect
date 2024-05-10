@@ -9,8 +9,13 @@ function Courses({ courses }) {
   const [loading, setLoading] = useState(true); // Initially set to true
 
   useEffect(() => {
-    setLoading(true); // Set loading to true when courses are updated
-    setLoading(false); // Set loading to false when courses are received
+    // Set loading to true when courses are updated
+    setLoading(true);
+    
+    // If there are courses, set loading to false
+    if (courses.length > 0) {
+      setLoading(false);
+    }
   }, [courses]);
 
   // Add console log to check the courses
@@ -20,7 +25,7 @@ function Courses({ courses }) {
     <div className="Courses">
       {/* Show skeleton while loading or if no courses are available */}
       {loading || courses.length === 0 ? (
-        Array(courses.length).fill().map((_, index) => (
+        Array(6).fill().map((_, index) => (
           <CourseCardSkeleton key={index}/>
         ))
       ) : (

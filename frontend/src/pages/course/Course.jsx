@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Course.css";
 import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
@@ -14,7 +13,7 @@ function Course() {
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [courseAdded, setCourseAdded] = useState(false); // New state to track if course is added
+  const [courseAdded, setCourseAdded] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
 
@@ -22,10 +21,7 @@ function Course() {
     const fetchData = async () => {
       try {
         const courseData = await DataFetcher.fetchCourse(id);
-        const providerData = await DataFetcher.fetchProviders(
-          id,
-          targetCurrency
-        );
+        const providerData = await DataFetcher.fetchProviders(id, targetCurrency);
         setCourse(courseData);
         setProviders(providerData);
       } catch (error) {
@@ -37,7 +33,7 @@ function Course() {
 
     return () => {
       setCourse(null);
-      setProviders([]);
+      // setProviders([]);
     };
   }, [id, targetCurrency]);
 
@@ -53,7 +49,12 @@ function Course() {
     if (courseAdded) {
       console.log("Navigate to cart page");
     } else {
-      if (selectedProvider) {
+      console.log(selectedProvider)
+      if (selectedProvider === null) {
+        console.log("inside of warning statement");
+        setShowWarning(true); // Show warning if no provider selected
+        setShowSuccessMessage(false);
+      } else {
         const alreadyInCart = cart.some(item => item.course.id === course?.id);
   
         if (alreadyInCart) {
@@ -61,14 +62,12 @@ function Course() {
         } else {
           addToCart({ course, selectedProvider });
           setShowSuccessMessage(true);
-          setCourseAdded(true); 
+          setCourseAdded(true);
         }
-      } else {
-        setShowWarning(true);
       }
     }
   };
-
+  
   if (!course || !providers) {
     return <div>Loading...</div>;
   }
@@ -108,9 +107,15 @@ function Course() {
           </li>
         ))}
       </ul>
-      {!showSuccessMessage && (
-        <div className="warning" role="alert">
-          {showWarning ? "Please select a provider before adding to cart." : ""}
+      {showWarning && (
+      <div className="warning" role="alert">
+        Please select a provider before adding to cart.
+        </div>
+      )}
+
+      {showSuccessMessage && (
+        <div className="success-message" role="alert">
+          Course successfully added to cart!
         </div>
       )}
       <button className="addToCartButton" onClick={handleAddToCart} disabled={!selectedProvider || courseAdded}>
@@ -119,5 +124,5 @@ function Course() {
     </div>
   );
 }
-  
+
 export default Course;
