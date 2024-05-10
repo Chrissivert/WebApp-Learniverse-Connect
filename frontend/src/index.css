@@ -38,7 +38,7 @@ button {
 }
 
 button:hover {
-  color:  rgb(151, 88, 163);
+  color:  rgb(255, 255, 255);
 }
 
 a:link, a:visited, a:active {
