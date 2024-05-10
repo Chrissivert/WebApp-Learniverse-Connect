@@ -130,4 +130,11 @@ ul {
   100% {
     transform: scale(1);
   }
+
+}
+
+.providerLabel.disabled {
+  color: #aaa; /* Lighter text color */
+  text-decoration: line-through; /* Strike-through effect */
+  cursor: not-allowed; /* Change cursor to not-allowed */
 }

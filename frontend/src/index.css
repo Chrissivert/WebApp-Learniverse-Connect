@@ -45,10 +45,3 @@ button:hover {
 a:link, a:visited, a:active {
   text-decoration: none;
 }
-
-
-select {
-  transform: scale(var(--dropdown-scale));
-  transform-origin: left center;
-  min-width: 120px;
-}

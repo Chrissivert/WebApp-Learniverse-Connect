@@ -14,22 +14,9 @@ function Course() {
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const { addToCart } = useContext(CartContext);
+  const [courseAdded, setCourseAdded] = useState(false); // New state to track if course is added
+  const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
-
-  const handleSelectProvider = (provider) => {
-    setSelectedProvider(provider);
-    setShowWarning(false);
-  };
-
-  const handleAddToCart = () => {
-    if (selectedProvider) {
-      addToCart({ course, selectedProvider });
-      setShowSuccessMessage(true);
-    } else {
-      setShowWarning(true);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +41,34 @@ function Course() {
     };
   }, [id, targetCurrency]);
 
+  useEffect(() => {
+    const alreadyInCart = cart.some(item => item.course.course.id === course?.id);
+  
+    if (alreadyInCart) {
+      setCourseAdded(true); 
+    }
+  }, [cart, course]);
+  
+  const handleAddToCart = () => {
+    if (courseAdded) {
+      console.log("Navigate to cart page");
+    } else {
+      if (selectedProvider) {
+        const alreadyInCart = cart.some(item => item.course.id === course?.id);
+  
+        if (alreadyInCart) {
+          setShowSuccessMessage(true);
+        } else {
+          addToCart({ course, selectedProvider });
+          setShowSuccessMessage(true);
+          setCourseAdded(true); 
+        }
+      } else {
+        setShowWarning(true);
+      }
+    }
+  };
+
   if (!course || !providers) {
     return <div>Loading...</div>;
   }
@@ -73,16 +88,19 @@ function Course() {
       <ul>
         {providers.map((provider) => (
           <li key={provider.providerId}>
-            <label htmlFor={provider.providerId} className="providerLabel">
+            <label
+              htmlFor={provider.providerId}
+              className={`providerLabel ${courseAdded ? "disabled" : ""}`}
+            >
               <input
                 type="radio"
                 id={provider.providerId}
                 name="provider"
                 value={provider}
                 checked={selectedProvider === provider}
-                onChange={() => handleSelectProvider(provider)}
+                onChange={() => setSelectedProvider(provider)}
+                disabled={courseAdded}
                 aria-labelledby={`provider-label-${provider.providerId}`}
-                aria-checked={selectedProvider === provider ? "true" : "false"}
               />
               {provider.providerName} - Price:{" "}
               {Math.ceil(provider.price)} {provider.currency}
@@ -90,21 +108,16 @@ function Course() {
           </li>
         ))}
       </ul>
-      {showWarning && (
+      {!showSuccessMessage && (
         <div className="warning" role="alert">
-          Please select a provider before adding to cart.
+          {showWarning ? "Please select a provider before adding to cart." : ""}
         </div>
       )}
-      {showSuccessMessage && (
-        <div className="success-message" role="alert" aria-live="assertive">
-          Course added to cart successfully!
-        </div>
-      )}
-      <button className="addToCartButton" onClick={handleAddToCart}>
-        Add to Cart
+      <button className="addToCartButton" onClick={handleAddToCart} disabled={!selectedProvider || courseAdded}>
+        {courseAdded ? "Already Added to Cart" : "Add to Cart"}
       </button>
     </div>
   );
 }
-
+  
 export default Course;

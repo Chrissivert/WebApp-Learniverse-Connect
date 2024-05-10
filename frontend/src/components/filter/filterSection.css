@@ -1,32 +1,86 @@
 .filter-container {
-    display: flex;
-    justify-content: center; /* Center the filter row horizontally */
+  display: flex;
+  justify-content: center; /* Center the filter row horizontally */
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line when there's not enough space */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Adjust the width of each filter component for different screen sizes */
+@media screen and (max-width: 768px) {
+  .filter-row > * {
+    width: 100%; /* Each component takes up 100% width on small screens */
+    margin-bottom: 10px; /* Add some spacing between components */
+  }
+}
+
+/* Optional: Add specific styles for larger screens if needed */
+@media screen and (min-width: 769px) {
+  .filter-row > * {
+    flex: 1; /* Each component shares an equal amount of available space */
+    margin-right: 10px; /* Add some spacing between components */
   }
   
-  .filter-row {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line when there's not enough space */
-    align-items: center;
-    margin-bottom: 20px;
+  .filter-row > *:last-child {
+    margin-right: 0; /* Remove right margin for the last component */
   }
-  
-  /* Adjust the width of each filter component for different screen sizes */
-  @media screen and (max-width: 768px) {
-    .filter-row > * {
-      width: 100%; /* Each component takes up 100% width on small screens */
-      margin-bottom: 10px; /* Add some spacing between components */
-    }
+}
+
+/* Apply styles to all dropdown tables */
+.dropdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* Style table headers */
+.dropdown-table th {
+  background-color: #f5f5f5;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Style table rows */
+.dropdown-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style even rows */
+.dropdown-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.dropdown-table tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Add animation to table rows */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  /* Optional: Add specific styles for larger screens if needed */
-  @media screen and (min-width: 769px) {
-    .filter-row > * {
-      flex: 1; /* Each component shares an equal amount of available space */
-      margin-right: 10px; /* Add some spacing between components */
-    }
-    
-    .filter-row > *:last-child {
-      margin-right: 0; /* Remove right margin for the last component */
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+.dropdown-table tr {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+select {
+  transform: scale(var(--dropdown-scale));
+  transform-origin: left center;
+  min-width: 120px;
+}
