@@ -39,7 +39,6 @@ function Course() {
   }, [cart, course]);
 
   useEffect(() => {
-    const userId = '4'; // Replace with actual logic to retrieve user ID
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
       const favoritesArray = JSON.parse(favorites);

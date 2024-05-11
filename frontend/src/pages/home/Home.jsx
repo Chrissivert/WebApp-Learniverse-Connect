@@ -7,18 +7,18 @@ import PostImage from '../../components/crudTest/post/image/PostImage';
 import PostUser from '../../components/crudTest/post/user/PostUser';
 import PostCourse from '../../components/crudTest/post/course/PostCourse';
 import Coursecard from '../../components/coursecard/Coursecard';
-import { sendApiGetRequest } from '../../services/api-requests';
-// import { generateImageUrl, getImageFromServer } from '../../services/image-service';
-import GetImage from '../../components/crudTest/post/image/GetImage';
 import DataFetcher from '../../components/fetcher/Datafetcher';
+import GetImage from '../../components/crudTest/post/image/GetImage';
+
 
 export default function Home() {
   const [favoriteCourses, setFavoriteCourses] = useState([]);
 
   const fetchFavoriteCourses = async () => {
     try {
-      const userId = 1; // Replace with the actual user ID
+      const userId = 4; // Replace with the actual user ID
       const favoriteCourses = await DataFetcher.fetchFavoriteCourses(userId);
+      console.log("Favorite Courses:", favoriteCourses); // <-- Added console log here
       setFavoriteCourses(favoriteCourses);
     } catch (error) {
       console.error('Error fetching favorite courses:', error);
@@ -31,14 +31,6 @@ export default function Home() {
 
   return (
     <div className='home-container'>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div> */}
       <img src={FrontImage} alt='front-image' className='image'/>
       <div className='toCourses'>
         <h2>Learniverse Connect</h2>
@@ -53,18 +45,21 @@ export default function Home() {
          Tempore, voluptatem! Possimus quaerat adipisci ipsa assumenda. Magnam eius 
          dolor eaque fugiat, doloremque est voluptatum hic.</h2> 
 
-        {/* <PostImage/> 
-        <PostCourse/> */}
-        <div>
-          {/* {images.map((image) => (
-            <Link to={`/course/${image.id}`} key={image.id}>
-              <Coursecard course={image}/>
-            </Link>
-          ))} */}
+      {/* Displaying favorite courses */}
+      <div className="favorite-courses">
+        <h2>Your Favorite Courses</h2>
+        {favoriteCourses.map(course => (
+          <Link to={`/courses/${course.id}`} key={course.id}>
+            <Coursecard course={course}/>
+          </Link>
+        ))}
+      </div>
 
-          <PostImage/>
-          <GetImage imageId={6}/>
-        </div>
+      {/* Other content */}
+      <div>
+        <PostImage/>
+        <GetImage imageId={6}/>
+      </div>
     </div>
   );
 }

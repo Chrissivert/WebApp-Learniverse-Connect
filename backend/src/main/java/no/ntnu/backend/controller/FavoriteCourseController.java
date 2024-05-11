@@ -23,6 +23,7 @@ public class FavoriteCourseController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<FavoriteCourse>> getAllFavoriteCoursesByUserId(@PathVariable("userId") int userId) {
+        System.out.println("HEEEEEEE");
         List<FavoriteCourse> favoriteCourses = favoriteCourseService.getAllFavoriteCoursesByUserId(userId);
         return ResponseEntity.ok(favoriteCourses);
     }

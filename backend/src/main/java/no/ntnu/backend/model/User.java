@@ -2,6 +2,7 @@ package no.ntnu.backend.model;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,6 +42,9 @@ public class User {
           )}
   )
   private Set<Role> roles = new LinkedHashSet();
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<FavoriteCourse> favoriteCourses;
 
   public User() {
   }
