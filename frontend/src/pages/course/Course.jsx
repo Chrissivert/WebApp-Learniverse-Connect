@@ -38,6 +38,15 @@ function Course() {
     setCourseAdded(alreadyInCart);
   }, [cart, course]);
 
+  useEffect(() => {
+    const userId = '4'; // Replace with actual logic to retrieve user ID
+    const favorites = localStorage.getItem("favorites");
+    if (favorites) {
+      const favoritesArray = JSON.parse(favorites);
+      setFavorited(favoritesArray.includes(id));
+    }
+  }, [id]);
+
   const handleAddToCart = () => {
     if (!selectedProvider) {
       setShowWarning(true);
@@ -52,12 +61,19 @@ function Course() {
   const handleToggleFavorite = async () => {
     const userId = '4'; // Replace with actual logic to retrieve user ID
     try {
+      let favorites = localStorage.getItem("favorites");
+      if (!favorites) favorites = "[]";
+      let favoritesArray = JSON.parse(favorites);
       if (!favorited) {
         await DataFetcher.addFavoriteCourse(userId, id);
+        favoritesArray.push(id);
+        localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(true);
         console.log(`User ${userId} added course ${id} to favorites.`);
       } else {
         await DataFetcher.removeFavoriteCourse(userId, id);
+        favoritesArray = favoritesArray.filter(favId => favId !== id);
+        localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
         console.log(`User ${userId} removed course ${id} from favorites.`);
       }
