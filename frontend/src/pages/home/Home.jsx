@@ -10,8 +10,25 @@ import Coursecard from '../../components/coursecard/Coursecard';
 import { sendApiGetRequest } from '../../services/api-requests';
 // import { generateImageUrl, getImageFromServer } from '../../services/image-service';
 import GetImage from '../../components/crudTest/post/image/GetImage';
+import DataFetcher from '../../components/fetcher/Datafetcher';
 
 export default function Home() {
+  const [favoriteCourses, setFavoriteCourses] = useState([]);
+
+  const fetchFavoriteCourses = async () => {
+    try {
+      const userId = 1; // Replace with the actual user ID
+      const favoriteCourses = await DataFetcher.fetchFavoriteCourses(userId);
+      setFavoriteCourses(favoriteCourses);
+    } catch (error) {
+      console.error('Error fetching favorite courses:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFavoriteCourses();
+  }, []);
+
   return (
     <div className='home-container'>
       {/* <div>

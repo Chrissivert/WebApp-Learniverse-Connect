@@ -50,7 +50,7 @@ function Course() {
   };
 
   const handleToggleFavorite = async () => {
-    const userId = '1'; // Replace with actual logic to retrieve user ID
+    const userId = '4'; // Replace with actual logic to retrieve user ID
     try {
       if (!favorited) {
         await DataFetcher.addFavoriteCourse(userId, id);
