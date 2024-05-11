@@ -17,10 +17,6 @@ function Courses({ courses }) {
       setLoading(false);
     }
   }, [courses]);
-
-  // Add console log to check the courses
-  console.log("Courses received in Courses component:", courses);
-
   return (
     <div className="Courses">
       {/* Show skeleton while loading or if no courses are available */}

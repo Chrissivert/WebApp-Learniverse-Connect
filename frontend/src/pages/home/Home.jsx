@@ -4,11 +4,8 @@ import '../../index.css';
 import { Link } from "react-router-dom";
 import FrontImage from '/home/front_image.png';
 import PostImage from '../../components/crudTest/post/image/PostImage';
-import PostUser from '../../components/crudTest/post/user/PostUser';
-import PostCourse from '../../components/crudTest/post/course/PostCourse';
 import Coursecard from '../../components/coursecard/Coursecard';
 import DataFetcher from '../../components/fetcher/Datafetcher';
-import GetImage from '../../components/crudTest/post/image/GetImage';
 import { AuthContext } from '../admin/AuthProvider';
 
 
@@ -65,7 +62,6 @@ export default function Home() {
       {/* Other content */}
       <div>
         <PostImage/>
-        <GetImage imageId={6}/>
       </div>
     </div>
   );

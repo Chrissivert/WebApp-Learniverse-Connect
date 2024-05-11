@@ -14,11 +14,7 @@ function CoursesPage() {
     handlePriceChange,
     handleCategoryChange,
   } = coursesPageLogic();
-
-  // Add console logs here
-  console.log("Filters:", filters);
-  console.log("Courses:", courses);
-
+  
   return (
     <div>
       <FilterSection

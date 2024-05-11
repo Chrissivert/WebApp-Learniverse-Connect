@@ -6,7 +6,6 @@ function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a pr
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(maxPrice); // Use maxPrice as initial value
 
-  console.log("Max Pricaae:", maxPrice); // Log maxPrice
   const handleMinChange = (e) => {
     let value = parseFloat(e.target.value);
     value = Math.max(-1, Math.min(value, maxValue)); // Restrict within the range
