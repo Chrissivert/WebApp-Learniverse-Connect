@@ -14,6 +14,7 @@ function Course() {
   const [showWarning, setShowWarning] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [courseAdded, setCourseAdded] = useState(false);
+  const [favorited, setFavorited] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
 
@@ -30,45 +31,42 @@ function Course() {
     };
 
     fetchData();
-
-    return () => {
-      setCourse(null);
-      // setProviders([]);
-    };
   }, [id, targetCurrency]);
 
   useEffect(() => {
-    const alreadyInCart = cart.some(item => item.course.course.id === course?.id);
-  
-    if (alreadyInCart) {
-      setCourseAdded(true); 
-    }
+    const alreadyInCart = cart.some(item => item.course.id === course?.id);
+    setCourseAdded(alreadyInCart);
   }, [cart, course]);
-  
+
   const handleAddToCart = () => {
-    if (courseAdded) {
-      console.log("Navigate to cart page");
-    } else {
-      console.log(selectedProvider)
-      if (selectedProvider === null) {
-        console.log("inside of warning statement");
-        setShowWarning(true); // Show warning if no provider selected
-        setShowSuccessMessage(false);
-      } else {
-        const alreadyInCart = cart.some(item => item.course.id === course?.id);
-  
-        if (alreadyInCart) {
-          setShowSuccessMessage(true);
-        } else {
-          addToCart({ course, selectedProvider });
-          setShowSuccessMessage(true);
-          setCourseAdded(true);
-        }
-      }
+    if (!selectedProvider) {
+      setShowWarning(true);
+      setShowSuccessMessage(false);
+    } else if (!courseAdded) {
+      addToCart({ course, selectedProvider });
+      setShowSuccessMessage(true);
+      setCourseAdded(true);
     }
   };
-  
-  if (!course || !providers) {
+
+  const handleToggleFavorite = async () => {
+    const userId = '1'; // Replace with actual logic to retrieve user ID
+    try {
+      if (!favorited) {
+        await DataFetcher.addFavoriteCourse(userId, id);
+        setFavorited(true);
+        console.log(`User ${userId} added course ${id} to favorites.`);
+      } else {
+        await DataFetcher.removeFavoriteCourse(userId, id);
+        setFavorited(false);
+        console.log(`User ${userId} removed course ${id} from favorites.`);
+      }
+    } catch (error) {
+      console.error('Failed to update favorites:', error);
+    }
+  };
+
+  if (!course || !providers.length) {
     return <div>Loading...</div>;
   }
 
@@ -79,6 +77,10 @@ function Course() {
           <button className="goBackButton">← Courses</button>
         </Link>
         <h2 className="title">{course.title}</h2>
+        {/* Button for favoriting with dynamic text */}
+        <button className={`favoriteButton ${favorited ? 'favorited' : ''}`} onClick={handleToggleFavorite}>
+          {favorited ? "Remove from Favorites" : "Add to Favorites"}
+        </button>
       </div>
       <p>{course.description}</p>
       <p>Start Date: {course.startDate}</p>
@@ -87,37 +89,21 @@ function Course() {
       <ul>
         {providers.map((provider) => (
           <li key={provider.providerId}>
-            <label
-              htmlFor={provider.providerId}
-              className={`providerLabel ${courseAdded ? "disabled" : ""}`}
-            >
+            <label>
               <input
                 type="radio"
-                id={provider.providerId}
                 name="provider"
-                value={provider}
                 checked={selectedProvider === provider}
                 onChange={() => setSelectedProvider(provider)}
                 disabled={courseAdded}
-                aria-labelledby={`provider-label-${provider.providerId}`}
               />
-              {provider.providerName} - Price:{" "}
-              {Math.ceil(provider.price)} {provider.currency}
+              {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
             </label>
           </li>
         ))}
       </ul>
-      {showWarning && (
-      <div className="warning" role="alert">
-        Please select a provider before adding to cart.
-        </div>
-      )}
-
-      {showSuccessMessage && (
-        <div className="success-message" role="alert">
-          Course successfully added to cart!
-        </div>
-      )}
+      {showWarning && <div className="warning" role="alert">Please select a provider before adding to cart.</div>}
+      {showSuccessMessage && <div className="success-message" role="alert">Course successfully added to cart!</div>}
       <button className="addToCartButton" onClick={handleAddToCart} disabled={!selectedProvider || courseAdded}>
         {courseAdded ? "Already Added to Cart" : "Add to Cart"}
       </button>

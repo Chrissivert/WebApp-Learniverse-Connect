@@ -31,6 +31,17 @@ class DataFetcher {
     }
   }
 
+  static async addFavoriteCourse(userId, courseId) {
+    try {
+      const response = await axios.post(`http://localhost:8080/api/favorite-courses/user/${userId}/course/${courseId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error adding course to favorites:', error);
+      throw error;
+    }
+  }
+  
+
   static async fetchCourseTags() {
     try {
       const response = await axios.get('http://localhost:8080/course-tags');

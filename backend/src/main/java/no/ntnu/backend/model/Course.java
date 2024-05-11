@@ -35,6 +35,10 @@ public class Course {
   public Course() {
   }
 
+public Course(int id) {
+  this.id = id;
+}
+
   /**
    * 
    *
