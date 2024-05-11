@@ -34,7 +34,7 @@ function Course() {
   }, [id, targetCurrency]);
 
   useEffect(() => {
-    const alreadyInCart = cart.some(item => item.course.id === course?.id);
+    const alreadyInCart = cart.some(item => item.course.course.id === course?.id);
     setCourseAdded(alreadyInCart);
   }, [cart, course]);
 
@@ -102,21 +102,21 @@ function Course() {
       <p>Related Certification: {course.relatedCertification}</p>
       <h3>Providers:</h3>
       <ul>
-        {providers.map((provider) => (
-          <li key={provider.providerId}>
-            <label>
-              <input
-                type="radio"
-                name="provider"
-                checked={selectedProvider === provider}
-                onChange={() => setSelectedProvider(provider)}
-                disabled={courseAdded}
-              />
-              {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
-            </label>
-          </li>
-        ))}
-      </ul>
+  {providers.map((provider) => (
+    <li key={provider.providerId}>
+      <label className={`providerLabel ${courseAdded ? 'disabled' : ''}`}>
+        <input
+          type="radio"
+          name="provider"
+          checked={selectedProvider === provider}
+          onChange={() => setSelectedProvider(provider)}
+          disabled={courseAdded}
+        />
+        {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
+      </label>
+    </li>
+  ))}
+</ul>
       {showWarning && <div className="warning" role="alert">Please select a provider before adding to cart.</div>}
       {showSuccessMessage && <div className="success-message" role="alert">Course successfully added to cart!</div>}
       <button className="addToCartButton" onClick={handleAddToCart} disabled={!selectedProvider || courseAdded}>
