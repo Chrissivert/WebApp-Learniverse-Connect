@@ -22,6 +22,7 @@ export default function Header() {
           {/* <SpeakingComponent text="Home Page" /> */}
         {/* </Link> */}
       </div>
+      
       <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
       </div>
