@@ -1,24 +1,28 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Profile.css";
+//import { PostImage } from "../../components/crudTest/post/image/PostImage";
 //import '../../index.css';
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function Profile() {
+  //const [imgId, setImgId] = useState(null);
   const { id } = useParams();
   useEffect(
     function () {
       async function getUser() {
         try {
-          const res = await axios.get(`http://localhost:8080/user/${id}`);
-          const data = await res.data;
+          //const res = await axios.get(`http://localhost:8080/user/${id}`);
+          //setImgId(res.data.imgId);
+          const userToken = localStorage.getItem("token");
+          console.log(userToken);
 
-          if (data.Response === "False") {
+          /* if (data.Response === "False") {
             throw new Error(data.Error);
           }
 
-          console.log(data);
+          console.log(data); */
         } catch (error) {
           console.error("Error fetching user:", error);
         }
@@ -48,7 +52,7 @@ function Avatar() {
   return (
     <img
       className="avatar"
-      src="/profile/prince_froggy.jpeg"
+      src="http://localhost:8080/images/1/data"
       alt="Prince Froggy"
     />
   );
