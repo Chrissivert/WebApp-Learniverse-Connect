@@ -46,7 +46,7 @@ export default function Home() {
           ))} */}
 
           <PostImage/>
-          <GetImage imageId={6}/>
+          <GetImage imageId={6} width={300}/>
         </div>
     </div>
   );
