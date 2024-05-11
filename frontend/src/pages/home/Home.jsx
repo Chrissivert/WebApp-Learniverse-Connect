@@ -48,9 +48,9 @@ export default function Home() {
       {/* Displaying favorite courses */}
       <div className="favorite-courses">
         <h2>Your Favorite Courses</h2>
-        {favoriteCourses.map(course => (
-          <Link to={`/courses/${course.id}`} key={course.id}>
-            <Coursecard course={course}/>
+        {favoriteCourses.map(favoriteCourse => (
+          <Link to={`/course/${favoriteCourse.course.id}`} key={favoriteCourse.course.id}>
+            <Coursecard course={favoriteCourse.course}/>
           </Link>
         ))}
       </div>
