@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Home.css';
 import '../../index.css';
 import { Link } from "react-router-dom";
@@ -9,10 +9,17 @@ import PostCourse from '../../components/crudTest/post/course/PostCourse';
 import Coursecard from '../../components/coursecard/Coursecard';
 import DataFetcher from '../../components/fetcher/Datafetcher';
 import GetImage from '../../components/crudTest/post/image/GetImage';
+import { AuthContext } from '../admin/AuthProvider';
 
 
 export default function Home() {
   const [favoriteCourses, setFavoriteCourses] = useState([]);
+
+  const { user, isAuthenticated } = useContext(AuthContext); // Access user and isAuthenticated from AuthContext
+
+  console.log("User:", user);
+  console.log("IsAuthenticated:", isAuthenticated);
+
 
   const fetchFavoriteCourses = async () => {
     try {

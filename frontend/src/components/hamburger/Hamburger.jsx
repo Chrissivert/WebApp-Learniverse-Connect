@@ -29,6 +29,7 @@ export default function HamburgerMenu() {
           <div><Button text='Profile' src='/profile'/></div>
           <div><Button text='Login' src='/login'/></div>
           <div><Button text='Register' src='/register'/></div>
+          <div><Button text='Admin' src='/admin'/></div>
         </div>
         </nav>
       </div>
