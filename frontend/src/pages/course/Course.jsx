@@ -6,6 +6,7 @@ import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
 import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
 import DataFetcher from "../../components/fetcher/Datafetcher";
+import GetImage from "../../components/crudTest/post/image/GetImage";
 
 function Course() {
   const { id } = useParams();
@@ -65,6 +66,7 @@ function Course() {
           <button className="goBackButton">← Courses</button>
         </Link>
         <h2 className="title">{course.title}</h2>
+        <GetImage imageId={id}/>
       </div>
       <p>{course.description}</p>
       <p>Start Date: {course.startDate}</p>
