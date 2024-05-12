@@ -35,7 +35,7 @@ export default function Coursecard({ course }) {
   return (
     <div className="course-card">
       <div className="image-section">
-        <GetImage imageId={course.id}/>
+        <GetImage imageId={course.imageId}/>
       </div>
       <div className="info-section">
         <h2>{course.title}</h2>

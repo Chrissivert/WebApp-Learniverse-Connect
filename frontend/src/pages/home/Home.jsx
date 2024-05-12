@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import "./Home.css";
 import "../../index.css";
 import { Link } from "react-router-dom";
-import FrontImage from "/home/front_image.png";
-import PostImage from "../../components/crudTest/post/image/PostImage";
-import GetImage from "../../components/crudTest/post/image/GetImage";
-import Coursecard from "../../components/coursecard/Coursecard";
-import DataFetcher from "../../components/fetcher/Datafetcher";
-import { AuthContext } from "../admin/AuthProvider";
+import FrontImage from '/home/front_image.png';
+import PostImage from '../../components/crudTest/post/image/PostImage';
+import GetImage from '../../components/crudTest/post/image/GetImage';
+import Coursecard from '../../components/coursecard/Coursecard';
+import DataFetcher from '../../components/fetcher/Datafetcher';
+import { AuthContext } from '../admin/AuthProvider';
 
 export default function Home() {
   const [favoriteCourses, setFavoriteCourses] = useState([]);
