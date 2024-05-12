@@ -44,6 +44,7 @@ public class AccessUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
+            System.out.println(user);
             return new AccessUserDetails(user.get());
         } else {
             throw new UsernameNotFoundException("User " + user + "not found");
@@ -137,13 +138,13 @@ public class AccessUserService implements UserDetailsService {
     private void createUser(String email, String password, String username) {
         Role userRole = this.roleRepository.findOneById(1);
         if (userRole != null) {
+
             User user = new User(email, this.createHash(password));
             user.addRole(userRole);
             user.setUsername(username);
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             user.setStartDate(sqlDate);
-
             this.userRepository.saveAndFlush(user);
         }
     }

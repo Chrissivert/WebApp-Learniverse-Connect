@@ -1,8 +1,36 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import '../../index.css';
-import './Login.css'
-import { AuthContext } from '../admin/AuthProvider';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import "../../index.css";
+import "./Login.css";
+import { AuthContext } from "../admin/AuthProvider";
+
+/**
+ * Parse JWT string, extract information from it
+ * Code copied from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library
+ * @param token JWT token string
+ * @returns {any} Decoded JWT object
+ */
+function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
 function Login() {
   const { login } = useContext(AuthContext); // Get login function from AuthContext
@@ -23,8 +51,13 @@ function Login() {
         throw new Error("Login failed");
       }
       const data = await response.json();
+      const userData = parseJwt(data.jwt);
+      console.log(userData);
+      localStorage.setItem("token", data.jwt);
+      setCookie("jwt", data.jwt);
+      setCookie("current_username", userData.sub);
+      setCookie("current_user_roles", userData.roles.join(","));
       login(data.user); // Update AuthContext with user information
-      console.log(data.user);
       alert("Login successful!");
       //window.location.href = "/";
     } catch (error) {
@@ -32,6 +65,22 @@ function Login() {
       alert("Login failed. Please try again.");
     }
   };
+
+  async function getAllUsers() {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:8080/users", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
@@ -69,6 +118,7 @@ function Login() {
           !
         </p>
       </form>
+      <button onClick={getAllUsers}></button>
     </div>
   );
 }
