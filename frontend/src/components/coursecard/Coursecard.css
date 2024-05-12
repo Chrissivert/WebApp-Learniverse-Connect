@@ -1,4 +1,6 @@
-.course-card {
+/* Coursecard.css */
+.course-card,
+.course-card-skeleton {
   display: flex;
   flex-direction: column;
   border-radius: 25px;
@@ -16,7 +18,8 @@
   transform: scale(1.05);
 }
 
-.image-section {
+.image-section,
+.skeleton-image {
   flex: 1;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;

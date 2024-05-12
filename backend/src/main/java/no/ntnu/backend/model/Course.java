@@ -1,11 +1,9 @@
 package no.ntnu.backend.model;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * 
@@ -29,11 +27,18 @@ public class Course {
     private String relatedCertification;
     //private int imageId;
 
+     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<FavoriteCourse> favoriteCourses;
+
   /**
    * 
    */
   public Course() {
   }
+
+public Course(int id) {
+  this.id = id;
+}
 
   /**
    * 
@@ -215,36 +220,18 @@ public class Course {
     this.description = description;
   }
 
-//   /**
-//    * 
-//    *
-//    * @return
-//    */
-//   public String getImageType() {
-//     return this.imageType;
-//   }
-
-//   /**
-//    * 
-//    *
-//    * @param imageType
-//    */
-//   public void setImageType(String imageType) {
-//     this.imageType = imageType;
-//   }
-
   @JsonIgnore
   public boolean isValid() {
     return //this.id > 0 &&
-      !this.title.isBlank() && this.title != null &&
+    this.title != null && !this.title.isBlank() &&
       this.levelId > 0 &&
       this.categoryId > 0 &&
       this.startDate != null &&
       this.endDate != null &&
       this.credit >= 0 &&
       this.hoursPerWeek >= 0 &&
-      !this.relatedCertification.isBlank() && this.relatedCertification != null &&
-      !this.description.isBlank() && this.description != null;
+      this.relatedCertification != null && !this.relatedCertification.isBlank() &&
+      this.description != null && !this.description.isBlank();
   }
 
   @Override

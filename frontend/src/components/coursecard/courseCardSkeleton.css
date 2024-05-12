@@ -1,0 +1,23 @@
+.courseCardSkeleton {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.skeleton {
+    background-color: #eee;
+    margin: 5px 0;
+}
+
+.skeleton-image {
+    height: 150px;
+}
+
+.skeleton-text {
+    height: 20px;
+    width: 100%;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
