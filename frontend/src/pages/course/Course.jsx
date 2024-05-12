@@ -69,13 +69,11 @@ function Course() {
         favoritesArray.push(id);
         localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(true);
-        console.log(`User ${userId} added course ${id} to favorites.`);
       } else {
         await DataFetcher.removeFavoriteCourse(userId, id);
         favoritesArray = favoritesArray.filter(favId => favId !== id);
         localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
-        console.log(`User ${userId} removed course ${id} from favorites.`);
       }
     } catch (error) {
       console.error('Failed to update favorites:', error);

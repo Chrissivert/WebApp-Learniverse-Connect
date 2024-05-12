@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 /**
@@ -28,6 +26,8 @@ public class User {
   private String email;
   private String password;
   private boolean active = true;
+
+  private int imgId;
 
   @ManyToMany(
           fetch = FetchType.EAGER
@@ -119,6 +119,14 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public int getImgId(){
+    return this.imgId;
+  }
+
+  public void setImgId(int imgId){
+    this.imgId = imgId;
   }
 
   /*@JsonIgnore

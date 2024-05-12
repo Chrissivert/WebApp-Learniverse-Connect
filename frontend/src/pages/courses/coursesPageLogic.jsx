@@ -29,12 +29,7 @@ function useCoursesPageLogic() {
         const categoriesData = await DataFetcher.fetchCategories();
 
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
-
-        console.log('Fetched Courses:', coursesData);
-        console.log('Fetched Cheapest Prices:', courseProviderData);
-        console.log('Fetched Categories:', categoriesData);
-        console.log('Combined Courses:', combinedCourses);
-
+        
         setAllCourses(combinedCourses);
 
         // Calculate the maximum price from courseProviderData

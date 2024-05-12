@@ -6,7 +6,6 @@ function CategoryFilter({ onCategoryChange }) {
 
   const handleCategoryChange = (event) => {
     const categoryName = event.target.value;
-    console.log(categoryName);
     setSelectedCategory(categoryName);
     onCategoryChange(categoryName); // Pass categoryName instead of category ID
   };
