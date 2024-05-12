@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Coursecard.css";
 import { loadImage } from "../../functions/ImageLoader"; 
 import CourseCardSkeleton from "./CourseCardSkeleton"; 
+import GetImage from "../crudTest/post/image/GetImage";
 
-function Coursecard({ course }) {
-  const [imageUrl, setImageUrl] = useState(null);
+export default function Coursecard({ course }) {
+  // const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true); 
   
   // useEffect(() => {
@@ -21,15 +22,15 @@ function Coursecard({ course }) {
 
   // Set loading to true initially and display skeleton
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
   }, []);
 
-  if (!loading) {
+  if (loading) {
     return <CourseCardSkeleton />;
   }
 
-  const { cheapestPrice, cheapestPriceCurrency } = course;
-  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+  // const { cheapestPrice, cheapestPriceCurrency } = course;
+  // const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
 
   return (
     <div className="course-card">
