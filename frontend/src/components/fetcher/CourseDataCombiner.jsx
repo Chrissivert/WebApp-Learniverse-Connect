@@ -8,7 +8,8 @@ class CourseDataCombiner {
       }, {});
 
       // Assign categories to courses based on their categoryId
-      const coursesWithData = courses.map((course) => {
+      console.log('courses:', courses)
+      const coursesWithData = courses.data.map((course) => {
         // Get the category name for the course's categoryId
         const categoryName = categoryIdToNameMap[course.categoryId] || "Other";
 

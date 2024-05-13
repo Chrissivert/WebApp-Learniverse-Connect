@@ -3,6 +3,9 @@ import DataFetcher from '../../components/fetcher/Datafetcher';
 import CourseDataCombiner from '../../components/fetcher/CourseDataCombiner';
 import { useCurrencyContext } from '../../components/currencySelector/TargetCurrencyContext';
 import { filterLogic } from "./FilterLogic.jsx";
+import { getCoursesFromServer } from '../../services/course-service.jsx';
+import { getCategoriesFromServer } from '../../services/category-service.jsx';
+
 
 function useCoursesPageLogic() {
   const { targetCurrency } = useCurrencyContext();
@@ -24,9 +27,15 @@ function useCoursesPageLogic() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coursesData = await DataFetcher.fetchCourses();
+        const coursesData = await getCoursesFromServer();
         const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
+        // const categoriesData = getCategoriesFromServer();
         const categoriesData = await DataFetcher.fetchCategories();
+
+        console.log('coursesData:', coursesData)
+        console.log('courseProviderData:', courseProviderData)
+        console.log('categoriesData:', categoriesData)
+        console.log("dadad")
 
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
         

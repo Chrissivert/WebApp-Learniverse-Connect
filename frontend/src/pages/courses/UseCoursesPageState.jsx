@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import DataFetcher from '../../components/fetcher/Datafetcher';
 import CourseDataCombiner from '../../components/fetcher/CourseDataCombiner';
+import { getCoursesFromServer } from '../../../../services/course-service';
+import { getTagsFromServer } from '../../../../services/course-service';
+
 
 function useCoursesPageState() {
   const [filters, setFilters] = useState({
@@ -20,9 +23,11 @@ function useCoursesPageState() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coursesData = await DataFetcher.fetchCourses();
+        // const coursesData = await DataFetcher.fetchCourses();
+
+        const coursesData = getCoursesFromServer() 
         const cheapestPricesData = await DataFetcher.fetchCheapestPrices();
-        const tagsData = await DataFetcher.fetchCourseTags();
+        const tagsData =  getTagsFromServer()
   
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, cheapestPricesData, tagsData);
         setCourses(combinedCourses);
