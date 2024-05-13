@@ -35,7 +35,7 @@ export function getOneCourseFromServer(courseId) {
  * Updates a course on the server.
  *
  * @param {int} courseID The ID of the course to be updated.
- * @param {FormData} course The updates course to be sent.
+ * @param {FormData} course The updated course to be sent.
  * @returns The outcome of the put request.
  */
 export function updateCourseOnServer(courseId, course) {
