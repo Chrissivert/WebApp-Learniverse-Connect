@@ -19,8 +19,8 @@
 body {
   place-items: center;
   margin-top: 5%;
-  margin-bottom: 2rem;
-  padding-top: 2rem;
+  margin-bottom: 8rem;
+  padding-top: 3rem;
   font-size: var(--base-font-size); /* Apply base font size */
 }
 
