@@ -35,6 +35,11 @@ export default function PostImage() {
 
     try {
       uploadImageToServer(formData);
+      console.log("Succesfull upload!");
+
+      setFile(null);
+      setAltText("");
+      setPreviewImage(null)
     } catch (error) {
       console.error("Error uploading file:", error);
     }

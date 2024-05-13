@@ -68,7 +68,7 @@ export async function sendApiDeleteRequest(url) {
 async function sendApiRequest(method, url, data) {
   try {
     const config = {
-      method: method.toLowerCase(),
+      method: method,
       baseURL: API_BASE_URL,
       url: url,
       data: (method === apiRequestMethods.POST || apiRequestMethods.PUT) ? data : null,

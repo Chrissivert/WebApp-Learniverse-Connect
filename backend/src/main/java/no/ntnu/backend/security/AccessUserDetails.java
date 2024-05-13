@@ -20,7 +20,7 @@ public class AccessUserDetails implements UserDetails {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.isActive = user.isActive();
-        //this.convertRoles(user.getRoles());
+        this.convertRoles(user.getRoles());
     }
 
     private void convertRoles(Set<Role> roles) {

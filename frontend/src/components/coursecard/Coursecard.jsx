@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Coursecard.css";
 import { loadImage } from "../../functions/ImageLoader"; 
 import CourseCardSkeleton from "./CourseCardSkeleton"; 
+import GetImage from "../crudTest/post/image/GetImage";
 
-function Coursecard({ course }) {
-  const [imageUrl, setImageUrl] = useState(null);
+export default function Coursecard({ course }) {
+  // const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true); 
   
   // useEffect(() => {
@@ -21,27 +22,25 @@ function Coursecard({ course }) {
 
   // Set loading to true initially and display skeleton
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
   }, []);
 
-  if (!loading) {
+  if (loading) {
     return <CourseCardSkeleton />;
   }
 
-  const { cheapestPrice, cheapestPriceCurrency } = course;
-  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+  // const { cheapestPrice, cheapestPriceCurrency } = course;
+  // const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
 
   return (
     <div className="course-card">
-      <div className="image-section" style={{backgroundImage: `url(${imageUrl})`}}>
+      <div className="image-section">
+        <GetImage imageId={course.imageId}/>
       </div>
-      <div className="text-section">
-        <h2> {course.title}</h2>
-        <p>Credits: {course.credit}</p>
-        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
+      <div className="info-section">
+        <h2>{course.title}</h2>
+        <p>Start Date: {course.startDate}</p>
       </div>
     </div>
-  );
+  )
 }
-
-export default Coursecard;

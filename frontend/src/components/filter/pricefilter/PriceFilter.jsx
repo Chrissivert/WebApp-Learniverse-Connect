@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './priceFilter.css'; // Import CSS file
 
-function PriceRangeFilter({ onPriceChange }) {
+function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a prop
   const [useInput, setUseInput] = useState(false);
   const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(100000);
+  const [maxValue, setMaxValue] = useState(Math.ceil(maxPrice)); // Use maxPrice as initial value and round it up
 
   const handleMinChange = (e) => {
     let value = parseFloat(e.target.value);
@@ -15,7 +15,7 @@ function PriceRangeFilter({ onPriceChange }) {
   
   const handleMaxChange = (e) => {
     let value = parseFloat(e.target.value);
-    value = Math.min(1000, Math.max(value, minValue)); // Restrict within the range
+    value = Math.min(Math.ceil(maxPrice), Math.max(value, minValue)); // Restrict within the range
     setMaxValue(value);
     onPriceChange(minValue, value);
   };
@@ -31,6 +31,11 @@ function PriceRangeFilter({ onPriceChange }) {
   useEffect(() => {
     onPriceChange(minValue, maxValue);
   }, [minValue, maxValue]);
+
+  useEffect(() => {
+    // Update maxValue when maxPrice changes
+    setMaxValue(Math.ceil(maxPrice));
+  }, [maxPrice]);
 
   return (
     <div className="price-range-container"> {/* Apply styling to container */}
@@ -71,7 +76,7 @@ function PriceRangeFilter({ onPriceChange }) {
             <input
               type="range"
               min={0}
-              max={100000}
+              max={maxPrice} // Use maxPrice as maximum value
               value={minValue}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);
@@ -81,11 +86,11 @@ function PriceRangeFilter({ onPriceChange }) {
           </div>
           <div>
             {/* Scrollbar */}
-            <label>Max Price: {maxValue}</label>
+            <label>Max Price: {Math.ceil(maxPrice)}</label> {/* Display rounded up maxPrice */}
             <input
               type="range"
               min={0}
-              max={100000}
+              max={maxPrice} // Use maxPrice as maximum value
               value={maxValue}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);

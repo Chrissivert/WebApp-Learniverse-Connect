@@ -5,68 +5,48 @@
   flex-direction: column;
   border-radius: 25px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   border: 2px solid #8a2be2;
+  height: 400px;
 }
 
 .course-card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.course-card h2,
-.course-card-skeleton h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.course-card p,
-.course-card-skeleton p {
-  margin: 4px 0;
-  color: #666;
-}
-
-.course-card .cheapest-price,
-.course-card-skeleton .cheapest-price {
-  font-weight: bold;
-  color: green;
+  color: #8a2be2;
+  transform: scale(1.05);
 }
 
 .image-section,
 .skeleton-image {
   flex: 1;
-  background-size: cover;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
-.text-section,
-.skeleton-text {
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.info-section {
   padding: 20px;
-  flex: 1;
+  /* flex: flex; */
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
-.text-section h2,
-.skeleton-text h2 {
+.info-section h2 {
   font-size: 24px;
   margin-bottom: 8px;
 }
 
-.text-section p,
-.skeleton-text p {
+.info-section p {
   margin: 4px 0;
-}
-
-.course-card {
-  height: 400px; /* Adjusted height */
-}
-
-.course-card-skeleton {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
 }

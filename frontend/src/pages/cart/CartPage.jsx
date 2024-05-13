@@ -19,14 +19,7 @@ function CartPage() {
   const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
   // Calculate total price
-  
-  // Log course objects and cheapestPrice
-  console.log("Cart:", cart);
-  cart.forEach(({ course }) => {
-    console.log("Course ID:", course.id);
-    console.log("Course Object:", course);
-    console.log("Cheapest Price:", course.selectedProvider.price);
-  });
+
 
   return (
     <div className="cart-page">
@@ -40,14 +33,6 @@ function CartPage() {
             <Coursecard course={course.course} />
             <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
             <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p> {/* Display provider price and currency */}
-            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
-          </div>
-        ))}
-        {cart.map(({ course }) => ( // Using cart.map here
-          <div key={course.id} className="cart-item">
-            <Coursecard course={course.course} />
-            <p className="provider">Provider: {course.selectedProvider.providerName}</p> {/* Display provider name */}
-            <p className="price">Price: {course.selectedProvider.currency} {course.selectedProvider.price}</p> {/* Display provider price and currency */}
             <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
           </div>
         ))}

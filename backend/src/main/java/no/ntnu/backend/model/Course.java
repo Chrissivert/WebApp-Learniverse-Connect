@@ -1,38 +1,44 @@
 package no.ntnu.backend.model;
+
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * 
  *
- * @author 
+ * @author
  * @version 29.03.2024
  */
 @Entity
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String title;
-    private int levelId;
-    private int categoryId;
-    private Date startDate;
-    private Date endDate;
-    private double credit;
-    private double hoursPerWeek;
-    private String description;
-    private String relatedCertification;
-    //private int imageId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private String title;
+  private int levelId;
+  private int categoryId;
+  private Date startDate;
+  private Date endDate;
+  private double credit;
+  private double hoursPerWeek;
+  private String description;
+  private String relatedCertification;
+  private Integer imageId;
+
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  private List<FavoriteCourse> favoriteCourses;
 
   /**
    * 
    */
   public Course() {
+  }
+
+  public Course(int id) {
+    this.id = id;
   }
 
   /**
@@ -215,36 +221,36 @@ public class Course {
     this.description = description;
   }
 
-//   /**
-//    * 
-//    *
-//    * @return
-//    */
-//   public String getImageType() {
-//     return this.imageType;
-//   }
+  /**
+   * 
+   *
+   * @return
+   */
+  public Integer getImageId() {
+    return this.imageId;
+  }
 
-//   /**
-//    * 
-//    *
-//    * @param imageType
-//    */
-//   public void setImageType(String imageType) {
-//     this.imageType = imageType;
-//   }
+  /**
+   * 
+   *
+   * @param imageId
+   */
+  public void setImageId(Integer imageId) {
+    this.imageId = imageId;
+  }
 
   @JsonIgnore
   public boolean isValid() {
-    return //this.id > 0 &&
-      !this.title.isBlank() && this.title != null &&
-      this.levelId > 0 &&
-      this.categoryId > 0 &&
-      this.startDate != null &&
-      this.endDate != null &&
-      this.credit >= 0 &&
-      this.hoursPerWeek >= 0 &&
-      !this.relatedCertification.isBlank() && this.relatedCertification != null &&
-      !this.description.isBlank() && this.description != null;
+    return // this.id > 0 &&
+    this.title != null && !this.title.isBlank() &&
+        this.levelId > 0 &&
+        this.categoryId > 0 &&
+        this.startDate != null &&
+        this.endDate != null &&
+        this.credit >= 0 &&
+        this.hoursPerWeek >= 0 &&
+        this.relatedCertification != null && !this.relatedCertification.isBlank() &&
+        this.description != null && !this.description.isBlank();
   }
 
   @Override
@@ -263,13 +269,14 @@ public class Course {
         this.credit == that.credit &&
         this.hoursPerWeek == that.hoursPerWeek &&
         this.relatedCertification == that.relatedCertification &&
-        this.description == that.description;
+        this.description == that.description &&
+        this.imageId == that.imageId;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(this.id, this.title, this.levelId, this.categoryId, this.startDate, this.endDate, this.credit,
-        this.hoursPerWeek, this.relatedCertification, this.description);
+        this.hoursPerWeek, this.relatedCertification, this.description, this.imageId);
   }
 
   @Override
@@ -284,6 +291,7 @@ public class Course {
         "credit=" + this.credit + ", " +
         "hoursPerWeek=" + this.hoursPerWeek + ", " +
         "relatedCertification=" + this.relatedCertification +
-        "description=" + this.description + ']';
+        "description=" + this.description +
+        "imageId=" + this.imageId + "]";
   }
 }

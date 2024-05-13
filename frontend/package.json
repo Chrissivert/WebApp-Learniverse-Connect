@@ -12,10 +12,12 @@
   "dependencies": {
     "antd": "^5.16.4",
     "axios": "^1.6.8",
+    "core-js": "^3.37.0",
     "dotenv": "^16.4.5",
     "hamburger": "^0.1.1",
     "hamburger-react": "^2.5.0",
     "http": "^0.0.1-security",
+    "jwt-decode": "^4.0.0",
     "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

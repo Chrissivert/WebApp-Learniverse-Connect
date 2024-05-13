@@ -15,11 +15,14 @@ import './index.css';
 import { CurrencyProvider } from './components/currencySelector/TargetCurrencyContext.jsx';
 import CartProvider from './pages/cart/CartProvider.jsx';
 import { SpeakingProvider } from './components/textReader/speakingContext.jsx';
+import AdminPage from './pages/admin/Admin.jsx';
+import { AuthProvider } from './pages/admin/AuthProvider.jsx';
 
 export default function App() {  
   const [targetCurrency, setTargetCurrency] = useState('AUD'); 
 
   return (
+    <AuthProvider>
     <SpeakingProvider>
     <CurrencyProvider>
       <CartProvider> 
@@ -35,11 +38,13 @@ export default function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="admin" element={<AdminPage />} />
           </Routes>
           <Footer />
         </Router>
       </CartProvider>
     </CurrencyProvider>
     </SpeakingProvider>
+    </AuthProvider>
   );
 }

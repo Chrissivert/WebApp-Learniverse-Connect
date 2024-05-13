@@ -9,8 +9,8 @@ import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
   const { cartPopped } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
 
   return (
     <header className="header-container">
@@ -19,12 +19,16 @@ export default function Header() {
       </div>
       
       <div className="currency-selector-container">
-        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK', 'Ask Girts']} />
+        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
       </div>
 
       <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
+
+
+          <span className="cart-text">Cart ({cart.length})</span>
+
         </Link>
       </div>
 

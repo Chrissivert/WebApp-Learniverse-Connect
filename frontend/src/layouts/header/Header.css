@@ -1,4 +1,4 @@
-header {
+.header-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -14,7 +14,6 @@ header {
   transition: 0.3s;
   z-index: 1000;
 }
-
 .cart-container,
 .login-container { /* Adjust for login-container for consistency */
   display: flex;
@@ -70,3 +69,35 @@ header {
   animation: pop 0.3s ease-in-out;
 }
 
+
+
+/* Navigation links */
+.header-container a {
+  color: white;
+  text-decoration: none;
+  position: relative; /* Added for positioning the underline */
+}
+
+/* Underline */
+.header-container a::after {
+  content: '';
+  position: absolute;
+  left: 50%; /* Start from the middle */
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background-color: rgb(255, 255, 255);
+  transition: width 0.3s, left 0.3s; /* Smooth transition effect for width and position */
+}
+
+/* Hover effect */
+.header-container a:hover::after {
+  width: calc(100%); /* Underline expands to full width with a little distance on each side */
+  left: 0; /* Adjusted position to maintain distance */
+}
+
+/* Active link */
+.header-container a.active::after {
+  width: calc(100%); /* Underline stays at full width for active link */
+  left: 0; /* Adjusted position to maintain distance */
+}

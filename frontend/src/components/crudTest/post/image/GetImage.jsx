@@ -7,7 +7,7 @@ import { generateImageUrl, getImageDataFromServer } from "../../../../services/i
  * @param {int} imageId 
  * @returns 
  */
-export default function GetImage({imageId}) {
+export default function GetImage({imageId, width}) {
   const [altText, setAltText] = useState('');
 
   /**
@@ -29,7 +29,7 @@ export default function GetImage({imageId}) {
 
   return (
     <div className="image">
-      <img src={generateImageUrl(imageId)} width={300} alt={altText}/>
+      <img src={altText ? generateImageUrl(imageId) : null} width={width} alt={altText}/>
     </div>
   )
 }

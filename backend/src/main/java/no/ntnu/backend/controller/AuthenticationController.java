@@ -59,6 +59,7 @@ public class AuthenticationController {
         }
         final UserDetails userDetails = userService.loadUserByUsername(
                 authenticationRequest.getEmail());
+        logger.info("USERDETAILS :" + String.valueOf(userDetails.getUsername()));
         final String jwt = jwtUtil.generateToken(userDetails);
         logger.info("JWT token generated successfully for email: {}", authenticationRequest.getEmail());
         return ResponseEntity.ok(new AuthenticationResponse(jwt));

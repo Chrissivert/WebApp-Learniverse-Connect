@@ -2,42 +2,53 @@ import { useState, useEffect } from 'react';
 import DataFetcher from '../../components/fetcher/Datafetcher';
 import CourseDataCombiner from '../../components/fetcher/CourseDataCombiner';
 import { useCurrencyContext } from '../../components/currencySelector/TargetCurrencyContext';
+import { filterLogic } from "./FilterLogic.jsx";
 
-function coursesPageLogic() {
+function useCoursesPageLogic() {
   const { targetCurrency } = useCurrencyContext();
   const [filters, setFilters] = useState({
     searchQuery: '',
     minPrice: 0,
-    maxPrice: 100000,
+    maxPrice: 100000, // Initialize with a default value
     sortBy: '',
     sortOrder: 'asc',
     category: ''
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(5); // Number of courses per page - hardcoded
+  const [perPage] = useState(5);
+  const [allCourses, setAllCourses] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [courseTags, setCourseTags] = useState([]);
-  
+  const [maxPrice, setMaxPrice] = useState(100000); // Initialize with a default value
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const coursesData = await DataFetcher.fetchCourses();
-        const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency); // Pass target currency
-        const tagsData = await DataFetcher.fetchCourseTags();''
+        const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
+        const categoriesData = await DataFetcher.fetchCategories();
 
-        console.log('Course Provider Data:', courseProviderData); // Logging course provider data
-  
-        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, tagsData);
-        setCourses(combinedCourses);
-        setCourseTags(tagsData);
+        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
+        
+        setAllCourses(combinedCourses);
+
+        // Calculate the maximum price from courseProviderData
+        if (courseProviderData.length > 0) {
+          const maxPriceValue = Math.max(...courseProviderData.map(provider => provider.price));
+          setMaxPrice(maxPriceValue);
+        }
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
   
     fetchData();
-  }, [targetCurrency]); // Update when targetCurrency changes
+  }, [targetCurrency]);
+
+  useEffect(() => {
+    const filteredCourses = filterLogic(allCourses, filters);
+    setCourses(filteredCourses);
+  }, [filters, allCourses]);
 
   const handleSortChange = (sortBy, sortOrder) => {
     setFilters({ ...filters, sortBy, sortOrder });
@@ -46,7 +57,7 @@ function coursesPageLogic() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
+
   const handleSearchQueryChange = (query) => {
     setFilters({ ...filters, searchQuery: query });
   };
@@ -59,32 +70,18 @@ function coursesPageLogic() {
     setFilters({ ...filters, category });
   };
 
-  const handleCurrencyChange = async (currency) => {
-    setTargetCurrency(currency); // Update target currency
-
-    try {
-      const cheapestPricesData = await DataFetcher.fetchCheapestPrices(currency); // Fetch prices for selected currency
-      const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(courses, cheapestPricesData, courseTags);
-      setCourses(combinedCourses); // Update courses with new prices
-    } catch (error) {
-      console.error('Error fetching prices:', error);
-    }
-  };
-
   return {
-    filters,
+    filters: { ...filters, maxPrice }, // include maxPrice in filters
     currentPage,
     perPage,
     courses,
-    courseTags,
     targetCurrency,
     handleSortChange,
     handlePageChange,
     handleSearchQueryChange,
     handlePriceChange,
     handleCategoryChange,
-    handleCurrencyChange,
   };
 }
 
-export default coursesPageLogic;
+export default useCoursesPageLogic;

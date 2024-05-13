@@ -2,10 +2,9 @@ package no.ntnu.backend.model;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -28,6 +27,8 @@ public class User {
   private String password;
   private boolean active = true;
 
+  private int imgId;
+
   @ManyToMany(
           fetch = FetchType.EAGER
   )
@@ -42,6 +43,9 @@ public class User {
   )
   private Set<Role> roles = new LinkedHashSet();
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<FavoriteCourse> favoriteCourses;
+
   public User() {
   }
 
@@ -49,6 +53,10 @@ public class User {
     this.email = email;
     this.password = password;
   }
+
+  public User(int id) {
+    this.id = id;
+}
 
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
@@ -111,6 +119,14 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public int getImgId(){
+    return this.imgId;
+  }
+
+  public void setImgId(int imgId){
+    this.imgId = imgId;
   }
 
   /*@JsonIgnore
