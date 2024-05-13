@@ -18,17 +18,19 @@ function Courses({ courses }) {
     }
   }, [courses]);
   return (
-    <div className="Courses">
+    <div className="courses">
       {/* Show skeleton while loading or if no courses are available */}
-      {loading || courses.length === 0 ? (
+      {loading ? (
         Array(6).fill().map((_, index) => (
           <CourseCardSkeleton key={index}/>
         ))
       ) : (
         courses.map((course) => (
-          <Link to={`/course/${course.id}`} key={course.id}>
-            <Coursecard course={course}/>
-          </Link>
+          <div className="test">
+            <Link to={`/course/${course.id}`} key={course.id}>
+              <Coursecard course={course}/>
+            </Link>
+          </div>
         ))
       )}
     </div>

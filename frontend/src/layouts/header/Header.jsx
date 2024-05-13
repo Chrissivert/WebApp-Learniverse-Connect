@@ -25,10 +25,7 @@ export default function Header() {
       <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
-
-
           <span className="cart-text">Cart ({cart.length})</span>
-
         </Link>
       </div>
 

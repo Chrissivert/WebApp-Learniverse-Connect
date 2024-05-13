@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-footer{
+/* footer {
   background-color: rgb(151, 88, 163);
   color: white;
   width: 100%;
@@ -14,6 +14,22 @@ footer{
   right: 0;
   position: absolute;
   margin-top: auto;
+  bottom: 0;
   z-index: 0;
   padding: 1rem;
+} */
+
+footer {
+  background-color: rgb(151, 88, 163);
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  padding: 1rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  height: 6rem;
 }
+

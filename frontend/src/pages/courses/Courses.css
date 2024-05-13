@@ -1,8 +1,16 @@
-.Courses {
+.courses {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Adjust column widths */
-  gap: 3%;
+  grid-template-columns: repeat(2, 1fr);
+  /* gap: 2%; */
   align-items: center;
+}
+
+.test {
+  /* display: grid; */
+  /* grid-template-columns: repeat(2, 1fr); */
+  /* gap: 2%; */
+  padding: 1%;
+  /* align-items: center; */
 }
 
 @media (max-width: 1000px) {
