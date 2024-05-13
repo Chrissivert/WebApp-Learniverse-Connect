@@ -9,15 +9,15 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
  * CRUD REST-API Request methods.
  */
 const apiRequestMethods = Object.freeze({
-  POST: 'post',
-  GET: 'get',
-  PUT: 'put',
-  DELETE: 'delete'
+  POST: "post",
+  GET: "get",
+  PUT: "put",
+  DELETE: "delete",
 });
 
 /**
  * Sends an HTTP POST REST-API request to the backend.
- * 
+ *
  * @param {string} url The URL that will be used for the request.
  * @param {FormData} data The data to be sent with the request.
  * @returns The response from the request.
@@ -28,7 +28,7 @@ export async function sendApiPostRequest(url, data) {
 
 /**
  * Sends an HTTP GET REST-API request to the backend.
- * 
+ *
  * @param {string} url The URL that will be used for the request.
  * @returns The response from the request.
  */
@@ -38,7 +38,7 @@ export async function sendApiGetRequest(url) {
 
 /**
  * Sends an HTTP PUT REST-API request to the backend.
- * 
+ *
  * @param {string} url The URL that will be used for the request.
  * @param {FormData} data The data to be sent with the request.
  * @returns The response from the request.
@@ -49,7 +49,7 @@ export async function sendApiPutRequest(url, data) {
 
 /**
  * Sends an HTTP DELETE REST-API request to the backend.
- * 
+ *
  * @param {string} url The URL that will be used for the request.
  * @returns The response from the request.
  */
@@ -71,13 +71,18 @@ async function sendApiRequest(method, url, data) {
       method: method,
       baseURL: API_BASE_URL,
       url: url,
-      data: (method === apiRequestMethods.POST || apiRequestMethods.PUT) ? data : null,
-      headers: (url.includes('images') ? ({
-        'Content-Type': 'multipart/form-data'
-      }) : null // ({
-      //  'Content-Type': 'application/json'
-      //})
-    )};
+      data:
+        method === apiRequestMethods.POST || apiRequestMethods.PUT
+          ? data
+          : null,
+      headers: url.includes("images")
+        ? {
+            "Content-Type": "multipart/form-data",
+          }
+        : {
+            "Content-Type": "application/json",
+          },
+    };
 
     const response = await axios(config);
     console.log("API request sent succesfully");
