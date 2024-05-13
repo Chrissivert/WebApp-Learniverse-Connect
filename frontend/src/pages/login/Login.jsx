@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../../index.css";
 import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
+import { postAuthToServer } from "../../services/user-request";
+import { jwtDecode } from "jwt-decode";
 
 /**
  * Parse JWT string, extract information from it
@@ -40,24 +42,31 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/authenticate", {
+      /* const response = await fetch("http://localhost:8080/api/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
-      if (!response.ok) {
+      }); */
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      console.log(formData);
+      const response = await postAuthToServer(formData);
+      console.log(response);
+
+      /* if (!response.ok) {
         throw new Error("Login failed");
-      }
-      const data = await response.json();
-      const userData = parseJwt(data.jwt);
+      } */
+      console.log("data data " + response.data.jwt);
+      const userData = parseJwt(response.data.jwt);
       console.log(userData);
-      localStorage.setItem("token", data.jwt);
-      setCookie("jwt", data.jwt);
+      localStorage.setItem("token", response.jwt);
+      setCookie("jwt", response.jwt);
       setCookie("current_username", userData.sub);
       setCookie("current_user_roles", userData.roles.join(","));
-      login(data.user); // Update AuthContext with user information
+      login(response.user); // Update AuthContext with user information
       alert("Login successful!");
       //window.location.href = "/";
     } catch (error) {
