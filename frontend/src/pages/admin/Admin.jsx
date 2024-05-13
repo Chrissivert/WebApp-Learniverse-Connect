@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './AuthProvider';
+import Unauthorized from '../error/unauthorized/401';
 
 function AdminPage() {
     const auth = useContext(AuthContext);
@@ -22,10 +23,11 @@ function AdminPage() {
     // If user is not admin, show unauthorized page
     if (!isAdmin) {
         return (
-            <div>
-                <h1>Unauthorized Access</h1>
-                <p>You do not have permission to access this page.</p>
-            </div>
+            // <div>
+            //     <h1>Unauthorized Access</h1>
+            //     <p>You do not have permission to access this page.</p>
+            // </div>
+            <Unauthorized/>
         );
     }
 
