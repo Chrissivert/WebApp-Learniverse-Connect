@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @Operation(summary = "Retrieves a user by its Email", description = "Retrieves a user by its Email.")
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<User> readUserByEmail(@PathVariable String email) {
         return this.userService.readByEmail(email);
     }

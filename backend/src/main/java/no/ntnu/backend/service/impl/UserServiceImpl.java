@@ -34,7 +34,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public List<User> readAll() {
-    return this.userRepository.findAll();
+    System.out.println("Reading all");
+  return this.userRepository.findAll();
   }
 
   @Override

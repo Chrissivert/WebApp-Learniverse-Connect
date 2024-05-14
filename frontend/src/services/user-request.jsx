@@ -5,7 +5,7 @@ import {
   sendApiDeleteRequest,
 } from "./api-requests";
 
-const PROFILE_URL = "/user";
+const PROFILE_URL = "/users";
 
 /**
  * Retrieves a user from the server by ID.
@@ -13,7 +13,7 @@ const PROFILE_URL = "/user";
  * @param {int} userId The ID of the user to be retrieved.
  * @returns The outcome of the get request.
  */
-export function getUserFromServerById(userId) {
+export async function getUserById(userId) {
   return sendApiGetRequest(PROFILE_URL + "/" + userId);
 }
 
@@ -23,8 +23,8 @@ export function getUserFromServerById(userId) {
  * @param {String} email The email of the user to be retrieved.
  * @returns The outcome of the get request.
  */
-export function getUserFromServerByEmail(email) {
-  return sendApiGetRequest(PROFILE_URL + "/" + email);
+export function getUserByEmail(email) {
+  return sendApiGetRequest(PROFILE_URL + "/email/" + email);
 }
 
 const REGISTER_URL = "/api/signup";

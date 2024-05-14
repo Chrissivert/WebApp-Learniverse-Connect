@@ -65,7 +65,7 @@ public class SecurityConfiguration {
                 // Admin URL is accessible only for Admin role
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/admin/**").hasRole("ADMIN"))
                 // Users URL is accessible only for User role
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/users/**").hasRole("USER"))
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/users").permitAll())
                 // Profile URL is accessible only for User role
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/profile/**").hasRole("USER"))
                 // Other URLs are accessible by everyone.
