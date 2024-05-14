@@ -8,18 +8,26 @@ export default function HamburgerMenu() {
 
   const toggleMenu = () => {
     setOpen(!isOpen);
-  }
+  };
+
+  // Function to handle key press events
+  const handleKeyPress = (event) => {
+    // If the key pressed is 'Enter' and the menu is closed, open it
+    if (event.key === 'Enter' && !isOpen) {
+      setOpen(true);
+    }
+    // If the key pressed is 'Escape' and the menu is open, close it
+    else if (event.key === 'Escape' || event.key === "Enter" && isOpen) {
+      setOpen(false);
+    }
+  };
 
   return (
-    <>
-      {/* <div> */}
-      <div className={'hamburger-menu' + (isOpen ? ' open' : '')}> 
-        {/* <div className={'menu-container' + (isOpen ? 'open' : '')}> */}
-        <div className='menu-icon-container' onClick={toggleMenu}>
-          {/* <Hamburger direction='right' toggled={isOpen} toggle={toggleMenu}/> */}
-          <Hamburger direction='right' toggled={isOpen}/>
-        </div>
-        <nav className={'menu' + (isOpen ? ' open' : '')}>
+    <div className={'hamburger-menu' + (isOpen ? ' open' : '')} tabIndex="0" onKeyDown={handleKeyPress}>
+      <div className='menu-icon-container' onClick={toggleMenu}>
+        <Hamburger direction='right' toggled={isOpen} />
+      </div>
+      <nav className={'menu' + (isOpen ? ' open' : '')}>
         <hr />
         <div className="flex-container">
           <div><Button text='Home' src='/'/></div>
@@ -31,8 +39,7 @@ export default function HamburgerMenu() {
           <div><Button text='Register' src='/register'/></div>
           <div><Button text='Admin' src='/admin'/></div>
         </div>
-        </nav>
-      </div>
-    </>
+      </nav>
+    </div>
   );
 }

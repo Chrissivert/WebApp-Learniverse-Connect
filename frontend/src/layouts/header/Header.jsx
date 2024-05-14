@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useContext } from 'react';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
@@ -15,7 +14,7 @@ export default function Header() {
   return (
     <header className="header-container">
       <div className="logo-container">
-          <Logo home_src={true} aria-label="Homepage-button" />
+        <Logo home_src={true} aria-label="Homepage-button" />
       </div>
       
       <div className="currency-selector-container">
@@ -25,10 +24,7 @@ export default function Header() {
       <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
-
-
           <span className="cart-text">Cart ({cart.length})</span>
-
         </Link>
       </div>
 
@@ -38,7 +34,8 @@ export default function Header() {
         </Link>
       </div>
 
-      <HamburgerMenu />
+      {/* Add tabIndex to HamburgerMenu */}
+      <HamburgerMenu tabIndex="0" />
     </header>
   );
 }
