@@ -86,7 +86,7 @@ function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a pr
           </div>
           <div>
             {/* Scrollbar */}
-            <label>Max Price: {Math.ceil(maxPrice)}</label> {/* Display rounded up maxPrice */}
+            <label>Max Price: {maxValue}</label>
             <input
               type="range"
               min={0}

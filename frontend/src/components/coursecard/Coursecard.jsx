@@ -40,6 +40,7 @@ export default function Coursecard({ course }) {
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
         {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
+        {/* <p>Credits: {course.credit}</p> */}
       </div>
     </div>
   )
