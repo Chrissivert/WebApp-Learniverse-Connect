@@ -2,7 +2,7 @@ class CourseDataCombiner {
   static async combineCoursesWithPricesAndCategories(courses, courseProvider, category) {
     try {
       // Create a map of category IDs to category names
-      const categoryIdToNameMap = category.reduce((map, cat) => {
+      const categoryIdToNameMap = category.data.reduce((map, cat) => {
         map[cat.id] = cat.subject;
         return map;
       }, {});

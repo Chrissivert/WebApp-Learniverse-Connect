@@ -23,7 +23,6 @@ function useCoursesPageState() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const coursesData = await DataFetcher.fetchCourses();
 
         const coursesData = getCoursesFromServer() 
         const cheapestPricesData = await DataFetcher.fetchCheapestPrices();

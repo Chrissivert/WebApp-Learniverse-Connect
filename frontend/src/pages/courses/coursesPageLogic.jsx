@@ -29,8 +29,7 @@ function useCoursesPageLogic() {
       try {
         const coursesData = await getCoursesFromServer();
         const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
-        // const categoriesData = getCategoriesFromServer();
-        const categoriesData = await DataFetcher.fetchCategories();
+        const categoriesData = await getCategoriesFromServer();
 
         console.log('coursesData:', coursesData)
         console.log('courseProviderData:', courseProviderData)

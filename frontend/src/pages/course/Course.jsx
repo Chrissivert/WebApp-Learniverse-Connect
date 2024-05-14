@@ -5,7 +5,8 @@ import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
 import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
 import DataFetcher from "../../components/fetcher/Datafetcher";
-import GetImage from "../../components/crudTest/post/image/GetImage";
+import { getOneCourseFromServer } from "../../services/course-service";
+import { addFavoriteCourseToServer, deleteFavoriteCourseOnServer } from "../../services/favorite-course";
 
 function Course() {
   const { id } = useParams();
@@ -22,9 +23,9 @@ function Course() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const courseData = await DataFetcher.fetchCourse(id);
+        const courseData = await getOneCourseFromServer(id);
         const providerData = await DataFetcher.fetchProviders(id, targetCurrency);
-        setCourse(courseData);
+        setCourse(courseData.data);
         setProviders(providerData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -65,12 +66,15 @@ function Course() {
       if (!favorites) favorites = "[]";
       let favoritesArray = JSON.parse(favorites);
       if (!favorited) {
-        await DataFetcher.addFavoriteCourse(userId, id);
+
+        await addFavoriteCourseToServer(userId, id);
+        // await DataFetcher.addFavoriteCourse(userId, id);
         favoritesArray.push(id);
         localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(true);
       } else {
-        await DataFetcher.removeFavoriteCourse(userId, id);
+        await deleteFavoriteCourseOnServer(userId, id);
+        // await DataFetcher.removeFavoriteCourse(userId, id);
         favoritesArray = favoritesArray.filter(favId => favId !== id);
         localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
