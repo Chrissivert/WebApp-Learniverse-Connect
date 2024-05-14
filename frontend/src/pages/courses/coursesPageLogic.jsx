@@ -29,22 +29,19 @@ function useCoursesPageLogic() {
       try {
         const coursesData = await getCoursesFromServer();
         const courseProviderData = await getCheapestPriceForEachCourse(targetCurrency);
-        // const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
         const categoriesData = await getCategoriesFromServer();
-
-        console.log('coursesData:', coursesData)
-        console.log('courseProviderData:', courseProviderData)
-        console.log('categoriesData:', categoriesData)
-        console.log("dadad")
 
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
         
         setAllCourses(combinedCourses);
 
-        // Calculate the maximum price from courseProviderData
-        if (courseProviderData.length > 0) {
-          const maxPriceValue = Math.max(...courseProviderData.map(provider => provider.price));
+        console.log(courseProviderData.data.length)
+        console.log("dajda" + courseProviderData)
+
+        if (courseProviderData.data.length > 0) {
+          const maxPriceValue = Math.max(...courseProviderData.data.map(provider => provider.price));
           setMaxPrice(maxPriceValue);
+          console.log('helo:', maxPriceValue);
         }
       } catch (error) {
         console.error('Error fetching courses:', error);
