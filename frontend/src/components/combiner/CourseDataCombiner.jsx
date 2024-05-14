@@ -13,7 +13,7 @@ class CourseDataCombiner {
         // Get the category name for the course's categoryId
         const categoryName = categoryIdToNameMap[course.categoryId] || "Other";
 
-        const courseDataFromProvider = courseProvider.find(courseProvider => courseProvider.courseId === course.id);
+        const courseDataFromProvider = courseProvider.data.find(courseProvider => courseProvider.courseId === course.id);
 
         const courseWithCategory = {
           ...course,

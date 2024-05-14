@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import DataFetcher from '../../components/fetcher/Datafetcher';
-import CourseDataCombiner from '../../components/fetcher/CourseDataCombiner';
+import CourseDataCombiner from '../../components/combiner/CourseDataCombiner.jsx';
 import { useCurrencyContext } from '../../components/currencySelector/TargetCurrencyContext';
 import { filterLogic } from "./FilterLogic.jsx";
 import { getCoursesFromServer } from '../../services/course-service.jsx';
 import { getCategoriesFromServer } from '../../services/category-service.jsx';
+import { getCheapestPriceForEachCourse } from '../../services/course-provider.jsx';
 
 
 function useCoursesPageLogic() {
@@ -28,7 +28,8 @@ function useCoursesPageLogic() {
     const fetchData = async () => {
       try {
         const coursesData = await getCoursesFromServer();
-        const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
+        const courseProviderData = await getCheapestPriceForEachCourse(targetCurrency);
+        // const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
         const categoriesData = await getCategoriesFromServer();
 
         console.log('coursesData:', coursesData)
