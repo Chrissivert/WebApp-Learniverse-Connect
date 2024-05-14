@@ -14,6 +14,7 @@ function CoursesPage() {
     handlePriceChange,
     handleCategoryChange,
   } = coursesPageLogic();
+
   
   return (
     <div>

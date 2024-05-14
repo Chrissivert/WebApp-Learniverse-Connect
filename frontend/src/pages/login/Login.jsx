@@ -4,7 +4,7 @@ import "../../index.css";
 import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
 import { postAuthToServer } from "../../services/user-request";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 /**
  * Parse JWT string, extract information from it

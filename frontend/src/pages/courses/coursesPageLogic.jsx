@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import DataFetcher from '../../components/fetcher/Datafetcher';
-import CourseDataCombiner from '../../components/fetcher/CourseDataCombiner';
+import CourseDataCombiner from '../../components/combiner/CourseDataCombiner.jsx';
 import { useCurrencyContext } from '../../components/currencySelector/TargetCurrencyContext';
 import { filterLogic } from "./FilterLogic.jsx";
+import { getCoursesFromServer } from '../../services/course-service.jsx';
+import { getCategoriesFromServer } from '../../services/category-service.jsx';
+import { getCheapestPriceForEachCourse } from '../../services/course-provider.jsx';
+
 
 function useCoursesPageLogic() {
   const { targetCurrency } = useCurrencyContext();
@@ -24,18 +27,21 @@ function useCoursesPageLogic() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const coursesData = await DataFetcher.fetchCourses();
-        const courseProviderData = await DataFetcher.fetchCheapestPrices(targetCurrency);
-        const categoriesData = await DataFetcher.fetchCategories();
+        const coursesData = await getCoursesFromServer();
+        const courseProviderData = await getCheapestPriceForEachCourse(targetCurrency);
+        const categoriesData = await getCategoriesFromServer();
 
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
         
         setAllCourses(combinedCourses);
 
-        // Calculate the maximum price from courseProviderData
-        if (courseProviderData.length > 0) {
-          const maxPriceValue = Math.max(...courseProviderData.map(provider => provider.price));
+        console.log(courseProviderData.data.length)
+        console.log("dajda" + courseProviderData)
+
+        if (courseProviderData.data.length > 0) {
+          const maxPriceValue = Math.max(...courseProviderData.data.map(provider => provider.price));
           setMaxPrice(maxPriceValue);
+          console.log('helo:', maxPriceValue);
         }
       } catch (error) {
         console.error('Error fetching courses:', error);

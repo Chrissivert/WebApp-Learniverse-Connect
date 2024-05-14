@@ -7,6 +7,9 @@ import GetImage from "../crudTest/post/image/GetImage";
 export default function Coursecard({ course }) {
   // const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true); 
+  const { cheapestPrice, cheapestPriceCurrency } = course;
+  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
+
   
   // useEffect(() => {
   //   loadImage(course.title)
@@ -28,10 +31,6 @@ export default function Coursecard({ course }) {
   if (loading) {
     return <CourseCardSkeleton />;
   }
-
-  // const { cheapestPrice, cheapestPriceCurrency } = course;
-  // const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
-
   return (
     <div className="course-card">
       <div className="image-section">
@@ -40,6 +39,8 @@ export default function Coursecard({ course }) {
       <div className="info-section">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
+        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
+        {/* <p>Credits: {course.credit}</p> */}
       </div>
     </div>
   )

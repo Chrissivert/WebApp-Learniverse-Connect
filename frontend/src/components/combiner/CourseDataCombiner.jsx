@@ -2,17 +2,18 @@ class CourseDataCombiner {
   static async combineCoursesWithPricesAndCategories(courses, courseProvider, category) {
     try {
       // Create a map of category IDs to category names
-      const categoryIdToNameMap = category.reduce((map, cat) => {
+      const categoryIdToNameMap = category.data.reduce((map, cat) => {
         map[cat.id] = cat.subject;
         return map;
       }, {});
 
       // Assign categories to courses based on their categoryId
-      const coursesWithData = courses.map((course) => {
+      console.log('courses:', courses)
+      const coursesWithData = courses.data.map((course) => {
         // Get the category name for the course's categoryId
         const categoryName = categoryIdToNameMap[course.categoryId] || "Other";
 
-        const courseDataFromProvider = courseProvider.find(courseProvider => courseProvider.courseId === course.id);
+        const courseDataFromProvider = courseProvider.data.find(courseProvider => courseProvider.courseId === course.id);
 
         const courseWithCategory = {
           ...course,
