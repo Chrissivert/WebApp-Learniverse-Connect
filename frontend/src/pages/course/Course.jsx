@@ -24,7 +24,7 @@ function Course() {
     const fetchData = async () => {
       try {
         const courseData = await getOneCourseFromServer(id);
-        const providerData = await getAllProvidersForACourse(id,targetCurrency);
+        const providerData = await getAllProvidersForACourse(id, targetCurrency);
         setCourse(courseData.data);
         setProviders(providerData.data);
       } catch (error) {
@@ -66,7 +66,6 @@ function Course() {
       if (!favorites) favorites = "[]";
       let favoritesArray = JSON.parse(favorites);
       if (!favorited) {
-
         await addFavoriteCourseToServer(userId, id);
         favoritesArray.push(id);
         localStorage.setItem("favorites", JSON.stringify(favoritesArray));
@@ -82,6 +81,16 @@ function Course() {
     }
   };
 
+  const handleProviderSelection = (provider) => {
+    setSelectedProvider(provider);
+  };
+
+  const handleKeyPress = (e, provider) => {
+    if (e.key === 'Enter') {
+      handleProviderSelection(provider);
+    }
+  };
+
   if (!course || !providers.length) {
     return <div>Loading...</div>;
   }
@@ -93,8 +102,12 @@ function Course() {
           <button className="goBackButton">← Courses</button>
         </Link>
         <h2 className="title">{course.title}</h2>
-        {/* Button for favoriting with dynamic text */}
-        <button className={`favoriteButton ${favorited ? 'favorited' : ''}`} onClick={handleToggleFavorite}>
+        <button
+          className={`favoriteButton ${favorited ? 'favorited' : ''}`}
+          onClick={handleToggleFavorite}
+          onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
+          tabIndex={0} // Ensure button is focusable
+        >
           {favorited ? "Remove from Favorites" : "Add to Favorites"}
         </button>
       </div>
@@ -103,24 +116,34 @@ function Course() {
       <p>Related Certification: {course.relatedCertification}</p>
       <h3>Providers:</h3>
       <ul>
-  {providers.map((provider) => (
-    <li key={provider.providerId}>
-      <label className={`providerLabel ${courseAdded ? 'disabled' : ''}`}>
-        <input
-          type="radio"
-          name="provider"
-          checked={selectedProvider === provider}
-          onChange={() => setSelectedProvider(provider)}
-          disabled={courseAdded}
-        />
-        {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
-      </label>
-    </li>
-  ))}
-</ul>
+        {providers.map((provider) => (
+          <li key={provider.providerId}>
+            <label
+              className={`providerLabel ${courseAdded ? 'disabled' : ''}`}
+              tabIndex={0} // Ensure label is focusable
+              onKeyDown={(e) => handleKeyPress(e, provider)}
+            >
+              <input
+                type="radio"
+                name="provider"
+                checked={selectedProvider === provider}
+                onChange={() => handleProviderSelection(provider)}
+                disabled={courseAdded}
+              />
+              {provider.providerName} - Price: {Math.ceil(provider.price)} {provider.currency}
+            </label>
+          </li>
+        ))}
+      </ul>
       {showWarning && <div className="warning" role="alert">Please select a provider before adding to cart.</div>}
       {showSuccessMessage && <div className="success-message" role="alert">Course successfully added to cart!</div>}
-      <button className="addToCartButton" onClick={handleAddToCart} disabled={!selectedProvider || courseAdded}>
+      <button
+        className="addToCartButton"
+        onClick={handleAddToCart}
+        disabled={!selectedProvider || courseAdded}
+        onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
+        tabIndex={0} // Ensure button is focusable
+      >
         {courseAdded ? "Already Added to Cart" : "Add to Cart"}
       </button>
     </div>
