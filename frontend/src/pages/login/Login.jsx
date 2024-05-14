@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../index.css";
 import "./Login.css";
@@ -34,6 +34,16 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+function saveUserDataToStorage(userData){
+  try {
+    const data = JSON.stringify(userData);
+    localStorage.setItem('user', data);
+    console.log(data);
+  } catch (error) {
+    console.error("Could not save user data to localStorage:", error);
+  }
+}
+
 function Login() {
   const { login } = useContext(AuthContext); // Get login function from AuthContext
   const [email, setEmail] = useState("");
@@ -62,12 +72,14 @@ function Login() {
       console.log("data data " + response.data.jwt);
       const userData = parseJwt(response.data.jwt);
       console.log(userData);
+      saveUserDataToStorage(userData);
       localStorage.setItem("token", response.jwt);
       setCookie("jwt", response.jwt);
       setCookie("current_username", userData.sub);
       setCookie("current_user_roles", userData.roles.join(","));
-      login(response.user); // Update AuthContext with user information
+      login(userData); // Update AuthContext with user information
       alert("Login successful!");
+      
       //window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
