@@ -179,4 +179,22 @@ Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgi
 Great to have finished the registration and login. Plan to change how axios fetches. Focus on acheving the mandatory tasks such as adding HTTPS, having a page for each role, adding design guideline and so on. Perhaps admin needs to have their own page showing overview of courses and users.
 
 
- 
+ ## Week 20
+ Date: 14th May
+ Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
+
+ ### What was accomplished: 
+
+* A
+* 
+
+### What didn’t go well:
+
+* A lot of time spent studying for OS-exam
+* 
+
+
+### What to do: 
+
+
+## Discussion: 
