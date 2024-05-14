@@ -51,6 +51,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public ResponseEntity<User> readByEmail(String email) {
+    ResponseEntity<User> response;
+
+    Optional<User> user = this.getUserByEmail(email);
+    if (user.isPresent()) {
+      response = new ResponseEntity<>(user.get(), HttpStatus.OK);
+    } else {
+      response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return response;
+  }
+
+  @Override
   public ResponseEntity<String> update(int id, User user) {
     ResponseEntity<String> response;
 
@@ -79,6 +92,10 @@ public class UserServiceImpl implements UserService {
 
   private Optional<User> getUserById(int id) {
     return this.userRepository.findById(id);
+  }
+
+  private Optional<User> getUserByEmail(String email) {
+    return this.userRepository.findByEmail(email);
   }
 
   private void addUser(User user) throws IllegalArgumentException {
