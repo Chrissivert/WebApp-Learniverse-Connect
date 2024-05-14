@@ -38,7 +38,10 @@ function AdminPage() {
     // If user is admin, show admin page content
     return (
         <div>
-            <h1>Welcome Admin!</h1>
+            <h1>Welcome {auth.user.sub}</h1>
+            <p>You can add, update and delete courses as well as users.</p>
+            <hr/>
+            <p>You can also hide courses, you dont want to show but dont want to delete either</p>
             {/* Admin page content */}
         </div>
     );
