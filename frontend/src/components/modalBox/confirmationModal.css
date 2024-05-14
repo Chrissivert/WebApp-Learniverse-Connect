@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999; /* Ensure the overlay is on top of everything */
   }
   
   .modal {
@@ -35,5 +36,16 @@
   
   .modal-buttons button {
     margin: 0 10px;
+  }
+
+  .total-price {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+
+  .total-items {
+    color: #121212;
+    font-size: 1.2em;
   }
   

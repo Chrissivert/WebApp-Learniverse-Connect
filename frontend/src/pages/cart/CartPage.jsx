@@ -1,29 +1,34 @@
 import React, { useContext, useState } from 'react';
 import { CartContext } from './CartProvider';
-import './cartPage.css'; // Import the stylesheet for CartPage
+import './cartPage.css'; 
 import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 import ConfirmationModal from '../../components/modalBox/ConfirmationModalBox';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmationType, setConfirmationType] = useState(null);
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [totalPurchasePrice, setTotalPurchasePrice] = useState(0);
+  const navigate = useNavigate(); // Declare navigate
 
   const handleRemoveItem = (courseId) => {
     removeFromCart(courseId);
   };
 
   const handleClearCart = () => {
-    clearCart();
+    setConfirmationType("clearCart");
+    setShowConfirmation(true);
   };
 
   const handlePurchase = () => {
     setPurchaseItems([...cart]);
     const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
     setTotalPurchasePrice(totalPrice);
+    setConfirmationType("purchase");
     setShowConfirmation(true);
   };
 
@@ -32,9 +37,19 @@ function CartPage() {
     console.log("Purchase confirmed!");
     setShowConfirmation(false);
     clearCart();
+    navigate('/purchased'); // Navigate to the purchased page after purchase
   };
 
   const cancelPurchase = () => {
+    setShowConfirmation(false);
+  };
+
+  const confirmClearCart = () => {
+    clearCart();
+    setShowConfirmation(false);
+  };
+
+  const cancelClearCart = () => {
     setShowConfirmation(false);
   };
 
@@ -62,13 +77,20 @@ function CartPage() {
           <p>Total Price: {currency} {Math.ceil(totalPrice)}</p>
         </div>
         <div className="action-buttons">
-          <button onClick={handleClearCart}>Clear Cart</button>
-          <button onClick={handlePurchase}>Purchase</button>
-          <Button text="Proceed to Checkout" src="/checkout" />
+          <button onClick={handleClearCart}disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Clear Cart</button>
+          <button onClick={handlePurchase} disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Purchase</button>
         </div>
       </div>
 
-      {showConfirmation && (
+      {showConfirmation && confirmationType === "clearCart" && (
+        <ConfirmationModal
+          message="Are you sure you want to clear your cart?"
+          onConfirm={confirmClearCart}
+          onCancel={cancelClearCart}
+        />
+      )}
+
+      {showConfirmation && confirmationType === "purchase" && (
         <ConfirmationModal
           items={purchaseItems}
           totalPrice={totalPurchasePrice}

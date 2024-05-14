@@ -17,6 +17,7 @@ import CartProvider from './pages/cart/CartProvider.jsx';
 import { SpeakingProvider } from './components/textReader/speakingContext.jsx';
 import AdminPage from './pages/admin/Admin.jsx';
 import { AuthProvider } from './pages/admin/AuthProvider.jsx';
+import PurchasedPage from './pages/purchased/PurchasedPage.jsx';
 
 export default function App() {  
   const [targetCurrency, setTargetCurrency] = useState('AUD'); 
@@ -39,6 +40,7 @@ export default function App() {
             <Route path='/login' element={<Login />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="admin" element={<AdminPage />} />
+            <Route path="/purchased" element={<PurchasedPage/>} />
           </Routes>
           <Footer />
         </Router>
