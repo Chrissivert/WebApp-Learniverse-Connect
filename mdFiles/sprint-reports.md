@@ -178,23 +178,43 @@ Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgi
 ## Discussion: 
 Great to have finished the registration and login. Plan to change how axios fetches. Focus on acheving the mandatory tasks such as adding HTTPS, having a page for each role, adding design guideline and so on. Perhaps admin needs to have their own page showing overview of courses and users.
 
+## Week 20
+Date: 15th May
+Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik
 
- ## Week 20
- Date: 14th May
- Participants: Vegard Arnesen Mytting, Øystein Grande, Chris Sivert Sylte, Birgitte Vik 
+### What was accomplished:
 
- ### What was accomplished: 
-
-* A
-* 
+* Authentication in backend is complete.
+* Fixed a merge conflict by creating a new branch and cherry-picking changes.
+* Managed parsing JWT in frontend and fixed a related bug.
+* Worked on storing JWT contents into cookies.
+* Created Postman tests for model and authentication.
+* Added a design guideline file.
+* Gave admin users access to an admin page.
+* Added images to the database and implemented CRUD operations for both BLOB and JSON data.
+* Ensured the footer works correctly.
+* Added a purchasedpage
+* Added restriction of only buying one instance of a course
+* Max price is decided by most expensive course and currency selected
 
 ### What didn’t go well:
 
-* A lot of time spent studying for OS-exam
-* 
+* A lot of time was spent studying for the OS exam.
+* Challenging using foreign keys
+* Boring to have to update the database for everyone when someone changes it locally
 
+### What to do:
 
-### What to do: 
+* Ensure cookies are correctly set and user info is retrieved into the user page.
+* Include tokens in subsequent requests to the backend and implement user logout.
+* Style the profile page.
+* Continue developing the admin page with functionalities to create, edit, delete, and hide courses and users.
+* Implement these functions with a simple and organized design and create more Postman tests.
+* Make the frontend more responsive and fill in missing product information.
+* Work on different error pages and fine-tune the API-request 'super-method'.
 
+### Discussion:
 
-## Discussion: 
+* Review the overall format and ensure all necessary information is included.
+* Continue to address and resolve any merge conflicts promptly.
+* Prioritize tasks based on project deadlines and exam schedules to balance study and work effectively.

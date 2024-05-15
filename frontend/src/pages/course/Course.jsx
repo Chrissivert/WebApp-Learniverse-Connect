@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Course.css";
 import "../../index.css";
@@ -19,6 +19,7 @@ function Course() {
   const [favorited, setFavorited] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
+  const addToCartButtonRef = useRef(null);  // Ref for the add to cart button
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,6 +92,13 @@ function Course() {
     }
   };
 
+  useEffect(() => {
+    // For debugging purpose, check if button is focusable
+    if (addToCartButtonRef.current) {
+      console.log('Add to Cart button:', addToCartButtonRef.current);
+    }
+  }, []);
+
   if (!course || !providers.length) {
     return <div>Loading...</div>;
   }
@@ -143,6 +151,7 @@ function Course() {
         disabled={!selectedProvider || courseAdded}
         onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
         tabIndex={0} // Ensure button is focusable
+        ref={addToCartButtonRef}  // Attach ref to the button
       >
         {courseAdded ? "Already Added to Cart" : "Add to Cart"}
       </button>
