@@ -34,10 +34,10 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function saveUserDataToStorage(userData){
+function saveUserDataToStorage(userData) {
   try {
     const data = JSON.stringify(userData);
-    localStorage.setItem('user', data);
+    localStorage.setItem("user", data);
     console.log(data);
   } catch (error) {
     console.error("Could not save user data to localStorage:", error);
@@ -62,24 +62,20 @@ function Login() {
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
-      console.log(formData);
       const response = await postAuthToServer(formData);
-      console.log(response);
 
       /* if (!response.ok) {
         throw new Error("Login failed");
       } */
-      console.log("data data " + response.data.jwt);
       const userData = parseJwt(response.data.jwt);
-      console.log(userData);
       saveUserDataToStorage(userData);
-      localStorage.setItem("token", response.jwt);
+      localStorage.setItem("token", response.data.jwt);
       setCookie("jwt", response.jwt);
       setCookie("current_username", userData.sub);
       setCookie("current_user_roles", userData.roles.join(","));
       login(userData); // Update AuthContext with user information
       alert("Login successful!");
-      
+
       //window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
