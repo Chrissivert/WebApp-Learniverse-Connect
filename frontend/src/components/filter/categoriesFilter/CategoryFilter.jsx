@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './categoryFilter.css';
+import { getCategoriesFromServer } from '../../../services/category-service';
 
-function CategoryFilter({ onCategoryChange }) {
+export default function CategoryFilter({ onCategoryChange }) {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [categories, setCategories] = useState([]);
 
   const handleCategoryChange = (event) => {
     const categoryName = event.target.value;
     setSelectedCategory(categoryName);
-    onCategoryChange(categoryName); // Pass categoryName instead of category ID
+    onCategoryChange(categoryName);
   };
+
+  /**
+   * Fetches the category-names in a list
+   */
+  async function fetchCategories() {
+    const response = await getCategoriesFromServer();
+    setCategories(response.data);
+  }
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <div>
       <label htmlFor="categorySelect"></label>
       <select id="categorySelect" className="category-select" onChange={handleCategoryChange} value={selectedCategory}>
         <option value="">-- Select a category --</option>
-        <option value="Information Technologies">Information Technologies</option>
-        <option value="Digital Marketing">Digital Marketing</option>
-        <option value="Business and Entrepreneurship">Business and Entrepreneurship</option>
-        <option value="Data Science and Analytics">Data Science and Analytics</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.subject}>{category.subject}</option>
+        ))}
       </select>
     </div>
   );
 }
-
-export default CategoryFilter;
