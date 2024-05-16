@@ -14,7 +14,7 @@ import io.jsonwebtoken.JwtException;
 import java.io.IOException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class  JwtRequestFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
     @Autowired
     private final UserDetailsService userDetailsService;
@@ -29,12 +29,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
-
+        System.out.println("Request " + request);
         String authorizationHeader = request.getHeader("Authorization");
         String email = null;
         String jwt = null;
 
         try {
+            System.out.println("Header: " + authorizationHeader);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 jwt = authorizationHeader.substring(7);
                 email = this.jwtUtil.extractUsername(jwt);
@@ -42,7 +43,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
+                System.out.println("userdetails: " + userDetails.getUsername() + userDetails.getPassword() + userDetails.getAuthorities());
                 if (this.jwtUtil.validateToken(jwt, userDetails)) {
+                    System.out.println("Valid");
                     UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(userDetails, (Object)null, userDetails.getAuthorities());
                     upat.setDetails((new WebAuthenticationDetailsSource()).buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(upat);

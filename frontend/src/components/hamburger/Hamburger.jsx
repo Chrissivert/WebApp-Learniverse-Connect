@@ -1,25 +1,36 @@
 import './Hamburger.css';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Hamburger from 'hamburger-react';
 import Button from '../button/Button';
 
 export default function HamburgerMenu() {
   const [isOpen, setOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
-  }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !isOpen) {
+      setOpen(true);
+    } else if (event.key === 'Escape' || (event.key === 'Enter' && isOpen)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      menuRef.current.focus();
+    }
+  }, [isOpen]);
 
   return (
-    <>
-      {/* <div> */}
-      <div className={'hamburger-menu' + (isOpen ? ' open' : '')}> 
-        {/* <div className={'menu-container' + (isOpen ? 'open' : '')}> */}
-        <div className='menu-icon-container' onClick={toggleMenu}>
-          {/* <Hamburger direction='right' toggled={isOpen} toggle={toggleMenu}/> */}
-          <Hamburger direction='right' toggled={isOpen}/>
-        </div>
-        <nav className={'menu' + (isOpen ? ' open' : '')}>
+    <div className={'hamburger-menu' + (isOpen ? ' open' : '')} tabIndex="0" onKeyDown={handleKeyPress}>
+      <div className='menu-icon-container' onClick={toggleMenu} tabIndex="0">
+        <Hamburger direction='right' toggled={isOpen} />
+      </div>
+      <nav className={'menu' + (isOpen ? ' open' : '')} tabIndex="-1" ref={menuRef}>
         <hr />
         <div className="flex-container">
           <div><Button text='Home' src='/'/></div>
@@ -31,8 +42,7 @@ export default function HamburgerMenu() {
           <div><Button text='Register' src='/register'/></div>
           <div><Button text='Admin' src='/admin'/></div>
         </div>
-        </nav>
-      </div>
-    </>
+      </nav>
+    </div>
   );
 }

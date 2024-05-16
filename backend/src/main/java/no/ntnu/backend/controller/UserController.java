@@ -40,6 +40,12 @@ public class UserController {
         return this.userService.readById(id);
     }
 
+    @Operation(summary = "Retrieves a user by its Email", description = "Retrieves a user by its Email.")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> readUserByEmail(@PathVariable String email) {
+        return this.userService.readByEmail(email);
+    }
+
     @Operation(summary = "Updates an existing user", description = "Updates an existing user.")
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {

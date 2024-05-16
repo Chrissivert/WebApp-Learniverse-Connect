@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../index.css";
 import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
 import { postAuthToServer } from "../../services/user-request";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 
 /**
  * Parse JWT string, extract information from it
@@ -34,6 +34,16 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+function saveUserDataToStorage(userData) {
+  try {
+    const data = JSON.stringify(userData);
+    localStorage.setItem("user", data);
+    console.log(data);
+  } catch (error) {
+    console.error("Could not save user data to localStorage:", error);
+  }
+}
+
 function Login() {
   const { login } = useContext(AuthContext); // Get login function from AuthContext
   const [email, setEmail] = useState("");
@@ -52,22 +62,20 @@ function Login() {
       const formData = new FormData();
       formData.append("email", email);
       formData.append("password", password);
-      console.log(formData);
       const response = await postAuthToServer(formData);
-      console.log(response);
 
       /* if (!response.ok) {
         throw new Error("Login failed");
       } */
-      console.log("data data " + response.data.jwt);
       const userData = parseJwt(response.data.jwt);
-      console.log(userData);
-      localStorage.setItem("token", response.jwt);
+      saveUserDataToStorage(userData);
+      localStorage.setItem("token", response.data.jwt);
       setCookie("jwt", response.jwt);
       setCookie("current_username", userData.sub);
       setCookie("current_user_roles", userData.roles.join(","));
-      login(response.user); // Update AuthContext with user information
+      login(userData); // Update AuthContext with user information
       alert("Login successful!");
+
       //window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);

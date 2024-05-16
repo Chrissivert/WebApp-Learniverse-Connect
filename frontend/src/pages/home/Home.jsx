@@ -6,8 +6,8 @@ import FrontImage from '/home/front_image.png';
 import PostImage from '../../components/crudTest/post/image/PostImage';
 import GetImage from '../../components/crudTest/post/image/GetImage';
 import Coursecard from '../../components/coursecard/Coursecard';
-import DataFetcher from '../../components/fetcher/Datafetcher';
 import { AuthContext } from '../admin/AuthProvider';
+import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 
 export default function Home() {
   const [favoriteCourses, setFavoriteCourses] = useState([]);
@@ -20,9 +20,9 @@ export default function Home() {
   const fetchFavoriteCourses = async () => {
     try {
       const userId = 4; // Replace with the actual user ID
-      const favoriteCourses = await DataFetcher.fetchFavoriteCourses(userId);
-      console.log("Favorite Courses:", favoriteCourses); // <-- Added console log here
-      setFavoriteCourses(favoriteCourses);
+      const favoriteCourses = await getFavoriteCoursesFromAUser(userId);
+      console.log("Favorite Courses:", favoriteCourses.data); // <-- Added console log here
+      setFavoriteCourses(favoriteCourses.data);
     } catch (error) {
       console.error("Error fetching favorite courses:", error);
     }

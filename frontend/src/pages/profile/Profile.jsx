@@ -5,39 +5,54 @@ import "./Profile.css";
 //import '../../index.css';
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { getUserByEmail } from "../../services/user-request";
 
 export default function Profile() {
   //const [imgId, setImgId] = useState(null);
-  const { id } = useParams();
-  useEffect(
-    function () {
-      async function getUser() {
-        try {
-          //const res = await axios.get(`http://localhost:8080/user/${id}`);
-          //setImgId(res.data.imgId);
-          const userToken = localStorage.getItem("token");
-          console.log(userToken);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [startDate, setStartDate] = useState("");
+  useEffect(function () {
+    async function getUser() {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log("user" + user.sub);
+        const convertedEmail = user.sub.replace("@", "%40");
+        //console.log("this is my user" + user.sub);
+        console.log("convertedEmail: " + convertedEmail);
+        const res = await getUserByEmail(convertedEmail);
+        const currentUser = res.data;
+        setUserName(currentUser.username);
+        setEmail(currentUser.email);
+        setStartDate(currentUser.startDate);
+        console.log("username: " + userName);
+        console.log("current user: " + currentUser);
+        console.log("email: " + email);
+        console.log("startDate: " + startDate);
+        console.log(res);
+        //const res = await axios.get(`http://localhost:8080/user/${id}`);
+        //setImgId(res.data.imgId);
+        /* const userToken = localStorage.getItem("token");
+          console.log(userToken); */
 
-          /* if (data.Response === "False") {
+        /* if (data.Response === "False") {
             throw new Error(data.Error);
           }
 
           console.log(data); */
-        } catch (error) {
-          console.error("Error fetching user:", error);
-        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
       }
+    }
 
-      getUser();
-    },
-    [id]
-  );
+    getUser();
+  });
   return (
     <div className="profilepage">
       <div className="card">
         <Avatar />
         <div className="data">
-          <Intro />
+          <Intro userName={userName} email={email} startDate={startDate} />
         </div>
       </div>
       <Content />
@@ -58,12 +73,12 @@ function Avatar() {
   );
 }
 
-function Intro() {
+function Intro({ userName, email, startDate }) {
   return (
     <div className="intro">
-      <h2>Prince Froggy</h2>
-      <p>Full-stack web developer and student at NTNU.</p>
-      <p>User since: January 8th 2024</p>
+      <h1>{userName}</h1>
+      <h2>{email}</h2>
+      <p>User since: {startDate}</p>
       <div className="buttons">
         <button className="button">Follow</button>
         <button className="button">Message</button>

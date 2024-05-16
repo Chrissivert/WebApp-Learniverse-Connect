@@ -40,6 +40,16 @@ public interface UserService{
   public ResponseEntity<User> readById(int id);
 
   /**
+   * GET
+   *
+   * @param email
+   * @return
+   */
+  public ResponseEntity<User> readByEmail(String email);
+
+
+
+  /**
    * PUT
    *
    * @param id

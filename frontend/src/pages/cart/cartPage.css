@@ -24,11 +24,17 @@
 
 .remove-btn {
   display: flex;
-  margin-left: 10px; /* Add margin to remove button */
-  background-color: #a193a7; /* Change background color of remove button */
-  color: white; /* Change text color of remove button */
-  border: none; /* Remove border */
-  padding: 5px 10px; /* Add padding */
-  border-radius: 5px; /* Add border radius */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-left: 10px;
+  background-color: #a193a7; 
+  color: white; 
+  border: none; 
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  cursor: pointer;
 }
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+

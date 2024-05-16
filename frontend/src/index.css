@@ -48,3 +48,13 @@ button:hover {
 a:link, a:visited, a:active {
   text-decoration: none;
 }
+
+:focus-visible {
+  outline: 3px solid blue;
+  transition: outline 0.3s ease;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+

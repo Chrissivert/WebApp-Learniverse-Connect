@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import './priceFilter.css'; // Import CSS file
+import './priceFilter.css';
 
-function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a prop
+function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const [useInput, setUseInput] = useState(false);
   const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(Math.ceil(maxPrice)); // Use maxPrice as initial value and round it up
+  const [maxValue, setMaxValue] = useState(Math.ceil(maxPrice));
 
   const handleMinChange = (e) => {
     let value = parseFloat(e.target.value);
-    value = Math.max(-1, Math.min(value, maxValue)); // Restrict within the range
+    value = Math.max(-1, Math.min(value, maxValue));
     setMinValue(value);
     onPriceChange(value, maxValue);
   };
   
   const handleMaxChange = (e) => {
     let value = parseFloat(e.target.value);
-    value = Math.min(Math.ceil(maxPrice), Math.max(value, minValue)); // Restrict within the range
+    value = Math.min(Math.ceil(maxPrice), Math.max(value, minValue));
     setMaxValue(value);
     onPriceChange(minValue, value);
   };
 
   const toggleInputMode = () => {
     setUseInput((prev) => !prev);
-    // If toggling to scrollbar mode, apply the filter with the current input values
     if (!useInput && !isNaN(minValue) && !isNaN(maxValue)) {
       onPriceChange(minValue, maxValue);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      toggleInputMode();
     }
   };
 
@@ -33,18 +38,18 @@ function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a pr
   }, [minValue, maxValue]);
 
   useEffect(() => {
-    // Update maxValue when maxPrice changes
     setMaxValue(Math.ceil(maxPrice));
   }, [maxPrice]);
 
   return (
-    <div className="price-range-container"> {/* Apply styling to container */}
+    <div className="price-range-container">
       <div>
         <label>
           <input
             type="checkbox"
             checked={useInput}
             onChange={toggleInputMode}
+            onKeyPress={handleKeyPress}
           />
           Use Input
         </label>
@@ -71,12 +76,11 @@ function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a pr
       ) : (
         <div>
           <div>
-            {/* Scrollbar */}
             <label>Min Price: {minValue}</label>
             <input
               type="range"
               min={0}
-              max={maxPrice} // Use maxPrice as maximum value
+              max={maxPrice}
               value={minValue}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);
@@ -85,12 +89,11 @@ function PriceRangeFilter({ onPriceChange, maxPrice }) { // Add maxPrice as a pr
             />
           </div>
           <div>
-            {/* Scrollbar */}
-            <label>Max Price: {Math.ceil(maxPrice)}</label> {/* Display rounded up maxPrice */}
+            <label>Max Price: {maxValue}</label>
             <input
               type="range"
               min={0}
-              max={maxPrice} // Use maxPrice as maximum value
+              max={maxPrice}
               value={maxValue}
               onChange={(e) => {
                 const value = parseFloat(e.target.value);

@@ -64,8 +64,11 @@ public class SecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)
                 // Admin URL is accessible only for Admin role
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/admin/**").hasRole("ADMIN"))
-                // Users URL is accessible only for Users role
-                .authorizeHttpRequests((auth) -> auth.requestMatchers("/users/**").hasRole("USER"))
+                // Users URL is accessible only for User role
+                //.authorizeHttpRequests((auth) -> auth.requestMatchers("/users").hasAnyRole("USER", "ADMIN"))
+                .authorizeHttpRequests((auth) -> auth.requestMatchers("/users/**").hasAnyRole("USER", "ADMIN"))
+                // Allow HTTP OPTIONS requests - CORS pre-flight requests
+                .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.OPTIONS).permitAll())
                 // Other URLs are accessible by everyone.
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
 
