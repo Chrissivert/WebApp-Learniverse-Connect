@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication(
 		exclude = {SecurityAutoConfiguration.class }
 )
-@CrossOrigin("http://localhost:5173")
 public class BackendApplication {
 
 	/**
