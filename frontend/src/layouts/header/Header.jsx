@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className="header-container">
       <div className="logo-container">
-          <Logo home_src={true} aria-label="Homepage-button" />
+          <Logo home_src={true}/>
       </div>
       
       <div className="currency-selector-container">

@@ -14,6 +14,7 @@
   transition: 0.3s;
   z-index: 1000;
 }
+
 .cart-container,
 .login-container { /* Adjust for login-container for consistency */
   display: flex;
