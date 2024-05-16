@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/favorite-courses")
+@CrossOrigin
 public class FavoriteCourseController {
 
     private final FavoriteCourseService favoriteCourseService;

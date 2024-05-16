@@ -26,7 +26,7 @@ import no.ntnu.backend.repository.CourseTagsRepository;
  * @version 23.05.2024
  */
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class CourseTagsController {
 
     private final CourseTagsRepository courseTagsRepository;

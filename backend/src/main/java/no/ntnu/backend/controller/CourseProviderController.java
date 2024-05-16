@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * @version 23.05.2024
  */
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class CourseProviderController {
 
     private final CourseProviderService courseProviderService;
