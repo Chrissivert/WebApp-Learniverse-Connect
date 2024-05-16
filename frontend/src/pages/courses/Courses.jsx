@@ -8,6 +8,7 @@ import CourseCardSkeleton from "../../components/coursecard/CourseCardSkeleton.j
 function Courses({ courses }) {
   const [loading, setLoading] = useState(true); // Initially set to true
 
+
   useEffect(() => {
     // Set loading to true when courses are updated
     setLoading(true);
@@ -17,6 +18,7 @@ function Courses({ courses }) {
       setLoading(false);
     }
   }, [courses]);
+  
   return (
     <div className="courses">
       {/* Show skeleton while loading or if no courses are available */}
@@ -28,8 +30,8 @@ function Courses({ courses }) {
         ))
       ) : (
         courses.map((course) => (
-          <div className="coursecards">
-            <Link to={`/course/${course.id}`} key={course.id}>
+          <div className="coursecards" key={course.id}>
+            <Link to={`/course/${course.id}`}>
               <Coursecard course={course}/>
             </Link>
           </div>

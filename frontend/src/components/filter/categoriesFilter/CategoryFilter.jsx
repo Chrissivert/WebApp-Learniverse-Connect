@@ -23,11 +23,17 @@ export default function CategoryFilter({ onCategoryChange }) {
     fetchCategories();
   }, []);
 
+  const clearSelection = () => {
+    setSelectedCategory('');
+    onCategoryChange(''); // Notify parent component that the category has been cleared
+  };
+
   return (
     <div>
-      <label htmlFor="categorySelect"></label>
+      <label htmlFor="categorySelect">Category:</label>
       <select id="categorySelect" className="category-select" onChange={handleCategoryChange} value={selectedCategory}>
-        <option value="">-- Select a category --</option>
+        {!selectedCategory && <option value="">-- Select a category --</option>}
+        {selectedCategory && <option value="" style={{ fontWeight: 'bold' }}>-- REMOVE CATEGORY --</option>}
         {categories.map((category) => (
           <option key={category.id} value={category.subject}>{category.subject}</option>
         ))}
