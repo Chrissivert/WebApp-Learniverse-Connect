@@ -6,6 +6,7 @@ import CurrencySelector from '../../components/currencySelector/CurrencySelector
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
+import NavList from '../../components/hamburger/NavList.jsx';
 
 export default function Header() {
   const { cartPopped } = useContext(CartContext);
@@ -17,25 +18,30 @@ export default function Header() {
         <Logo home_src={true} aria-label="Homepage-button" />
       </div>
       
-      <div className="currency-selector-container">
+      {/* <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
-      </div>
+      </div> */}
 
-      <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
+      {/* <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
           <span className="cart-text">Cart ({cart.length})</span>
         </Link>
-      </div>
+      </div> */}
 
-      <div className='login-container'>
+      {/* <div className='login-container'>
         <Link to="/login" className="login-link">
           <img src="/login/login_white.png" alt="Login" className="login"></img>
         </Link>
-      </div>
+      </div> */}
 
       {/* Add tabIndex to HamburgerMenu */}
-      <HamburgerMenu tabIndex="0" />
+      {/* <HamburgerMenu tabIndex="0" /> */}
+      <div className='navlist-container'>
+        <NavList/>
+      </div>
+
+      <HamburgerMenu/>
     </header>
   );
 }

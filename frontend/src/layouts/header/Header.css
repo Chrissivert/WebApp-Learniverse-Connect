@@ -15,6 +15,25 @@
   z-index: 1000;
 }
 
+.hamburger-menu {
+  display: none;
+}
+
+.navlist-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.navlist-container ul li {
+  margin-right: 10px;
+}
+
+.navlist-container ul li:last-child {
+margin-right: 0;
+}
+
 .cart-container,
 .login-container { /* Adjust for login-container for consistency */
   display: flex;
@@ -101,4 +120,14 @@
 .header-container a.active::after {
   width: calc(100%); /* Underline stays at full width for active link */
   left: 0; /* Adjusted position to maintain distance */
+}
+
+@media (max-width: 1000px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .navlist-container {
+    display: none;
+  }
 }
