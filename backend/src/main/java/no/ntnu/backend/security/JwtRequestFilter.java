@@ -14,7 +14,7 @@ import io.jsonwebtoken.JwtException;
 import java.io.IOException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class  JwtRequestFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
     @Autowired
     private final UserDetailsService userDetailsService;
@@ -29,7 +29,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
-
+        System.out.println("Request " + request);
         String authorizationHeader = request.getHeader("Authorization");
         String email = null;
         String jwt = null;
