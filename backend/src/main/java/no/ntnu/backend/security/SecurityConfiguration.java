@@ -1,6 +1,6 @@
 package no.ntnu.backend.security;
 
-import no.ntnu.backend.config.CorsConfig;
+// import no.ntnu.backend.config.CorsConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class SecurityConfiguration {
      * @throws Exception When user service is not found
      */
 
-    private static final Logger logger = LoggerFactory.getLogger(CorsConfig.class);
+    // private static final Logger logger = LoggerFactory.getLogger(CorsConfig.class);
     @Autowired
     protected void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -57,7 +57,7 @@ public class SecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain configureAuthorizationFilterChain(HttpSecurity http) throws Exception {
-        logger.info("Using SecurityFilterChain...");
+        // logger.info("Using SecurityFilterChain...");
         http
                 // Disable CSRF and CORS checks. Without this it will be hard to make automated tests.
                 .csrf(AbstractHttpConfigurer::disable)

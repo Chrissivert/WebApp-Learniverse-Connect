@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function SortByFilter({ onSortChange }) {
-  const [sortAttribute, setSortAttribute] = useState(''); // State to store the sorting attribute
+  const [sortAttribute, setSortAttribute] = useState('title');
   const [sortOrder, setSortOrder] = useState('asc');
+
+  useEffect(() => {
+    onSortChange(sortAttribute, sortOrder);
+  }, []);
 
   const handleAttributeChange = (event) => {
     const selectedAttribute = event.target.value;
-    setSortAttribute(selectedAttribute); // Update the sorting attribute state
-    onSortChange(selectedAttribute, sortOrder); // Pass the selected attribute and current sort order
+    setSortAttribute(selectedAttribute);
+    onSortChange(selectedAttribute, sortOrder);
   };
 
   const toggleSortOrder = () => {
@@ -19,11 +23,10 @@ function SortByFilter({ onSortChange }) {
   return (
     <div className="sort-filter-container">
       <label htmlFor="sortSelect">Sort by:</label>
-      <select id="sortSelect" className='sort-dropdown' onChange={handleAttributeChange}>
-        <option value="">-- Select an attribute --</option>
+      <select id="sortSelect" className='sort-dropdown' value={sortAttribute} onChange={handleAttributeChange}>
+        <option value="title">Title</option>
         <option value="price">Price</option>
         <option value="credits">Credits</option>
-        <option value="title">Title</option>
       </select>
       <button className='sortButton' onClick={toggleSortOrder}>
         {sortAttribute === 'title' ? (sortOrder === 'asc' ? 'A to Z' : 'Z to A') : (sortOrder === 'asc' ? 'Low to High' : 'High to Low')}
