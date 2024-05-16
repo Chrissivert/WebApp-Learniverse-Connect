@@ -13,7 +13,7 @@ export default function CategoryFilter({ onCategoryChange }) {
   };
 
   /**
-   * Fetches the category-names in a list
+   * Fetches the categories in a list
    */
   async function fetchCategories() {
     const response = await getCategoriesFromServer();
