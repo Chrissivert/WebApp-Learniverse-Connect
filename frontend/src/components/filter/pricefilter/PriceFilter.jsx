@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './priceFilter.css';
 
 function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const [useInput, setUseInput] = useState(false);

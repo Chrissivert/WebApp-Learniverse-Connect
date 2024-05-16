@@ -51,7 +51,6 @@ export default function Home() {
         doloremque est voluptatum hic.
       </h2>
 
-      {/* Displaying favorite courses */}
       <div className="favorite-courses">
         <h2>Your Favorite Courses</h2>
         {favoriteCourses.map((favoriteCourse) => (
