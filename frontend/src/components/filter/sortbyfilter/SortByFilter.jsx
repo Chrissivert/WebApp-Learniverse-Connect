@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './sortByFilter.css'; // Import CSS file
 
 function SortByFilter({ onSortChange }) {
   const [sortAttribute, setSortAttribute] = useState(''); // State to store the sorting attribute
@@ -20,13 +19,13 @@ function SortByFilter({ onSortChange }) {
   return (
     <div className="sort-filter-container">
       <label htmlFor="sortSelect">Sort by:</label>
-      <select id="sortSelect" onChange={handleAttributeChange}>
+      <select id="sortSelect" className='sort-dropdown' onChange={handleAttributeChange}>
         <option value="">-- Select an attribute --</option>
         <option value="price">Price</option>
         <option value="credits">Credits</option>
         <option value="title">Title</option>
       </select>
-      <button onClick={toggleSortOrder}>
+      <button className='sortButton' onClick={toggleSortOrder}>
         {sortAttribute === 'title' ? (sortOrder === 'asc' ? 'A to Z' : 'Z to A') : (sortOrder === 'asc' ? 'Low to High' : 'High to Low')}
       </button>
     </div>

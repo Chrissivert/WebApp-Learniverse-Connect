@@ -1,16 +1,20 @@
-// CurrencyContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const CurrencyContext = createContext();
 
 export const useCurrencyContext = () => useContext(CurrencyContext);
 
 export const CurrencyProvider = ({ children }) => {
-  const [targetCurrency, setTargetCurrency] = useState('NOK'); // Default currency
+  const initialCurrency = localStorage.getItem('targetCurrency') || 'NOK';
+  const [targetCurrency, setTargetCurrency] = useState(initialCurrency);
 
   const handleCurrencyChange = (currency) => {
     setTargetCurrency(currency);
   };
+
+  useEffect(() => {
+    localStorage.setItem('targetCurrency', targetCurrency);
+  }, [targetCurrency]);
 
   return (
     <CurrencyContext.Provider value={{ targetCurrency, handleCurrencyChange }}>

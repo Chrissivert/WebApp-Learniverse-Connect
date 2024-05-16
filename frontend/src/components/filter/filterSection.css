@@ -84,3 +84,27 @@ select {
   transform-origin: left center;
   min-width: 120px;
 }
+
+.category-select, .search-input, .sort-dropdown {
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  color: #333; /* Dark color for text */
+  line-height: 1.5; /* Adequate line height for text */
+}
+
+.sortButton{
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+}
