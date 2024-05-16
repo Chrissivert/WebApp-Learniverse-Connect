@@ -25,7 +25,7 @@ function Courses({ courses }) {
       {loading ? (
         Array(6).fill().map((_, index) => (
           <div className="coursecards-skeleton" key={index}>
-            <CourseCardSkeleton />
+            <CourseCardSkeleton/>
           </div>
         ))
       ) : (
