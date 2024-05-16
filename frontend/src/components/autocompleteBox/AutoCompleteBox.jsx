@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './autoCompleteBox.css';
 import { filterLogic } from '../../pages/courses/FilterLogic';
 
 function AutocompleteBox({ courses, filters }) {
