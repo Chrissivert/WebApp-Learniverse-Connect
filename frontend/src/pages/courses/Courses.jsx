@@ -22,8 +22,8 @@ function Courses({ courses }) {
       {/* Show skeleton while loading or if no courses are available */}
       {loading ? (
         Array(6).fill().map((_, index) => (
-          <div className="coursecards-skeleton">
-            <CourseCardSkeleton key={index}/>
+          <div className="coursecards-skeleton" key={index}>
+            <CourseCardSkeleton/>
           </div>
         ))
       ) : (
