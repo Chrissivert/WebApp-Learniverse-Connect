@@ -39,7 +39,7 @@ export default function Coursecard({ course }) {
       <div className="info-section">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
-        {roundedCheapestPrice && <p className="cheapest-price">Cheapest Price: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
+        {roundedCheapestPrice && <p className="cheapest-price">Prices from: {roundedCheapestPrice} {cheapestPriceCurrency}</p>}
         {/* <p>Credits: {course.credit}</p> */}
       </div>
     </div>
