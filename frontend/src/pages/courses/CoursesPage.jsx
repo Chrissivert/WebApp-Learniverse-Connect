@@ -1,6 +1,7 @@
 import React from 'react';
 import Courses from './Courses';
-import '../../index.css';
+// import '../../index.css';
+import './Courses.css';
 import FilterSection from '../../components/filter/FilterSection';
 import coursesPageLogic from './coursesPageLogic';
 
@@ -15,9 +16,8 @@ function CoursesPage() {
     handleCategoryChange,
   } = coursesPageLogic();
 
-  
   return (
-    <div>
+    <div className='courses-page-container'>
       <FilterSection
         onSearchQueryChange={handleSearchQueryChange}
         onPriceChange={handlePriceChange}
