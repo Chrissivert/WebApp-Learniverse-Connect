@@ -1,7 +1,11 @@
 .courseCardSkeleton {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 10px;
     margin: 10px;
+    /* height: 400px; */
+    width: 100%;
+    /* animation: blink-animation 2s steps(5, start) infinite;
+    -webkit-animation: blink-animation 2s steps(5, start) infinite; */
 }
 
 .skeleton {
