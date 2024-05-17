@@ -10,7 +10,7 @@ export default function Coursecard({ course }) {
   const { cheapestPrice, cheapestPriceCurrency } = course;
   const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
 
-  console.log(course.title + "course")
+  // console.log(course.title + "course")
 
   
   // useEffect(() => {
@@ -41,7 +41,7 @@ export default function Coursecard({ course }) {
       <div className="info-section">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
-        {roundedCheapestPrice && <p className="cheapest-price">Prices from: {roundedCheapestPrice} {course.currency}</p>}
+        {/* {roundedCheapestPrice && <p className="cheapest-price">Prices from: {roundedCheapestPrice} {course.currency}</p>} */}
         {/* <p>Credits: {course.credit}</p> */}
       </div>
     </div>
