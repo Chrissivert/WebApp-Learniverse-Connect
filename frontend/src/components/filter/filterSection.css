@@ -10,31 +10,19 @@
   margin-bottom: 20px;
 }
 
-/* Optional: Add specific styles for larger screens if needed */
-@media screen and (min-width: 769px) {
-  .filter-row > * {
-    flex: 1; /* Each component shares an equal amount of available space */
-    margin-right: 10px; /* Add some spacing between components */
-  }
 
-  .sortButton {
-    max-width: calc(50% - 40px); /* Adjusted max width for smaller screens */
-  }
-  
-  .filter-row > *:last-child {
-    margin-right: 0; /* Remove right margin for the last component */
-  }
-}
-
-@media screen and (max-width: 820px) {
+/* Adjustments for smaller screens */
+@media screen and (max-width: 1000px) {
   .filter-row {
     flex-direction: column; /* Display filters in a column on small screens */
-    align-items: stretch; /* Stretch items to fill container width */
   }
 
   .filter-row > * {
-    width: 100%; /* Each filter takes up 100% width on small screens */
     margin-bottom: 10px; /* Add some spacing between filters */
+  }
+
+  .filter-container, .sort-filter-container, .search-container, .autocomplete-item {
+    font-size: 18px; /* Decrease font size for smaller screens */
   }
 }
 
@@ -213,11 +201,4 @@ select {
 /* Base styles for all components */
 .filter-container, .sort-filter-container, .search-container {
   font-size: 20px; /* Base font size */
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-  .filter-container, .sort-filter-container, .search-container, .autocomplete-item {
-    font-size: 18px; /* Decrease font size for smaller screens */
-  }
 }
