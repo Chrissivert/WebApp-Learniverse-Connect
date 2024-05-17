@@ -38,7 +38,6 @@
   }
 }
 
-
 /* Apply styles to all dropdown tables */
 .dropdown-table {
   width: 100%;
@@ -105,9 +104,6 @@ select {
   line-height: 1.5; /* Adequate line height for text */
 }
 
-
-
-
 .sort-filter-container {
   display: flex;
   align-items: center;
@@ -133,6 +129,21 @@ select {
   text-overflow: ellipsis; /* Displays ellipsis (...) if text overflows */
 }
 
+.sortButton:hover {
+  background-color: #8a2be2;
+}
+
+.search-input:hover {
+  background-color: #edebeb;
+}
+
+.sort-dropdown:hover {
+  background-color: #edebeb;
+}
+
+.category-select:hover {
+  background-color: #edebeb;
+}
 
 .search-container {
   position: relative;
@@ -141,7 +152,6 @@ select {
   padding-bottom: 20px; /* Add padding below the search bar */
   margin: 0 auto; /* Center the search bar horizontally */
 }
-
 
 .search-input {
   width: 100%;
@@ -187,7 +197,6 @@ select {
   font-size: 22px; /* Adjust the font size as needed */
 }
 
-
 .autocomplete-item:last-child {
   border-bottom: none; /* Remove border for the last item */
 }
@@ -212,5 +221,3 @@ select {
     font-size: 18px; /* Decrease font size for smaller screens */
   }
 }
-
-
