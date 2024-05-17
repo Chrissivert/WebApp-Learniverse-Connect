@@ -6,9 +6,9 @@ import CategoryFilter from './categoriesFilter/CategoryFilter';
 import AutocompleteBox from '../../components/autocompleteBox/AutoCompleteBox'; // Import AutocompleteBox component
 import './filterSection.css'; // Import CSS file for FilterSection component
 
-function FilterSection({ onSearchQueryChange, onPriceChange, onSortChange, onCategoryChange, courses, filters, maxPrice }) {
+export default function FilterSection({ onSearchQueryChange, onPriceChange, onSortChange, onCategoryChange, courses, filters, maxPrice }) {
   return (
-    <div>
+    <div className='filter-section-container'>
       <SearchBar setSearchQuery={onSearchQueryChange} />
       <AutocompleteBox courses={courses} filters={filters} /> {/* Pass both courses and filters to AutocompleteBox */}
       <div className="filter-row">
@@ -19,5 +19,3 @@ function FilterSection({ onSearchQueryChange, onPriceChange, onSortChange, onCat
     </div>
   );
 }
-
-export default FilterSection;
