@@ -1,4 +1,4 @@
-.courseCardSkeleton {
+.course-card-skeleton {
     /* border: 1px solid #ccc; */
     padding: 10px;
     margin: 10px;
@@ -13,9 +13,9 @@
     margin: 5px 0;
 }
 
-.skeleton-image {
+/* .skeleton-image {
     height: 150px;
-}
+} */
 
 .skeleton-text {
     height: 20px;

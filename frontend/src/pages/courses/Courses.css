@@ -38,7 +38,7 @@
     padding: 3%;
   }
 
-  .coursecards-skeleton,
+  .coursecards-skeleton:last-child,
   .coursecards:last-child {
     padding-bottom: 3rem;
   }
