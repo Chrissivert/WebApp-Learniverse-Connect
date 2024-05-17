@@ -50,11 +50,10 @@ a:link, a:visited, a:active {
 }
 
 :focus-visible {
-  outline: 3px solid blue;
+  outline: 3px solid rgb(151, 88, 163);
   transition: outline 0.3s ease;
 }
 
 button:focus:not(:focus-visible) {
   outline: none;
 }
-

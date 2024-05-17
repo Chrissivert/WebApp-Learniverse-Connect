@@ -26,12 +26,24 @@
     flex: 1 1 calc(50% - 32px);
     padding: 2%;
   }
+  .courses-page-container {
+    margin-top: 2rem;
+  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .coursecards-skeleton,
   .coursecards {
     flex: 1 1 calc(100% - 32px);
     padding: 3%;
+  }
+
+  .coursecards-skeleton,
+  .coursecards:last-child {
+    padding-bottom: 3rem;
+  }
+
+  .courses-page-container {
+    margin-top: 2rem;
   }
 }
