@@ -12,10 +12,12 @@ import Unauthorized from "../error/unauthorized/401";
 import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { AuthProvider } from "../admin/AuthProvider";
 import { Link } from "react-router-dom";
+//import { GetFavoriteCourses } from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 
 export default function Profile() {
   //const [imgId, setImgId] = useState(null);
   const auth = useContext(AuthContext);
+  const [userId, setUserId] = useState(null);
   const [isUser, setIsUser] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("");
@@ -49,9 +51,12 @@ export default function Profile() {
           console.log("convertedEmail: " + convertedEmail);
           const res = await getUserByEmail(convertedEmail);
           const currentUser = res.data;
+          console.log("res.data " + res.data);
+          setUserId(currentUser.id);
           setUserName(currentUser.username);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
+          console.log("userId " + userId);
           console.log("username: " + userName);
           console.log("current user: " + currentUser);
           console.log("email: " + email);
