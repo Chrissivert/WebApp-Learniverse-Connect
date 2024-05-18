@@ -51,13 +51,13 @@
 
 .button {
   color: #ffffff;
-  background-color: #bd67ec;
+  background-color: rgb(151, 88, 163);
   transition: filter 0.3s ease;
 }
 
 .button:hover {
   filter: grayscale(50%);
-  background-color: #b315de;
+  background-color: rgb(151, 88, 163, 0.6);
   color: #ffffff;
 }
 .avatar {
