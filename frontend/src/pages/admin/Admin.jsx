@@ -4,6 +4,7 @@ import Unauthorized from '../error/unauthorized/401';
 import Courses from '../courses/Courses';
 import { getCoursesFromServer } from "../../services/course-service";
 import "./Admin.css";
+import { Link } from "react-router-dom";
 
 function AdminPage() {
     const auth = useContext(AuthContext);
@@ -53,6 +54,16 @@ function AdminPage() {
         }));
     }
 
+
+    const addNewCourse = async (curId) => {
+        try {
+          
+        } catch (error) {
+          console.error('Failed to add new course:', error);
+        }
+      };
+    
+
     // If user is not admin, show unauthorized page
     if (!isAdmin) {
         return (
@@ -70,7 +81,12 @@ function AdminPage() {
             <h1>Welcome {auth.user.sub}</h1>
             <p>As an admin you can add, update, delete and hide/unhide courses. All visible and hidden courses are listed in the table below. To read full description of a course, click on the description section. </p>
             <hr/>
-            <button className='button'>Add new course</button>
+            <div>
+                <Link to={"/newCourse"}>
+                <button className='button'>Add new course</button>
+                </Link>
+            </div>
+            
             {/* Admin page content */}
         
             {/* Courses Table */}
