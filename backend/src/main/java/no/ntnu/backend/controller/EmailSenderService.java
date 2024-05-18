@@ -22,6 +22,13 @@ public void sendEmail(String toEmail, String subject, String text){
     message.setSubject(subject);
     message.setText(text);
 
+
+    System.out.println("Senddadading email to: " + toEmail);
+    System.out.println("Subject: " + subject);
+    System.out.println("Senddwadawdaing email..." + text);
+
+System.out.println("Sending email..." + message);
+
     mailSender.send(message);
     
 }

@@ -25,6 +25,12 @@ public class PurchaseController {
         String subject = purchaseData.getSubject();
         String text = "Thank you for your purchase!\n\n" + purchaseData.getText();
 
+        System.out.println("Sending email to: " + email);
+        System.out.println("Subject: " + subject);
+        System.out.println("Text: " + text);
+
+        System.out.println("Sending email..." + purchaseData.getText());
+
         emailSenderService.sendEmail(email, subject, text);
     }
 }
