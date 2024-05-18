@@ -38,11 +38,6 @@
     padding: 3%;
   }
 
-  .coursecards-skeleton:last-child,
-  .coursecards:last-child {
-    padding-bottom: 3rem;
-  }
-
   .courses-page-container {
     margin-top: 2rem;
   }

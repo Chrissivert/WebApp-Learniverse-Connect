@@ -18,6 +18,7 @@ import { SpeakingProvider } from './components/textReader/speakingContext.jsx';
 import AdminPage from './pages/admin/Admin.jsx';
 import { AuthProvider } from './pages/admin/AuthProvider.jsx';
 import PurchasedPage from './pages/purchased/PurchasedPage.jsx';
+import PostCourse from './components/crudTest/post/course/PostCourse.jsx';
 
 export default function App() {  
   const [targetCurrency, setTargetCurrency] = useState('AUD'); 
@@ -41,6 +42,7 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/purchased" element={<PurchasedPage/>} />
+            <Route path="/newCourse" element={<PostCourse/>} />
           </Routes>
           <Footer />
         </Router>

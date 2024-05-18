@@ -13,7 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   min-height: 100vh;
-  /* margin-bottom: 6rem; */
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 body {

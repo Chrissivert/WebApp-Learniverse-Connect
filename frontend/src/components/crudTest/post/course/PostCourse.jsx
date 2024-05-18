@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./PostCourse.css";
+import { Link } from "react-router-dom";
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -47,7 +49,14 @@ export default function PostCourse() {
 
   return (
     <>
-      <h1>POST COURSE HERE:</h1>
+      <div>
+        <Link to={"/admin"}>
+          <button className='button'>Go back →</button>
+        </Link>
+            
+      </div>
+      <h1>Create new course</h1>
+      <p>Here you can create a course</p>
 
       <form onSubmit={handleSubmit}>
         {/* <label htmlFor='id'>
