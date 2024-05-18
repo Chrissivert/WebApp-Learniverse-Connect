@@ -84,8 +84,8 @@ async function sendApiRequest(method, url, data) {
           },
     };
 
+
     const response = await axios(config);
-    console.log("API request sent succesfully");
     return response;
   } catch (error) {
     console.error("Error in sendApiRequest:", error);

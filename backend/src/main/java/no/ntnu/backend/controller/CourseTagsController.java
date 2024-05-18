@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.backend.model.CourseTags;
+import no.ntnu.backend.model.Tags;
 import no.ntnu.backend.repository.CourseTagsRepository;
 
 
@@ -26,6 +27,7 @@ import no.ntnu.backend.repository.CourseTagsRepository;
  * @version 23.05.2024
  */
 @RestController
+@RequestMapping("/course-tags")
 @CrossOrigin
 public class CourseTagsController {
 
@@ -48,8 +50,10 @@ public class CourseTagsController {
      *
      * @return List of CourseTags containing information about all course tags.
      */
-    @GetMapping("/course-tags")
-    List<CourseTags> getAllCourses() {
+    @GetMapping()
+    List<CourseTags> readAllCourseTags() {
         return courseTagsRepository.findAll();
     }
 }
+
+

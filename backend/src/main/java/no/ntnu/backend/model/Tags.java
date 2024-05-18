@@ -16,6 +16,8 @@ public class Tags {
   private int id;
   private String tag;
 
+  
+
   public Tags() {
   }
 
@@ -40,25 +42,23 @@ public class Tags {
     return //this.id > 0 &&
       !this.tag.isBlank() && this.tag != null;
   }
-
   @Override
   public boolean equals(Object obj) {
-    if (obj == this)
-      return true;
-    if (obj == null || obj.getClass() != this.getClass())
-      return false;
-    var that = (Tags) obj;
-    return this.id == that.id;
+      if (obj == this) return true;
+      if (obj == null || obj.getClass() != this.getClass()) return false;
+      var that = (Tags) obj;
+      return this.id == that.id;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+      return Objects.hash(this.id);
   }
 
   @Override
   public String toString() {
-    return "Tags[" +
-        "id=" + this.id + ']';
+      return "Tags[" +
+          "id=" + this.id + ", " +
+          "tag=" + this.tag + "]";
   }
 }
