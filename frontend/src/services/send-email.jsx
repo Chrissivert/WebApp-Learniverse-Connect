@@ -2,8 +2,6 @@ import { sendApiPostRequest } from "./api-requests";
 
 const EMAIL_URL = "/purchased";
 
-console.log('send-email.jsx');
-
 /**
  * Sends an email.
  *

@@ -41,9 +41,8 @@ function CartPage() {
     console.log("Purchase confirmed!");
     try {
       await sendPurchaseEmail(cart); // Send email after confirmation
-      console.log("Email sent successfully!");
       clearCart();
-      navigate('/purchased'); // Redirect after email is sent
+      navigate('/purchased', { state: { emailConfirmationSent: true } }); // Redirect to purchase page with state indicating email confirmation
     } catch (error) {
       console.error('Error sending email:', error);
       alert('Failed to send email');

@@ -13,11 +13,17 @@ export default function Header() {
   const { cart } = useContext(CartContext);
 
   return (
-    <header className="header-container">
+     <header className="header-container">
+
       <div className="logo-container">
         <Logo home_src={true} aria-label="Homepage-button" />
       </div>
-      
+      <div className="learniverse-connect">
+        <Link to="/" className="learniverse-link">
+          Learniverse connect
+        </Link>
+      </div>
+
       {/* <div className="currency-selector-container">
         <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
       </div> */}

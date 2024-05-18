@@ -1,7 +1,6 @@
 .header-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between; /* Changed from space-around to space-between */
   padding: 10px;
   background-color: rgb(151, 88, 163);
   color: white;
@@ -9,49 +8,59 @@
   top: 0;
   width: 100%;
   left: 0;
-  right: 0;
   height: 6rem;
   transition: 0.3s;
-  z-index: 1000;
+  z-index: 100;
+  padding-left: 20px;
 }
 
 .hamburger-menu {
   display: none;
 }
 
+.navlist-container {
+  max-width: 70%;}
+
+  .learniverse-connect {
+    color: white;
+    padding-left: 10px; /* Add padding for spacing */
+  }
+  
+
+
+
 .navlist-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: space-between; /* Spread out the list items */
+  width: 100%; /* Ensure the ul takes up the full width */
 }
 
 .navlist-container ul li {
   margin-right: 10px;
 }
 
-.navlist-container ul li:last-child {
-margin-right: 0;
-}
 
 .cart-container,
-.login-container { /* Adjust for login-container for consistency */
+.login-container {
   display: flex;
   align-items: center;
 }
 
 .cart-link,
-.login-link { /* Combine cart-link and login-link */
+.login-link {
   display: flex;
   align-items: center;
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s, filter 0.3s; /* Add transition for color and filter */
+  transition: color 0.3s, filter 0.3s;
 }
 
 .cart-link:hover,
-.login-link:hover { /* Define hover styles for both links */
-  filter: brightness(0.8); /* Slightly decrease brightness on hover */
+.login-link:hover {
+  filter: brightness(0.8);
 }
 
 .cart-icon {
@@ -67,7 +76,6 @@ margin-right: 0;
   display: flex;
 }
 
-/* header.css */
 .cart-icon {
   max-height: 50px;
   max-width: 50px; 
@@ -89,37 +97,31 @@ margin-right: 0;
   animation: pop 0.3s ease-in-out;
 }
 
-
-
-/* Navigation links */
 .header-container a {
   color: white;
   text-decoration: none;
-  position: relative; /* Added for positioning the underline */
+  position: relative;
 }
 
-/* Underline */
 .header-container a::after {
   content: '';
   position: absolute;
-  left: 50%; /* Start from the middle */
+  left: 50%;
   bottom: -2px;
   height: 2px;
   width: 0;
   background-color: rgb(255, 255, 255);
-  transition: width 0.3s, left 0.3s; /* Smooth transition effect for width and position */
+  transition: width 0.3s, left 0.3s;
 }
 
-/* Hover effect */
 .header-container a:hover::after {
-  width: calc(100%); /* Underline expands to full width with a little distance on each side */
-  left: 0; /* Adjusted position to maintain distance */
+  width: calc(100%);
+  left: 0;
 }
 
-/* Active link */
 .header-container a.active::after {
-  width: calc(100%); /* Underline stays at full width for active link */
-  left: 0; /* Adjusted position to maintain distance */
+  width: calc(100%);
+  left: 0;
 }
 
 @media (max-width: 1000px) {
@@ -131,3 +133,24 @@ margin-right: 0;
     display: none;
   }
 }
+
+.learniverse-connect {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-right: auto;
+}
+
+.learniverse-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
