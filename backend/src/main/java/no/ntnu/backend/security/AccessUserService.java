@@ -136,7 +136,7 @@ public class AccessUserService implements UserDetailsService {
 //    }
 
     private void createUser(String email, String password, String username) {
-        Role userRole = this.roleRepository.findOneById(1);
+        Role userRole = this.roleRepository.findOneById(2);
         if (userRole != null) {
 
             User user = new User(email, this.createHash(password));

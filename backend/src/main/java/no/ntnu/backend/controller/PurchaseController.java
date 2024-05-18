@@ -18,16 +18,13 @@ public class PurchaseController {
     @Autowired
     private EmailSenderService emailSenderService;
 
-    
-
-    @Operation(summary = "Cree", description = "Crekkke.")
+    @Operation(summary = "Handle Purchase", description = "Handle purchase request and send confirmation email.")
     @PostMapping()
     public void handlePurchase(@RequestBody PurchaseData purchaseData) {
         String email = purchaseData.getToEmail();
-        System.out.println("eeeeeeee" + purchaseData.getToEmail());
-        System.out.println("eeeeeeee" + purchaseData.getSubject());
-        String subject = "Purchase Confirmation";
-        String text = "Thank you for your purchase!";
+        String subject = purchaseData.getSubject();
+        String text = "Thank you for your purchase!\n\n" + purchaseData.getText();
+
         emailSenderService.sendEmail(email, subject, text);
     }
 }

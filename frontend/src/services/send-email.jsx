@@ -12,7 +12,8 @@ console.log('send-email.jsx');
  * @param {string} text The content of the email.
  * @returns The outcome of the post request.
  */
-export function sendEmail(toEmail, subject, text) {
-    console.log('sendEmail');
+export function sendEmail(toEmail, subject, items) {
+  const text = items.map(item => `${item.name}: ${Math.ceil(item.price)} ${item.currency} ${item.provider}`).join('\n');
   return sendApiPostRequest(EMAIL_URL, { toEmail, subject, text });
 }
+
