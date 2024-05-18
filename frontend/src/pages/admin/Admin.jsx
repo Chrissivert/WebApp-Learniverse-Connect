@@ -53,15 +53,6 @@ function AdminPage() {
             [courseId]: !prevState[courseId]
         }));
     }
-
-
-    const addNewCourse = async (curId) => {
-        try {
-          
-        } catch (error) {
-          console.error('Failed to add new course:', error);
-        }
-      };
     
 
     // If user is not admin, show unauthorized page
