@@ -1,4 +1,4 @@
-.description {
+.description-cell {
     max-width: 200px; /* Adjust as per your design */
     overflow: hidden;
     white-space: nowrap;
@@ -6,6 +6,37 @@
     cursor: pointer; /* Change cursor to pointer to indicate interactivity */
 }
 
-.description:hover {
-    white-space: normal; /* Reveal full text on hover */
+.description-cell.expanded {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+}
+
+.courseTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.courseTable th, .courseTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.courseTable th {
+    background-color: #f2f2f2;
+}
+
+.courseTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.courseTable tr:hover {
+    background-color: #ddd;
+}
+.button-container {
+    display: flex;
+}
+
+.button {
+    margin-right: 10px; /* Adjust spacing between buttons as needed */
 }

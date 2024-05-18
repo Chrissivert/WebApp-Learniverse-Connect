@@ -80,13 +80,13 @@ async function sendApiRequest(method, url, data) {
       headers: url.includes("images")
         ? {
             "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + token,
           }
         : {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
     };
-
 
     const response = await axios(config);
     return response;
