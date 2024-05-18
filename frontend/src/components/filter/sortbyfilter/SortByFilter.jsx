@@ -25,7 +25,7 @@ export default function SortByFilter({ onSortChange }) {
       <label htmlFor="sortSelect">Select to sort by:</label>
       <select id="sortSelect" className='sort-dropdown' value={sortAttribute} onChange={handleAttributeChange}>
         <option value="title">Title</option>
-        {/* <option value="price">Price</option> */}
+        <option value="price">Price</option>
         <option value="credits">Credits</option>
       </select>
       <button className='sortButton' onClick={toggleSortOrder}>
