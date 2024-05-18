@@ -5,8 +5,8 @@ import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 import ConfirmationModal from '../../components/modalBox/ConfirmationModalBox';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import PurchaseComponent from '../../components/PurchaseComponent';
+import { useNavigate } from 'react-router-dom';
+import useEmailLogic from '../../components/EmailLogic';
 
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -14,7 +14,8 @@ function CartPage() {
   const [confirmationType, setConfirmationType] = useState(null);
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [totalPurchasePrice, setTotalPurchasePrice] = useState(0);
-  const navigate = useNavigate(); // Declare navigate
+  const navigate = useNavigate();
+  const { sendPurchaseEmail } = useEmailLogic(); // Use the email logic
 
   const handleRemoveItem = (courseId) => {
     removeFromCart(courseId);
@@ -33,13 +34,12 @@ function CartPage() {
     setShowConfirmation(true);
   };
 
-  const confirmPurchase = () => {
-    // Logic for actual purchase action goes here
+  const confirmPurchase = async () => {
     console.log("Purchase confirmed!");
+    await sendPurchaseEmail(cart); // Send email after confirmation
     setShowConfirmation(false);
     clearCart();
-    navigate('/purchased'); // Navigate to the purchased page after 
-    PurchaseComponent(); // Call the PurchaseComponent function here
+    navigate('/purchased'); 
   };
 
   const cancelPurchase = () => {
@@ -79,7 +79,7 @@ function CartPage() {
           <p>Total Price: {currency} {Math.ceil(totalPrice)}</p>
         </div>
         <div className="action-buttons">
-          <button onClick={handleClearCart}disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Clear Cart</button>
+          <button onClick={handleClearCart} disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Clear Cart</button>
           <button onClick={handlePurchase} disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Purchase</button>
         </div>
       </div>
@@ -101,9 +101,6 @@ function CartPage() {
           onCancel={cancelPurchase}
         />
       )}
-
-      {/* Integrate PurchaseComponent here */}
-  <PurchaseComponent cart={cart} onPurchase={handlePurchase} />
     </div>
   );
 }
