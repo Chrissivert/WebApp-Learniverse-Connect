@@ -8,7 +8,8 @@ const useEmailLogic = () => {
 
   const sendPurchaseEmail = async (cart) => {
     const emailData = {
-      email: user.sub,
+      // email: user.sub,
+      email: "chrisssy@ntnu.no",
       name: user.name,
       items: cart.map(({ course }) => {
         return {

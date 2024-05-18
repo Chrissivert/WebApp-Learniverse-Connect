@@ -7,6 +7,7 @@ import Coursecard from '../../components/coursecard/Coursecard';
 import ConfirmationModal from '../../components/modalBox/ConfirmationModalBox';
 import { useNavigate } from 'react-router-dom';
 import useEmailLogic from '../../components/EmailLogic';
+import Spinner from '../../components/spinner/Spinner';
 
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -14,8 +15,9 @@ function CartPage() {
   const [confirmationType, setConfirmationType] = useState(null);
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [totalPurchasePrice, setTotalPurchasePrice] = useState(0);
+  const [loading, setLoading] = useState(false); // State for loading spinner
   const navigate = useNavigate();
-  const { sendPurchaseEmail } = useEmailLogic(); // Use the email logic
+  const { sendPurchaseEmail } = useEmailLogic();
 
   const handleRemoveItem = (courseId) => {
     removeFromCart(courseId);
@@ -35,12 +37,21 @@ function CartPage() {
   };
 
   const confirmPurchase = async () => {
+    setLoading(true); // Show spinner
     console.log("Purchase confirmed!");
-    await sendPurchaseEmail(cart); // Send email after confirmation
-    setShowConfirmation(false);
-    clearCart();
-    navigate('/purchased'); 
+    try {
+      await sendPurchaseEmail(cart); // Send email after confirmation
+      console.log("Email sent successfully!");
+      clearCart();
+      navigate('/purchased'); // Redirect after email is sent
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email');
+    } finally {
+      setLoading(false); // Hide spinner regardless of email result
+    }
   };
+  
 
   const cancelPurchase = () => {
     setShowConfirmation(false);
@@ -60,6 +71,7 @@ function CartPage() {
 
   return (
     <div className="cart-page">
+      {loading && <Spinner />}
       <div className="cart-header">
         <h1>Shopping Cart</h1>
         <Button text="Go to Courses" src="/courses" />
