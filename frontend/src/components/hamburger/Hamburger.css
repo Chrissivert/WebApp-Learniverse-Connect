@@ -61,3 +61,7 @@
   height: 3px;
   margin: 5px 0;
 }
+
+.flex-container{
+  background-color: transparent;
+}

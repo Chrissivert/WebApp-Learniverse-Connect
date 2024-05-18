@@ -1,7 +1,6 @@
 import './Hamburger.css';
 import React, { useState, useRef, useEffect } from 'react';
 import Hamburger from 'hamburger-react';
-import Button from '../button/Button';
 import NavList from './NavList';
 
 export default function HamburgerMenu() {

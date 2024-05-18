@@ -1,8 +1,9 @@
 import Button from "../button/Button";
+import './navList.css';
 
 export default function NavList() {
   return (
-    <ul>
+    <ul className="navList">
       <li><Button text='Home' src='/' /></li>
       <li><Button text='About' src='/about' /></li>
       <li><Button text='Courses' src='/courses' /></li>

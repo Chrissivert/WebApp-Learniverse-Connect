@@ -6,7 +6,7 @@
 }
 
 footer {
-  background-color: rgb(151, 88, 163);
+  background-image: linear-gradient(to right, rgb(151, 88, 163), rgb(204, 115, 207)); /* Linear gradient */  color: white;
   color: #ffffff;
   position: absolute;
   bottom: 0;

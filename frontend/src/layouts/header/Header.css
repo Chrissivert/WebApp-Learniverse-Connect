@@ -2,8 +2,7 @@
   display: flex;
   justify-content: space-between; /* Changed from space-around to space-between */
   padding: 10px;
-  background-color: rgb(151, 88, 163);
-  color: white;
+ background-image: linear-gradient(to right, rgb(151, 88, 163), rgb(204, 115, 207)); /* Linear gradient */  color: white;
   position: fixed;
   top: 0;
   width: 100%;
@@ -20,11 +19,6 @@
 
 .navlist-container {
   max-width: 70%;}
-
-  .learniverse-connect {
-    color: white;
-    padding-left: 10px; /* Add padding for spacing */
-  }
   
 
 
@@ -137,17 +131,23 @@
 .learniverse-connect {
   display: flex;
   align-items: center;
-  color: white;
+  color: white; /* Set the color of the text */
   margin-right: auto;
-}
+  background: linear-gradient(180deg, #fff -148.55%, #9087ef 236.16%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 200;
+  }
 
-.learniverse-link {
+
+
+/* .learniverse-link {
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 18px;
   transition: color 0.3s;
-}
+} */
 
 .logo-container {
   display: flex;
