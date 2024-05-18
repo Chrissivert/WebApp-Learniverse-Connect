@@ -49,6 +49,7 @@ public class CourseProvider {
         return this.id.getProviderId();
     }
 
+
     @Embeddable
     public static class CourseProviderId implements Serializable {
 

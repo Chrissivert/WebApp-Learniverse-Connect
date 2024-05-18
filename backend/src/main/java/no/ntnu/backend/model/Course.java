@@ -3,6 +3,8 @@ package no.ntnu.backend.model;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -30,6 +32,15 @@ public class Course {
 
   @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
   private List<FavoriteCourse> favoriteCourses;
+
+
+  @ManyToMany
+  @JoinTable(
+      name = "CourseTags",
+      joinColumns = @JoinColumn(name = "course_id"),
+      inverseJoinColumns = @JoinColumn(name = "tag_id")
+  )
+  private Set<Tags> tags;
 
   /**
    * 

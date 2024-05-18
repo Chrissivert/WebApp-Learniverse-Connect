@@ -1,15 +1,16 @@
 export function filterLogic(courses, filters) {
   // Filter by search query, min and max price, and selected category
   let filtered = courses.filter(course =>
-    (!filters.searchQuery || course.title.toLowerCase().includes(filters.searchQuery.toLowerCase())) &&
+    (!filters.searchQuery || 
+      course.title.toLowerCase().includes(filters.searchQuery.toLowerCase()) || // Check title
+      course.tags.some(tag => tag.toLowerCase().includes(filters.searchQuery.toLowerCase())) // Check tags
+    ) &&
     course.cheapestPrice >= filters.minPrice &&
     course.cheapestPrice <= filters.maxPrice &&
     (!filters.category || // Check if category is undefined or empty
-      ( // Check if course.categories exists
-        course.categoryName.includes(filters.category))
+      course.categoryName.toLowerCase().includes(filters.category.toLowerCase())
     )
   );
-
 
   // Sort the filtered courses based on the selected attribute and sort order
   if (filters.sortBy === 'title') {

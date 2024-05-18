@@ -1,6 +1,7 @@
 package no.ntnu.backend.service;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import no.ntnu.backend.model.Provider;
 import no.ntnu.backend.repository.CourseProviderRepository;
 import no.ntnu.backend.repository.ProviderRepository;
 
+
+//CLASS CREATED WITH HELP FROM CHATGPT!
+
 @Service
 public class CourseProviderService {
 
@@ -25,8 +29,6 @@ public class CourseProviderService {
     private ProviderRepository providerRepository;
 
     private List<CourseProvider> listOfCourseProviders = new ArrayList<>();
-
-    // Update CourseProviderService
 
 public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId, String targetCurrency) {
     List<CourseProvider> convertedCoursePrices = getConvertedCoursePrices(targetCurrency);
@@ -58,6 +60,55 @@ public List<CourseByEachProviderDTO> getProvidersForCourse(Long courseId, String
     private Map<String, Map<String, Double>> conversionRatesMap = new HashMap<>();
 
     private Map<String, Long> lastUpdatedMap = new HashMap<>();
+
+    public List<CourseProvider> getMinimumConvertedPriceForEachCourse(String targetCurrency) {
+    List<CourseProvider> allCoursePrices = getConvertedCoursePrices(targetCurrency);
+    Map<Long, Double> minimumPricesForEachCourse = new HashMap<>();
+
+    // Find minimum price for each course
+    for (CourseProvider courseProvider : allCoursePrices) {
+        long courseId = courseProvider.getCourseId();
+        double price = courseProvider.getPrice();
+
+        if (!minimumPricesForEachCourse.containsKey(courseId) || price < minimumPricesForEachCourse.get(courseId)) {
+            minimumPricesForEachCourse.put(courseId, price);
+        }
+    }
+
+    // Create CourseProvider objects for minimum prices
+    List<CourseProvider> minimumPricesList = minimumPricesForEachCourse.entrySet().stream()
+            .map(entry -> new CourseProvider(entry.getKey(), -1, entry.getValue(), targetCurrency))
+            .collect(Collectors.toList());
+
+    return minimumPricesList;
+}
+
+
+public List<CourseProvider> getMaximumConvertedPriceForEachCourse(String targetCurrency) {
+    List<CourseProvider> allCoursePrices = getConvertedCoursePrices(targetCurrency);
+    Map<Long, Double> maximumPricesForEachCourse = new HashMap<>();
+
+    // Find maximum price for each course
+    for (CourseProvider courseProvider : allCoursePrices) {
+        long courseId = courseProvider.getCourseId();
+        double price = courseProvider.getPrice();
+
+        if (!maximumPricesForEachCourse.containsKey(courseId) || price > maximumPricesForEachCourse.get(courseId)) {
+            maximumPricesForEachCourse.put(courseId, price);
+        }
+    }
+
+    // Create CourseProvider objects for maximum prices
+    List<CourseProvider> maximumPricesList = maximumPricesForEachCourse.entrySet().stream()
+            .map(entry -> new CourseProvider(entry.getKey(), -1, entry.getValue(), targetCurrency))
+            .collect(Collectors.toList());
+
+    return maximumPricesList;
+}
+
+
+
+
 
     public List<CourseProvider> getConvertedCoursePrices(String targetCurrency) {
         List<CourseProvider> allCoursePrices = courseProviderRepository.findAll();

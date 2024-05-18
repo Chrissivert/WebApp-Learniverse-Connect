@@ -6,6 +6,7 @@ import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 import ConfirmationModal from '../../components/modalBox/ConfirmationModalBox';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import PurchaseComponent from '../../components/PurchaseComponent';
 
 function CartPage() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -37,7 +38,8 @@ function CartPage() {
     console.log("Purchase confirmed!");
     setShowConfirmation(false);
     clearCart();
-    navigate('/purchased'); // Navigate to the purchased page after purchase
+    navigate('/purchased'); // Navigate to the purchased page after 
+    PurchaseComponent(); // Call the PurchaseComponent function here
   };
 
   const cancelPurchase = () => {
@@ -99,6 +101,9 @@ function CartPage() {
           onCancel={cancelPurchase}
         />
       )}
+
+      {/* Integrate PurchaseComponent here */}
+      <PurchaseComponent />
     </div>
   );
 }

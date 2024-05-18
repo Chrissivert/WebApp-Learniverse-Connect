@@ -4,7 +4,9 @@ import { useCurrencyContext } from '../../components/currencySelector/TargetCurr
 import { filterLogic } from "./FilterLogic.jsx";
 import { getCoursesFromServer } from '../../services/course-service.jsx';
 import { getCategoriesFromServer } from '../../services/category-service.jsx';
-import { getCheapestPriceForEachCourse } from '../../services/course-provider.jsx';
+import { getCheapestPriceForEachCourse, getMostExpensivePriceForEachCourse } from '../../services/course-provider.jsx';
+import { getTagsFromServer} from '../../services/tags-service.jsx'; // Import the new services
+import { getCourseTagsFromServer} from '../../services/course-tags-service.jsx'; // Import the new services
 
 
 function useCoursesPageLogic() {
@@ -18,8 +20,6 @@ function useCoursesPageLogic() {
     category: ''
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(5);
   const [allCourses, setAllCourses] = useState([]);
   const [courses, setCourses] = useState([]);
   const [maxPrice, setMaxPrice] = useState(100000); // Initialize with a default value
@@ -28,20 +28,27 @@ function useCoursesPageLogic() {
     const fetchData = async () => {
       try {
         const coursesData = await getCoursesFromServer();
-        const courseProviderData = await getCheapestPriceForEachCourse(targetCurrency);
+        const cheapestProviderForEachCourse = await getCheapestPriceForEachCourse(targetCurrency);
+        const mostExpensiveProviderForEachCourse = await getMostExpensivePriceForEachCourse(targetCurrency);
         const categoriesData = await getCategoriesFromServer();
+        const tagsData = await getTagsFromServer(); // Fetch tags
+        const courseTagsData = await getCourseTagsFromServer(); // Fetch course-tags
 
-        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(coursesData, courseProviderData, categoriesData);
+        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(
+          coursesData,
+          cheapestProviderForEachCourse,
+          mostExpensiveProviderForEachCourse,
+          categoriesData,
+          tagsData,
+          courseTagsData
+        );
         
         setAllCourses(combinedCourses);
 
-        console.log(courseProviderData.data.length)
-        console.log("dajda" + courseProviderData)
-
-        if (courseProviderData.data.length > 0) {
-          const maxPriceValue = Math.max(...courseProviderData.data.map(provider => provider.price));
+        if (mostExpensiveProviderForEachCourse.data.length > 0) {
+          const maxPriceValue = Math.max(...mostExpensiveProviderForEachCourse.data.map(provider => provider.price));
+          console.log(JSON.stringify(mostExpensiveProviderForEachCourse.data) + "dddd")
           setMaxPrice(maxPriceValue);
-          console.log('helo:', maxPriceValue);
         }
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -60,10 +67,6 @@ function useCoursesPageLogic() {
     setFilters({ ...filters, sortBy, sortOrder });
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
   const handleSearchQueryChange = (query) => {
     setFilters({ ...filters, searchQuery: query });
   };
@@ -76,17 +79,19 @@ function useCoursesPageLogic() {
     setFilters({ ...filters, category });
   };
 
+  const handleTagSearch = (tag) => {
+    setFilters({ ...filters, searchQuery: tag });
+  };
+
   return {
     filters: { ...filters, maxPrice }, // include maxPrice in filters
-    currentPage,
-    perPage,
     courses,
     targetCurrency,
     handleSortChange,
-    handlePageChange,
     handleSearchQueryChange,
     handlePriceChange,
     handleCategoryChange,
+    handleTagSearch,
   };
 }
 

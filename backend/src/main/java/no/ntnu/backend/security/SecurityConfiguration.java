@@ -70,6 +70,7 @@ public class SecurityConfiguration {
                 //.authorizeHttpRequests((auth) -> auth.requestMatchers("/users").hasAnyRole("USER", "ADMIN"))
                 .authorizeHttpRequests((auth) -> auth.requestMatchers("/users/**").hasAnyRole("USER", "ADMIN"))
                 // Other URLs are accessible by everyone.
+                
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
 
                 // Enable stateless session policy
