@@ -68,9 +68,9 @@ function AdminPage() {
     return (
         <div>
             <h1>Welcome {auth.user.sub}</h1>
-            <p>You can add, update and delete courses as well as users.</p>
+            <p>As an admin you can add, update, delete and hide/unhide courses. All visible and hidden courses are listed in the table below. To read full description of a course, click on the description section. </p>
             <hr/>
-            <p>You can also hide courses, you dont want to show but dont want to delete either</p>
+            <button className='button'>Add new course</button>
             {/* Admin page content */}
         
             {/* Courses Table */}
@@ -102,6 +102,7 @@ function AdminPage() {
                                     <div className="button-container">
                                         <button className="button">Edit</button>
                                         <button className="button">Delete</button>
+                                        <button className='button'>Hide</button>
                                     </div>
                                 </td>
                             </tr>
