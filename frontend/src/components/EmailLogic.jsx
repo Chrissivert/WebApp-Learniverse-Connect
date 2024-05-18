@@ -8,8 +8,7 @@ const useEmailLogic = () => {
 
   const sendPurchaseEmail = async (cart) => {
     const emailData = {
-      // email: user.sub,
-      email: "chrisssy@ntnu.no",
+      email: user.sub,
       name: user.name,
       items: cart.map(({ course }) => {
         return {
@@ -28,7 +27,6 @@ const useEmailLogic = () => {
     try {
       const response = await sendEmail(emailData.email, "Purchase Confirmation", emailData.items);
       console.log("response", response);
-      alert('Email sent successfully!');
     } catch (error) {
       console.error('Error sending email:', error);
       alert('Failed to send email');
