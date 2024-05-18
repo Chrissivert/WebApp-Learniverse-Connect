@@ -103,7 +103,7 @@ function CartPage() {
       )}
 
       {/* Integrate PurchaseComponent here */}
-      <PurchaseComponent />
+  <PurchaseComponent cart={cart} onPurchase={handlePurchase} />
     </div>
   );
 }

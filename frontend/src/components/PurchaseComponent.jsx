@@ -1,28 +1,32 @@
 import React from 'react';
 import { sendEmail } from '../services/send-email';
 
-const PurchaseComponent = () => {
+const PurchaseComponent = ({ cart, onPurchase }) => {
+  console.log("dada"+ JSON.stringify(cart));
   const handlePurchase = async () => {
     const emailData = {
-      email: 'chris.sivert@outlook.com',
-      items: [
-        { name: 'Item 1', price: 100 },
-        { name: 'Item 2', price: 200 }
-      ]
+      email: 'marikristinehegge@hotmail.com',
+      items: cart.map(({ course }) => {
+        console.log('Course:', course); // Add console log here
+        return { name: course.course.title, 
+          price: course.selectedProvider.price, 
+          currency: course.selectedProvider.currency,
+          provider: course.selectedProvider.providerName }
+      }),
     };
 
-    console.log('Purchase data:', emailData.email);
+    console
 
     try {
-      const response = await sendEmail(emailData.email, "subjdct", "text");
-      console.log("response" + response);
+      const response = await sendEmail(emailData.email, "Purchase Confirmation", emailData.items);
+      console.log("response", response);
       alert('Email sent successfully!');
+      onPurchase();
     } catch (error) {
       console.error('Error sending email:', error);
       alert('Failed to send email');
     }
   };
-
 
   return (
     <button onClick={handlePurchase}>Purchase</button>
