@@ -122,6 +122,8 @@ select {
 .sortButton {
   border-radius: 20px;
   border: 1px solid #ccc;
+  background-color: #99c8ff;
+  color: #000;
   padding: 10px 20px;
   font-size: 16px;
   white-space: nowrap; /* Prevents button text from wrapping */
@@ -130,7 +132,8 @@ select {
 }
 
 .sortButton:hover {
-  background-color: #8a2be2;
+  background-color: #d1e6ff;
+  color: #000;
 }
 
 .search-input:hover {
