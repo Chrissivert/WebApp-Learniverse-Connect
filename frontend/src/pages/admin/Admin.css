@@ -1,0 +1,11 @@
+.description {
+    max-width: 200px; /* Adjust as per your design */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer; /* Change cursor to pointer to indicate interactivity */
+}
+
+.description:hover {
+    white-space: normal; /* Reveal full text on hover */
+}
