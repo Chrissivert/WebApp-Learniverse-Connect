@@ -15,6 +15,8 @@ const apiRequestMethods = Object.freeze({
   DELETE: "delete",
 });
 
+const token = localStorage.getItem("token");
+
 /**
  * Sends an HTTP POST REST-API request to the backend.
  *
@@ -81,6 +83,7 @@ async function sendApiRequest(method, url, data) {
           }
         : {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
     };
 
