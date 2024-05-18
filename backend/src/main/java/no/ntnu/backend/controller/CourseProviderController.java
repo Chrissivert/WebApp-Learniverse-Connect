@@ -47,6 +47,12 @@ public class CourseProviderController {
   @Operation(summary = "Retrieves the cheapest course prices", description = "Retrieves the cheapest course prices.")
   @GetMapping("/cheapest-course-prices")
   public List<CourseProvider> getCheapestCoursePrices(@RequestParam String targetCurrency) {
-    return courseProviderService.getConvertedCoursePrices(targetCurrency);
+    return courseProviderService.getMinimumConvertedPriceForEachCourse(targetCurrency);
   }
+
+  @Operation(summary = "Retrieves the most expensive course prices", description = "Retrieves the most expensive course prices.")
+@GetMapping("/most-expensive-course-prices")
+public List<CourseProvider> getMostExpensiveCoursePrices(@RequestParam String targetCurrency) {
+    return courseProviderService.getMaximumConvertedPriceForEachCourse(targetCurrency);
+}
 }

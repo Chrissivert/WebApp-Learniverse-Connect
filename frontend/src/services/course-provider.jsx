@@ -9,6 +9,17 @@ import {sendApiGetRequest} from "./api-requests";
 export function getCheapestPriceForEachCourse(targetCurrency) {
     return sendApiGetRequest(`/cheapest-course-prices?targetCurrency=${targetCurrency}`);
   }
+
+
+  /**
+ * Retrieves the most expensive course prices.
+ *
+ * @param {string} targetCurrency The target currency for the prices.
+ * @returns The outcome of the get request.
+ */
+export function getMostExpensivePriceForEachCourse(targetCurrency) {
+  return sendApiGetRequest(`/most-expensive-course-prices?targetCurrency=${targetCurrency}`);
+}
   
   /**
    * Retrieves the providers for a particular course.

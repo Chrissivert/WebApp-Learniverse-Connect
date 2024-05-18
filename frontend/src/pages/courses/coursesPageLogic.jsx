@@ -4,7 +4,7 @@ import { useCurrencyContext } from '../../components/currencySelector/TargetCurr
 import { filterLogic } from "./FilterLogic.jsx";
 import { getCoursesFromServer } from '../../services/course-service.jsx';
 import { getCategoriesFromServer } from '../../services/category-service.jsx';
-import { getCheapestPriceForEachCourse } from '../../services/course-provider.jsx';
+import { getCheapestPriceForEachCourse, getMostExpensivePriceForEachCourse } from '../../services/course-provider.jsx';
 import { getTagsFromServer} from '../../services/tags-service.jsx'; // Import the new services
 import { getCourseTagsFromServer} from '../../services/course-tags-service.jsx'; // Import the new services
 
@@ -28,14 +28,16 @@ function useCoursesPageLogic() {
     const fetchData = async () => {
       try {
         const coursesData = await getCoursesFromServer();
-        const courseProviderData = await getCheapestPriceForEachCourse(targetCurrency);
+        const cheapestProviderForEachCourse = await getCheapestPriceForEachCourse(targetCurrency);
+        const mostExpensiveProviderForEachCourse = await getMostExpensivePriceForEachCourse(targetCurrency);
         const categoriesData = await getCategoriesFromServer();
         const tagsData = await getTagsFromServer(); // Fetch tags
         const courseTagsData = await getCourseTagsFromServer(); // Fetch course-tags
 
         const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(
           coursesData,
-          courseProviderData,
+          cheapestProviderForEachCourse,
+          mostExpensiveProviderForEachCourse,
           categoriesData,
           tagsData,
           courseTagsData
@@ -43,8 +45,8 @@ function useCoursesPageLogic() {
         
         setAllCourses(combinedCourses);
 
-        if (courseProviderData.data.length > 0) {
-          const maxPriceValue = Math.max(...courseProviderData.data.map(provider => provider.price));
+        if (cheapestProviderForEachCourse.data.length > 0) {
+          const maxPriceValue = Math.max(...cheapestProviderForEachCourse.data.map(provider => provider.price));
           setMaxPrice(maxPriceValue);
         }
       } catch (error) {

@@ -43,6 +43,7 @@ export default function Coursecard({ course }) {
         <p>Start Date: {course.startDate}</p>
         {/* {roundedCheapestPrice && <p className="cheapest-price">Prices from: {roundedCheapestPrice} {course.currency}</p>} */}
         {/* <p>Credits: {course.credit}</p> */}
+        {<p>Prices from {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}</p>}
       </div>
     </div>
   )
