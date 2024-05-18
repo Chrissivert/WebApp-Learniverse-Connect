@@ -18,12 +18,14 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <img src={FrontImage} alt="front-image" className="image" />
-      <div className="toCourses">
-        <h2>Learniverse Connect</h2>
-        <Link to={`/courses`} className="link">
-          <p className="courseButton">Find your course →</p>
-        </Link>
+      <div className="landingpage-banner-container">
+        <img src={FrontImage} alt="front-image" className="image" />
+        <div className="toCourses">
+          <h2>Learniverse Connect</h2>
+          <Link to={`/courses`} className="link">
+            <p className="courseButton">Find your course →</p>
+          </Link>
+        </div>
       </div>
       <h2>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
