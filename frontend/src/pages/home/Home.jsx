@@ -8,38 +8,24 @@ import GetImage from '../../components/crudTest/post/image/GetImage';
 import Coursecard from '../../components/coursecard/Coursecard';
 import { AuthContext } from '../admin/AuthProvider';
 import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
+import FavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
+import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 
 export default function Home() {
-  const [favoriteCourses, setFavoriteCourses] = useState([]);
-
   const { user, isAuthenticated } = useContext(AuthContext); // Access user and isAuthenticated from AuthContext
-
   console.log("User:", user);
   console.log("IsAuthenticated:", isAuthenticated);
 
-  const fetchFavoriteCourses = async () => {
-    try {
-      const userId = 4; // Replace with the actual user ID
-      const favoriteCourses = await getFavoriteCoursesFromAUser(userId);
-      console.log("Favorite Courses:", favoriteCourses.data); // <-- Added console log here
-      setFavoriteCourses(favoriteCourses.data);
-    } catch (error) {
-      console.error("Error fetching favorite courses:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFavoriteCourses();
-  }, []);
-
   return (
     <div className="home-container">
-      <img src={FrontImage} alt="front-image" className="image" />
-      <div className="toCourses">
-        <h2>Learniverse Connect</h2>
-        <Link to={`/courses`} className="link">
-          <p className="courseButton">Find your course →</p>
-        </Link>
+      <div className="landingpage-banner-container">
+        <img src={FrontImage} alt="front-image" className="image" />
+        <div className="toCourses">
+          <h2>Learniverse Connect</h2>
+          <Link to={`/courses`} className="link">
+            <p className="courseButton">Find your course →</p>
+          </Link>
+        </div>
       </div>
       <h2>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
@@ -50,21 +36,6 @@ export default function Home() {
         quaerat adipisci ipsa assumenda. Magnam eius dolor eaque fugiat,
         doloremque est voluptatum hic.
       </h2>
-
-      <div className="favorite-courses">
-        <h2>Your Favorite Courses</h2>
-        {favoriteCourses.map((favoriteCourse) => (
-          <Link
-            to={`/course/${favoriteCourse.course.id}`}
-            key={favoriteCourse.course.id}
-          >
-            <Coursecard course={favoriteCourse.course} />
-          </Link>
-        ))}
-      </div>
-
-      <PostImage />
-      <GetImage imageId={6} width={300} />
     </div>
   );
 }
