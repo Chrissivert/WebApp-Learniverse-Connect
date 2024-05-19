@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { getFavoriteCoursesFromAUser } from "../../../../services/favorite-course";
+import { Link } from "react-router-dom";
+import Coursecard from "../../../coursecard/Coursecard";
 
 export default function GetFavoriteCourses({ userId }) {
   const [favoriteCourses, setFavoriteCourses] = useState([]);

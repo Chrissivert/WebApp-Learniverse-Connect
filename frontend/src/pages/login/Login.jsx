@@ -4,6 +4,7 @@ import "../../index.css";
 import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
 import { postAuthToServer } from "../../services/user-request";
+import { getUserByEmail } from "../../services/user-request";
 // import { jwtDecode } from "jwt-decode";
 
 /**
@@ -45,6 +46,8 @@ function saveUserDataToStorage(userData) {
 }
 
 function Login() {
+  //const auth = useContext(AuthContext);
+  const [userId, setUserId] = useState(null);
   const { login } = useContext(AuthContext); // Get login function from AuthContext
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,18 +73,34 @@ function Login() {
       const userData = parseJwt(response.data.jwt);
       saveUserDataToStorage(userData);
       localStorage.setItem("token", response.data.jwt);
-      setCookie("jwt", response.jwt);
+      /* setCookie("jwt", response.jwt);
       setCookie("current_username", userData.sub);
-      setCookie("current_user_roles", userData.roles.join(","));
+      setCookie("current_user_roles", userData.roles.join(",")); */
       login(userData); // Update AuthContext with user information
-      alert("Login successful!");
-
+      //console.log("res.data " + res.data);
+      const convertedEmail = email.replace("@", "%40");
+      console.log("convertedEmail: " + convertedEmail);
+      //console.log("this is my user" + user.sub);
+      const res = await getUserByEmail(convertedEmail);
+      console.log("res: " + res);
+      const currentUser = res.data.id;
+      console.log("res.data " + res.data);
+      console.log("currentUser: " + currentUser);
+      setUserId(currentUser);
+      localStorage.setItem("ActiveUserId", userId);
       //window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
       alert("Login failed. Please try again.");
     }
   };
+
+  useEffect(() => {
+    if (userId !== null) {
+      localStorage.setItem("ActiveUserId", userId);
+      window.location.href = "/";
+    }
+  }, [userId]);
 
   async function getAllUsers() {
     try {

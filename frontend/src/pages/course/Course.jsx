@@ -61,7 +61,7 @@ function Course() {
   };
 
   const handleToggleFavorite = async () => {
-    const userId = '4'; // Replace with actual logic to retrieve user ID
+    const userId = localStorage.getItem("ActiveUserId");
     try {
       let favorites = localStorage.getItem("favorites");
       if (!favorites) favorites = "[]";
