@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Coursecard from "../../../coursecard/Coursecard";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-export default function DeleteCourse() {
+export default function DeleteUser() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const [course, setCourse] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/courses/${id}`);
-        setCourse(response.data);
+        const response = await axios.get(`http://localhost:8080/users/${id}`);
+        setUser(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching course:', error);
+        console.error('Error fetching user:', error);
       }
     };
-    fetchCourse();
+    fetchUser();
   }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(`http://localhost:8080/courses/${id}`);
-      navigate('/admin/course');
-      alert('Course deleted successfully');
+      await axios.delete(`http://localhost:8080/users/${id}`);
+      navigate('/admin/user');
+      alert('User deleted successfully');
     } catch (error) {
-      console.error('Error deleting course:', error);
+      console.error('Error deleting user:', error);
     }
   };
 
@@ -42,14 +41,14 @@ export default function DeleteCourse() {
   return (
     <>
       <div>
-        <Link to={"/admin/course"}>
+        <Link to={"/admin/user"}>
           <button className='button'>Go back →</button>
         </Link>   
       </div>
-      <h1>Delete the course "{course.title}"</h1>
+      <h1>Delete the user "{user.username}"</h1>
 
       <form onSubmit={handleSubmit}>
-      {course && <Coursecard course={course} />}
+      <p>{user.username}</p>
       <button type='submit'>Delete</button>
       </form>
     </>
