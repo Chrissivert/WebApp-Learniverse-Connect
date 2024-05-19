@@ -40,3 +40,36 @@
 .button {
     margin-right: 10px; /* Adjust spacing between buttons as needed */
 }
+
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between buttons */
+}
+
+.admin-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 30px 60px;
+    font-size: 24px;
+    color: white;
+    background-color: rgb(151, 88, 163);
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.admin-button:hover {
+    background-color: rgb(151, 88, 163,06);
+}

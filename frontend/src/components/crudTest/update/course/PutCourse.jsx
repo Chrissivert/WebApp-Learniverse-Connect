@@ -58,7 +58,7 @@ export default function PutCourse() {
         imageType: data.imageType
       };
       await axios.put(`http://localhost:8080/courses/${id}`, userData);
-      navigate('/admin');
+      navigate('/admin/course');
       alert('Course updated successfully');
     } catch (error) {
       console.error('Error updating course:', error);
@@ -72,7 +72,7 @@ export default function PutCourse() {
   return (
     <>
       <div>
-        <Link to={"/admin"}>
+        <Link to={"/admin/course"}>
           <button className='button'>Go back →</button>
         </Link>   
       </div>

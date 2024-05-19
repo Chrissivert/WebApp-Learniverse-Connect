@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./PostCourse.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -44,7 +44,7 @@ export default function PostCourse() {
       };
 
       axios.post(`http://localhost:8080/courses`, userData)
-      navigate('/admin');
+      navigate('/admin/course');
       alert('Course added successfully');
 
     } catch (error) {
@@ -55,7 +55,7 @@ export default function PostCourse() {
   return (
     <>
       <div>
-        <Link to={"/admin"}>
+        <Link to={"/admin/course"}>
           <button className='button'>Go back →</button>
         </Link>
             

@@ -11,11 +11,6 @@ function AdminPage() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const [courses, setCourses] = useState([]);
-    const [coursesLoading, setCoursesLoading] = useState(true);
-
-    const [expandedDescription, setExpandedDescription] = useState({});
-    
     useEffect(() => {
         console.log(auth.user) // Check if user have been loaded
         // Check if the user has the admin role
@@ -28,20 +23,6 @@ function AdminPage() {
         setLoading(false);
 
     }, [auth.user]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const courseData = await getCoursesFromServer();
-                setCourses(courseData.data);
-                setCoursesLoading(false); // Update coursesLoading after fetching data
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-    
-        fetchData();
-    }, []);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -72,59 +53,15 @@ function AdminPage() {
             <h1>Welcome {auth.user.sub}</h1>
             <p>As an admin you can add, update, delete and hide/unhide courses. All visible and hidden courses are listed in the table below. To read full description of a course, click on the description section. </p>
             <hr/>
-            <div>
-                <Link to={"/newCourse"}>
-                <button className='button'>Add new course</button>
-                </Link>
+            <div className="button-container">
+                <Link to={"/admin/user"}>
+                    <button className='admin-button'>User →</button>
+                </Link>  
+                <Link to={"/admin/course"}>
+                    <button className='admin-button'>Course →</button>
+                </Link> 
             </div>
-            
-            {/* Admin page content */}
-        
-            {/* Courses Table */}
-            {coursesLoading ? (
-                <div>Loading courses...</div>
-            ) : (
-                <table className='courseTable'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {courses.map(course => (
-                            <tr key={course.id}>
-                                <td>{course.id}</td>
-                                <td>{course.title}</td>
-                                <td 
-                                    className={`description-cell ${expandedDescription[course.id] ? 'expanded' : ''}`} 
-                                    onClick={() => toggleDescription(course.id)}
-                                >
-                                    {course.description}
-                                </td>
-                                <td>
-                                    {/* Add action buttons like Edit, Delete, etc. */}
-                                    <div className="button-container">
-                                        <div>
-                                            <Link to={`/updateCourse/${course.id}`}>
-                                            <button className="button">Edit</button>
-                                            </Link>
-                                        </div>
-                                        <div>
-                                            <Link to={`/deleteCourse/${course.id}`}>
-                                            <button className="button">Delete</button>
-                                            </Link>
-                                        </div>
-                                        <button className='button'>Hide</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
+    
         </div>
     );
 }

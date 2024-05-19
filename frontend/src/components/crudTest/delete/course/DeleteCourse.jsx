@@ -27,7 +27,7 @@ export default function DeleteCourse() {
     event.preventDefault();
     try {
       await axios.delete(`http://localhost:8080/courses/${id}`);
-      navigate('/admin');
+      navigate('/admin/course');
       alert('Course deleted successfully');
     } catch (error) {
       console.error('Error deleting course:', error);
@@ -42,7 +42,7 @@ export default function DeleteCourse() {
   return (
     <>
       <div>
-        <Link to={"/admin"}>
+        <Link to={"/admin/course"}>
           <button className='button'>Go back →</button>
         </Link>   
       </div>
