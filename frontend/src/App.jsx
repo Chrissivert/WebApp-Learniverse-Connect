@@ -21,7 +21,7 @@ import PurchasedPage from './pages/purchased/PurchasedPage.jsx';
 import PostCourse from './components/crudTest/post/course/PostCourse.jsx';
 
 export default function App() {  
-  const [targetCurrency, setTargetCurrency] = useState('AUD'); 
+  const [targetCurrency, setTargetCurrency] = useState('NOK'); 
 
   return (
     <AuthProvider>

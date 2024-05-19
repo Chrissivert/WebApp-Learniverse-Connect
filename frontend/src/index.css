@@ -16,16 +16,13 @@
 }
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 body {
   place-items: center;
-  margin-top: 5%;
-  margin-bottom: 8rem;
+  margin-bottom: 0rem;
   padding-top: 2rem;
   font-size: var(--base-font-size); /* Apply base font size */
 }
@@ -47,10 +44,10 @@ button {
   height: 100%;
 }
 
-button:hover {
+/* button:hover {
   color:  rgb(255, 255, 255);
   background-color: rgb(151, 88, 163);
-}
+} */
 
 a:link, a:visited, a:active {
   text-decoration: none;

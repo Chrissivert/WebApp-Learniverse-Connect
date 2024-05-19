@@ -1,8 +1,8 @@
 .header-container {
   display: flex;
-  justify-content: space-between; /* Changed from space-around to space-between */
+  justify-content: space-between;
   padding: 10px;
- background-image: linear-gradient(to right, rgb(151, 88, 163), rgb(204, 115, 207)); /* Linear gradient */  color: white;
+  background-image: linear-gradient(to right, rgb(151, 88, 163), rgb(204, 115, 207));
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,43 +10,45 @@
   height: 6rem;
   transition: 0.3s;
   z-index: 100;
-  padding-left: 20px;
 }
 
 .hamburger-menu {
   display: none;
+  margin-right: auto;
+}
+
+.learniverse-connect {
+  color: white;
+  padding-left: 10px;
 }
 
 .navlist-container {
-  max-width: 70%;}
-  
-
-
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
 
 .navlist-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: space-between; /* Spread out the list items */
-  width: 100%; /* Ensure the ul takes up the full width */
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navlist-container ul li {
   margin-right: 10px;
 }
 
-
 .cart-container,
 .login-container {
   display: flex;
-  align-items: center;
+  justify-content: center; 
 }
 
 .cart-link,
 .login-link {
-  display: flex;
-  align-items: center;
   color: #fff;
   text-decoration: none;
   transition: color 0.3s, filter 0.3s;
@@ -60,35 +62,12 @@
 .cart-icon {
   font-size: 24px;
   margin-right: 5px;
-}
-
-.cart-text {
-  font-size: 16px;
-}
-
-.button-container {
-  display: flex;
-}
-
-.cart-icon {
   max-height: 50px;
   max-width: 50px; 
 }
 
-@keyframes pop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.cart-container.pop .cart-icon {
-  animation: pop 0.3s ease-in-out;
+.cart-text {
+  font-size: 16px;
 }
 
 .header-container a {
@@ -122,35 +101,24 @@
   .hamburger-menu {
     display: block;
   }
-
-  .navlist-container {
-    display: none;
-  }
 }
 
 .learniverse-connect {
   display: flex;
   align-items: center;
-  color: white; /* Set the color of the text */
-  margin-right: auto;
-  background: linear-gradient(180deg, #fff -148.55%, #9087ef 236.16%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  z-index: 200;
-  }
-
-
-
-/* .learniverse-link {
-  text-decoration: none;
   color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.3s;
-} */
+  margin-right: auto;
+  font-family: Bebas Neue, sans-serif;
+  font-size: 30px;
+}
 
 .logo-container {
   display: flex;
   align-items: center;
 }
 
+.header-right-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Align to the right */
+}

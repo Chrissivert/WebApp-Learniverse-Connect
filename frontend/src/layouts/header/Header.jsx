@@ -14,7 +14,6 @@ export default function Header() {
 
   return (
      <header className="header-container">
-
       <div className="logo-container">
         <Logo home_src={true} aria-label="Homepage-button" />
       </div>
@@ -24,25 +23,21 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* <div className="currency-selector-container">
-        <CurrencySelector currencies={['USD', 'EUR', 'GBP', 'NOK']} />
-      </div> */}
+      <div className="header-right-container">
+        <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
+          <Link to="/cart" className="cart-link">
+            <FaShoppingCart className="cart-icon" />
+            <span className="cart-text">Cart ({cart.length})</span>
+          </Link>
+        </div>
 
-      {/* <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
-        <Link to="/cart" className="cart-link">
-          <FaShoppingCart className="cart-icon" />
-          <span className="cart-text">Cart ({cart.length})</span>
-        </Link>
-      </div> */}
+        <div className='login-container'>
+          <Link to="/login" className="login-link">
+            <img src="/login/login_white.png" alt="Login" className="login"></img>
+          </Link>
+        </div>
+      </div>
 
-      {/* <div className='login-container'>
-        <Link to="/login" className="login-link">
-          <img src="/login/login_white.png" alt="Login" className="login"></img>
-        </Link>
-      </div> */}
-
-      {/* Add tabIndex to HamburgerMenu */}
-      {/* <HamburgerMenu tabIndex="0" /> */}
       <div className='navlist-container'>
         <NavList/>
       </div>
