@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 export default function PutCourse() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [data, setFormData] = useState({
-    id: '',
     title: '',
     levelId: '',
     categoryId: '',
@@ -15,6 +17,21 @@ export default function PutCourse() {
     description: '',
     imageType: ''
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/courses/${id}`);
+        setFormData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching course data:', error);
+        setLoading(false);
+      }
+    };
+    fetchCourseData();
+  }, [id]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -24,8 +41,8 @@ export default function PutCourse() {
     });
   };
 
-  const handleSubmit = async () => {
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const userData = {
         id: data.id,
@@ -40,63 +57,65 @@ export default function PutCourse() {
         description: data.description,
         imageType: data.imageType
       };
-
-      //TODO: Instead of putting "invisible values", GET/fetch already existing data,
-      //then present the existing data from the selected ID, and the change whatever 
-      //one wants to the presented data, and then PUT the new data into the database!
-      axios.put(`http://localhost:8080/courses/${data.id}`, userData)
+      await axios.put(`http://localhost:8080/courses/${id}`, userData);
+      navigate('/admin');
+      alert('Course updated successfully');
     } catch (error) {
-      console.error('Error:', error);
-    };
+      console.error('Error updating course:', error);
+    }
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
-      <h1>PUT COURSE HERE:</h1>
-
+      <div>
+        <Link to={"/admin"}>
+          <button className='button'>Go back →</button>
+        </Link>   
+      </div>
+      <h1>Update Course "{data.title}"</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='id'>
-          Course id to update
-          <input id='id' type='number' value={data.id} onChange={handleChange} />
-        </label>
         <label htmlFor='title'>
-          New title
+          Title
           <input id='title' value={data.title} onChange={handleChange} />
         </label>
-        <label htmlFor='level'>
-          New level id
+        <label htmlFor='levelId'>
+          Level ID
           <input id='levelId' type='number' value={data.levelId} onChange={handleChange} />
         </label>
-        <label htmlFor='category'>
-          New category id
+        <label htmlFor='categoryId'>
+          Category ID
           <input id='categoryId' type='number' value={data.categoryId} onChange={handleChange} />
         </label>
-        <label htmlFor='start-date'>
-          New start date
+        <label htmlFor='startDate'>
+          Start Date
           <input id='startDate' type='date' value={data.startDate} onChange={handleChange} />
         </label>
-        <label htmlFor='end-date'>
-          New end date
+        <label htmlFor='endDate'>
+          End Date
           <input id='endDate' type='date' value={data.endDate} onChange={handleChange} />
         </label>
         <label htmlFor='credit'>
-          New credit
+          Credit
           <input id='credit' type='number' value={data.credit} onChange={handleChange} />
         </label>
-        <label htmlFor='hours-per-week'>
-          New hours per week
+        <label htmlFor='hoursPerWeek'>
+          Hours Per Week
           <input id='hoursPerWeek' type='number' value={data.hoursPerWeek} onChange={handleChange} />
         </label>
-        <label htmlFor='related-certification'>
-          New related certification
+        <label htmlFor='relatedCertification'>
+          Related Certification
           <input id='relatedCertification' value={data.relatedCertification} onChange={handleChange} />
         </label>
         <label htmlFor='description'>
-          New description
+          Description
           <input id='description' value={data.description} onChange={handleChange} />
         </label>
-        <label htmlFor='image-type'>
-          New image type
+        <label htmlFor='imageType'>
+          Image Type
           <input id='imageType' value={data.imageType} onChange={handleChange} />
         </label>
         <button type='submit'>Update</button>
