@@ -19,22 +19,32 @@ export default function Profile() {
   const auth = useContext(AuthContext);
   const [userId, setUserId] = useState(null);
   const [isUser, setIsUser] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState("");
 
   useEffect(() => {
-    console.log(auth.user); // Check if user have been loaded
-    // Check if the user has the user role
+    console.log(auth.user);
     if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
       console.log("User roles:", auth.user.roles);
+
       const isUser = auth.user.roles.some(
         (role) => role.authority === "ROLE_USER"
       );
+
+      const isAdmin = auth.user.roles.some(
+        (role) => role.authority === "ROLE_ADMIN"
+      );
+
       console.log("Is user:", isUser);
+      console.log("Is admin:", isAdmin);
       setIsUser(isUser);
+      setIsAdmin(isAdmin);
     }
+
     setLoading(false);
   }, [auth.user]);
 
@@ -55,6 +65,8 @@ export default function Profile() {
           setUserId(currentUser.id);
           localStorage.setItem("ActiveUserId", userId);
           setUserName(currentUser.username);
+          setAvatar(currentUser.username.slice(0, 2).toUpperCase());
+          console.log("AVATAR: " + avatar);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
           console.log("userId " + userId);
@@ -86,8 +98,8 @@ export default function Profile() {
     return <div>Loading...</div>;
   }
 
-  // If user is not user role, show unauthorized page
-  if (!isUser) {
+  // If user is not user role or admin role, show unauthorized page
+  if (!isUser && !isAdmin) {
     return (
       // <div>
       //     <h1>Unauthorized Access</h1>
@@ -99,12 +111,11 @@ export default function Profile() {
   return (
     <div className="profilepage">
       <div className="card">
-        <Avatar />
+        <Avatar avatar={avatar} />
         <div className="data">
           <Intro userName={userName} email={email} startDate={startDate} />
         </div>
       </div>
-      <Content />
       {userId && <GetFavoriteCourses userId={userId} />}
     </div>
   );
@@ -115,13 +126,14 @@ function signoff() {
   localStorage.removeItem("token");
 }
 
-function Avatar() {
+function Avatar({ avatar }) {
   return (
-    <img
+    <div className="user-avatar">{avatar}</div>
+    /* <img
       className="avatar"
       src="http://localhost:8080/images/1/data"
       alt="Prince Froggy"
-    />
+    /> */
   );
 }
 
@@ -138,11 +150,16 @@ function Intro({ userName, email, startDate }) {
           </button>
         </Link>
       </div>
+      <p>
+        Welcome to your profile! Here you may access your favorite courses.
+        Below are the courses you've marked as favorites. Dive back in whenever
+        you're ready! Happy learning!
+      </p>
     </div>
   );
 }
 
-function Content() {
+function Content({ userName }) {
   return (
     <div className="content">
       {/* <h1>User Info:</h1> */}
@@ -160,18 +177,15 @@ function Content() {
           <tr>Sup</tr>
         </table>
       </div> */}
-      <h3>This is the content part of the page.</h3>
+      <h1>Hello, {userName}!</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
-        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
-        error quaerat necessitatibus.
+        Welcome to your profile! Here you may access your favorite courses.{" "}
       </p>
       <p>
-        Commodi asperiores, magnam consequuntur deserunt repudiandae, non
-        tempore maxime eum tempora ipsam reprehenderit, fuga labore corporis
-        numquam quos rem error quaerat necessitatibus.
+        Below are the courses you've marked as favorites. Dive back in whenever
+        you're ready!
       </p>
+      <p>Happy learning!</p>
     </div>
   );
 }
