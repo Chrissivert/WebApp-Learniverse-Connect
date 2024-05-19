@@ -23,7 +23,7 @@ export async function getUserById(userId) {
  * @param {String} email The email of the user to be retrieved.
  * @returns The outcome of the get request.
  */
-export function getUserByEmail(email) {
+export async function getUserByEmail(email) {
   return sendApiGetRequest(PROFILE_URL + "/email/" + email);
 }
 

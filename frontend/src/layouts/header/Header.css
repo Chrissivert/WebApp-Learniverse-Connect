@@ -1,6 +1,7 @@
 .header-container {
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Center children vertically */
   padding: 10px;
   background-image: linear-gradient(to right, rgb(151, 88, 163), rgb(204, 115, 207));
   position: fixed;
@@ -17,6 +18,13 @@
   margin-right: auto;
 }
 
+@media (max-width: 1000px) {
+  .hamburger-menu {
+    display: block;
+
+  }
+}
+
 .learniverse-connect {
   color: white;
   padding-left: 10px;
@@ -26,6 +34,12 @@
   display: flex;
   align-items: center;
   margin-right: auto;
+}
+
+@media (max-width: 1000px) {
+  .navlist-container {
+    display: none;
+  }
 }
 
 .navlist-container ul {
@@ -41,19 +55,48 @@
   margin-right: 10px;
 }
 
-.cart-container,
+.cart-container {
+  display: flex;
+  justify-content: center;
+  margin-right: 80px; /* Adjust the margin to your preference */
+}
+
 .login-container {
   display: flex;
   justify-content: center; 
+  margin-right: 40px; /* Adjust the margin to your preference */
 }
+
+
+.cart-container,
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
 
 .cart-link,
 .login-link {
   color: #fff;
   text-decoration: none;
   transition: color 0.3s, filter 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.cart-link{
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s, filter 0.3s;
+    display: flex; /* Add this */
+    align-items: center; /* Add this to vertically center the icon and text */
+  }
+  
 .cart-link:hover,
 .login-link:hover {
   filter: brightness(0.8);
@@ -66,9 +109,22 @@
   max-width: 50px; 
 }
 
+.cart-login-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Take up remaining space */
+}
+
 .cart-text {
   font-size: 16px;
+  margin-left: 30px; /* Adjust the margin to your preference */
 }
+
+.login-text {
+  font-size: 16px;
+  margin-top: 5px; /* Adjust spacing between icon and text */
+}
+
 
 .header-container a {
   color: white;
@@ -92,17 +148,6 @@
   left: 0;
 }
 
-.header-container a.active::after {
-  width: calc(100%);
-  left: 0;
-}
-
-@media (max-width: 1000px) {
-  .hamburger-menu {
-    display: block;
-  }
-}
-
 .learniverse-connect {
   display: flex;
   align-items: center;
@@ -114,9 +159,9 @@
 
 .logo-container {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Display logos in a column */
+  align-items: center; /* Center align logos */
 }
-
 .header-right-container {
   display: flex;
   align-items: center;

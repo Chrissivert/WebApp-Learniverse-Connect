@@ -12,7 +12,7 @@ import Unauthorized from "../error/unauthorized/401";
 import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { AuthProvider } from "../admin/AuthProvider";
 import { Link } from "react-router-dom";
-//import { GetFavoriteCourses } from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
+import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 
 export default function Profile() {
   //const [imgId, setImgId] = useState(null);
@@ -53,6 +53,7 @@ export default function Profile() {
           const currentUser = res.data;
           console.log("res.data " + res.data);
           setUserId(currentUser.id);
+          localStorage.setItem("ActiveUserId", userId);
           setUserName(currentUser.username);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
@@ -85,7 +86,7 @@ export default function Profile() {
     return <div>Loading...</div>;
   }
 
-  // If user is not admin, show unauthorized page
+  // If user is not user role, show unauthorized page
   if (!isUser) {
     return (
       // <div>
@@ -104,9 +105,7 @@ export default function Profile() {
         </div>
       </div>
       <Content />
-      <SocialMedia />
-      <CourseInfo />
-      <CourseSelection />
+      {userId && <GetFavoriteCourses userId={userId} />}
     </div>
   );
 }
