@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Coursecard.css";
-import { loadImage } from "../../functions/ImageLoader";
+// import { loadImage } from "../../functions/ImageLoader";
 import CourseCardSkeleton from "./CourseCardSkeleton";
 import GetImage from "../crudTest/post/image/GetImage";
 
