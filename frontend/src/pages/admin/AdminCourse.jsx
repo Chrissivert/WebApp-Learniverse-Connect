@@ -79,7 +79,7 @@ function AdminCourse() {
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
                                         <div>
-                                            <Link to={`/admin/course/updateCourse${course.id}`}>
+                                            <Link to={`/admin/course/updateCourse/${course.id}`}>
                                             <button className="button">Edit</button>
                                             </Link>
                                         </div>
