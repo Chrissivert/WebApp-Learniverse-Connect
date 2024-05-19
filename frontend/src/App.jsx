@@ -47,10 +47,9 @@ export default function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/purchased" element={<PurchasedPage/>} />
             <Route path="/admin/course" element={<AdminCoursePage/>} />
-            <Route path="/newCourse" element={<PostCourse/>} />
-            <Route path="/newCourse" element={<PostCourse/>} />
-            <Route path="/deleteCourse/:id" element={<DeleteCourse/>} />
-            <Route path="/updateCourse/:id" element={<UpdateCourse/>} />
+            <Route path="/admin/course/newCourse" element={<PostCourse/>} />
+            <Route path="/admin/course/deleteCourse/:id" element={<DeleteCourse/>} />
+            <Route path="/admin/course/updateCourse/:id" element={<UpdateCourse/>} />
           </Routes>
           <Footer />
         </Router>

@@ -1,7 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from './AuthProvider';
-import Unauthorized from '../error/unauthorized/401';
-import Courses from '../courses/Courses';
 import { getCoursesFromServer } from "../../services/course-service";
 import "./Admin.css";
 import { Link } from "react-router-dom";
@@ -47,7 +44,7 @@ function AdminCourse() {
                 </Link>   
             </div>
             <div>
-                <Link to={"/newCourse"}>
+                <Link to={"/admin/course/newCourse"}>
                 <button className='button'>Add new course</button>
                 </Link>
             </div>
@@ -82,12 +79,12 @@ function AdminCourse() {
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
                                         <div>
-                                            <Link to={`/updateCourse/${course.id}`}>
+                                            <Link to={`/admin/course/updateCourse${course.id}`}>
                                             <button className="button">Edit</button>
                                             </Link>
                                         </div>
                                         <div>
-                                            <Link to={`/deleteCourse/${course.id}`}>
+                                            <Link to={`/admin/course/deleteCourse/${course.id}`}>
                                             <button className="button">Delete</button>
                                             </Link>
                                         </div>
