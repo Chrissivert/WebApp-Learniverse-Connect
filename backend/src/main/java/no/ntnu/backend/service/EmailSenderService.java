@@ -1,4 +1,4 @@
-package no.ntnu.backend.controller;
+package no.ntnu.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
