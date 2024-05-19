@@ -28,6 +28,7 @@ export default function DeleteCourse() {
     try {
       await axios.delete(`http://localhost:8080/courses/${id}`);
       navigate('/admin');
+      alert('Course deleted successfully');
     } catch (error) {
       console.error('Error deleting course:', error);
     }
