@@ -7,6 +7,16 @@ import {
 
 const PROFILE_URL = "/users";
 
+
+/**
+ * Retrieves the user from the server.
+ *
+ * @returns The outcome of the get request.
+ */
+export function getUserFromServer() {
+  return sendApiGetRequest(PROFILE_URL);
+}
+
 /**
  * Retrieves a user from the server by ID.
  *
