@@ -18,6 +18,7 @@ import { SpeakingProvider } from './components/textReader/speakingContext.jsx';
 import AdminPage from './pages/admin/Admin.jsx';
 import { AuthProvider } from './pages/admin/AuthProvider.jsx';
 import PurchasedPage from './pages/purchased/PurchasedPage.jsx';
+import AdminCoursePage from './pages/admin/AdminCourse.jsx';
 import PostCourse from './components/crudTest/post/course/PostCourse.jsx';
 import DeleteCourse from './components/crudTest/delete/course/DeleteCourse.jsx';
 import UpdateCourse from './components/crudTest/update/course/PutCourse.jsx';
@@ -45,6 +46,8 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/purchased" element={<PurchasedPage/>} />
+            <Route path="/admin/course" element={<AdminCoursePage/>} />
+            <Route path="/newCourse" element={<PostCourse/>} />
             <Route path="/newCourse" element={<PostCourse/>} />
             <Route path="/deleteCourse/:id" element={<DeleteCourse/>} />
             <Route path="/updateCourse/:id" element={<UpdateCourse/>} />

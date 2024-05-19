@@ -44,7 +44,7 @@ export default function PostCourse() {
       };
 
       axios.post(`http://localhost:8080/courses`, userData)
-      navigate('/admin');
+      navigate('/admin/course');
       alert('Course added successfully');
 
     } catch (error) {
@@ -55,7 +55,7 @@ export default function PostCourse() {
   return (
     <>
       <div>
-        <Link to={"/admin"}>
+        <Link to={"/admin/course"}>
           <button className='button'>Go back →</button>
         </Link>
             
