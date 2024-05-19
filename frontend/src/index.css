@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   min-height: 100vh;
+  padding-top: 4rem;
 }
 
 #root {

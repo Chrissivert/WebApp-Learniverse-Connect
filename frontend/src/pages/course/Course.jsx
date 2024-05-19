@@ -7,6 +7,7 @@ import { useCurrencyContext } from "../../components/currencySelector/TargetCurr
 import { getOneCourseFromServer } from "../../services/course-service";
 import { addFavoriteCourseToServer, deleteFavoriteCourseOnServer } from "../../services/favorite-course";
 import { getAllProvidersForACourse } from "../../services/course-provider";
+import NotFound from "../error/notFound/404";
 
 function Course() {
   const { id } = useParams();
@@ -100,7 +101,7 @@ function Course() {
   }, []);
 
   if (!course || !providers.length) {
-    return <div>Loading...</div>;
+    return <NotFound/>
   }
 
   return (
