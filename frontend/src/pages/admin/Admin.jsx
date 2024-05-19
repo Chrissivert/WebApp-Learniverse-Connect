@@ -107,12 +107,12 @@ function AdminPage() {
                                 <td>
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
-                                        <div key={course.id}>
+                                        <div>
                                             <Link to={`/updateCourse/${course.id}`}>
                                             <button className="button">Edit</button>
                                             </Link>
                                         </div>
-                                        <div key={course.id}>
+                                        <div>
                                             <Link to={`/deleteCourse/${course.id}`}>
                                             <button className="button">Delete</button>
                                             </Link>

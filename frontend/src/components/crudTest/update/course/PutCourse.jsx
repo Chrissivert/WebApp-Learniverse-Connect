@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 export default function PutCourse() {
   const { id } = useParams();
@@ -71,7 +71,12 @@ export default function PutCourse() {
 
   return (
     <>
-      <h1>Update Course:</h1>
+      <div>
+        <Link to={"/admin"}>
+          <button className='button'>Go back →</button>
+        </Link>   
+      </div>
+      <h1>Update Course "{data.title}"</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='title'>
           Title

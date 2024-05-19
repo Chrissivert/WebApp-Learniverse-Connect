@@ -44,10 +44,9 @@ export default function DeleteCourse() {
       <div>
         <Link to={"/admin"}>
           <button className='button'>Go back →</button>
-        </Link>
-            
+        </Link>   
       </div>
-      <h1>Delete the course {course.title}</h1>
+      <h1>Delete the course "{course.title}"</h1>
 
       <form onSubmit={handleSubmit}>
       {course && <Coursecard course={course} />}
