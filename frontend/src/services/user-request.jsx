@@ -7,7 +7,6 @@ import {
 
 const PROFILE_URL = "/users";
 
-
 /**
  * Retrieves the user from the server.
  *
@@ -68,7 +67,7 @@ export function addUserToServer(user) {
   return sendApiPostRequest(PROFILE_URL, user);
 }
 
-const REGISTER_URL = "/api/signup";
+const REGISTER_URL = "/signup";
 
 /**
  *
@@ -80,7 +79,7 @@ export function postSignupToServer(data) {
   return sendApiPostRequest(REGISTER_URL, data);
 }
 
-const AUTH_URL = "/api/authenticate";
+const AUTH_URL = "/authenticate";
 
 /**
  *
@@ -91,4 +90,3 @@ const AUTH_URL = "/api/authenticate";
 export function postAuthToServer(data) {
   return sendApiPostRequest(AUTH_URL, data);
 }
-
