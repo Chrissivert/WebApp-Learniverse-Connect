@@ -34,14 +34,14 @@ public class JwtUtil {
      */
     public String generateToken(UserDetails userDetails) {
         final long timeNow = System.currentTimeMillis();
-        final long millisecondsInHour = 60 * 60 * 1000;
-        final long timeAfterOneHour = timeNow + millisecondsInHour;
+        final long millisecondsInSixMonths = 6L * 30 * 24 * 60 * 60 * 1000; // Approximation for 6 months
+        final long timeAfterSixMonths = timeNow + millisecondsInSixMonths;
 
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .claim(ROLE_KEY, userDetails.getAuthorities())
                 .issuedAt(new Date(timeNow))
-                .expiration(new Date(timeAfterOneHour))
+                .expiration(new Date(timeAfterSixMonths))
                 .signWith(getSigningKey())
                 .compact();
     }

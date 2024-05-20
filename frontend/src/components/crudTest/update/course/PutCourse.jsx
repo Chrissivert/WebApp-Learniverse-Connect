@@ -16,8 +16,13 @@ export default function PutCourse() {
     hoursPerWeek: '',
     relatedCertification: '',
     description: '',
-    imageType: ''
   });
+
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [categoryId] = useState('');
+  const [selectedLevel, setSelectedLevel] = useState('');
+  const [levelId] = useState('');
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +30,8 @@ export default function PutCourse() {
       try {
         const response = await getOneCourseFromServer(id);
         setFormData(response.data);
+        setSelectedLevel(response.data.levelId);
+        setSelectedCategory(response.data.categoryId)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course data:', error);
@@ -35,11 +42,15 @@ export default function PutCourse() {
   }, [id]);
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setFormData({
-      ...data,
-      [e.target.id]: value
-    });
+    const { id, value } = e.target;
+    if (id === 'levelId') {
+      setSelectedLevel(value); // Update selected level only
+    } else {
+      setFormData({
+        ...data,
+        [id]: value
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,16 +59,19 @@ export default function PutCourse() {
       const userData = {
         id: data.id,
         title: data.title,
-        levelId: data.levelId,
-        categoryId: data.categoryId,
+        levelId: parseInt(levelId || data.levelId),
+        categoryId: parseInt(categoryId || data.categoryId),
         startDate: data.startDate,
         endDate: data.endDate,
         credit: data.credit,
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
         description: data.description,
-        imageType: data.imageType
       };
+      const response = await getOneCourseFromServer(id);
+      const currentCourse = response.data;
+      userData.hidden = currentCourse.hidden;
+
       await updateCourseOnServer(id, userData);
       navigate('/admin/course');
       alert('Course updated successfully');
@@ -85,11 +99,20 @@ export default function PutCourse() {
         </label>
         <label htmlFor='levelId'>
           Level ID
-          <input id='levelId' type='number' value={data.levelId} onChange={handleChange} />
+          <select id='levelId' value={selectedLevel} onChange={handleChange}>
+            <option value="1">Beginner</option>
+            <option value="2">Intermediate</option>
+            <option value="3">Expert</option>
+          </select>
         </label>
         <label htmlFor='categoryId'>
           Category ID
-          <input id='categoryId' type='number' value={data.categoryId} onChange={handleChange} />
+          <select id='categoryId' value={selectedCategory} onChange={handleChange}>
+            <option value="1">Information Technologies</option>
+            <option value="2">Digital Marketing</option>
+            <option value="3">Business and Entrepreneurship</option>
+            <option value="4">Data Science and Analytics</option>
+          </select>
         </label>
         <label htmlFor='startDate'>
           Start Date
@@ -114,10 +137,6 @@ export default function PutCourse() {
         <label htmlFor='description'>
           Description
           <input id='description' value={data.description} onChange={handleChange} />
-        </label>
-        <label htmlFor='imageType'>
-          Image Type
-          <input id='imageType' value={data.imageType} onChange={handleChange} />
         </label>
         <button type='submit'>Update</button>
       </form>
