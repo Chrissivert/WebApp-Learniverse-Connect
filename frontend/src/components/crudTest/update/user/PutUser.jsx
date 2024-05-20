@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getUserById } from '../../../../services/user-request';
 
-export default function PutCourse() {
+export default function PutUser() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setFormData] = useState({
@@ -16,17 +17,17 @@ export default function PutCourse() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchCourseData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/users/${id}`);
+        const response = await getUserById(id);
         setFormData(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching users data:', error);
+        console.error('Error fetching course data:', error);
         setLoading(false);
       }
     };
-    fetchUserData();
+    fetchCourseData();
   }, [id]);
 
   const handleChange = (e) => {
@@ -68,7 +69,7 @@ export default function PutCourse() {
           <button className='button'>Go back →</button>
         </Link>   
       </div>
-      <h1>Update Course "{data.username}"</h1>
+      <h1>Update User "{data.username}"</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='username'>
           Username
