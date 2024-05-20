@@ -13,6 +13,7 @@ import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { AuthProvider } from "../admin/AuthProvider";
 import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
+import UserAvatar from "../../components/userAvatar/UserAvatar";
 
 export default function Profile() {
   //const [imgId, setImgId] = useState(null);
@@ -22,7 +23,6 @@ export default function Profile() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState("");
 
@@ -61,7 +61,6 @@ export default function Profile() {
           setUserId(currentUser.id);
           localStorage.setItem("ActiveUserId", userId);
           setUserName(currentUser.username);
-          setAvatar(currentUser.username.slice(0, 2).toUpperCase());
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
          
@@ -101,7 +100,7 @@ export default function Profile() {
   return (
     <div className="profilepage">
       <div className="card">
-        <Avatar avatar={avatar} />
+        <UserAvatar user={auth.user} />
         <div className="data">
           <Intro userName={userName} email={email} startDate={startDate} />
         </div>

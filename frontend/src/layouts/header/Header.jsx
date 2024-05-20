@@ -13,7 +13,6 @@ export default function Header() {
   const { cart } = useContext(CartContext);
   const auth = useContext(AuthContext);
 
-  // Assuming you have access to the user object from AuthContext
   const user = auth.user;
 
   return (

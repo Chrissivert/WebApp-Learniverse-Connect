@@ -4,6 +4,7 @@ import { getUserByEmail } from "../../services/user-request";
 
 function UserAvatar({ user }) {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   let avatar = "";
 
   useEffect(() => {
@@ -14,13 +15,14 @@ function UserAvatar({ user }) {
         console.log("User data:", response.data);
       } catch (error) {
         console.error("Error fetching user:", error);
+      } finally {
+        setLoading(false); // Ensure loading is set to false regardless of success or failure
       }
     }
 
     fetchUser();
   }, [user]);
 
-  // Set the avatar to the first two letters of the username if userData is available
   if (userData) {
     console.log("inside");
     avatar = userData.username.slice(0, 2).toUpperCase();
@@ -29,12 +31,10 @@ function UserAvatar({ user }) {
 
   return (
     <div className="user-avatar">
-      {userData ? (
+      {!loading && userData && (
         <Link to="/profile">
           <div>{avatar}</div>
         </Link>
-      ) : (
-        "Loading..."
       )}
     </div>
   );
