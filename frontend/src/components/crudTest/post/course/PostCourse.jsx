@@ -43,7 +43,6 @@ export default function PostCourse() {
         relatedCertification: data.relatedCertification,
         description: data.description
       };
-
       await addCourseToServer(userData);
       navigate('/admin/course');
       alert('Course added successfully');
