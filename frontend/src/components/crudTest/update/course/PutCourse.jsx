@@ -18,6 +18,8 @@ export default function PutCourse() {
     description: '',
     imageType: ''
   });
+  const [selectedLevel, setSelectedLevel] = useState(''); // New state for selected level
+  const [levelId, setLevelId] = useState(''); // New state for levelId that updates only onSubmit
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export default function PutCourse() {
       try {
         const response = await getOneCourseFromServer(id);
         setFormData(response.data);
+        setSelectedLevel(response.data.levelId); // Set selected level initially
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course data:', error);
@@ -35,11 +38,15 @@ export default function PutCourse() {
   }, [id]);
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setFormData({
-      ...data,
-      [e.target.id]: value
-    });
+    const { id, value } = e.target;
+    if (id === 'levelId') {
+      setSelectedLevel(value); // Update selected level only
+    } else {
+      setFormData({
+        ...data,
+        [id]: value
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,7 +55,7 @@ export default function PutCourse() {
       const userData = {
         id: data.id,
         title: data.title,
-        levelId: data.levelId,
+        levelId: parseInt(levelId || data.levelId), // Use levelId only if it's set
         categoryId: data.categoryId,
         startDate: data.startDate,
         endDate: data.endDate,
@@ -58,6 +65,10 @@ export default function PutCourse() {
         description: data.description,
         imageType: data.imageType
       };
+      const response = await getOneCourseFromServer(id);
+      const currentCourse = response.data;
+      userData.hidden = currentCourse.hidden;
+
       await updateCourseOnServer(id, userData);
       navigate('/admin/course');
       alert('Course updated successfully');
@@ -85,7 +96,11 @@ export default function PutCourse() {
         </label>
         <label htmlFor='levelId'>
           Level ID
-          <input id='levelId' type='number' value={data.levelId} onChange={handleChange} />
+          <select id='levelId' value={selectedLevel} onChange={handleChange}>
+            <option value="1">Beginner</option>
+            <option value="2">Intermediate</option>
+            <option value="3">Expert</option>
+          </select>
         </label>
         <label htmlFor='categoryId'>
           Category ID
