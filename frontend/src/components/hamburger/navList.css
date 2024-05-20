@@ -1,3 +1,21 @@
 .navList button{
     background-color: transparent;
 }
+
+.navList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navList li {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 2px; /* Adjust margin as needed */
+  }
+
+  .button-image {
+    height: 30px;
+    width: auto;
+  }
+  
+  

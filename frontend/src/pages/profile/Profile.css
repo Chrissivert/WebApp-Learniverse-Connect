@@ -51,11 +51,6 @@
   transition: filter 0.3s ease;
 }
 
-.button:hover {
-  filter: grayscale(50%);
-  background-color: rgb(151, 88, 163, 0.6);
-  color: #ffffff;
-}
 .user-avatar {
   display: flex;
   justify-content: center;
@@ -64,10 +59,16 @@
   height: 80px;
   border-radius: 80px;
   padding: 20px;
-  margin-top: 30px;
+  margin-top: 2px;
   font-size: 32px;
   color: #fefefe;
   background-color: rgb(151, 88, 163);
+}
+
+.button:hover {
+  filter: grayscale(50%);
+  background-color: rgb(151, 88, 163, 0.6);
+  color: #ffffff;
 }
 
 .intro {

@@ -131,8 +131,7 @@
   position: relative;
 }
 
-/* General anchor styles for the underline effect, excluding learniverse-link */
-.header-container a:not(.logo-link)::after {
+.header-container a:not(.logo-link):not(.user-avatar-link)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -143,10 +142,11 @@
   transition: width 0.3s, left 0.3s;
 }
 
-.header-container a:not(.logo-link):hover::after {
+.header-container a:not(.logo-link):not(.user-avatar-link):hover::after {
   width: calc(100%);
   left: 0;
 }
+
 
 .learniverse-connect {
   display: flex;
