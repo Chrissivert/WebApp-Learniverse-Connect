@@ -2,15 +2,25 @@ import React, { useState, useEffect } from 'react';
 
 export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(Math.ceil(maxPrice/100)*100);
+  const [maxValue, setMaxValue] = useState(Math.ceil(maxPrice / 100) * 100);
 
   useEffect(() => {
     onPriceChange(minValue, maxValue);
   }, [minValue, maxValue]);
 
   useEffect(() => {
-    setMaxValue(Math.ceil(maxPrice/100)*100);
-  }, [maxPrice]);
+    // Ensure min value doesn't exceed max value
+    if (minValue > maxValue) {
+      setMinValue(maxValue);
+    }
+  }, [minValue, maxValue]);
+
+  useEffect(() => {
+    // Ensure max value doesn't exceed min value
+    if (maxValue < minValue) {
+      setMaxValue(minValue);
+    }
+  }, [minValue, maxValue]);
 
   return (
     <div className="price-range-container">
@@ -19,7 +29,7 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
         <input
           type="range"
           min={0}
-          max={Math.ceil(maxPrice/100)*100}
+          max={Math.ceil(maxPrice / 100) * 100}
           step={100}
           value={minValue}
           onChange={(e) => {
@@ -34,7 +44,7 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
           type="range"
           min={0}
           step={100}
-          max={Math.ceil(maxPrice/100)*100}
+          max={Math.ceil(maxPrice / 100) * 100}
           value={maxValue}
           onChange={(e) => {
             const value = parseFloat(e.target.value);

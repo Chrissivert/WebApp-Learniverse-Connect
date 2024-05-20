@@ -47,7 +47,6 @@ function useCoursesPageLogic() {
 
         if (mostExpensiveProviderForEachCourse.data.length > 0) {
           const maxPriceValue = Math.max(...mostExpensiveProviderForEachCourse.data.map(provider => provider.price));
-          console.log(JSON.stringify(mostExpensiveProviderForEachCourse.data) + "dddd")
           setMaxPrice(maxPriceValue);
         }
       } catch (error) {

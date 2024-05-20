@@ -20,9 +20,6 @@ const useEmailLogic = () => {
       }),
     };
 
-    console.log('emailData', emailData);
-    console.log('cart', cart);
-    console.log('user', user);
 
     try {
       const response = await sendEmail(emailData.email, "Purchase Confirmation", emailData.items);

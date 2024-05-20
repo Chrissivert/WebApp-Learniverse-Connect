@@ -12,12 +12,9 @@ function AdminPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log(auth.user) // Check if user have been loaded
         // Check if the user has the admin role
         if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
-            console.log("User roles:", auth.user.roles);
             const isAdmin = auth.user.roles.some(role => role.authority === 'ROLE_ADMIN');
-            console.log("Is admin:", isAdmin);
             setIsAdmin(isAdmin);
         }
         setLoading(false);

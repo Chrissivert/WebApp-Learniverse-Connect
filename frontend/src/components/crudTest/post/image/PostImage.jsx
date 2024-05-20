@@ -35,7 +35,6 @@ export default function PostImage() {
 
     try {
       uploadImageToServer(formData);
-      console.log("Succesfull upload!");
 
       setFile(null);
       setAltText("");
