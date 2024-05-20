@@ -3,14 +3,12 @@ import "./Coursecard.css";
 import CourseCardSkeleton from "./CourseCardSkeleton";
 import GetImage from "../crudTest/post/image/GetImage";
 
-export default function Coursecard({ course, favorited, onFavoriteToggle }) {
+export default function Coursecard({ course, favorited, onFavoriteToggle, showPrice=true }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(false);
   }, []);
-
-  console.log(favorited + "dawdadwa")
 
   const handleToggleFavorite = () => {
     onFavoriteToggle(course.id); // Call the parent function to toggle favorite status
@@ -31,6 +29,7 @@ export default function Coursecard({ course, favorited, onFavoriteToggle }) {
       <div className="info-section">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
+        <div className={'price-section' + (showPrice ? '' : ' close')}>
         {Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ? (
           <p>
             Price: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}
@@ -40,6 +39,7 @@ export default function Coursecard({ course, favorited, onFavoriteToggle }) {
             Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}
           </p>
         )}
+        </div>
       </div>
     </div>
   );
