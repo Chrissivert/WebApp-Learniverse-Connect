@@ -117,7 +117,7 @@ function Course() {
           onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
           tabIndex={0} // Ensure button is focusable
         >
-          {favorited ? "Remove from Favorites" : "Add to Favorites"}
+          {favorited ? "★ Remove from Favorites" : "☆ Add to Favorites"}
         </button>
       </div>
       <p>{course.description}</p>

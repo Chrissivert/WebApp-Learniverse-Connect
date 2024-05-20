@@ -7,22 +7,18 @@ import CourseCardSkeleton from "../../components/coursecard/CourseCardSkeleton.j
 
 function Courses({ courses }) {
   const [loading, setLoading] = useState(true); // Initially set to true
-  const [visibleCourses, setVisibleCourses] = useState([]);
+
 
   useEffect(() => {
-    // Filter out hidden courses
-    const filteredCourses = courses.filter(course => !course.hidden);
-    setVisibleCourses(filteredCourses);
-    console.log(visibleCourses);
+    // Set loading to true when courses are updated
+    setLoading(true);
     
     // If there are courses, set loading to false
-    if (filteredCourses.length > 0) {
+    if (courses.length > 0) {
       setLoading(false);
-    } else {
-      setLoading(true);
     }
   }, [courses]);
-
+  
   return (
     <div className="courses">
       {/* Show skeleton while loading or if no courses are available */}
@@ -33,7 +29,7 @@ function Courses({ courses }) {
           </div>
         ))
       ) : (
-        visibleCourses.map((course) => (
+        courses.map((course) => (
           <div className="coursecards" key={course.id}>
             <Link to={`/course/${course.id}`}>
               <Coursecard course={course}/>

@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/providers")
+@RequestMapping("/api/providers")
 @CrossOrigin
 public class ProviderController {
 

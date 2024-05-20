@@ -38,20 +38,20 @@ public class CourseProviderController {
   }
 
   @Operation(summary = "Retrieves providers offering a particular course", description = "Retrieves providers offering a particular course.")
-  @GetMapping("/course/providers/{courseId}")
+  @GetMapping("/api/course/providers/{courseId}")
   public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId,
       @RequestParam String targetCurrency) {
     return courseProviderService.getProvidersForCourse(courseId, targetCurrency);
   }
 
   @Operation(summary = "Retrieves the cheapest course prices", description = "Retrieves the cheapest course prices.")
-  @GetMapping("/cheapest-course-prices")
+  @GetMapping("/api/cheapest-course-prices")
   public List<CourseProvider> getCheapestCoursePrices(@RequestParam String targetCurrency) {
     return courseProviderService.getMinimumConvertedPriceForEachCourse(targetCurrency);
   }
 
   @Operation(summary = "Retrieves the most expensive course prices", description = "Retrieves the most expensive course prices.")
-@GetMapping("/most-expensive-course-prices")
+@GetMapping("/api/most-expensive-course-prices")
 public List<CourseProvider> getMostExpensiveCoursePrices(@RequestParam String targetCurrency) {
     return courseProviderService.getMaximumConvertedPriceForEachCourse(targetCurrency);
 }

@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/levels")
+@RequestMapping("/api/levels")
 @CrossOrigin
 public class LevelController {
 

@@ -1,34 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./Coursecard.css";
-// import { loadImage } from "../../functions/ImageLoader";
 import CourseCardSkeleton from "./CourseCardSkeleton";
 import GetImage from "../crudTest/post/image/GetImage";
 
-export default function Coursecard({ course }) {
-  // const [imageUrl, setImageUrl] = useState(null);
+export default function Coursecard({ course, favorited, onFavoriteToggle }) {
   const [loading, setLoading] = useState(true);
-  const { cheapestPrice, cheapestPriceCurrency } = course;
-  const roundedCheapestPrice = cheapestPrice ? cheapestPrice.toFixed(0) : null;
 
-  // console.log(course.title + "course")
-
-
-  // useEffect(() => {
-  //   loadImage(course.title)
-  //     .then(url => {
-  //       setImageUrl(url);
-  //       setLoading(false); // Set loading to false after image is loaded
-  //     })
-  //     .catch(error => {
-  //       console.error("Error loading image:", error);
-  //       setLoading(false); // Set loading to false even if there's an error
-  //     });
-  // }, [course]);
-
-  // Set loading to true initially and display skeleton
   useEffect(() => {
     setLoading(false);
   }, []);
+
+  console.log(favorited + "dawdadwa")
+
+  const handleToggleFavorite = () => {
+    onFavoriteToggle(course.id); // Call the parent function to toggle favorite status
+  };
 
   if (loading) {
     return <CourseCardSkeleton />;
@@ -36,17 +22,25 @@ export default function Coursecard({ course }) {
 
   return (
     <div className="course-card">
+      <div className="favorite-icon" onClick={handleToggleFavorite}>
+        {favorited ? "★" : "☆"} {/* Use the favorited prop to determine the star icon */}
+      </div>
       <div className="image-section">
         <GetImage imageId={course.imageId} />
       </div>
       <div className="info-section">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
-        {<p>{Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ?
-          <p>Price: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}</p> :
-          <p>Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}
-            - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}</p>}</p>}
+        {Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ? (
+          <p>
+            Price: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}
+          </p>
+        ) : (
+          <p>
+            Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}
+          </p>
+        )}
       </div>
     </div>
-  )
+  );
 }
