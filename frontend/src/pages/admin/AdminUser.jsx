@@ -31,7 +31,7 @@ function AdminUser() {
         <div>
             <div>
                 <Link to={"/admin"}>
-                <button className='button'>Go back →</button>
+                <button className='button'>← Go back</button>
                 </Link>   
             </div>
             <div>
@@ -73,7 +73,6 @@ function AdminUser() {
                                             <button className="button">Delete</button>
                                             </Link>
                                         </div>
-                                        <button className='button'>Hide</button>
                                     </div>
                                 </td>
                             </tr>

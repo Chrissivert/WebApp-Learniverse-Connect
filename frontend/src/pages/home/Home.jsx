@@ -6,6 +6,7 @@ import findACourse from '/icons/home/find-a-course.png'
 import createAnAccount from '/icons/home/create-an-account.png'
 import readMoreAbout from '/icons/home/read-more-about.png'
 
+
 export default function Home() {
   return (
     <div className="home-container">

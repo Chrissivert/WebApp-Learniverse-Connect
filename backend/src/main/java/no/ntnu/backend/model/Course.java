@@ -30,6 +30,8 @@ public class Course {
   private String relatedCertification;
   private Integer imageId;
 
+  private boolean hidden;
+
   @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
   private List<FavoriteCourse> favoriteCourses;
 
@@ -250,6 +252,14 @@ public class Course {
     this.imageId = imageId;
   }
 
+  public void setHidden(boolean hidden) {
+    this.hidden = hidden;
+  }
+
+  public boolean isHidden() {
+    return hidden;
+  }
+
   @JsonIgnore
   public boolean isValid() {
     return // this.id > 0 &&
@@ -281,13 +291,14 @@ public class Course {
         this.hoursPerWeek == that.hoursPerWeek &&
         this.relatedCertification == that.relatedCertification &&
         this.description == that.description &&
-        this.imageId == that.imageId;
+        this.imageId == that.imageId &&
+        this.hidden == that.hidden;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(this.id, this.title, this.levelId, this.categoryId, this.startDate, this.endDate, this.credit,
-        this.hoursPerWeek, this.relatedCertification, this.description, this.imageId);
+        this.hoursPerWeek, this.relatedCertification, this.description, this.imageId, this.hidden);
   }
 
   @Override
@@ -303,6 +314,7 @@ public class Course {
         "hoursPerWeek=" + this.hoursPerWeek + ", " +
         "relatedCertification=" + this.relatedCertification +
         "description=" + this.description +
-        "imageId=" + this.imageId + "]";
+        "imageId=" + this.imageId + "]" +
+        "hidden=" + this.hidden + "]";
   }
 }

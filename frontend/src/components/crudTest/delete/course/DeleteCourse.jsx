@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Coursecard from "../../../coursecard/Coursecard";
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getOneCourseFromServer } from '../../../../services/course-service';
+
 
 export default function DeleteCourse() {
 
@@ -13,8 +15,9 @@ export default function DeleteCourse() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/courses/${id}`);
+        const response = await getOneCourseFromServer(id);
         setCourse(response.data);
+        console.log(response.data)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course:', error);
@@ -26,7 +29,7 @@ export default function DeleteCourse() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(`http://localhost:8080/courses/${id}`);
+      await axios.delete(getOneCourseFromServer(id));
       navigate('/admin/course');
       alert('Course deleted successfully');
     } catch (error) {
@@ -43,13 +46,15 @@ export default function DeleteCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Delete the course "{course.title}"</h1>
-
+      <p>Under is a preveiw of the coursecard to the course to be deleted. The deletion is permanent and cannot be reversed.</p>
       <form onSubmit={handleSubmit}>
-      {course && <Coursecard course={course} />}
+      <div className="coursecard-container">
+        {course && <Coursecard course={course} />}
+      </div>
       <button type='submit'>Delete</button>
       </form>
     </>

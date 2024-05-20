@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,8 +35,10 @@ public class UserController {
         return this.userService.readAll();
     }
 
+
     @Operation(summary = "Retrieves a user by its ID", description = "Retrieves a user by its ID.")
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> readUserById(@PathVariable int id) {
         return this.userService.readById(id);
     }

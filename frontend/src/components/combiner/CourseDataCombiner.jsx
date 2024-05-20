@@ -1,9 +1,5 @@
 class CourseDataCombiner {
   static async combineCoursesWithPricesAndCategories(courses, cheapestProvider, mostExpensiveProvider, category, tags, courseTags) {
-
-    console.log("TAAAAA" + JSON.stringify(cheapestProvider.data));
-    console.log(JSON.stringify(mostExpensiveProvider.data) + "b");
-
     try {
       // Create a map of category IDs to category names
       const categoryIdToNameMap = category.data.reduce((map, cat) => {
@@ -48,12 +44,11 @@ class CourseDataCombiner {
           mostExpensivePrice: mostExpensiveCourseData ? mostExpensiveCourseData.price : null,
           tags: tags
         };
-
-        console.log(JSON.stringify(courseWithCategoryAndTags) + "ABCABC");
-
+        console.log(courseWithCategoryAndTags);
         return courseWithCategoryAndTags;
       });
 
+      
       return coursesWithData;
     } catch (error) {
       console.error('Error combining courses with prices, categories, and tags:', error);

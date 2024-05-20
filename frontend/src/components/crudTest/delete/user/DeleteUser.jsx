@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getUserById } from '../../../../services/user-request';
 
 export default function DeleteUser() {
 
@@ -12,7 +13,8 @@ export default function DeleteUser() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/users/${id}`);
+        const response = await getUserById(id);
+        ;
         setUser(response.data);
         setLoading(false);
       } catch (error) {
@@ -25,7 +27,7 @@ export default function DeleteUser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(`http://localhost:8080/users/${id}`);
+      await axios.delete(getUserById(id));
       navigate('/admin/user');
       alert('User deleted successfully');
     } catch (error) {
@@ -42,7 +44,7 @@ export default function DeleteUser() {
     <>
       <div>
         <Link to={"/admin/user"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Delete the user "{user.username}"</h1>

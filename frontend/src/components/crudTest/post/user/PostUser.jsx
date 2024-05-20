@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
+import { getUsersFromServer } from '../../../../services/user-request';
 
 export default function PostUser() {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function PostUser() {
         password: formData.password
       };
 
-      axios.post("http://localhost:8080/users", userData)
+      axios.post(getUsersFromServer, userData)
       navigate('/admin/user');
       alert('User added successfully');
     } catch (error) {
@@ -46,7 +47,7 @@ export default function PostUser() {
     <>
     <div>
         <Link to={"/admin/user"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← fGo back</button>
         </Link>
             
       </div>

@@ -8,9 +8,9 @@ import { getCheapestPriceForEachCourse, getMostExpensivePriceForEachCourse } fro
 import { getTagsFromServer} from '../../services/tags-service.jsx'; // Import the new services
 import { getCourseTagsFromServer} from '../../services/course-tags-service.jsx'; // Import the new services
 
-
 function useCoursesPageLogic() {
   const { targetCurrency } = useCurrencyContext();
+  const [combinedCourses, setCombinedCourses] = useState([]);
   const [filters, setFilters] = useState({
     searchQuery: '',
     minPrice: 0,
@@ -20,9 +20,7 @@ function useCoursesPageLogic() {
     category: ''
   });
 
-  const [allCourses, setAllCourses] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(100000); // Initialize with a default value
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +29,10 @@ function useCoursesPageLogic() {
         const cheapestProviderForEachCourse = await getCheapestPriceForEachCourse(targetCurrency);
         const mostExpensiveProviderForEachCourse = await getMostExpensivePriceForEachCourse(targetCurrency);
         const categoriesData = await getCategoriesFromServer();
-        const tagsData = await getTagsFromServer(); // Fetch tags
-        const courseTagsData = await getCourseTagsFromServer(); // Fetch course-tags
+        const tagsData = await getTagsFromServer();
+        const courseTagsData = await getCourseTagsFromServer();
 
-        const combinedCourses = await CourseDataCombiner.combineCoursesWithPricesAndCategories(
+        const combinedCoursesData = await CourseDataCombiner.combineCoursesWithPricesAndCategories(
           coursesData,
           cheapestProviderForEachCourse,
           mostExpensiveProviderForEachCourse,
@@ -42,51 +40,50 @@ function useCoursesPageLogic() {
           tagsData,
           courseTagsData
         );
-        
-        setAllCourses(combinedCourses);
+
+        setCombinedCourses(combinedCoursesData);
 
         if (mostExpensiveProviderForEachCourse.data.length > 0) {
           const maxPriceValue = Math.max(...mostExpensiveProviderForEachCourse.data.map(provider => provider.price));
-          console.log(JSON.stringify(mostExpensiveProviderForEachCourse.data) + "dddd")
-          setMaxPrice(maxPriceValue);
+          setFilters(prevFilters => ({ ...prevFilters, maxPrice: maxPriceValue }));
         }
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
-  
+
     fetchData();
   }, [targetCurrency]);
 
   useEffect(() => {
-    const filteredCourses = filterLogic(allCourses, filters);
+    const filteredCourses = filterLogic(combinedCourses, filters);
     setCourses(filteredCourses);
-  }, [filters, allCourses]);
+  }, [filters, combinedCourses]);
 
   const handleSortChange = (sortBy, sortOrder) => {
-    setFilters({ ...filters, sortBy, sortOrder });
+    setFilters(prevFilters => ({ ...prevFilters, sortBy, sortOrder }));
   };
 
   const handleSearchQueryChange = (query) => {
-    setFilters({ ...filters, searchQuery: query });
+    setFilters(prevFilters => ({ ...prevFilters, searchQuery: query }));
   };
 
   const handlePriceChange = (min, max) => {
-    setFilters({ ...filters, minPrice: min, maxPrice: max });
+    setFilters(prevFilters => ({ ...prevFilters, minPrice: min, maxPrice: max }));
   };
 
   const handleCategoryChange = (category) => {
-    setFilters({ ...filters, category });
+    setFilters(prevFilters => ({ ...prevFilters, category }));
   };
 
   const handleTagSearch = (tag) => {
-    setFilters({ ...filters, searchQuery: tag });
+    setFilters(prevFilters => ({ ...prevFilters, searchQuery: tag }));
   };
 
   return {
-    filters: { ...filters, maxPrice }, // include maxPrice in filters
+    combinedCourses,
+    filters,
     courses,
-    targetCurrency,
     handleSortChange,
     handleSearchQueryChange,
     handlePriceChange,

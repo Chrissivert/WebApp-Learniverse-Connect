@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./PostCourse.css";
 import { useNavigate, Link } from "react-router-dom";
+import { getCoursesFromServer } from '../../../../services/course-service';
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -43,7 +44,7 @@ export default function PostCourse() {
         description: data.description
       };
 
-      axios.post(`http://localhost:8080/courses`, userData)
+      axios.post(getCoursesFromServer, userData)
       navigate('/admin/course');
       alert('Course added successfully');
 
@@ -56,7 +57,7 @@ export default function PostCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>
             
       </div>
