@@ -12,6 +12,7 @@ import iconAdmin from "/icons/home/admin-icon.png";
 
 export default function NavList() {
   return (
+    <nav>
     <ul className="navList">
       <li><Button text='Home' src='/'/><img src={iconHome} className='button-image'/></li>
       <li><Button text='About' src='/about'/><img src={iconAbout} className='button-image'/></li>
@@ -20,6 +21,7 @@ export default function NavList() {
       <li><Button text='Register' src='/register'/><img src={iconRegister} className='button-image'/></li>
       <li><Button text='Admin' src='/admin'/><img src={iconAdmin} className='button-image'/></li>
     </ul>
+    </nav>
 
 // frontend\public\icons\home\home-icon.png
   );

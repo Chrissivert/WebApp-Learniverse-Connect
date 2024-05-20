@@ -1,4 +1,3 @@
-// CurrencySelector.jsx
 import React from 'react';
 import { useCurrencyContext } from './TargetCurrencyContext.jsx';
 
@@ -12,7 +11,8 @@ function CurrencySelector({ currencies }) {
         id="currencySelect"
         value={targetCurrency}
         onChange={(e) => handleCurrencyChange(e.target.value)}
-        aria-label="Select Currency"
+        aria-label="Select Preferred Currency"
+        aria-labelledby="currencySelect"
       >
         {currencies.map((currency) => (
           <option key={currency} value={currency}>

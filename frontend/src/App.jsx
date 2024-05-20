@@ -14,7 +14,6 @@ import CartPage from "./pages/cart/CartPage.jsx";
 import "./index.css";
 import { CurrencyProvider } from "./components/currencySelector/TargetCurrencyContext.jsx";
 import CartProvider from "./pages/cart/CartProvider.jsx";
-import { SpeakingProvider } from "./components/textReader/speakingContext.jsx";
 import AdminPage from "./pages/admin/Admin.jsx";
 import { AuthProvider } from "./pages/admin/AuthProvider.jsx";
 import PurchasedPage from "./pages/purchased/PurchasedPage.jsx";
@@ -32,7 +31,6 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <SpeakingProvider>
         <CurrencyProvider>
           <CartProvider>
             <Router>
@@ -80,7 +78,6 @@ export default function App() {
             </Router>
           </CartProvider>
         </CurrencyProvider>
-      </SpeakingProvider>
     </AuthProvider>
   );
 }

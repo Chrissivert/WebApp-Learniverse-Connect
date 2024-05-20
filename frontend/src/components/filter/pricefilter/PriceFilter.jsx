@@ -9,15 +9,15 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   }, [minValue, maxValue]);
 
   useEffect(() => {
-    // Update maxValue when maxPrice changes
     setMaxValue(Math.ceil(maxPrice / 100) * 100);
   }, [maxPrice]);
 
   return (
-    <div className="price-range-container">
+    <section className="price-range-container" aria-labelledby="priceRangeHeading">
       <div className='min-price-range'>
-        <label>Min Price: {minValue}</label>
+        <label htmlFor="minPrice">Min Price: {minValue}</label>
         <input
+          id="minPrice"
           type="range"
           min={0}
           max={maxValue}
@@ -27,11 +27,15 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
             const value = parseFloat(e.target.value);
             setMinValue(value);
           }}
+          aria-valuemin={0}
+          aria-valuemax={maxValue}
+          aria-valuenow={minValue}
         />
       </div>
       <div className='max-price-range'>
-        <label>Max Price: {maxValue}</label>
+        <label htmlFor="maxPrice">Max Price: {maxValue}</label>
         <input
+          id="maxPrice"
           type="range"
           min={minValue}
           step={100}
@@ -41,8 +45,11 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
             const value = parseFloat(e.target.value);
             setMaxValue(value);
           }}
+          aria-valuemin={minValue}
+          aria-valuemax={Math.ceil(maxPrice / 100) * 100}
+          aria-valuenow={maxValue}
         />
       </div>
-    </div>
+    </section>
   );
 }

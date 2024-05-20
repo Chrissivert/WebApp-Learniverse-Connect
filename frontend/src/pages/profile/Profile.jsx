@@ -127,7 +127,7 @@ function Intro({ userName, email, startDate }) {
         you're ready! Happy learning!
       </p>
 
-      <CurrencySelector currencies={['USD', 'EUR', 'GBP']} /> {/* Render CurrencySelector with currencies prop */}
+      <CurrencySelector currencies={['NOK', 'USD', 'EUR', 'GBP']} /> {/* Render CurrencySelector with currencies prop */}
     </div>
   );
 }
