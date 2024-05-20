@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { addCourseToServer } from '../../../../services/course-service';
 import { getLevelsFromServer } from '../../../../services/levels-service';
 import { getCategoriesFromServer } from '../../../../services/category-service';
+import { getProvidersFromServer } from '../../../../services/provider-service';
+import { getTagsFromServer } from '../../../../services/tags-service';
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -22,11 +24,13 @@ export default function PostCourse() {
 
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryId] = useState('');
   const [levels, setLevels] = useState([]);
-  const [selectedLevel, setSelectedLevel] = useState('');
   const [levelId] = useState('');
+  const [providers, setProviders] = useState([]);
+  const [providerId] = useState('');
+  const [tags, setTags] = useState([]);
+  const [tagId] = useState('');
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -43,9 +47,12 @@ export default function PostCourse() {
         setCategories(categoriesResponse.data);
         const levelsResponse = await getLevelsFromServer();
         setLevels(levelsResponse.data);
+        const providerResponse = await getProvidersFromServer();
+        setProviders(providerResponse.data);
+        setLevels(levelsResponse.data);
+        const tagResponse = await getTagsFromServer();
+        setTags(tagResponse.data);
 
-        setSelectedLevel(response.data.levelId);
-        setSelectedCategory(response.data.categoryId)
       } catch (error) {
         console.error('Error fetching course data:', error);
       }
@@ -67,7 +74,9 @@ export default function PostCourse() {
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
         description: data.description,
-        hidden: 1
+        hidden: 1,
+        providerId: parseInt(providerId || data.providerId),
+        tagId: parseInt(tagId || data.tagId)
       };
 
       await addCourseToServer(userData);
@@ -138,6 +147,22 @@ export default function PostCourse() {
         <label htmlFor='description'>
           Description
           <input id='description' value={data.description} onChange={handleChange} />
+        </label>
+        <label htmlFor="providerId">
+          Provider
+          <select id="providerId" value={data.providerId} onChange={handleChange}>
+            {providers.map((provider) => (
+              <option key={provider.id} value={provider.id}>{provider.name}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="tagId">
+          Tag
+          <select id="tagId" value={data.tagId} onChange={handleChange}>
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>{tag.tag}</option>
+            ))}
+          </select>
         </label>
         <button type='submit'>Post</button>
       </form>
