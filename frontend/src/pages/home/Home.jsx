@@ -17,24 +17,24 @@ export default function Home() {
         <h1>Welcome to Learniverse Connect</h1>
         <p>Start Learning Today!</p>
         <div className='button-row'>
-          <Link to="/courses" className="button-link">
+          <a href="/courses" className="button-link">
             <button className='home-row-button'>
               <img src={findACourse} className='button-image' />
               <p>Find a course →</p>
             </button>
-          </Link>
-          <Link to='/register' className='button-link'>
+          </a>
+          <a href='/register' className='button-link'>
             <button className='home-row-button'>
               <img src={createAnAccount} className='button-image' />
               <p>Create your account →</p>
             </button>
-          </Link>
-          <Link to='/about' className='button-link'>
+          </a>
+          <a href='/about' className='button-link'>
             <button className='home-row-button'>
               <img src={readMoreAbout} className='button-image' />
               <p>Read more about us →</p>
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

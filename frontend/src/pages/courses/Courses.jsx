@@ -55,14 +55,16 @@ function Courses({ courses }) {
           console.log(JSON.stringify(favoritedCourses) +"favoritedCourses"),
           <div className="coursecards" key={course.id}>
             {/* Link to the course detail page */}
-            <Link to={`/course/${course.id}`}>
+            {/* <Link to={`/course/${course.id}`}> */}
+            <a href={`/course/${course.id}`}>
               {/* Render CourseCard component */}
               <Coursecard
                 course={course}
                 favorited={favorites ? favorites.includes(course.id) : false}
                 onFavoriteToggle={() => toggleFavorite(course.id)} // Pass toggle function
               />
-            </Link>
+            {/* </Link> */}
+            </a>
           </div>
         ))
       )}
