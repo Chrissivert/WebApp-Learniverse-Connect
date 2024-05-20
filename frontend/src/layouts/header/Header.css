@@ -21,7 +21,6 @@
 @media (max-width: 1000px) {
   .hamburger-menu {
     display: block;
-
   }
 }
 
@@ -67,7 +66,6 @@
   margin-right: 40px; /* Adjust the margin to your preference */
 }
 
-
 .cart-container,
 .login-container {
   display: flex;
@@ -76,8 +74,6 @@
   justify-content: center;
   height: 100%;
 }
-
-
 
 .cart-link,
 .login-link {
@@ -89,14 +85,14 @@
   align-items: center;
 }
 
-.cart-link{
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s, filter 0.3s;
-    display: flex; /* Add this */
-    align-items: center; /* Add this to vertically center the icon and text */
-  }
-  
+.cart-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s, filter 0.3s;
+  display: flex; /* Add this */
+  align-items: center; /* Add this to vertically center the icon and text */
+}
+
 .cart-link:hover,
 .login-link:hover {
   filter: brightness(0.8);
@@ -125,14 +121,14 @@
   margin-top: 5px; /* Adjust spacing between icon and text */
 }
 
-
 .header-container a {
   color: white;
   text-decoration: none;
   position: relative;
 }
 
-.header-container a::after {
+/* General anchor styles for the underline effect, excluding learniverse-link */
+.header-container a:not(.logo-link)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -143,7 +139,7 @@
   transition: width 0.3s, left 0.3s;
 }
 
-.header-container a:hover::after {
+.header-container a:not(.logo-link):hover::after {
   width: calc(100%);
   left: 0;
 }
@@ -162,8 +158,11 @@
   flex-direction: column; /* Display logos in a column */
   align-items: center; /* Center align logos */
 }
+
 .header-right-container {
   display: flex;
   align-items: center;
   margin-left: auto; /* Align to the right */
 }
+
+
