@@ -46,9 +46,9 @@
   justify-content: center;
 }
 
-.front-image .image{
+.home-container .front-image .image{
   width: 100%;
-  height: auto;
+  height:auto;
   left: 0;
   right: 0;
 }
