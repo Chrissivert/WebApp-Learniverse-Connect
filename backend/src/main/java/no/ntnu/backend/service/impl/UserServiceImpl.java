@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
     if ((user.getId()) != id) {
       throw new IllegalArgumentException("User ID in URL does not match the ID in JSON data");
     }
-
+    user.setStartDate(existingUser.get().getStartDate());
     user.setId(existingUser.get().getId());
     this.userRepository.save(user);
   }

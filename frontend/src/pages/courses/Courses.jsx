@@ -8,6 +8,7 @@ import CourseCardSkeleton from "../../components/coursecard/CourseCardSkeleton.j
 function Courses({ courses }) {
   const [favoritedCourses, setFavoritedCourses] = useState([]);
   const [loading, setLoading] = useState(true); // Initially set to true
+  const [visibleCourses, setVisibleCourses] = useState([]);
 
   // Function to toggle the favorited state of a course
   const toggleFavorite = (courseId) => {
@@ -25,10 +26,12 @@ function Courses({ courses }) {
   // Effect to handle loading state based on courses
   useEffect(() => {
     // Set loading to true when courses are updated
+    const filteredCourses = courses.filter(course => !course.hidden);
+    setVisibleCourses(filteredCourses);
     setLoading(true);
     
     // If there are courses, set loading to false
-    if (courses.length > 0) {
+    if (filteredCourses.length > 0) {
       setLoading(false);
     }
   }, [courses]);
@@ -47,7 +50,7 @@ function Courses({ courses }) {
         ))
       ) : (
         // Render actual course cards
-        courses.map((course) => (
+        visibleCourses.map((course) => (
           console.log(JSON.stringify(course) +"courseadawda"),
           console.log(JSON.stringify(favoritedCourses) +"favoritedCourses"),
           <div className="coursecards" key={course.id}>
@@ -56,7 +59,7 @@ function Courses({ courses }) {
               {/* Render CourseCard component */}
               <Coursecard
                 course={course}
-                favorited={favorites.includes(course.id)} // Pass favorited state
+                favorited={favorites ? favorites.includes(course.id) : false}
                 onFavoriteToggle={() => toggleFavorite(course.id)} // Pass toggle function
               />
             </Link>

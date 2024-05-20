@@ -9,18 +9,9 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   }, [minValue, maxValue]);
 
   useEffect(() => {
-    // Ensure min value doesn't exceed max value
-    if (minValue > maxValue) {
-      setMinValue(maxValue);
-    }
-  }, [minValue, maxValue]);
-
-  useEffect(() => {
-    // Ensure max value doesn't exceed min value
-    if (maxValue < minValue) {
-      setMaxValue(minValue);
-    }
-  }, [minValue, maxValue]);
+    // Update maxValue when maxPrice changes
+    setMaxValue(Math.ceil(maxPrice / 100) * 100);
+  }, [maxPrice]);
 
   return (
     <div className="price-range-container">
@@ -29,7 +20,7 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
         <input
           type="range"
           min={0}
-          max={Math.ceil(maxPrice / 100) * 100}
+          max={maxValue}
           step={100}
           value={minValue}
           onChange={(e) => {
@@ -42,7 +33,7 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
         <label>Max Price: {maxValue}</label>
         <input
           type="range"
-          min={0}
+          min={minValue}
           step={100}
           max={Math.ceil(maxPrice / 100) * 100}
           value={maxValue}
