@@ -38,7 +38,6 @@ function CartPage() {
 
   const confirmPurchase = async () => {
     setLoading(true); // Show spinner
-    console.log("Purchase confirmed!");
     try {
       await sendPurchaseEmail(cart); // Send email after confirmation
       clearCart();

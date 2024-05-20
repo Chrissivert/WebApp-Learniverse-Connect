@@ -3,6 +3,7 @@ import "./Home.css";  // Ensure this path is correct
 import "../../index.css"; // Additional CSS if needed
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
   return (
     <div className="home-container">

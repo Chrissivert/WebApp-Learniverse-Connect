@@ -2,9 +2,6 @@ import React from 'react';
 import './confirmationModal.css';
 
 function ConfirmationModal({ message, items, totalPrice, currency, onConfirm, onCancel }) {
-
-  console.log(items); // Log the items to console
-
   return (
     <div className="modal-overlay">
       <div className="modal">
