@@ -16,6 +16,8 @@ function AdminCourse() {
                 const courseData = await getCoursesFromServer();
                 setCourses(courseData.data);
                 setLoading(false); // Update coursesLoading after fetching data
+                const hiddenCourseIds = courseData.data.filter(course => course.hidden).map(course => course.id);
+                setHiddenCourses(hiddenCourseIds);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

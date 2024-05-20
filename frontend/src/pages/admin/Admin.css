@@ -74,6 +74,7 @@
     background-color: rgb(151, 88, 163,06);
 }
 
-.hidden {
-    color: red; /* Grey color */
+
+.hidden td {
+    background-color: rgb(151, 88, 163, 0.4); 
 }
