@@ -16,10 +16,13 @@ export default function PutCourse() {
     hoursPerWeek: '',
     relatedCertification: '',
     description: '',
-    imageType: ''
   });
-  const [selectedLevel, setSelectedLevel] = useState(''); // New state for selected level
-  const [levelId, setLevelId] = useState(''); // New state for levelId that updates only onSubmit
+
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [categoryId] = useState('');
+  const [selectedLevel, setSelectedLevel] = useState('');
+  const [levelId] = useState('');
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +30,8 @@ export default function PutCourse() {
       try {
         const response = await getOneCourseFromServer(id);
         setFormData(response.data);
-        setSelectedLevel(response.data.levelId); // Set selected level initially
+        setSelectedLevel(response.data.levelId);
+        setSelectedCategory(response.data.categoryId)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course data:', error);
@@ -55,15 +59,14 @@ export default function PutCourse() {
       const userData = {
         id: data.id,
         title: data.title,
-        levelId: parseInt(levelId || data.levelId), // Use levelId only if it's set
-        categoryId: data.categoryId,
+        levelId: parseInt(levelId || data.levelId),
+        categoryId: parseInt(categoryId || data.categoryId),
         startDate: data.startDate,
         endDate: data.endDate,
         credit: data.credit,
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
         description: data.description,
-        imageType: data.imageType
       };
       const response = await getOneCourseFromServer(id);
       const currentCourse = response.data;
@@ -104,7 +107,12 @@ export default function PutCourse() {
         </label>
         <label htmlFor='categoryId'>
           Category ID
-          <input id='categoryId' type='number' value={data.categoryId} onChange={handleChange} />
+          <select id='categoryId' value={selectedCategory} onChange={handleChange}>
+            <option value="1">Information Technologies</option>
+            <option value="2">Digital Marketing</option>
+            <option value="3">Business and Entrepreneurship</option>
+            <option value="4">Data Science and Analytics</option>
+          </select>
         </label>
         <label htmlFor='startDate'>
           Start Date
@@ -129,10 +137,6 @@ export default function PutCourse() {
         <label htmlFor='description'>
           Description
           <input id='description' value={data.description} onChange={handleChange} />
-        </label>
-        <label htmlFor='imageType'>
-          Image Type
-          <input id='imageType' value={data.imageType} onChange={handleChange} />
         </label>
         <button type='submit'>Update</button>
       </form>
