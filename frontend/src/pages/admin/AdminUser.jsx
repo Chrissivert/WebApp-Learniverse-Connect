@@ -55,6 +55,7 @@ function AdminUser() {
                             <th>Username</th>
                             <th>Email</th>
                             <th>Roles</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
