@@ -139,4 +139,64 @@ ul {
   cursor: not-allowed; /* Change cursor to not-allowed */
 }
 
+.button-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 
+.goBackButton {
+  height: auto;
+  width: 100%;
+  /* background-color: aqua; */
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: column; */
+}
+
+.favoriteButton {
+  height: auto;
+  width: 80%;
+  margin-top: 5%;
+  align-self: center;
+}
+
+/* .button-section {
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+} */
+
+.title-image-section {
+  /* background-color: aqua; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.title-image-section .course-image-section img{
+  /* background-color: rgb(255, 0, 200); */
+  height: 10rem;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+}
+
+.title-image-section .title {
+  /* background-color: rgb(227, 0, 0); */
+  margin: 0;
+  padding: 0;
+  max-width: min-content;
+}
+
+.title-image-favorite {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
