@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 @CrossOrigin
 public class RoleController {
 

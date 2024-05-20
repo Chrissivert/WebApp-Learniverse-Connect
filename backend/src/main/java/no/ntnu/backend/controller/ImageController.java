@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/images")
+@RequestMapping("/api/images")
 public class ImageController {
   @Autowired
   private ImageService imageService;
@@ -83,14 +83,6 @@ public class ImageController {
   @Operation(summary = "Retrieve an image by ID", description = "Retrieves a specific image object based on its ID.")
   @GetMapping("/{id}/data")
   public ResponseEntity<byte[]> getImageDataById(@PathVariable int id) {
-    // Image image = this.imageService.readById(id).getBody();
-    // if (image != null && image.getData() != null) {
-    //   HttpHeaders headers = new HttpHeaders();
-    //   headers.setContentType(MediaType.valueOf(image.getContentType()));
-    //   return new ResponseEntity<>(image.getData(), headers, HttpStatus.OK);
-    // } else {
-    //   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    // }
     return this.imageService.readImageById(id);
   }
 

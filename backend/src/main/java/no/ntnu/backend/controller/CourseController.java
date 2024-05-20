@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * This is a javadoc
  */
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api/courses")
 @CrossOrigin
 public class CourseController {
 
