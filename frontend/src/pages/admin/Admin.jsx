@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 import Unauthorized from '../error/unauthorized/401';
-import Courses from '../courses/Courses';
-import { getCoursesFromServer } from "../../services/course-service";
 import "./Admin.css";
 import { Link } from "react-router-dom";
 
@@ -24,15 +22,7 @@ function AdminPage() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
-    const toggleDescription = (courseId) => {
-        setExpandedDescription(prevState => ({
-            ...prevState,
-            [courseId]: !prevState[courseId]
-        }));
-    }
     
-
     // If user is not admin, show unauthorized page
     if (!isAdmin) {
         return (

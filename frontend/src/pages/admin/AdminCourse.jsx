@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { getCoursesFromServer } from "../../services/course-service";
+import { getCoursesFromServer, updateCourseOnServer } from "../../services/course-service";
 import "./Admin.css";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ function AdminCourse() {
     const [loading, setLoading] = useState(true);
 
     const [expandedDescription, setExpandedDescription] = useState({});
-
+    const [hiddenCourses, setHiddenCourses] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +34,32 @@ function AdminCourse() {
             [courseId]: !prevState[courseId]
         }));
     }
+
+    const toggleCourseVisibility = async (courseId) => {
+        try {
+            const updatedCourses = [...courses];
+            const courseIndex = updatedCourses.findIndex(course => course.id === courseId);
+            const course = updatedCourses[courseIndex];
+
+            const isHidden = hiddenCourses.includes(courseId);
+            await updateCourseOnServer(courseId, {
+                ...course,
+                hidden: !isHidden // Toggle hidden status
+            });
+
+            if (isHidden) {
+                setHiddenCourses(hiddenCourses.filter(id => id !== courseId));
+            } else {
+                setHiddenCourses([...hiddenCourses, courseId]);
+            }
+
+            setCourses(updatedCourses);
+        } catch (error) {
+            console.error("Error toggling course visibility:", error);
+        }
+    }
+
+
 
     // If user is admin, show admin page content
     return (
@@ -66,7 +92,7 @@ function AdminCourse() {
                     </thead>
                     <tbody>
                         {courses.map(course => (
-                            <tr key={course.id}>
+                            <tr key={course.id} className={hiddenCourses.includes(course.id) ? 'hidden' : ''}>
                                 <td>{course.id}</td>
                                 <td>{course.title}</td>
                                 <td 
@@ -88,7 +114,14 @@ function AdminCourse() {
                                             <button className="button">Delete</button>
                                             </Link>
                                         </div>
-                                        <button className='button'>Hide</button>
+                                        <div>
+                                            <button 
+                                                className='button' 
+                                                onClick={() => toggleCourseVisibility(course.id)}
+                                            >
+                                                {hiddenCourses.includes(course.id) ? 'Unhide' : 'Hide'}
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

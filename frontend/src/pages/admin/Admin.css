@@ -73,3 +73,7 @@
 .admin-button:hover {
     background-color: rgb(151, 88, 163,06);
 }
+
+.hidden {
+    color: red; /* Grey color */
+}
