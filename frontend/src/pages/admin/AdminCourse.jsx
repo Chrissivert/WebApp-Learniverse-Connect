@@ -61,8 +61,6 @@ function AdminCourse() {
         }
     }
 
-
-
     // If user is admin, show admin page content
     return (
         <div>
@@ -72,7 +70,7 @@ function AdminCourse() {
                 </Link>   
             </div>
             <h1>COURSES</h1>
-            <p>This is all the current courses availabe in Learniverse Connecet. All visible and hidden courses are listed in the table below. 
+            <p>This is all the current courses availabe in Learniverse Connect. All visible and hidden courses are listed in the table below. 
                 Hidden courses is marked with a purple background and has a "unhide" button to make it visible. The visible courses has a "hide"
                 button to hide the specific course. You can easily change whether you want to hide or unhide a each induvidual course.
                 To read full description of a course, click on the description section. </p>
