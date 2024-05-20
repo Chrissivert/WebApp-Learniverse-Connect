@@ -56,7 +56,7 @@ function Courses({ courses }) {
               {/* Render CourseCard component */}
               <Coursecard
                 course={course}
-                favorited={favorites.includes(course.id)} // Pass favorited state
+                favorited={favorites ? favorites.includes(course.id) : false}
                 onFavoriteToggle={() => toggleFavorite(course.id)} // Pass toggle function
               />
             </Link>
