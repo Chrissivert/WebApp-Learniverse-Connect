@@ -90,6 +90,7 @@ async function sendApiRequest(method, url, data) {
     const response = await axios(config);
     return response;
   } catch (error) {
-    console.error("Error in sendApiRequest:", error);
+    console.error("Error in sendApiRequest:", error.response);
+    return error.response;
   }
 }
