@@ -103,6 +103,7 @@ function signoff() {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   localStorage.removeItem("favorites");
+  localStorage.removeItem("cart");
 }
 
 function Intro({ userName, email, startDate }) {

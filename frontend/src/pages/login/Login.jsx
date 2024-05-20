@@ -60,7 +60,7 @@ function Login() {
     if (loginSuccess) {
       const timer = setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 1500);
       return () => clearTimeout(timer);
     }
   }, [loginSuccess, navigate]);
@@ -112,6 +112,7 @@ function Login() {
       const resArray = favRes.data;
       const favArray = resArray.map((item) => item.id);
       console.log("favArray: " + favArray);
+      localStorage.setItem("favorites", JSON.stringify(favArray));
       //let favoritesArray = objArray.map(({ id }) => id);
       console.log("getfavouritecoursesfrom returned: " + favRes.data);
 
