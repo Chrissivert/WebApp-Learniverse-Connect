@@ -46,7 +46,7 @@ export default function DeleteCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Delete the course "{course.title}"</h1>

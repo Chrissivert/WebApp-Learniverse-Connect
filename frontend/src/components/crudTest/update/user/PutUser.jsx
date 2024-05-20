@@ -66,7 +66,7 @@ export default function PutUser() {
     <>
       <div>
         <Link to={"/admin/user"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Update User "{data.username}"</h1>

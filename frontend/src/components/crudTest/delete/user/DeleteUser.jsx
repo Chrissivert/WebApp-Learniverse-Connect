@@ -44,7 +44,7 @@ export default function DeleteUser() {
     <>
       <div>
         <Link to={"/admin/user"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Delete the user "{user.username}"</h1>

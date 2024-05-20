@@ -57,7 +57,7 @@ export default function PostCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>
             
       </div>

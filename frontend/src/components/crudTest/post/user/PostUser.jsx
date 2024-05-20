@@ -47,7 +47,7 @@ export default function PostUser() {
     <>
     <div>
         <Link to={"/admin/user"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← fGo back</button>
         </Link>
             
       </div>

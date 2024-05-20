@@ -74,7 +74,7 @@ export default function PutCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>Go back →</button>
+          <button className='button'>← Go back</button>
         </Link>   
       </div>
       <h1>Update Course "{data.title}"</h1>

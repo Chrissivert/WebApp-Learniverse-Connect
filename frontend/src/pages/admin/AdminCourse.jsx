@@ -17,7 +17,7 @@ function AdminCourse() {
                 setCourses(courseData.data);
                 setLoading(false); // Update coursesLoading after fetching data
                 const hiddenCourseIds = courseData.data.filter(course => course.hidden).map(course => course.id);
-                setHiddenCourses(hiddenCourseIds);
+            setHiddenCourses(hiddenCourseIds);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -68,7 +68,7 @@ function AdminCourse() {
         <div>
             <div>
                 <Link to={"/admin"}>
-                <button className='button'>Go back →</button>
+                <button className='button'>← Go back</button>
                 </Link>   
             </div>
             <div>
