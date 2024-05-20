@@ -50,9 +50,11 @@ export default function DeleteCourse() {
         </Link>   
       </div>
       <h1>Delete the course "{course.title}"</h1>
-
+      <p>Under is a preveiw of the coursecard to the course to be deleted. The deletion is permanent and cannot be reversed.</p>
       <form onSubmit={handleSubmit}>
-      {course && <Coursecard course={course} />}
+      <div className="coursecard-container">
+        {course && <Coursecard course={course} />}
+      </div>
       <button type='submit'>Delete</button>
       </form>
     </>

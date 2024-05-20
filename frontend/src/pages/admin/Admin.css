@@ -78,3 +78,8 @@
 .hidden td {
     background-color: rgb(151, 88, 163, 0.4); 
 }
+
+.coursecard-container {
+    max-width: 400px; /* Adjust maximum width as needed */
+    margin: 0 auto; /* Center the Coursecard */
+  }
