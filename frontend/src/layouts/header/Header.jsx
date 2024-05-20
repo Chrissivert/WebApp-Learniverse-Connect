@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
 import Logo from '../../components/logo/Logo.jsx';
-import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
 import NavList from '../../components/hamburger/NavList.jsx';
@@ -40,7 +39,6 @@ export default function Header() {
       <div className="header-right-container">
         <div className="cart-container">
           <Link to="/cart" className="cart-link">
-            {/* <FaShoppingCart className="cart-icon" /> */}
             <img src={cartImage} className='button-image'/>
             <span className="cart-text">Cart ({cart.length})</span>
           </Link>

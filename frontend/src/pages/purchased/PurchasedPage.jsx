@@ -7,7 +7,7 @@ function PurchasedPage() {
   const emailConfirmationSent = location.state && location.state.emailConfirmationSent;
 
   return (
-    <div className="purchased-page">
+    <main className="purchased-page" aria-live="polite">  
       <div className="purchased-content">
         <h1>Purchase Successful!</h1>
         {emailConfirmationSent ? (
@@ -17,7 +17,7 @@ function PurchasedPage() {
         )}
         <p>Your order will be processed shortly.</p>
       </div>
-    </div>
+    </main>
   );
 }
 

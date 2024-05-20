@@ -2,14 +2,10 @@
 
 .profilepage {
   display: grid;
-  /*   grid-template-columns: 1fr 5fr;
-  grid-template-rows: 4fr 2fr 2fr;
-  grid-column-gap: 4rem;
-  grid-row-gap: 2rem; */
+
   background-color: #e4e1e1;
   border-radius: 30px;
 
-  /*  margin-top: 60px; */
   grid-template-columns: 300px 1fr;
   gap: 1rem;
   padding: 2rem;
@@ -34,10 +30,6 @@
   font-size: 0.9rem;
 }
 
-/* .card::after {
-  content: "";
-  display: block;
-} */
 
 .buttons {
   display: flex;
@@ -82,17 +74,6 @@
   padding: 1rem;
   text-align: left;
   border: 2px solid #8a2be2;
-  /*   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-top: 3rem;
-  margin-right: 3rem; */
-  /* margin: 5%; */
-  /* border: 4px solid #222222; */
-  /*   border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: 10px 7px 35px -11px rgba(0, 0, 0, 0.75); */
 }
 
 .content > h1,
@@ -100,7 +81,6 @@ h2 {
   text-align: center;
 }
 .favorite-courses {
-  /* grid-column-end: span 2; */
   display: grid;
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

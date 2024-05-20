@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../../index.css";
 import "./Register.css";
 
@@ -8,12 +7,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [roleId, setRoleId] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +35,7 @@ function Register() {
         throw new Error("Registration failed");
       }
       alert("Registration successful!");
-      // navigate('/login'); // Use navigate function for redirection
+      navigate('/login'); // Use navigate function for redirection
     } catch (error) {
       console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");
@@ -49,41 +45,50 @@ function Register() {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <main>
+      <h1 id="registerTitle">Register</h1>
+      {error && <p style={{ color: "red" }} role="alert">{error}</p>}
+      <form onSubmit={handleSubmit} aria-labelledby="registerTitle">
         <div className="imgcontainer">
           <img src="/login/login.png" alt="Avatar" className="avatar" />
         </div>
-        <div className="form-container">
-          <label>Username</label>
+        <fieldset className="form-container">
+          <legend className="legend-register">
+             Register Information 
+          </legend>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
+            id="username"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            aria-required="true"
           />
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
+            id="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            aria-required="true"
           />
-          <label>Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            aria-required="true"
           />
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} aria-busy={loading}>
             Register
           </button>
-        </div>
+        </fieldset>
         <p>
           Already have an account? Log in{" "}
           <Link to="/login" className="register-link">
@@ -93,7 +98,7 @@ function Register() {
         </p>
       </form>
       {loading && <p>Loading...</p>}
-    </div>
+    </main>
   );
 }
 

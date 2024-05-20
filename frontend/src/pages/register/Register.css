@@ -1,13 +1,20 @@
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"] {
   width: 100%;
-  padding: 12px 20px;
+  padding: 16px 20px; /* Increased padding for taller input fields */
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   color: #000;
+  font-size: 16px; /* Increased font size */
 }
 
 button {
@@ -35,3 +42,4 @@ button {
   width: 100px;
   height: 100px;
 }
+
