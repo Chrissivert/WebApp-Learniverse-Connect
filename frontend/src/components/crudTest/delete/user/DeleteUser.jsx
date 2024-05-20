@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getUserById } from '../../../../services/user-request';
+import { getUserById, deleteUserOnServer } from '../../../../services/user-request';
 
 export default function DeleteUser() {
 
@@ -27,7 +26,7 @@ export default function DeleteUser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(getUserById(id));
+      await deleteUserOnServer(id);
       navigate('/admin/user');
       alert('User deleted successfully');
     } catch (error) {

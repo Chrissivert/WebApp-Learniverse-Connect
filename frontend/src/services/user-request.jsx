@@ -7,7 +7,6 @@ import {
 
 const PROFILE_URL = "/users";
 
-
 /**
  * Retrieves the user from the server.
  *
@@ -91,4 +90,3 @@ const AUTH_URL = "/authenticate";
 export function postAuthToServer(data) {
   return sendApiPostRequest(AUTH_URL, data);
 }
-

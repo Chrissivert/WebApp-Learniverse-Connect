@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getUserById } from '../../../../services/user-request';
+import { getUserById, updateUserOnServer } from '../../../../services/user-request';
 
 export default function PutUser() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setFormData] = useState({
     username: '',
-    start_date: '',
     email: '',
     password: '',
     active: '',
@@ -44,13 +42,12 @@ export default function PutUser() {
       const userData = {
         id: data.id,
         username: data.username,
-        start_date: data.start_date,
         email: data.email,
         password: data.password,
         active: data.active,
         img_id: data.img_id,
       };
-      await axios.put(getUserById(id), userData);
+      await updateUserOnServer(id, userData);
       navigate('/admin/user');
       alert('User updated successfully');
     } catch (error) {
@@ -74,10 +71,6 @@ export default function PutUser() {
         <label htmlFor='username'>
           Username
           <input id='username' value={data.username} onChange={handleChange} />
-        </label>
-        <label htmlFor='start date'>
-          Start date
-          <input id='start_date' type='date' value={data.start_date} onChange={handleChange} />
         </label>
         <label htmlFor='email'>
           Email
