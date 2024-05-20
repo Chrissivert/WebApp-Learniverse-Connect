@@ -39,6 +39,7 @@ function AdminPage() {
         <div>
             <h1>Welcome {auth.user.sub}</h1>
             <p>As an admin you can add, update, delete and hide/unhide courses. All visible and hidden courses are listed in the table below. To read full description of a course, click on the description section. </p>
+            <p>You can also manage users. Both create and delete users, as well as updating exisiting ones.</p>
             <hr/>
             <div className="button-container">
                 <Link to={"/admin/user"}>
