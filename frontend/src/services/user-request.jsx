@@ -13,7 +13,7 @@ const PROFILE_URL = "/users";
  *
  * @returns The outcome of the get request.
  */
-export function getUserFromServer() {
+export function getUsersFromServer() {
   return sendApiGetRequest(PROFILE_URL);
 }
 

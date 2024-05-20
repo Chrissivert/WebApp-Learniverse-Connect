@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../index.css";
 import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
@@ -51,6 +51,17 @@ function Login() {
   const { login } = useContext(AuthContext); // Get login function from AuthContext
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loginSuccess) {
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [loginSuccess, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,6 +88,7 @@ function Login() {
       setCookie("current_username", userData.sub);
       setCookie("current_user_roles", userData.roles.join(",")); */
       login(userData); // Update AuthContext with user information
+      setLoginSuccess(true);
       //console.log("res.data " + res.data);
       const convertedEmail = email.replace("@", "%40");
       console.log("convertedEmail: " + convertedEmail);
@@ -154,6 +166,7 @@ function Login() {
           !
         </p>
       </form>
+      {loginSuccess && <div className="success-message">Login Successful!</div>}
       <button onClick={getAllUsers}></button>
     </div>
   );

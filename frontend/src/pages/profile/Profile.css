@@ -9,22 +9,28 @@
   background-color: #e4e1e1;
   border-radius: 30px;
 
-  margin-top: 60px;
-  grid-template-columns: 1fr 1fr;
+  /*  margin-top: 60px; */
+  grid-template-columns: 300px 1fr;
   gap: 1rem;
+  padding: 2rem;
 }
 
 .card {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 3rem;
-  margin-left: 3rem;
   word-wrap: break-word;
-  max-width: 300px;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   box-shadow: 10px 7px 35px -11px rgba(0, 0, 0, 0.75);
+  border: 2px solid #8a2be2;
+  height: calc(100vh - 10rem);
+  position: sticky;
+  top: calc(6rem + 20px);
+}
+
+#root > div > div.card > div.data > div > p:nth-child(5) {
+  font-size: 0.9rem;
 }
 
 /* .card::after {
@@ -49,12 +55,18 @@
   background-color: rgb(151, 88, 163, 0.6);
   color: #ffffff;
 }
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-  margin-top: 20px;
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  padding: 20px;
+  margin-top: 30px;
+  font-size: 32px;
+  color: #fefefe;
+  background-color: rgb(151, 88, 163);
 }
 
 .intro {
@@ -62,6 +74,12 @@
 }
 
 .content {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 10px 7px 35px -11px rgba(0, 0, 0, 0.75);
+  padding: 1rem;
+  text-align: left;
+  border: 2px solid #8a2be2;
   /*   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,8 +92,13 @@
   background-color: #ffffff;
   box-shadow: 10px 7px 35px -11px rgba(0, 0, 0, 0.75); */
 }
+
+.content > h1,
+h2 {
+  text-align: center;
+}
 .favorite-courses {
-  grid-column-end: span 2;
+  /* grid-column-end: span 2; */
   display: grid;
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -107,4 +130,25 @@
 
 .user-info {
   display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .profilepage {
+    grid-template-columns: 1fr; /* Show only one element at a time */
+  }
+
+  .card,
+  .content {
+    grid-column: 1; /* Set both elements to occupy the first column */
+    margin-bottom: 20px; /* Add some spacing between elements */
+  }
+
+  .card {
+    position: initial;
+  }
+  .favorite-courses {
+    grid-column: 1; /* Set favorite courses to occupy the first column */
+    width: 100%; /* Match the width of card and content */
+    margin-bottom: 20px; /* Add some spacing between elements */
+  }
 }
