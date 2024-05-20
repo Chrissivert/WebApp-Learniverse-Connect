@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getUserByEmail } from "../../services/user-request";
 
 function UserAvatar({ user }) {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   let avatar = "";
 
   useEffect(() => {
@@ -10,23 +12,26 @@ function UserAvatar({ user }) {
       try {
         const response = await getUserByEmail(user.sub);
         setUserData(response.data);
-        console.log("User data:", response.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
+      }
+      finally {
+        setLoading(false); // Ensure loading is set to false regardless of success or failure
       }
     }
 
     fetchUser();
   }, [user]);
 
-  // Set the avatar to the first two letters of the username if userData is available
   if (userData) {
     avatar = userData.username.slice(0, 2).toUpperCase();
   }
 
   return (
     <div className="user-avatar">
-      {userData ? userData.avatar : avatar || "Loading..."}
+      {!loading && userData && (
+        <Link to="/profile" className="user-avatar-link">
+          <div>{avatar}</div>
+        </Link>
+      )}
     </div>
   );
 }

@@ -10,26 +10,23 @@ import { AuthContext } from "../admin/AuthProvider";
 import Unauthorized from "../error/unauthorized/401";
 //import { logout } from "../admin/AuthProvider";
 import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
-import { AuthProvider } from "../admin/AuthProvider";
 import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
+import UserAvatar from "../../components/userAvatar/UserAvatar";
 
 export default function Profile() {
-  //const [imgId, setImgId] = useState(null);
   const auth = useContext(AuthContext);
   const [userId, setUserId] = useState(null);
   const [isUser, setIsUser] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState("");
 
   useEffect(() => {
     console.log(auth.user);
     if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
-      console.log("User roles:", auth.user.roles);
 
       const isUser = auth.user.roles.some(
         (role) => role.authority === "ROLE_USER"
@@ -38,9 +35,6 @@ export default function Profile() {
       const isAdmin = auth.user.roles.some(
         (role) => role.authority === "ROLE_ADMIN"
       );
-
-      console.log("Is user:", isUser);
-      console.log("Is admin:", isAdmin);
       setIsUser(isUser);
       setIsAdmin(isAdmin);
     }
@@ -52,29 +46,17 @@ export default function Profile() {
     async function getUser() {
       try {
         const user = auth.user;
-        console.log("user: " + user);
-        console.log("auth.user: " + user);
         if (auth.user != null) {
-          console.log("user" + user.sub);
           const convertedEmail = user.sub.replace("@", "%40");
           //console.log("this is my user" + user.sub);
-          console.log("convertedEmail: " + convertedEmail);
           const res = await getUserByEmail(convertedEmail);
           const currentUser = res.data;
-          console.log("res.data " + res.data);
           setUserId(currentUser.id);
           localStorage.setItem("ActiveUserId", userId);
           setUserName(currentUser.username);
-          setAvatar(currentUser.username.slice(0, 2).toUpperCase());
-          console.log("AVATAR: " + avatar);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
-          console.log("userId " + userId);
-          console.log("username: " + userName);
-          console.log("current user: " + currentUser);
-          console.log("email: " + email);
-          console.log("startDate: " + startDate);
-          console.log(res);
+         
           //const res = await axios.get(`http://localhost:8080/user/${id}`);
           //setImgId(res.data.imgId);
           /* const userToken = localStorage.getItem("token");
@@ -101,17 +83,13 @@ export default function Profile() {
   // If user is not user role or admin role, show unauthorized page
   if (!isUser && !isAdmin) {
     return (
-      // <div>
-      //     <h1>Unauthorized Access</h1>
-      //     <p>You do not have permission to access this page.</p>
-      // </div>
       <Unauthorized />
     );
   }
   return (
     <div className="profilepage">
       <div className="card">
-        <Avatar avatar={avatar} />
+        <UserAvatar user={auth.user} />
         <div className="data">
           <Intro userName={userName} email={email} startDate={startDate} />
         </div>
@@ -125,17 +103,7 @@ function signoff() {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
   localStorage.removeItem("favorites");
-}
-
-function Avatar({ avatar }) {
-  return (
-    <div className="user-avatar">{avatar}</div>
-    /* <img
-      className="avatar"
-      src="http://localhost:8080/images/1/data"
-      alt="Prince Froggy"
-    /> */
-  );
+  localStorage.removeItem("cart");
 }
 
 function Intro({ userName, email, startDate }) {
