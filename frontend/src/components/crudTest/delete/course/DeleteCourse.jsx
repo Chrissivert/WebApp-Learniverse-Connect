@@ -15,8 +15,9 @@ export default function DeleteCourse() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await axios.get(getOneCourseFromServer(id));
+        const response = await getOneCourseFromServer(id);
         setCourse(response.data);
+        console.log(response.data)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course:', error);
