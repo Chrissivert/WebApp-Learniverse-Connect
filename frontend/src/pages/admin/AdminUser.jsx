@@ -73,7 +73,6 @@ function AdminUser() {
                                             <button className="button">Delete</button>
                                             </Link>
                                         </div>
-                                        <button className='button'>Hide</button>
                                     </div>
                                 </td>
                             </tr>

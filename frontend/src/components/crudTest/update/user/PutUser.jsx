@@ -43,14 +43,14 @@ export default function PutUser() {
     try {
       const userData = {
         id: data.id,
-        title: data.username,
-        levelId: data.start_date,
-        categoryId: data.email,
-        startDate: data.password,
-        endDate: data.active,
-        credit: data.img_id,
+        username: data.username,
+        start_date: data.start_date,
+        email: data.email,
+        password: data.password,
+        active: data.active,
+        img_id: data.img_id,
       };
-      await axios.put(`http://localhost:8080/users/${id}`, userData);
+      await axios.put(getUserById(id), userData);
       navigate('/admin/user');
       alert('User updated successfully');
     } catch (error) {
@@ -85,7 +85,7 @@ export default function PutUser() {
         </label>
         <label htmlFor='password'>
             Password
-          <input id='password' value={data.password} onChange={handleChange} />
+          <input id='password' placeholder={"new password"} onChange={handleChange} />
         </label>
         <label htmlFor='active'>
           Active
