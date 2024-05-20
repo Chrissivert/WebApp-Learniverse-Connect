@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getOneCourseFromServer } from '../../../../services/course-service';
+import { getOneCourseFromServer, updateCourseOnServer } from '../../../../services/course-service';
 
 export default function PutCourse() {
   const { id } = useParams();
@@ -58,7 +58,7 @@ export default function PutCourse() {
         description: data.description,
         imageType: data.imageType
       };
-      await axios.put(getOneCourseFromServer(id), userData);
+      await updateCourseOnServer(id, userData);
       navigate('/admin/course');
       alert('Course updated successfully');
     } catch (error) {

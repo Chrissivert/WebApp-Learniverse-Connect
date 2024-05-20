@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./PostCourse.css";
 import { useNavigate, Link } from "react-router-dom";
-import { getCoursesFromServer } from '../../../../services/course-service';
+import { addCourseToServer } from '../../../../services/course-service';
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -43,8 +43,7 @@ export default function PostCourse() {
         relatedCertification: data.relatedCertification,
         description: data.description
       };
-
-      axios.post(getCoursesFromServer, userData)
+      await addCourseToServer(userData);
       navigate('/admin/course');
       alert('Course added successfully');
 
