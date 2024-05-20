@@ -22,10 +22,10 @@ import AdminCoursePage from './pages/admin/AdminCourse.jsx';
 import PostCourse from './components/crudTest/post/course/PostCourse.jsx';
 import DeleteCourse from './components/crudTest/delete/course/DeleteCourse.jsx';
 import UpdateCourse from './components/crudTest/update/course/PutCourse.jsx';
-// import AdminUserPage from './pages/admin/AdminUser.jsx';
-// import PostUser from './components/crudTest/post/user/PostUser.jsx';
-// import DeleteUser from './components/crudTest/delete/user/DeleteUser.jsx';
-// import UpdateUser from './components/crudTest/update/user/PutUser.jsx';
+import AdminUserPage from './pages/admin/AdminUser.jsx';
+import PostUser from './components/crudTest/post/user/PostUser.jsx';
+import DeleteUser from './components/crudTest/delete/user/DeleteUser.jsx';
+import UpdateUser from './components/crudTest/update/user/PutUser.jsx';
 
 
 export default function App() {  
@@ -54,10 +54,10 @@ export default function App() {
             <Route path="/admin/course/newCourse" element={<PostCourse/>} />
             <Route path="/admin/course/deleteCourse/:id" element={<DeleteCourse/>} />
             <Route path="/admin/course/updateCourse/:id" element={<UpdateCourse/>} />
-            {/* <Route path="/admin/user" element={<AdminUserPage/>} /> */}
-            {/* <Route path="/admin/user/newUser" element={<PostUser/>} />
+            <Route path="/admin/user" element={<AdminUserPage/>} />
+            <Route path="/admin/user/newUser" element={<PostUser/>} />
             <Route path="/admin/user/deleteUser/:id" element={<DeleteUser/>} />
-            <Route path="/admin/user/updateUser/:id" element={<UpdateUser/>} /> */}
+            <Route path="/admin/user/updateUser/:id" element={<UpdateUser/>} />
           </Routes>
           <Footer />
         </Router>

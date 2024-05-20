@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Coursecard from "../../../coursecard/Coursecard";
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { getOneCourseFromServer } from '../../../../services/course-service';
+
 
 export default function DeleteCourse() {
 
@@ -13,8 +15,9 @@ export default function DeleteCourse() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/courses/${id}`);
+        const response = await getOneCourseFromServer(id);
         setCourse(response.data);
+        console.log(response.data)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching course:', error);
@@ -26,7 +29,7 @@ export default function DeleteCourse() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(`http://localhost:8080/courses/${id}`);
+      await axios.delete(getOneCourseFromServer(id));
       navigate('/admin/course');
       alert('Course deleted successfully');
     } catch (error) {
