@@ -15,7 +15,7 @@ export default function Footer() {
             <h3>Contact Us</h3>
             <ul>
               <li>Address: Larsgårdsvegen 2, Ålesund</li>
-              <li><a href='mailto:group01webapp@outlook.com'>E-mail: info@learniverse-connect.com</a></li>
+              <li><a href='mailto:info@learniverse-connect.com'>E-mail: info@learniverse-connect.com</a></li>
               <li>Phone: (+47) 735 95 000</li>
             </ul>
           </div>
