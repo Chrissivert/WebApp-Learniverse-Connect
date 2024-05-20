@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getOneCourseFromServer, updateCourseOnServer } from '../../../../services/course-service';
+import { getLevelsFromServer } from '../../../../services/levels-service';
+import { getCategoriesFromServer } from '../../../../services/category-service';
 
 export default function PutCourse() {
   const { id } = useParams();
@@ -18,10 +20,13 @@ export default function PutCourse() {
     description: '',
   });
 
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryId] = useState('');
+  const [levels, setLevels] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState('');
   const [levelId] = useState('');
+
 
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +34,11 @@ export default function PutCourse() {
     const fetchCourseData = async () => {
       try {
         const response = await getOneCourseFromServer(id);
+        const categoriesResponse = await getCategoriesFromServer();
+        setCategories(categoriesResponse.data);
+        const levelsResponse = await getLevelsFromServer();
+        setLevels(levelsResponse.data);
+
         setFormData(response.data);
         setSelectedLevel(response.data.levelId);
         setSelectedCategory(response.data.categoryId)
@@ -97,21 +107,20 @@ export default function PutCourse() {
           Title
           <input id='title' value={data.title} onChange={handleChange} />
         </label>
-        <label htmlFor='levelId'>
-          Level ID
-          <select id='levelId' value={selectedLevel} onChange={handleChange}>
-            <option value="1">Beginner</option>
-            <option value="2">Intermediate</option>
-            <option value="3">Expert</option>
+        <label htmlFor="levelId">
+          Level
+          <select id="levelId" value={data.levelId} onChange={handleChange}>
+            {levels.map((level) => (
+              <option key={level.id} value={level.id}>{level.difficulty}</option>
+            ))}
           </select>
         </label>
-        <label htmlFor='categoryId'>
-          Category ID
-          <select id='categoryId' value={selectedCategory} onChange={handleChange}>
-            <option value="1">Information Technologies</option>
-            <option value="2">Digital Marketing</option>
-            <option value="3">Business and Entrepreneurship</option>
-            <option value="4">Data Science and Analytics</option>
+        <label htmlFor="categoryId">
+          Category
+          <select id="categoryId" value={data.categoryId} onChange={handleChange}>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>{category.subject}</option>
+            ))}
           </select>
         </label>
         <label htmlFor='startDate'>

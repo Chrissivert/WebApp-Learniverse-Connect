@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./PostCourse.css";
 import { useNavigate, Link } from "react-router-dom";
 import { addCourseToServer } from '../../../../services/course-service';
+import { getLevelsFromServer } from '../../../../services/levels-service';
+import { getCategoriesFromServer } from '../../../../services/category-service';
+import { getProvidersFromServer } from '../../../../services/provider-service';
+import { getTagsFromServer } from '../../../../services/tags-service';
 
 export default function PostCourse() {
   const [data, setFormData] = useState({
@@ -19,6 +23,14 @@ export default function PostCourse() {
   });
 
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const [categoryId] = useState('');
+  const [levels, setLevels] = useState([]);
+  const [levelId] = useState('');
+  const [providers, setProviders] = useState([]);
+  const [providerId] = useState('');
+  const [tags, setTags] = useState([]);
+  const [tagId] = useState('');
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,21 +40,45 @@ export default function PostCourse() {
     });
   };
 
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      try {
+        const categoriesResponse = await getCategoriesFromServer();
+        setCategories(categoriesResponse.data);
+        const levelsResponse = await getLevelsFromServer();
+        setLevels(levelsResponse.data);
+        const providerResponse = await getProvidersFromServer();
+        setProviders(providerResponse.data);
+        setLevels(levelsResponse.data);
+        const tagResponse = await getTagsFromServer();
+        setTags(tagResponse.data);
+
+      } catch (error) {
+        console.error('Error fetching course data:', error);
+      }
+    };
+    fetchCourseData();
+  }, []);
+
   const handleSubmit = async () => {
 
     try {
       const userData = {
         id: data.id,
         title: data.title,
-        levelId: data.levelId,
-        categoryId: data.categoryId,
+        levelId: parseInt(levelId || data.levelId),
+        categoryId: parseInt(categoryId || data.categoryId),
         startDate: data.startDate,
         endDate: data.endDate,
         credit: data.credit,
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
-        description: data.description
+        description: data.description,
+        hidden: 1,
+        providerId: parseInt(providerId || data.providerId),
+        tagId: parseInt(tagId || data.tagId)
       };
+
       await addCourseToServer(userData);
       navigate('/admin/course');
       alert('Course added successfully');
@@ -56,7 +92,7 @@ export default function PostCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>← Go back</button>
+          <button className='button'>Go back →</button>
         </Link>
             
       </div>
@@ -72,13 +108,21 @@ export default function PostCourse() {
           Title
           <input id='title' value={data.title} onChange={handleChange} />
         </label>
-        <label htmlFor='level'>
-          Level id
-          <input id='levelId' type='number' value={data.levelId} onChange={handleChange} />
+        <label htmlFor="levelId">
+          Level
+          <select id="levelId" value={data.levelId} onChange={handleChange}>
+            {levels.map((level) => (
+              <option key={level.id} value={level.id}>{level.difficulty}</option>
+            ))}
+          </select>
         </label>
-        <label htmlFor='category'>
-          Category id
-          <input id='categoryId' type='number' value={data.categoryId} onChange={handleChange} />
+        <label htmlFor="categoryId">
+          Category
+          <select id="categoryId" value={data.categoryId} onChange={handleChange}>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>{category.subject}</option>
+            ))}
+          </select>
         </label>
         <label htmlFor='start-date'>
           Start date
@@ -103,6 +147,22 @@ export default function PostCourse() {
         <label htmlFor='description'>
           Description
           <input id='description' value={data.description} onChange={handleChange} />
+        </label>
+        <label htmlFor="providerId">
+          Provider
+          <select id="providerId" value={data.providerId} onChange={handleChange}>
+            {providers.map((provider) => (
+              <option key={provider.id} value={provider.id}>{provider.name}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="tagId">
+          Tag
+          <select id="tagId" value={data.tagId} onChange={handleChange}>
+            {tags.map((tag) => (
+              <option key={tag.id} value={tag.id}>{tag.tag}</option>
+            ))}
+          </select>
         </label>
         <button type='submit'>Post</button>
       </form>
