@@ -77,7 +77,7 @@ function CartPage() {
       <div className="cart-items">
         {cart.map(({ course }) => (
           <div key={course.id} className="cart-item">
-            <Coursecard course={course.course} />
+            <Coursecard course={course.course} showPrice={false}/>
             <p className="provider">Provider: {course.selectedProvider.providerName}</p>
             <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
             <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
