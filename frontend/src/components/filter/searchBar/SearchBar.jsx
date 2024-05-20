@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CurrencyInfoPopup from '../../currencySelector/CurrencyInfoPopup';
+import HelpPopUp from '../../currencySelector/HelpPopUp';
 
 function SearchBar({ searchQuery, setSearchQuery }) {
   return (
@@ -15,7 +15,7 @@ function SearchBar({ searchQuery, setSearchQuery }) {
         aria-label="Search courses"
       />
       <div className="info-popup">
-      <CurrencyInfoPopup />
+      <HelpPopUp />
       </div>
     </form>
   );

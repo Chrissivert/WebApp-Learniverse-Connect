@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./Course.css";
 import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
-import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
+import { useCurrencyContext } from "../../components/currencySelector/CurrencyContext";
 import { getOneCourseFromServer } from "../../services/course-service";
 import {
   addFavoriteCourseToServer,

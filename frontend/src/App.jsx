@@ -12,7 +12,7 @@ import Login from "./pages/login/Login.jsx";
 import CoursesPage from "./pages/courses/CoursesPage.jsx";
 import CartPage from "./pages/cart/CartPage.jsx";
 import "./index.css";
-import { CurrencyProvider } from "./components/currencySelector/TargetCurrencyContext.jsx";
+import { CurrencyProvider } from "./components/currencySelector/CurrencyContext.jsx";
 import CartProvider from "./pages/cart/CartProvider.jsx";
 import AdminPage from "./pages/admin/Admin.jsx";
 import { AuthProvider } from "./pages/admin/AuthProvider.jsx";

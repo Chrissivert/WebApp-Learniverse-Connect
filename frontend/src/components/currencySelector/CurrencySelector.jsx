@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCurrencyContext } from './TargetCurrencyContext.jsx';
+import { useCurrencyContext } from './CurrencyContext.jsx';
 
 function CurrencySelector({ currencies }) {
   const { targetCurrency, handleCurrencyChange } = useCurrencyContext();

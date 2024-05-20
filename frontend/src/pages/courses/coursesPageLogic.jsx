@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import CourseDataCombiner from '../../components/combiner/CourseDataCombiner.jsx';
-import { useCurrencyContext } from '../../components/currencySelector/TargetCurrencyContext';
+import { useCurrencyContext } from '../../components/currencySelector/CurrencyContext.jsx';
 import { filterLogic } from "./FilterLogic.jsx";
 import { getCoursesFromServer } from '../../services/course-service.jsx';
 import { getCategoriesFromServer } from '../../services/category-service.jsx';

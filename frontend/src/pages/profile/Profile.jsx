@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
 import CurrencySelector from "../../components/currencySelector/CurrencySelector";
-import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
+import { useCurrencyContext } from "../../components/currencySelector/CurrencyContext";
 
 export default function Profile() {
   const auth = useContext(AuthContext);
