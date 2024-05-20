@@ -13,6 +13,8 @@ import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
+import CurrencySelector from "../../components/currencySelector/CurrencySelector";
+import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
 
 export default function Profile() {
   const auth = useContext(AuthContext);
@@ -124,6 +126,8 @@ function Intro({ userName, email, startDate }) {
         Below are the courses you've marked as favorites. Dive back in whenever
         you're ready! Happy learning!
       </p>
+
+      <CurrencySelector currencies={['USD', 'EUR', 'GBP']} /> {/* Render CurrencySelector with currencies prop */}
     </div>
   );
 }

@@ -12,7 +12,6 @@ import {
 import { getAllProvidersForACourse } from "../../services/course-provider";
 import NotFound from "../error/notFound/404";
 import GetImage from "../../components/crudTest/post/image/GetImage";
-import { generateImageUrl } from "../../services/image-service";
 
 function Course() {
   const { id } = useParams();

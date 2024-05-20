@@ -7,10 +7,17 @@ function CurrencySelector({ currencies }) {
 
   return (
     <div>
-      <label>Select Currency:</label>
-      <select value={targetCurrency} onChange={(e) => handleCurrencyChange(e.target.value)}>
-        {currencies.map(currency => (
-          <option key={currency} value={currency}>{currency}</option>
+      <label htmlFor="currencySelect">Select Preferred Currency:</label>
+      <select
+        id="currencySelect"
+        value={targetCurrency}
+        onChange={(e) => handleCurrencyChange(e.target.value)}
+        aria-label="Select Currency"
+      >
+        {currencies.map((currency) => (
+          <option key={currency} value={currency}>
+            {currency}
+          </option>
         ))}
       </select>
     </div>
