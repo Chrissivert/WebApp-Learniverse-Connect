@@ -124,6 +124,7 @@ export default function Profile() {
 function signoff() {
   localStorage.removeItem("user");
   localStorage.removeItem("token");
+  localStorage.removeItem("favorites");
 }
 
 function Avatar({ avatar }) {
