@@ -24,16 +24,9 @@ export default function About() {
   // </div>
   // );
 
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate('/courses'); // Redirecting users to the search page
-  };
-
   return (
-    <div className="about-container"> {/* Add className="about-container" here */}
+    <div className="about-container">
       <h1>About us and our products</h1>
-      {/* <img src="/front-end/public/learniverse_connect_icon2.svg" alt="Logo" className="logo" /> */}
       <img src="/logo/learniverse_connect_logo.svg  " alt="Logo" className="logo"></img>
       <hr />
       <p>
@@ -77,7 +70,9 @@ export default function About() {
         a year, offering ample opportunities for you to participate and thrive in your learning pursuits.
       </p>
       <div className="cta">
-        <button className="searchBtn" onClick={handleButtonClick}>Search For Courses</button>
+        <a href='/courses'>
+          <button className="searchBtn">Search For Courses</button>
+        </a>
       </div>
     </div>
   );

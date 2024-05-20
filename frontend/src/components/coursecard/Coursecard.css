@@ -57,3 +57,7 @@
   margin: 4px 0;
   font-size: 17px;
 }
+
+.price-section.close {
+  display: none;
+}

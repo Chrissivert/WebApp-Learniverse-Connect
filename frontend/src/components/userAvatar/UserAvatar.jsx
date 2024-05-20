@@ -12,10 +12,8 @@ function UserAvatar({ user }) {
       try {
         const response = await getUserByEmail(user.sub);
         setUserData(response.data);
-        console.log("User data:", response.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      } finally {
+      }
+      finally {
         setLoading(false); // Ensure loading is set to false regardless of success or failure
       }
     }
@@ -24,15 +22,13 @@ function UserAvatar({ user }) {
   }, [user]);
 
   if (userData) {
-    console.log("inside");
     avatar = userData.username.slice(0, 2).toUpperCase();
-    console.log("Avatar:", avatar);
   }
 
   return (
     <div className="user-avatar">
       {!loading && userData && (
-        <Link to="/profile">
+        <Link to="/profile" className="user-avatar-link">
           <div>{avatar}</div>
         </Link>
       )}

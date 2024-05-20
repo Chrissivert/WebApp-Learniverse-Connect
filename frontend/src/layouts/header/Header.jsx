@@ -39,7 +39,7 @@ export default function Header() {
           </Link>
         </div>
         {user ? (
-          <UserAvatar user={user} /> // Show UserAvatar if user is logged in
+          <UserAvatar user={user} className="user-avatar" /> // Show UserAvatar if user is logged in
         ) : (
           <div className="login-container">
             <Link to="/login" className="login-link">
