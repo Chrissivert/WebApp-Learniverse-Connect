@@ -38,7 +38,6 @@ public class UserController {
 
     @Operation(summary = "Retrieves a user by its ID", description = "Retrieves a user by its ID.")
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> readUserById(@PathVariable int id) {
         return this.userService.readById(id);
     }

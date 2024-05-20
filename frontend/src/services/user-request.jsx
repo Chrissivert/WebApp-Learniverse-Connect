@@ -37,7 +37,38 @@ export async function getUserByEmail(email) {
   return sendApiGetRequest(PROFILE_URL + "/email/" + email);
 }
 
-const REGISTER_URL = "/signup";
+/**
+ * Deletes a user from the server.
+ *
+ * @param {int} userId The ID of the user to be deleted.
+ * @returns The outcome of the delete request.
+ */
+export function deleteUserOnServer(userId) {
+  return sendApiDeleteRequest(PROFILE_URL + "/" + userId);
+}
+
+/**
+ * Updates a user on the server.
+ *
+ * @param {int} userID The ID of the user to be updated.
+ * @param {FormData} user The updated user to be sent.
+ * @returns The outcome of the put request.
+ */
+export function updateUserOnServer(userId, user) {
+  return sendApiPutRequest(PROFILE_URL + "/" + userId, user);
+}
+
+/**
+ * Adds a user to the server.
+ *
+ * @param {FormData} user The user to be added.
+ * @returns The outcome of the post request.
+ */
+export function addUserToServer(user) {
+  return sendApiPostRequest(PROFILE_URL, user);
+}
+
+const REGISTER_URL = "/api/signup";
 
 /**
  *
@@ -49,7 +80,7 @@ export function postSignupToServer(data) {
   return sendApiPostRequest(REGISTER_URL, data);
 }
 
-const AUTH_URL = "/authenticate";
+const AUTH_URL = "/api/authenticate";
 
 /**
  *
@@ -60,3 +91,4 @@ const AUTH_URL = "/authenticate";
 export function postAuthToServer(data) {
   return sendApiPostRequest(AUTH_URL, data);
 }
+

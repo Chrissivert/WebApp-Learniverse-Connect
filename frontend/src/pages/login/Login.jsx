@@ -5,6 +5,7 @@ import "./Login.css";
 import { AuthContext } from "../admin/AuthProvider";
 import { postAuthToServer } from "../../services/user-request";
 import { getUserByEmail } from "../../services/user-request";
+import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 // import { jwtDecode } from "jwt-decode";
 
 /**
@@ -52,6 +53,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,6 +67,11 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters long.");
+      return;
+    }
     try {
       /* const response = await fetch("http://localhost:8080/api/authenticate", {
         method: "POST",
@@ -100,17 +107,22 @@ function Login() {
       console.log("currentUser: " + currentUser);
       setUserId(currentUser);
       localStorage.setItem("ActiveUserId", userId);
+
+      const favRes = await getFavoriteCoursesFromAUser(currentUser);
+      //let favoritesArray = objArray.map(({ id }) => id);
+      console.log("getfavouritecoursesfrom returned: " + favRes.data);
+
       //window.location.href = "/";
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
+      setErrorMessage("Login failed. Please try again.");
     }
   };
 
   useEffect(() => {
     if (userId !== null) {
       localStorage.setItem("ActiveUserId", userId);
-      window.location.href = "/";
+      //window.location.href = "/";
     }
   }, [userId]);
 
@@ -139,10 +151,10 @@ function Login() {
           <img src="/login/login.png" alt="Avatar" className="avatar" />
         </div>
         <div className="form-container">
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -158,6 +170,7 @@ function Login() {
           />
           <button type="submit">Login</button>
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <p>
           No account? Sign in{" "}
           <Link to="/register" className="register-link">

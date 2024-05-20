@@ -17,6 +17,11 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    if (password.length <= 6) {
+      setError("Password must be longer than 6 characters.");
+      return;
+    }
     setLoading(true);
     try {
       const response = await fetch("http://localhost:8080/api/signup", {
@@ -81,7 +86,7 @@ function Register() {
         </div>
         <p>
           Already have an account? Log in{" "}
-          <Link to="/login" className="login-link">
+          <Link to="/login" className="register-link">
             here
           </Link>
           !

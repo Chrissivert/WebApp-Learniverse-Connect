@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Coursecard from "../../../coursecard/Coursecard";
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { getOneCourseFromServer } from '../../../../services/course-service';
+import { getOneCourseFromServer, deleteCourseOnServer } from '../../../../services/course-service';
 
 
 export default function DeleteCourse() {
@@ -29,7 +29,8 @@ export default function DeleteCourse() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.delete(getOneCourseFromServer(id));
+      await deleteCourseOnServer(id);
+      console.log(deleteCourseOnServer(id))
       navigate('/admin/course');
       alert('Course deleted successfully');
     } catch (error) {
