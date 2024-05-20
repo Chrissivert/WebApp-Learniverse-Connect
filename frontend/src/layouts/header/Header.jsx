@@ -1,5 +1,3 @@
-// Header.js
-
 import React, { useContext } from 'react';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
@@ -12,9 +10,11 @@ import UserAvatar from '../../components/userAvatar/UserAvatar.jsx'; // Import t
 import { AuthContext } from '../../pages/admin/AuthProvider.jsx';
 
 export default function Header() {
-  const { cartPopped, cart } = useContext(CartContext);
-  const { user } = useContext(AuthContext); // Get the authenticated user from AuthContext
-  console.log(JSON.stringify(user) + "user")
+  const { cart } = useContext(CartContext);
+  const auth = useContext(AuthContext);
+
+  // Assuming you have access to the user object from AuthContext
+  const user = auth.user;
 
   return (
     <header className="header-container">
@@ -39,13 +39,16 @@ export default function Header() {
             <span className="cart-text">Cart ({cart.length})</span>
           </Link>
         </div>
-        <div className="login-container">
-          <Link to="/login" className="login-link">
-            <img src="/login/login_white.png" alt="Login" className="login" />
-            <span className="login-text">Login</span>
-          </Link>
-        </div>
-        {user && <UserAvatar user={user} />} {/* Pass the authenticated user as a prop to UserAvatar component if user exists */}
+        {user ? (
+          <UserAvatar user={user} /> // Show UserAvatar if user is logged in
+        ) : (
+          <div className="login-container">
+            <Link to="/login" className="login-link">
+              <img src="/login/login_white.png" alt="Login" className="login" />
+              <span className="login-text">Login</span>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

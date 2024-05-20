@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getUserByEmail } from "../../services/user-request";
 
 function UserAvatar({ user }) {
@@ -21,12 +22,20 @@ function UserAvatar({ user }) {
 
   // Set the avatar to the first two letters of the username if userData is available
   if (userData) {
+    console.log("inside");
     avatar = userData.username.slice(0, 2).toUpperCase();
+    console.log("Avatar:", avatar);
   }
 
   return (
     <div className="user-avatar">
-      {userData ? userData.avatar : avatar || "Loading..."}
+      {userData ? (
+        <Link to="/profile">
+          <div>{avatar}</div>
+        </Link>
+      ) : (
+        "Loading..."
+      )}
     </div>
   );
 }

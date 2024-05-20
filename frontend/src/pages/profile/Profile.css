@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  word-wrap: break-word;
+  word-break: break-word; /* Ensure long words break to the next line */
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   box-shadow: 10px 7px 35px -11px rgba(0, 0, 0, 0.75);
@@ -27,6 +27,7 @@
   height: calc(100vh - 10rem);
   position: sticky;
   top: calc(6rem + 20px);
+  padding: 1rem; /* Add padding inside the card */
 }
 
 #root > div > div.card > div.data > div > p:nth-child(5) {

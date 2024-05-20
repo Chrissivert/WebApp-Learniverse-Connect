@@ -52,29 +52,19 @@ export default function Profile() {
     async function getUser() {
       try {
         const user = auth.user;
-        console.log("user: " + user);
-        console.log("auth.user: " + user);
         if (auth.user != null) {
-          console.log("user" + user.sub);
           const convertedEmail = user.sub.replace("@", "%40");
           //console.log("this is my user" + user.sub);
           console.log("convertedEmail: " + convertedEmail);
           const res = await getUserByEmail(convertedEmail);
           const currentUser = res.data;
-          console.log("res.data " + res.data);
           setUserId(currentUser.id);
           localStorage.setItem("ActiveUserId", userId);
           setUserName(currentUser.username);
           setAvatar(currentUser.username.slice(0, 2).toUpperCase());
-          console.log("AVATAR: " + avatar);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
-          console.log("userId " + userId);
-          console.log("username: " + userName);
-          console.log("current user: " + currentUser);
-          console.log("email: " + email);
-          console.log("startDate: " + startDate);
-          console.log(res);
+         
           //const res = await axios.get(`http://localhost:8080/user/${id}`);
           //setImgId(res.data.imgId);
           /* const userToken = localStorage.getItem("token");
