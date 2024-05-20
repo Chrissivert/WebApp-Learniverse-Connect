@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { getUserFromServer } from "../../services/user-request";
+import { getUsersFromServer } from "../../services/user-request";
 import "./Admin.css";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function AdminUser() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userData = await getUserFromServer();
+                const userData = await getUsersFromServer();
                 setUsers(userData.data); 
                 setLoading(false); // Update coursesLoading after fetching data
             } catch (error) {
