@@ -109,6 +109,9 @@ function Login() {
       localStorage.setItem("ActiveUserId", userId);
 
       const favRes = await getFavoriteCoursesFromAUser(currentUser);
+      const resArray = favRes.data;
+      const favArray = resArray.map((item) => item.id);
+      console.log("favArray: " + favArray);
       //let favoritesArray = objArray.map(({ id }) => id);
       console.log("getfavouritecoursesfrom returned: " + favRes.data);
 
