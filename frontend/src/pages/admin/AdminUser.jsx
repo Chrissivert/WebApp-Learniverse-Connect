@@ -25,7 +25,6 @@ function AdminUser() {
         return <div>Loading...</div>;
     }
 
-
     // If user is admin, show admin page content
     return (
         <div>
@@ -34,6 +33,9 @@ function AdminUser() {
                 <button className='button'>← Go back</button>
                 </Link>   
             </div>
+            <h1>Users</h1>
+            <p>This is all the current users active in Learniverse Connect. Each user can be updated and deleted, and a new user can 
+                be created as well. </p>
             <div>
                 <Link to={"/admin/user/newUser"}>
                 <button className='button'>Add new user</button>
@@ -52,6 +54,7 @@ function AdminUser() {
                             <th>ID</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Roles</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +63,11 @@ function AdminUser() {
                                 <td>{user.id}</td>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
+                                <td>
+                                    {user.roles.map(role => (
+                                        <p key={role.id}>{role.title}</p>
+                                    ))}
+                                </td>
                                 <td>
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
