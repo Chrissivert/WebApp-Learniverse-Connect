@@ -37,7 +37,7 @@ export async function getUserByEmail(email) {
   return sendApiGetRequest(PROFILE_URL + "/email/" + email);
 }
 
-const REGISTER_URL = "/api/signup";
+const REGISTER_URL = "/signup";
 
 /**
  *
@@ -49,7 +49,7 @@ export function postSignupToServer(data) {
   return sendApiPostRequest(REGISTER_URL, data);
 }
 
-const AUTH_URL = "/api/authenticate";
+const AUTH_URL = "/authenticate";
 
 /**
  *
