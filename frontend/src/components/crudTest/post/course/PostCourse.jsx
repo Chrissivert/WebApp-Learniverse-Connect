@@ -41,8 +41,10 @@ export default function PostCourse() {
         credit: data.credit,
         hoursPerWeek: data.hoursPerWeek,
         relatedCertification: data.relatedCertification,
-        description: data.description
+        description: data.description,
+        hidden: 1
       };
+
       await addCourseToServer(userData);
       navigate('/admin/course');
       alert('Course added successfully');
@@ -56,7 +58,7 @@ export default function PostCourse() {
     <>
       <div>
         <Link to={"/admin/course"}>
-          <button className='button'>← Go back</button>
+          <button className='button'>Go back →</button>
         </Link>
             
       </div>
