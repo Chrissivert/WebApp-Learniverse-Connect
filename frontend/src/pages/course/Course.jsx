@@ -11,6 +11,8 @@ import {
 } from "../../services/favorite-course";
 import { getAllProvidersForACourse } from "../../services/course-provider";
 import NotFound from "../error/notFound/404";
+import GetImage from "../../components/crudTest/post/image/GetImage";
+import { generateImageUrl } from "../../services/image-service";
 
 function Course() {
   const { id } = useParams();
@@ -109,22 +111,30 @@ function Course() {
   }, []);
 
   if (!course || !providers.length) {
-    return <NotFound/>
+    return <NotFound />
   }
 
   return (
     <div className="Course">
-      <div className="head">
-        <Link to={`/courses`}>
-          <button className="goBackButton">← Courses</button>
-        </Link>
-        <h2 className="title">{course.title}</h2>
+      {/* <div className="head"> */}
+        <div className="button-section">
+          <Link to={`/courses`}>
+            <button className="goBackButton">← Back to Courses</button>
+          </Link>
+        </div>
+      {/* </div> */}
+      <div className="title-image-favorite">
+        <div className="title-image-section">
+          <h2 className="title">{course.title}</h2>
+          <div className="course-image-section">
+            <GetImage imageId={id} />
+          </div>
+        </div>
         <button
           className={`favoriteButton ${favorited ? "favorited" : ""}`}
           onClick={handleToggleFavorite}
           onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
-          tabIndex={0} // Ensure button is focusable
-        >
+          tabIndex={0}>
           {favorited ? "★ Remove from Favorites" : "☆ Add to Favorites"}
         </button>
       </div>
@@ -137,7 +147,7 @@ function Course() {
           <li key={provider.providerId}>
             <label
               className={`providerLabel ${courseAdded ? "disabled" : ""}`}
-              tabIndex={0} // Ensure label is focusable
+              tabIndex={0}
               onKeyDown={(e) => handleKeyPress(e, provider)}
             >
               <input
@@ -168,8 +178,8 @@ function Course() {
         onClick={handleAddToCart}
         disabled={!selectedProvider || courseAdded}
         onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
-        tabIndex={0} // Ensure button is focusable
-        ref={addToCartButtonRef} // Attach ref to the button
+        tabIndex={0}
+        ref={addToCartButtonRef}
       >
         {courseAdded ? "Already Added to Cart" : "Add to Cart"}
       </button>
