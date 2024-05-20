@@ -1,19 +1,14 @@
-/* made from: https://www.youtube.com/watch?v=PgAZ8KzfhO8&t=186s */
-
-.home-container {
+/* .home-container {
   width: 100%;
-  height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../home/test1.jpeg');
   background-size: cover;
   background-position: center;
-  display: flex; /* Added to make flexbox work */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */
 
-
-.home-content{
+/* .home-content{
   width: 100%;
   position: absolute;
   top: 50%;
@@ -21,49 +16,65 @@
   text-align: center;
   background-color: transparent;
   color: white;
-}
+} */
 
-.home-content h1{
+/* .home-content h1{
   font-size: 70px;
   margin-bottom: 80px;
-  
-}
+} */
 
-.home-content p{
+/* .home-content p{
   margin: 20px auto;
   font-weight: 100;
   line-height: 25px;
+} */
+
+.home-content .button-row .home-row-button .button-image {
+  height: 65px;
+  width: auto;
 }
 
-.home-content button{
- width: 200px;
- padding: 15px 0;
- text-align: center;
+.home-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.home-content {
+  display: contents;
+  max-width: 1200px;
+  justify-content: center;
+}
+
+.front-image .image{
+  width: 100%;
+  height: auto;
+  left: 0;
+  right: 0;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button-row .home-row-button {
+  width: 13.5rem;
+  height: 10rem;
+  padding: 15px 0;
+  text-align: center;
   margin: 20px 10px;
   border-radius: 25px;
   font-weight: bold;
-  border: 2px solid #008688;
-  background: transparent;
+  border: 2px solid rgb(151, 88, 163);
+  background: rgb(151, 88, 163);
   position: relative;
-  overflow: hidden;
+  color: #ffffff;
 }
 
-span{
-  background: #008688;
-  height: 100%;
-  width: 0;
-  border-radius: 25px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-  transition: 0.5s;
-}
-
-button:hover span{
-  width: 100%;
-}
-
-button:hover{
-  border:none
+.button-row .home-row-button:hover {
+  border: 2px solid rgb(204, 115, 207);
+  background: rgb(204, 115, 207);
 }

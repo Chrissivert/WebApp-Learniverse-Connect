@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 @CrossOrigin
 public class CategoryController {
 

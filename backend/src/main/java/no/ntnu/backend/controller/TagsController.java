@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/tags")
+@RequestMapping("/api/tags")
 @CrossOrigin
 public class TagsController {
 

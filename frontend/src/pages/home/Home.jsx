@@ -1,19 +1,41 @@
 import React from 'react';
-import "./Home.css";  // Ensure this path is correct
-import "../../index.css"; // Additional CSS if needed
+import "./Home.css";
 import { Link } from "react-router-dom";
+import frontImage from '/home/front_image.png'
+import findACourse from '/icons/home/find-a-course.png'
+import createAnAccount from '/icons/home/create-an-account.png'
+import readMoreAbout from '/icons/home/read-more-about.png'
 
 
 export default function Home() {
   return (
     <div className="home-container">
-      <div className="home-content">
+      <div className='front-image'>
+        <img className='image' src={frontImage} />
+      </div>
+      <div className='home-content'>
         <h1>Welcome to Learniverse Connect</h1>
-        <p>Start learning today blabla</p>
-        <Link to="/courses" className="link">
-          <button className="courseButton"><span></span>Find your course →</button>
-          <button className="login"><span></span>Create your account →</button>
-        </Link>
+        <p>Start Learning Today!</p>
+        <div className='button-row'>
+          <Link to="/courses" className="button-link">
+            <button className='home-row-button'>
+              <img src={findACourse} className='button-image' />
+              <p>Find a course →</p>
+            </button>
+          </Link>
+          <Link to='/register' className='button-link'>
+            <button className='home-row-button'>
+              <img src={createAnAccount} className='button-image' />
+              <p>Create your account →</p>
+            </button>
+          </Link>
+          <Link to='/about' className='button-link'>
+            <button className='home-row-button'>
+              <img src={readMoreAbout} className='button-image' />
+              <p>Read more about us →</p>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

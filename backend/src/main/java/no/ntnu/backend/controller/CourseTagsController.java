@@ -27,7 +27,7 @@ import no.ntnu.backend.repository.CourseTagsRepository;
  * @version 23.05.2024
  */
 @RestController
-@RequestMapping("/course-tags")
+@RequestMapping("/api/course-tags")
 @CrossOrigin
 public class CourseTagsController {
 

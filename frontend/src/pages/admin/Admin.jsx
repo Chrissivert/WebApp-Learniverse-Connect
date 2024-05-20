@@ -23,13 +23,8 @@ function AdminPage() {
         return <div>Loading...</div>;
     }
     
-    // If user is not admin, show unauthorized page
     if (!isAdmin) {
         return (
-            // <div>
-            //     <h1>Unauthorized Access</h1>
-            //     <p>You do not have permission to access this page.</p>
-            // </div>
             <Unauthorized/>
         );
     }
