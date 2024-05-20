@@ -1,6 +1,6 @@
 // emailLogic.js
-import { sendEmail } from '../services/send-email';
-import { AuthContext } from '../pages/admin/AuthProvider';
+import { sendEmail } from '../../services/send-email';
+import { AuthContext } from '../admin/AuthProvider';
 import { useContext } from 'react';
 
 const useEmailLogic = () => {

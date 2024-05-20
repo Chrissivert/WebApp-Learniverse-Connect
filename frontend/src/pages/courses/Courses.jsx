@@ -4,7 +4,7 @@ import '../../index.css';
 import { Link } from "react-router-dom";
 import Coursecard from "../../components/coursecard/Coursecard.jsx";
 import CourseCardSkeleton from "../../components/coursecard/CourseCardSkeleton.jsx";
-import HelpPopUp from "../../components/currencySelector/HelpPopUp.jsx";
+import HelpPopUp from "../../components/popUps/modalBox/HelpPopUp.jsx";
 
 
 function Courses({ courses }) {

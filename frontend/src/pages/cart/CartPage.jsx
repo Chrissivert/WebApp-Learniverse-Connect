@@ -4,9 +4,9 @@ import './cartPage.css';
 import '../../index.css';
 import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
-import ConfirmationModal from '../../components/modalBox/ConfirmationModalBox';
+import ConfirmationModal from '../../components/popUps/modalBox/ConfirmationModalBox';
 import { useNavigate } from 'react-router-dom';
-import useEmailLogic from '../../components/EmailLogic';
+import useEmailLogic from '../purchased/EmailLogic';
 import Spinner from '../../components/spinner/Spinner';
 
 function CartPage() {

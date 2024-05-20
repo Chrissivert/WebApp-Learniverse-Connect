@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HelpPopUp from '../../currencySelector/HelpPopUp';
+import HelpPopUp from '../../popUps/modalBox/HelpPopUp';
 
 function SearchBar({ searchQuery, setSearchQuery }) {
   return (

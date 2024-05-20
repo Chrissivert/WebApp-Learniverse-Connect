@@ -6,7 +6,7 @@ const HelpPopUp = () => {
   const handleHover = () => {
     setTimeout(() => {
       setShowPopup(true);
-    }, 1000);
+    }, 500);
   };
 
   const handleMouseLeave = () => {
