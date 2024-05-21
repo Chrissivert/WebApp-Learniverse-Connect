@@ -37,11 +37,25 @@ h1, h2 {
 
 
 button {
-  background-color: white;
+  background-color: #8a2be2; /* Change background color */
   margin: 5%;
   border-radius: 15px;
-  color: black;
-  height: 100%;
+  color: white; /* Change text color */
+  height: 50px; /* Reduce button height */
+  padding: 0 20px; /* Add padding for better spacing */
+  font-size: 1rem; /* Adjust font size */
+  border: none; /* Remove border */
+  cursor: pointer; /* Add pointer cursor */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition effect */
+}
+
+button:hover {
+  background-color: #6a1b9a; /* Darken background color on hover */
+  transform: scale(1.05); /* Add slight scale effect on hover */
+}
+
+button:focus:not(:focus-visible) {
+  outline: none; /* Remove outline for non-keyboard focus */
 }
 
 /* button:hover {
