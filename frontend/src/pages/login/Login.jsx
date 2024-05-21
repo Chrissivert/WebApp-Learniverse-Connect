@@ -84,9 +84,13 @@ function Login() {
       localStorage.setItem("ActiveUserId", userId);
 
       const favRes = await getFavoriteCoursesFromAUser(currentUser);
+      console.log("Favorite courses response:", favRes);
       const resArray = favRes.data;
-      const favArray = resArray.map((item) => item.id);
+      console.log("Favorite courses data:", resArray);
+      const favArray = resArray.map((item) => item.course.id);
+      //const favCourseArray = resArray.map((item) => item.course_id);
       localStorage.setItem("favorites", JSON.stringify(favArray));
+      //localStorage.setItem("favoriteCourseId", JSON.stringify(favCourseArray));
     } catch (error) {
       console.error("Login failed:", error);
       setErrorMessage("Login failed. Please try again.");

@@ -37,6 +37,28 @@ function Course() {
         );
         setCourse(courseData.data);
         setProviders(providerData.data);
+
+        const favorites = localStorage.getItem("favorites");
+        if (favorites) {
+          const favoritesArray = JSON.parse(favorites);
+          console.log("Favorites Array:", favoritesArray);
+          console.log("id:", id);
+
+          // Ensure id is a string
+          const courseIdString = id.toString();
+          // Ensure all elements in favoritesArray are strings
+          const stringFavoritesArray = favoritesArray.map((fav) =>
+            fav.toString()
+          );
+
+          console.log("String Favorites Array:", stringFavoritesArray);
+          console.log("Course ID String:", courseIdString);
+
+          // Check if the current course ID is in favorites
+          const isFavorited = stringFavoritesArray.includes(courseIdString);
+          console.log("isFavorited:", isFavorited);
+          setFavorited(isFavorited);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -53,12 +75,9 @@ function Course() {
   }, [cart, course]);
 
   useEffect(() => {
-    const favorites = localStorage.getItem("favorites");
-    if (favorites) {
-      const favoritesArray = JSON.parse(favorites);
-      setFavorited(favoritesArray.includes(id));
-    }
-  }, [id]);
+    console.log("Component rerendered"); // Log component rerendering
+    console.log("favorited: " + favorited);
+  }, [favorited]);
 
   const handleAddToCart = () => {
     if (!selectedProvider) {
@@ -77,6 +96,7 @@ function Course() {
       let favorites = localStorage.getItem("favorites");
       if (!favorites) favorites = "[]";
       let favoritesArray = JSON.parse(favorites);
+
       if (!favorited) {
         await addFavoriteCourseToServer(userId, id);
         favoritesArray.push(id);
@@ -85,7 +105,7 @@ function Course() {
       } else {
         await deleteFavoriteCourseOnServer(userId, id);
         favoritesArray = favoritesArray.filter((favId) => favId !== id);
-        localStorage.setItem("favorites", JSON.stringify(favoritesArray));
+        localStorage.removeItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
       }
     } catch (error) {
@@ -139,8 +159,15 @@ function Course() {
       <div className="course-content">
         <div className="description-container">
           <h2>Description</h2>
-          <p>{expandedDescription ? course.description : `${course.description.slice(0, 100)}...`}</p>
-          <button className= "expand-description-button"onClick={() => setExpandedDescription(!expandedDescription)}>
+          <p>
+            {expandedDescription
+              ? course.description
+              : `${course.description.slice(0, 100)}...`}
+          </p>
+          <button
+            className="expand-description-button"
+            onClick={() => setExpandedDescription(!expandedDescription)}
+          >
             {expandedDescription ? "Read Less" : "Read More"}
           </button>
         </div>
@@ -212,7 +239,6 @@ function Course() {
       </div>
     </div>
   );
-}  
+}
 
 export default Course;
-
