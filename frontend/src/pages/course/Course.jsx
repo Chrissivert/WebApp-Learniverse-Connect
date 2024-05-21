@@ -74,8 +74,6 @@ function Course() {
   }, [cart, course]);
 
   useEffect(() => {
-    console.log("Component rerendered");
-    console.log("favorited: " + favorited);
   }, [favorited]);
 
   const handleAddToCart = () => {

@@ -24,6 +24,7 @@ function CartPage() {
     setShowConfirmation(true);
   };
 
+
   const handlePurchase = () => {
     setPurchaseItems([...cart]);
     const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);

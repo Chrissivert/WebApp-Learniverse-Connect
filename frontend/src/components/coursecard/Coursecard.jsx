@@ -45,6 +45,8 @@ export default function Coursecard({ course, favorited, onFavoriteToggle, showPr
               Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}
             </p>
           )}
+          <p>Credits: {course.credit}
+          </p>
         </div>
       </div>
     </article>

@@ -8,7 +8,6 @@ import coursesPageLogic from './coursesPageLogic';
 function CoursesPage() {
   const {
     filters,
-    currentPage,
     courses,
     handleSortChange,
     handleSearchQueryChange,
@@ -29,7 +28,6 @@ function CoursesPage() {
       />
       <Courses
         filters={filters}
-        currentPage={currentPage}
         courses={courses}
       />
     </div>
