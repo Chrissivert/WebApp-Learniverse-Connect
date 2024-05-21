@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 import "./PostCourse.css";
 import { useNavigate, Link } from "react-router-dom";
 import { addCourseToServer } from '../../../../services/course-service';
@@ -19,7 +20,9 @@ export default function PostCourse() {
     credit: '',
     hoursPerWeek: '',
     relatedCertification: '',
-    description: ''
+    description: '',
+    providers: [],
+    tags: [] 
   });
 
   const navigate = useNavigate();
@@ -38,6 +41,13 @@ export default function PostCourse() {
       ...data,
       [e.target.id]: value
     });
+  };
+
+  const handleMultiSelectChange = (selectedOptions, field) => {
+    setFormData(prevData => ({
+      ...prevData,
+      [field]: selectedOptions.map(option => option.value)
+    }));
   };
 
   useEffect(() => {
@@ -75,8 +85,6 @@ export default function PostCourse() {
         relatedCertification: data.relatedCertification,
         description: data.description,
         hidden: 1,
-        providerId: parseInt(providerId || data.providerId),
-        tagId: parseInt(tagId || data.tagId)
       };
 
       await addCourseToServer(userData);
@@ -87,6 +95,9 @@ export default function PostCourse() {
       console.error('Error:', error);
     };
   };
+
+  const providerOptions = providers.map(provider => ({ value: provider.id, label: provider.name }));
+  const tagOptions = tags.map(tag => ({ value: tag.id, label: tag.tag }));
 
   return (
     <>
@@ -148,21 +159,25 @@ export default function PostCourse() {
           Description
           <input id='description' value={data.description} onChange={handleChange} />
         </label>
-        <label htmlFor="providerId">
-          Provider
-          <select id="providerId" value={data.providerId} onChange={handleChange}>
-            {providers.map((provider) => (
-              <option key={provider.id} value={provider.id}>{provider.name}</option>
-            ))}
-          </select>
+        <label htmlFor="providers">
+          Providers
+          <Select
+            isMulti
+            id="providers"
+            options={providerOptions}
+            onChange={(selectedOptions) => handleMultiSelectChange(selectedOptions, 'providers')}
+            value={providerOptions.filter(option => data.providers.includes(option.value))}
+          />
         </label>
-        <label htmlFor="tagId">
-          Tag
-          <select id="tagId" value={data.tagId} onChange={handleChange}>
-            {tags.map((tag) => (
-              <option key={tag.id} value={tag.id}>{tag.tag}</option>
-            ))}
-          </select>
+        <label htmlFor="tags">
+          Tags
+          <Select
+            isMulti
+            id="tags"
+            options={tagOptions}
+            onChange={(selectedOptions) => handleMultiSelectChange(selectedOptions, 'tags')}
+            value={tagOptions.filter(option => data.tags.includes(option.value))}
+          />
         </label>
         <button type='submit'>Post</button>
       </form>

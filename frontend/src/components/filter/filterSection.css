@@ -205,7 +205,7 @@ select {
 }
 
 .autocomplete-item:hover {
-  background-color: #f9f9f9; /* Light background on hover */
+  background-color: #edd3f7; /* Light background on hover */
 }
 
 /* Animation for showing autocomplete box */

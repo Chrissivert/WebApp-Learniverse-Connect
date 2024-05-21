@@ -40,5 +40,10 @@ button {
 }
 
 .success-message {
-  font-size: 30;
+  font-size: 3rem;
+}
+
+.error {
+  color: red;
+  font-size: 3rem;
 }
