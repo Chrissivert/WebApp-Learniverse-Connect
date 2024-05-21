@@ -206,18 +206,19 @@ ul {
 }.course-content {
   padding: 20px;
 }
+
 .attributes-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px; 
   margin-bottom: 20px;
   gap: 30px; 
+  font-size: 20px;
 }
 
 .attribute {
   width: calc(50% - 10px);
-  margin-bottom: 20px;
-  font-size: 0px;
+  margin-bottom: 20px;  
 }
 
 .attribute img {
