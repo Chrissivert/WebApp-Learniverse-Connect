@@ -16,11 +16,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @CrossOrigin
 @RestController
+@RequestMapping ("/api/authenticate")
 public class AuthenticationController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
@@ -39,7 +41,7 @@ public class AuthenticationController {
      * @param authenticationRequest The request JSON object containing username and password
      * @return OK + JWT token; Or UNAUTHORIZED
      */
-    @PostMapping("/api/authenticate")
+    @PostMapping()
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
         logger.info("Received authentication request for email: {}", authenticationRequest.getEmail());
         try {
@@ -62,21 +64,20 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    /**
-     * This method processes data received from the sign-up form (HTTP POST).
-     *
-     * @return Name of the template for the result page
-     */
-    @PostMapping({"/api/signup"})
+
+
+
+    @PostMapping("/signup")
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
-        String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(),signupData.getUsername());
-        //String errorMessage = this.userServiceImpl.addUser(signupData.getEmail(), signupData.getPassword());
-        ResponseEntity response;
+        logger.info("Received signup request for email: {}", signupData.getEmail());
+        String errorMessage = userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(), signupData.getUsername());
         if (errorMessage == null) {
-            response = new ResponseEntity(HttpStatus.OK);
+            logger.info("User created successfully for email: {}", signupData.getEmail());
+            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
         } else {
-            response = new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
+            logger.error("Error creating user for email: {}: {}", signupData.getEmail(), errorMessage);
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
-        return response;
     }
+
 }

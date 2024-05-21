@@ -26,6 +26,8 @@ public class UserController {
     @Operation(summary = "Creates a new user", description = "Creates a new user.")
     @PostMapping()
     public ResponseEntity<String> createUser(@RequestBody User user) {
+        System.out.println("Creating user first");
+        System.out.println("USER INFO" + user.getEmail() + user.getId());
         return this.userService.create(user);
     }
 
