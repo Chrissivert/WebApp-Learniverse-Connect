@@ -56,7 +56,6 @@ export default function Profile() {
           setUserName(currentUser.username);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
-         
         }
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -95,6 +94,11 @@ function signoff() {
 }
 
 function Intro({ userName, email, startDate }) {
+  const auth = useContext(AuthContext);
+
+  const handleSignOff = () => {
+    auth.logout();
+  };
   return (
     <div className="intro">
       <h1>{userName}</h1>
@@ -102,15 +106,14 @@ function Intro({ userName, email, startDate }) {
       <p>User since: {startDate}</p>
       <div className="buttons">
         <Link to="/">
-          <button className="button" onClick={signoff}>
+          <button className="button" onClick={handleSignOff}>
             Sign Off
           </button>
         </Link>
       </div>
       <p>
-        Welcome to your profile! Here you may access your favorite courses.
-        Below are the courses you've marked as favorites. Dive back in whenever
-        you're ready! Happy learning!
+        Welcome to your profile! Here you may access your favorite courses. Dive
+        in whenever you're ready! Happy learning!
       </p>
       <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
       {/* Render CurrencySelector with currencies prop */}

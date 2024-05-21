@@ -1,12 +1,15 @@
-# React + Vite
+# Learniverse-Connect Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the website. It is made using React. The user has the ability to add courses to cart, see their favorite courses, get email confirmation on purchase and more.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Before running frontend
 
-Requirement for running the application:
-- A '.env.local' file and the root directory for the frontend folder
-- Fill the said file with this line: VITE_API_BASE_URL=http://localhost:8080
+You'll need to have Node.js (npm) installed on your machine. If you dont, you can download it from here [here](https://nodejs.org/en). 
+
+
+## Running the backend:
+1. Enter the git repository folder
+2. Change directory to frontend. This can be done using  `cd frontend `
+3. Install the dependencies:  `npm install `
+4. Create a .env file in the root directory of the project and fill...
