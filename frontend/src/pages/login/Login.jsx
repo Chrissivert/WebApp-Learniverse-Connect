@@ -71,6 +71,7 @@ function Login() {
       const response = await postAuthToServer(formData);
 
       const userData = parseJwt(response.data.jwt);
+      console.log("User data:", userData);
       saveUserDataToStorage(userData);
       localStorage.setItem("token", response.data.jwt);
 
@@ -79,6 +80,7 @@ function Login() {
 
       const convertedEmail = email.replace("@", "%40");
       const res = await getUserByEmail(convertedEmail);
+      console.log("User response:", res);
       const currentUser = res.data.id;
       setUserId(currentUser);
       localStorage.setItem("ActiveUserId", userId);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../../index.css";
 import "./Register.css";
+import { addUserToServer } from "../../services/auth-service";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -15,34 +16,34 @@ function Register() {
     e.preventDefault();
     setError("");
     if (password.length <= 6) {
-      setError("Password must be longer than 6 characters.");
-      return;
+        setError("Password must be longer than 6 characters.");
+        return;
     }
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Registration failed");
-      }
-      alert("Registration successful!");
-      navigate('/login'); // Use navigate function for redirection
+
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("email", email);
+        formData.append("password", password);
+        const response = await addUserToServer(formData);
+
+        console.log("Response:", response);
+
+        if (response.status !== 201) {
+            throw new Error(response.message || "Registration failed");
+        }
+
+        alert("Registration successful!");
+        navigate('/login');
     } catch (error) {
-      console.error("Registration failed:", error);
-      setError("Registration failed. Please try again.");
+        console.error("Error:", error);
+        setError(error.message || "Registration failed. Please try again.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
 
   return (
     <main>

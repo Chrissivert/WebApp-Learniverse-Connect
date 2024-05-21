@@ -51,17 +51,6 @@ public class AccessUserService implements UserDetailsService {
         }
     }
 
-    /*
-    @Override
-    public UserDetails loadUserById(int id) throws UsernameNotFoundException {
-        ResponseEntity<User> user = this.userService.readById(id);
-        if (user != null) {
-            return new AccessUserDetails((User)user.get());
-        } else {
-            throw new UsernameNotFoundException("User " + user + "not found");
-        }
-    }
-     */
 
 
     public User getSessionUser() {
@@ -110,41 +99,20 @@ public class AccessUserService implements UserDetailsService {
         return errorMessage;
     }
 
-//    private void createUser(String email, String password, String username) {
-//        Role userRole = this.roleRepository.findOneById(1);
-//        if (userRole != null) {
-//            User user = new User(email, this.createHash(password));
-//            user.addRole(userRole);
-//            user.setUsername(username);
-//
-//            String dateString = "2024-04-18";
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//
-//            try {
-//                Date date = dateFormat.parse(dateString);
-//                System.out.println("Parsed Date: " + date);
-//
-//                // If you want to format it back to a string in the same format
-//                String formattedDateString = dateFormat.format(date);
-//                System.out.println("Formatted Date String: " + formattedDateString);
-//            } catch (ParseException e) {
-//                System.out.println("Error parsing date: " + e.getMessage());
-//                e.printStackTrace();
-//            }
-//            this.userRepository.save(user);
-//        }
-//    }
-
     private void createUser(String email, String password, String username) {
+        System.out.println("Creating user awaw");
         Role userRole = this.roleRepository.findOneById(2);
         if (userRole != null) {
-
             User user = new User(email, this.createHash(password));
             user.addRole(userRole);
             user.setUsername(username);
+
+            System.out.println(user.getRoles());
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            System.out.println("sqlDate: " + sqlDate);
             user.setStartDate(sqlDate);
+            System.out.println("USER INFO" + user.getEmail() + user.getId());
             this.userRepository.saveAndFlush(user);
         }
     }
@@ -153,12 +121,5 @@ public class AccessUserService implements UserDetailsService {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    /*
-    public boolean updateProfile(User user, UserProfileDto profileData) {
-        user.setBio(profileData.getBio());
-        this.userRepository.save(user);
-        return true;
-    }
-    */
 }
 

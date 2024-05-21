@@ -58,16 +58,6 @@ export default function Profile() {
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
          
-          //const res = await axios.get(`http://localhost:8080/user/${id}`);
-          //setImgId(res.data.imgId);
-          /* const userToken = localStorage.getItem("token");
-          console.log(userToken); */
-
-          /* if (data.Response === "False") {
-            throw new Error(data.Error);
-          }
-
-          console.log(data); */
         }
       } catch (error) {
         console.error("Error fetching user:", error);
