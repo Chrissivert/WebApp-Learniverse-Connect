@@ -13,6 +13,12 @@ import { getAllProvidersForACourse } from "../../services/course-provider";
 import NotFound from "../error/notFound/404";
 import GetImage from "../../components/crudTest/post/image/GetImage";
 
+
+import iconStartDate from "/icons/course/startdate-icon.png";
+import iconEndDate from "/icons/course/enddate-icon.png";
+import iconHoursPerWeek from "/icons/course/hours-icon.png";
+import iconCredits from "/icons/course/credits-icon.png";
+
 function Course() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
@@ -164,19 +170,23 @@ function Course() {
           </button>
         </div>
         <div className="attributes-container">
-          <div className="attribute">
+          <div className="start-date-attribute">
+          <img src={iconStartDate} alt={'Black hourglass'} />
             <h3>Start Date:</h3>
             <span>{course.startDate}</span>
           </div>
-          <div className="attribute">
+          <div className="end-date-attribute">
+          <img src={iconEndDate} alt={'Black hourglass'} />
             <h3>End Date:</h3>
             <span>{course.endDate}</span>
           </div>
-          <div className="attribute">
+          <div className="hours-attribute">
+          <img src={iconHoursPerWeek} alt={'Black clock'} />
             <h3>Hours Per Week:</h3>
             <span>{course.hoursPerWeek}</span>
           </div>
-          <div className="attribute">
+          <div className="credits-attribute" >
+            <img src={iconCredits} alt={'Black hourglass'} />
             <h3>Credits:</h3>
             <span>{course.credit}</span>
           </div>
