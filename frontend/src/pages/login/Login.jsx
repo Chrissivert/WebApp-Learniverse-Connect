@@ -87,7 +87,7 @@ function Login() {
       console.log("Favorite courses response:", favRes);
       const resArray = favRes.data;
       console.log("Favorite courses data:", resArray);
-      const favArray = resArray.map((item) => item.course.id);
+      const favArray = resArray.map((item) => item.course.id.toString());
       //const favCourseArray = resArray.map((item) => item.course_id);
       localStorage.setItem("favorites", JSON.stringify(favArray));
       //localStorage.setItem("favoriteCourseId", JSON.stringify(favCourseArray));

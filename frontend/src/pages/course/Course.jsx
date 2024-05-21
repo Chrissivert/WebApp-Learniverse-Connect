@@ -105,7 +105,7 @@ function Course() {
       } else {
         await deleteFavoriteCourseOnServer(userId, id);
         favoritesArray = favoritesArray.filter((favId) => favId !== id);
-        localStorage.removeItem("favorites", JSON.stringify(favoritesArray));
+        localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
       }
     } catch (error) {
