@@ -39,10 +39,6 @@ button {
   color: rgb(151, 88, 163);
 }
 
-.success-message {
-  font-size: 3rem;
-}
-
 .error {
   color: red;
   font-size: 3rem;

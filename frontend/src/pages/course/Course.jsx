@@ -185,6 +185,7 @@ function Course() {
           <div className="end-date-attribute">
             <img src={iconEndDate} alt={'Black hourglass'} />
             <h3>End Date:</h3>
+            <span>{course.endDate}</span>
             </div>
           <div className="hours-attribute">
             <img src={iconHoursPerWeek} alt={'Black clock'} />
@@ -234,16 +235,23 @@ function Course() {
             </div>
           ))}
         </div>
-        {showWarning && (
-          <div className="warning" role="alert">
-            Please select a provider before adding to cart.
-          </div>
-        )}
-        {showSuccessMessage && (
-          <div className="success-message" role="alert">
-            Course successfully added to cart!
-          </div>
-        )}
+        <div className="notification-container">
+  <div className="notification-placeholder">
+    {/* Add a placeholder for notifications */}
+    {showWarning && <div className="warning-placeholder"></div>}
+    {showSuccessMessage && <div className="success-message-placeholder"></div>}
+  </div>
+  {showWarning && (
+    <div className="warning" role="alert">
+      Please select a provider before adding to cart.
+    </div>
+  )}
+  {showSuccessMessage && (
+    <div className="success-message" role="alert">
+      Course successfully added to cart!
+    </div>
+  )}
+</div>
         <button
           className="addToCartButton"
           onClick={handleAddToCart}
