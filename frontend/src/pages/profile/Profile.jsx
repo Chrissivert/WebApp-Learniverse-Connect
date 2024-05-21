@@ -94,6 +94,11 @@ function signoff() {
 }
 
 function Intro({ userName, email, startDate }) {
+  const auth = useContext(AuthContext);
+
+  const handleSignOff = () => {
+    auth.logout();
+  };
   return (
     <div className="intro">
       <h1>{userName}</h1>
@@ -101,7 +106,7 @@ function Intro({ userName, email, startDate }) {
       <p>User since: {startDate}</p>
       <div className="buttons">
         <Link to="/">
-          <button className="button" onClick={signoff}>
+          <button className="button" onClick={handleSignOff}>
             Sign Off
           </button>
         </Link>
