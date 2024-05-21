@@ -19,12 +19,13 @@ export default function CategoryFilter({ onCategoryChange }) {
   }, []);
 
   return (
+
     <div className='category-container'>
       <label htmlFor="categorySelect" aria-labelledby="categorySelectLabel" className='category-label'> Select a category:</label>
       <select id="categorySelect" className="category-select" onChange={handleCategoryChange}>
         <option value="">All Categories</option>
         {categories.map((category) => (
-          console.log(category),
+          console.log(category + "dada"),
           <option key={category.id} value={category.subject}>{category.subject}</option>
         ))}
       </select>

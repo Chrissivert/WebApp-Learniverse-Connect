@@ -4,8 +4,6 @@ import './navList.css';
 import iconHome from "/icons/home/home-icon.png";
 import iconAbout from "/icons/home/read-more-about.png";
 import iconCourses from "/icons/home/find-a-course.png";
-import iconProfile from "/icons/home/login-icon.png";
-import iconRegister from "/icons/home/create-an-account.png";
 import iconAdmin from "/icons/home/admin-icon.png";
 import iconCart from '/cart/whiteCart.png';
 import { CartContext } from '../../pages/cart/CartProvider';
