@@ -28,7 +28,6 @@ export default function Profile() {
   useEffect(() => {
     console.log(auth.user);
     if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
-
       const isUser = auth.user.roles.some(
         (role) => role.authority === "ROLE_USER"
       );
@@ -73,9 +72,7 @@ export default function Profile() {
 
   // If user is not user role or admin role, show unauthorized page
   if (!isUser && !isAdmin) {
-    return (
-      <Unauthorized />
-    );
+    return <Unauthorized />;
   }
   return (
     <div className="profilepage">
@@ -115,8 +112,8 @@ function Intro({ userName, email, startDate }) {
         Below are the courses you've marked as favorites. Dive back in whenever
         you're ready! Happy learning!
       </p>
-
-      <CurrencySelector currencies={['NOK', 'USD', 'EUR', 'GBP']} /> {/* Render CurrencySelector with currencies prop */}
+      <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
+      {/* Render CurrencySelector with currencies prop */}
     </div>
   );
 }

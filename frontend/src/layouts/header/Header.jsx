@@ -1,18 +1,13 @@
 import React, { useContext } from 'react';
 import './Header.css';
 import HamburgerMenu from '../../components/hamburger/Hamburger.jsx';
-import Logo from '../../components/logo/Logo.jsx';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
 import { Link } from 'react-router-dom';
 import NavList from '../../components/hamburger/NavList.jsx';
-import UserAvatar from '../../components/userAvatar/UserAvatar.jsx'; // Import the UserAvatar component
+import UserAvatar from '../../components/userAvatar/UserAvatar.jsx';
 import { AuthContext } from '../../pages/admin/AuthProvider.jsx';
 import cartImage from '/cart/whiteCart.png';
-
-
-
-// frontend\public\cart\whiteCart.png
-
+import whitelogo from '/logo/white_icon.png'
 
 export default function Header() {
   const { cart } = useContext(CartContext);
@@ -22,37 +17,41 @@ export default function Header() {
 
   return (
     <header className="header-container">
-      <div className="logo-container">
-        <Logo home_src={true} aria-label="Homepage-button" />
-      </div>
-      <div className="learniverse-connect">
-        <Link to="/" className="learniverse-link">
-          Learniverse connect
+      <div className='header-content'>
+        <Link to="/" className="header-home-link">
+          <div className='logo-and-title-section'>
+            <div className="logo-container">
+              <img src={whitelogo} className='company-logo' />
+            </div>
+            <div className="company-title">
+              <h2>Learniverse Connect</h2>
+            </div>
+          </div>
         </Link>
-      </div>
-      <div className="navlist-container">
-        <NavList />
-      </div>
-      <div className="hamburger-menu">
-        <HamburgerMenu />
-      </div>
-      <div className="header-right-container">
-        <div className="cart-container">
-          <Link to="/cart" className="cart-link">
-            <img src={cartImage} className='button-image'/>
-            <span className="cart-text">Cart ({cart.length})</span>
-          </Link>
+        <div className="navlist-container">
+          <NavList />
         </div>
-        {user ? (
-          <UserAvatar user={user} className="user-avatar" /> // Show UserAvatar if user is logged in
-        ) : (
-          <div className="login-container">
-            <Link to="/login" className="login-link">
-              <img src="/login/login_white.png" alt="Login" className="login" />
-              <span className="login-text">Login</span>
+        <div className="hamburger-menu">
+          <HamburgerMenu />
+        </div>
+        <div className="cart-and-profile-section">
+          <div className="cart-container">
+            <Link to="/cart" className="cart-link">
+              <img src={cartImage} className='cart-img' />
+              <span className="cart-text">Cart ({cart.length})</span>
             </Link>
           </div>
-        )}
+          {user ? (
+            <UserAvatar user={user} className="user-avatar" />
+          ) : (
+            <div className="login-container">
+              <Link to="/login" className="login-link">
+                <img src="/login/login_white.png" alt="Login" className="login-img" />
+                <span className="login-text">Login</span>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

@@ -41,22 +41,14 @@ function Course() {
         const favorites = localStorage.getItem("favorites");
         if (favorites) {
           const favoritesArray = JSON.parse(favorites);
-          console.log("Favorites Array:", favoritesArray);
-          console.log("id:", id);
-
           // Ensure id is a string
           const courseIdString = id.toString();
           // Ensure all elements in favoritesArray are strings
           const stringFavoritesArray = favoritesArray.map((fav) =>
             fav.toString()
           );
-
-          console.log("String Favorites Array:", stringFavoritesArray);
-          console.log("Course ID String:", courseIdString);
-
           // Check if the current course ID is in favorites
           const isFavorited = stringFavoritesArray.includes(courseIdString);
-          console.log("isFavorited:", isFavorited);
           setFavorited(isFavorited);
         }
       } catch (error) {
@@ -105,7 +97,7 @@ function Course() {
       } else {
         await deleteFavoriteCourseOnServer(userId, id);
         favoritesArray = favoritesArray.filter((favId) => favId !== id);
-        localStorage.removeItem("favorites", JSON.stringify(favoritesArray));
+        localStorage.setItem("favorites", JSON.stringify(favoritesArray));
         setFavorited(false);
       }
     } catch (error) {
