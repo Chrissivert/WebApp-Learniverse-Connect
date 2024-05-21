@@ -1,5 +1,6 @@
 package no.ntnu.backend.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 /**
  * 
@@ -17,11 +19,15 @@ import jakarta.persistence.Id;
  */
 @Entity
 public class Level {
+  
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-  private String difficulty;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String difficulty;
 
+    @OneToMany(mappedBy = "level")
+    private List<Course> courses;
+    
   public Level() {
   }
 

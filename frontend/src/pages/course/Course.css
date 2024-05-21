@@ -234,7 +234,9 @@ ul {
 .start-date-attribute img,
 .end-date-attribute img,
 .hours-attribute img,
-.credits-attribute img {
+.credits-attribute img, 
+.level-attribute img,
+.category-attribute img {
   width: 30px; 
   height: auto;
 }

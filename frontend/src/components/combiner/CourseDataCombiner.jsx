@@ -1,13 +1,7 @@
 class CourseDataCombiner {
-  static async combineCoursesWithPricesAndCategories(courses, cheapestProvider, mostExpensiveProvider, category, tags, courseTags) {
+  static async combineCoursesWithPricesAndCategories(courses, cheapestProvider, mostExpensiveProvider, tags, courseTags) {
     try {
-      // Create a map of category IDs to category names
-      const categoryIdToNameMap = category.data.reduce((map, cat) => {
-        map[cat.id] = cat.subject;
-        return map;
-      }, {});
 
-      // Create a map of tag IDs to tag names
       const tagIdToNameMap = tags.data.reduce((map, tag) => {
         map[tag.id] = tag.tag;
         return map;
@@ -24,9 +18,7 @@ class CourseDataCombiner {
 
       // Assign categories, tags, cheapest and most expensive prices to courses based on their IDs
       const coursesWithData = courses.data.map((course) => {
-        // Get the category name for the course's categoryId
-        const categoryName = categoryIdToNameMap[course.categoryId] || "Other";
-        
+        // Get the category name for the course's categoryId        
         // Get the tags for the course
         const tags = courseIdToTagsMap[course.id] || [];
 
@@ -36,16 +28,15 @@ class CourseDataCombiner {
         // Get the most expensive price data for the course
         const mostExpensiveCourseData = mostExpensiveProvider.data.find(provider => provider.courseId === course.id);
 
-        const courseWithCategoryAndTags = {
+        const courseWithTagsAndPrice = {
           ...course,
-          categoryName: categoryName,
           cheapestPrice: cheapestCourseData ? cheapestCourseData.price : null,
           cheapestCurrency: cheapestCourseData ? cheapestCourseData.currency : null,
           mostExpensivePrice: mostExpensiveCourseData ? mostExpensiveCourseData.price : null,
           tags: tags
         };
-        console.log(courseWithCategoryAndTags);
-        return courseWithCategoryAndTags;
+        console.log(courseWithTagsAndPrice);
+        return courseWithTagsAndPrice;
       });
 
       

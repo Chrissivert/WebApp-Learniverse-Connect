@@ -5,19 +5,19 @@ import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
 import { useCurrencyContext } from "../../components/currencySelector/CurrencyContext";
 import { getOneCourseFromServer } from "../../services/course-service";
-import {
-  addFavoriteCourseToServer,
-  deleteFavoriteCourseOnServer,
-} from "../../services/favorite-course";
+import {addFavoriteCourseToServer,deleteFavoriteCourseOnServer,} from "../../services/favorite-course";
 import { getAllProvidersForACourse } from "../../services/course-provider";
 import NotFound from "../error/notFound/404";
 import GetImage from "../../components/crudTest/post/image/GetImage";
-
 
 import iconStartDate from "/icons/course/startdate-icon.png";
 import iconEndDate from "/icons/course/enddate-icon.png";
 import iconHoursPerWeek from "/icons/course/hours-icon.png";
 import iconCredits from "/icons/course/credits-icon.png";
+import iconExpert from "/icons/course/expert-icon.png";
+import iconBeginner from "/icons/course/beginner-icon.png";
+import iconIntermediate from "/icons/course/intermediate-icon.png";
+import iconCategory from "/icons/course/category-icon.png";
 
 function Course() {
   const { id } = useParams();
@@ -33,6 +33,7 @@ function Course() {
   const { targetCurrency } = useCurrencyContext();
   const addToCartButtonRef = useRef(null); // Ref for the add to cart button
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,13 +48,10 @@ function Course() {
         const favorites = localStorage.getItem("favorites");
         if (favorites) {
           const favoritesArray = JSON.parse(favorites);
-          // Ensure id is a string
           const courseIdString = id.toString();
-          // Ensure all elements in favoritesArray are strings
           const stringFavoritesArray = favoritesArray.map((fav) =>
             fav.toString()
           );
-          // Check if the current course ID is in favorites
           const isFavorited = stringFavoritesArray.includes(courseIdString);
           setFavorited(isFavorited);
         }
@@ -73,7 +71,7 @@ function Course() {
   }, [cart, course]);
 
   useEffect(() => {
-    console.log("Component rerendered"); // Log component rerendering
+    console.log("Component rerendered");
     console.log("favorited: " + favorited);
   }, [favorited]);
 
@@ -122,7 +120,6 @@ function Course() {
   };
 
   useEffect(() => {
-    // For debugging purpose, check if button is focusable
     if (addToCartButtonRef.current) {
       console.log("Add to Cart button:", addToCartButtonRef.current);
     }
@@ -131,6 +128,16 @@ function Course() {
   if (!course || !providers.length) {
     return <NotFound />;
   }
+
+  const difficultyIcons = {
+    Beginner: iconBeginner,
+    Intermediate: iconIntermediate,
+    Expert: iconExpert,
+  };
+
+  const difficultyIcon = difficultyIcons[course.level.difficulty] || null;
+
+  console.log(JSON.stringify(course) + "course")
   return (
     <div className="Course">
       <div className="button-section">
@@ -171,24 +178,33 @@ function Course() {
         </div>
         <div className="attributes-container">
           <div className="start-date-attribute">
-          <img src={iconStartDate} alt={'Black hourglass'} />
+            <img src={iconStartDate} alt={'Black hourglass'} />
             <h3>Start Date:</h3>
             <span>{course.startDate}</span>
           </div>
           <div className="end-date-attribute">
-          <img src={iconEndDate} alt={'Black hourglass'} />
+            <img src={iconEndDate} alt={'Black hourglass'} />
             <h3>End Date:</h3>
-            <span>{course.endDate}</span>
-          </div>
+            </div>
           <div className="hours-attribute">
-          <img src={iconHoursPerWeek} alt={'Black clock'} />
+            <img src={iconHoursPerWeek} alt={'Black clock'} />
             <h3>Hours Per Week:</h3>
             <span>{course.hoursPerWeek}</span>
           </div>
-          <div className="credits-attribute" >
+          <div className="credits-attribute">
             <img src={iconCredits} alt={'Black hourglass'} />
             <h3>Credits:</h3>
             <span>{course.credit}</span>
+          </div>
+          <div className="level-attribute">
+            <img src={difficultyIcon} alt="Difficulty icon" />
+            <h3>Difficulty:</h3>
+            <span>{course.level.difficulty}</span>
+          </div>
+          <div className="category-attribute">
+            <img src={iconCategory} alt="Difficulty icon" />
+            <h3>Difficulty:</h3>
+            <span>{course.category.subject}</span>
           </div>
         </div>
         <h3>Providers:</h3>

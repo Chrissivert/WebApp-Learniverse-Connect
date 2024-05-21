@@ -20,8 +20,6 @@ public class Course {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String title;
-  private int levelId;
-  private int categoryId;
   private Date startDate;
   private Date endDate;
   private double credit;
@@ -36,6 +34,16 @@ public class Course {
   private List<FavoriteCourse> favoriteCourses;
 
 
+
+  @ManyToOne
+  @JoinColumn(name = "categoryId", insertable = false, updatable = false)
+  private Category category;
+
+  @ManyToOne
+  @JoinColumn(name = "levelId", insertable = false, updatable = false)
+  private Level level;
+
+
   @ManyToMany
   @JoinTable(
       name = "CourseTags",
@@ -43,6 +51,8 @@ public class Course {
       inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
   private Set<Tags> tags;
+
+  
 
   /**
    * 
@@ -95,36 +105,23 @@ public class Course {
    *
    * @return
    */
-  public int getLevelId() {
-    return this.levelId;
-  }
+  public Level getLevel() {
+    return level;
+}
 
-  /**
-   * 
-   *
-   * @param levelId
-   */
-  public void setLevelId(int levelId) {
-    this.levelId = levelId;
-  }
+public void setLevel(Level level) {
+    this.level = level;
+}
 
-  /**
-   * 
-   *
-   * @return
-   */
-  public int getCategoryId() {
-    return this.categoryId;
-  }
 
-  /**
-   * 
-   *
-   * @param categoryId
-   */
-  public void setCategoryId(int categoryId) {
-    this.categoryId = categoryId;
-  }
+
+public Category getCategory() {
+  return category;
+}
+
+public void setCategory(Category category) {
+  this.category = category;
+}
 
   /**
    * 
@@ -263,9 +260,7 @@ public class Course {
   @JsonIgnore
   public boolean isValid() {
     return // this.id > 0 &&
-    this.title != null && !this.title.isBlank() &&
-        this.levelId > 0 &&
-        this.categoryId > 0 &&
+    this.title != null && !this.title.isBlank() && this.level != null && this.level.isValid() && this.category != null &&
         this.startDate != null &&
         this.endDate != null &&
         this.credit >= 0 &&
@@ -283,8 +278,8 @@ public class Course {
     var that = (Course) obj;
     return this.id == that.id &&
         this.title == that.title &&
-        this.levelId == that.levelId &&
-        this.categoryId == that.categoryId &&
+        this.level == that.level &&
+        this.category == that.category &&
         this.startDate == that.startDate &&
         this.endDate == that.endDate &&
         this.credit == that.credit &&
@@ -297,7 +292,7 @@ public class Course {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id, this.title, this.levelId, this.categoryId, this.startDate, this.endDate, this.credit,
+    return Objects.hash(this.id, this.title, this.level, this.category, this.startDate, this.endDate, this.credit,
         this.hoursPerWeek, this.relatedCertification, this.description, this.imageId, this.hidden);
   }
 
@@ -306,8 +301,8 @@ public class Course {
     return "Course[" +
         "id=" + this.id + ", " +
         "name=" + this.title + ", " +
-        "levelId=" + this.levelId + ", " +
-        "categoryId=" + this.categoryId + ", " +
+        "levelId=" + this.level + ", " +
+        "categoryId=" + this.category + ", " +
         "startDate=" + this.startDate + ", " +
         "endDate=" + this.endDate + ", " +
         "credit=" + this.credit + ", " +
