@@ -64,20 +64,20 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    /**
-     * This method processes data received from the sign-up form (HTTP POST).
-     *
-     * @return Name of the template for the result page
-     */
+
+
+
     @PostMapping("/signup")
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
-        String errorMessage = this.userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(),signupData.getUsername());
-        ResponseEntity response;
+        logger.info("Received signup request for email: {}", signupData.getEmail());
+        String errorMessage = userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(), signupData.getUsername());
         if (errorMessage == null) {
-            response = new ResponseEntity(HttpStatus.OK);
+            logger.info("User created successfully for email: {}", signupData.getEmail());
+            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
         } else {
-            response = new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
+            logger.error("Error creating user for email: {}: {}", signupData.getEmail(), errorMessage);
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
-        return response;
     }
+
 }
