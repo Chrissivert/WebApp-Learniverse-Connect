@@ -30,14 +30,14 @@ export default function HamburgerMenu() {
         aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
         className='menu-icon-container'
         onClick={toggleMenu}
-        aria-expanded={isOpen}
-      >
+        // aria-expanded={isOpen}
+        >
         <Hamburger direction='right' toggled={isOpen} />
       </button>
       <nav className={'menu' + (isOpen ? ' open' : '')}>
         <hr className='line'/>
         <NavList/>
       </nav>
-    </div>
+    </div >
   );
 }

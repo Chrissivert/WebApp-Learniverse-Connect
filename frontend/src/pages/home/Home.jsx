@@ -5,6 +5,7 @@ import frontImage from '/home/front_image.png'
 import findACourse from '/icons/home/find-a-course.png'
 import createAnAccount from '/icons/home/create-an-account.png'
 import readMoreAbout from '/icons/home/read-more-about.png'
+import Button from '../../components/button/Button';
 
 export default function Home() {
   return (
@@ -17,24 +18,9 @@ export default function Home() {
           <h1>Welcome to Learniverse Connect</h1>
           <p>Start Learning Today!</p>
           <div className='button-row'>
-            <Link to="/courses" className="button-link">
-              <button className='home-row-button'>
-                <img src={findACourse} className='button-image' alt="Find a Course" />
-                <p>Find a course →</p>
-              </button>
-            </Link>
-            <Link to='/register' className='button-link'>
-              <button className='home-row-button'>
-                <img src={createAnAccount} className='button-image' alt="Create an Account" />
-                <p>Create your account →</p>
-              </button>
-            </Link>
-            <Link to='/about' className='button-link'>
-              <button className='home-row-button'>
-                <img src={readMoreAbout} className='button-image' alt="Read more about us" />
-                <p>Read more about us →</p>
-              </button>
-            </Link>
+            <Button src={'/courses'} text={'Find a course →'} className={'button-link'} linkName={'home-row-button'} img={findACourse} imageName={'button-image'} alt={'Find a course'}/>
+            <Button src={'/register'} text={'Create your account →'} className={'button-link'} linkName={'home-row-button'} img={createAnAccount} imageName={'button-image'} alt={'Create an account'}/>
+            <Button src={'/about'} text={'Read more about us →'} className={'button-link'} linkName={'home-row-button'} img={readMoreAbout} imageName={'button-image'} alt={'Read more about us'}/>
           </div>
         </section>
       </section>

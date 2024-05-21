@@ -45,7 +45,6 @@ function CartPage() {
       setLoading(false); // Hide spinner regardless of email result
     }
   };
-  
 
   const cancelPurchase = () => {
     setShowConfirmation(false);
@@ -62,38 +61,44 @@ function CartPage() {
 
   const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
-
-
   return (
     <div className="cart-page">
-      {loading && <Spinner />}
+      {loading && <div className="spinner"><Spinner /></div>}
       <div className="cart-header">
         <h1>Shopping Cart</h1>
-        <Button text="Go to Courses" src="/courses" />
       </div>
-      <div className="cart-items">
-  {cart.map(({ course }) => {
-    console.log(course); // Add console log here
-    return (
-      <div key={course.id} className="cart-item">
-        <Coursecard course={course.course} showPrice={false}/>
-        <p className="provider">Provider: {course.selectedProvider.providerName}</p>
-        <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
-        <button className="remove-btn" onClick={() => removeFromCart(course.id)}>Remove</button>
-      </div>
-    );
-  })}
-</div>
-
-      <div className="cart-summary">
-        <div className="price-summary">
-          <p>Total Price: {currency} {Math.ceil(totalPrice)}</p>
+      
+      {cart.length > 0 && (
+        <button className="clear-cart-btn" onClick={handleClearCart}>Clear Cart</button>
+      )}
+      {cart.length === 0 ? (
+        <div className="empty-cart-message">
+          <p>Your cart is empty.</p>
         </div>
-        <div className="action-buttons">
-          <button onClick={handleClearCart} disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Clear Cart</button>
-          <button onClick={handlePurchase} disabled={cart.length === 0} className={cart.length === 0 ? "disabled" : ""}>Purchase</button>
+      ) : (
+        <div className="cart-items">
+          {cart.map(({ course }) => (
+            <div key={course.id} className="cart-item">
+              <Coursecard course={course.course} showPrice={false} />
+              <div className="details">
+                <p className="provider">Provider: {course.selectedProvider.providerName}</p>
+                <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
+              </div>
+              <button className="remove-btn" onClick={() => removeFromCart(course.id)}>Remove</button>
+            </div>
+          ))}
         </div>
-      </div>
+      )}
+      {(cart.length > 0) && (
+        <div className="cart-summary">
+          <div className="price-summary">
+            <p>Total Price: {currency} {Math.ceil(totalPrice)}</p>
+          </div>
+          <div className="action-buttons">
+            <button onClick={handlePurchase} className={cart.length === 0 ? "disabled" : ""}>Purchase</button>
+          </div>
+        </div>
+      )}
 
       {showConfirmation && confirmationType === "clearCart" && (
         <ConfirmationModal
@@ -114,6 +119,6 @@ function CartPage() {
       )}
     </div>
   );
-}
+}  
 
 export default CartPage;

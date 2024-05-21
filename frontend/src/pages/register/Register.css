@@ -42,12 +42,3 @@ button {
   width: 100px;
   height: 100px;
 }
-
-.success-message {
-  font-size: 3rem;
-}
-
-.error {
-  color: red;
-  font-size: 3rem;
-}
