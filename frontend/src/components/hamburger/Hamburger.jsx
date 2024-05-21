@@ -1,43 +1,42 @@
 import './Hamburger.css';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Hamburger from 'hamburger-react';
 import NavList from './NavList';
 
 export default function HamburgerMenu() {
   const [isOpen, setOpen] = useState(false);
-  // const menuRef = useRef(null);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuRef]);
 
   const toggleMenu = () => {
     setOpen(!isOpen);
   };
 
-  // const handleKeyPress = (event) => {
-  //   if (event.key === 'Enter' && !isOpen) {
-  //     setOpen(true);
-  //   } else if (event.key === 'Escape' || (event.key === 'Enter' && isOpen)) {
-  //     setOpen(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     menuRef.current.focus();
-  //   }
-  // }, [isOpen]);
-
   return (
-    // <div className={'hamburger-menu' + (isOpen ? ' open' : '')} tabIndex="0" onKeyDown={handleKeyPress}>
-    //   <div className='menu-icon-container' onClick={toggleMenu} tabIndex="0">
-    <div className={'hamburger-menu' + (isOpen ? ' open' : '')}>
-      <div className='menu-icon-container' onClick={toggleMenu}>
+    <div role="navigation" aria-label="Main Menu" className={'hamburger-menu' + (isOpen ? ' open' : '')} ref={menuRef}>
+      <button
+        aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
+        className='menu-icon-container'
+        onClick={toggleMenu}
+        aria-expanded={isOpen}
+      >
         <Hamburger direction='right' toggled={isOpen} />
-      </div>
-      {/* <nav className={'menu' + (isOpen ? ' open' : '')} tabIndex="-1" ref={menuRef}> */}
+      </button>
       <nav className={'menu' + (isOpen ? ' open' : '')}>
         <hr className='line'/>
-        <div className="flex-container">
-          <NavList/>
-        </div>
+        <NavList/>
       </nav>
     </div>
   );

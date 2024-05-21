@@ -6,7 +6,7 @@ export default function SortByFilter({ onSortChange }) {
 
   useEffect(() => {
     onSortChange(sortAttribute, sortOrder);
-  }, []);
+  }, [sortAttribute, sortOrder, onSortChange]);
 
   const handleAttributeChange = (event) => {
     const selectedAttribute = event.target.value;
@@ -21,16 +21,26 @@ export default function SortByFilter({ onSortChange }) {
   };
 
   return (
-    <div className="sort-filter-container">
-      <label htmlFor="sortSelect">Select to sort by:</label>
-      <select id="sortSelect" className='sort-dropdown' value={sortAttribute} onChange={handleAttributeChange}>
+    <section className="sort-filter-container">
+      <label htmlFor="sortSelect">Sort by:</label>
+      <select
+        id="sortSelect"
+        className='sort-dropdown'
+        value={sortAttribute}
+        onChange={handleAttributeChange}
+        aria-label="Sort options"
+      >
         <option value="title">Title</option>
         <option value="price">Price</option>
         <option value="credits">Credits</option>
       </select>
-      <button className='sortButton' onClick={toggleSortOrder}>
+      <button
+        className='sortButton'
+        onClick={toggleSortOrder}
+        aria-label={`Toggle sort order ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
+      >
         {sortAttribute === 'title' ? (sortOrder === 'asc' ? 'A to Z' : 'Z to A') : (sortOrder === 'asc' ? 'Low to High' : 'High to Low')}
       </button>
-    </div>
+    </section>
   );
 }

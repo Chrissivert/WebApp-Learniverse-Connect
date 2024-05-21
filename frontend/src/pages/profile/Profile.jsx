@@ -13,6 +13,7 @@ import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
+import CurrencySelector from "../../components/currencySelector/CurrencySelector";
 
 export default function Profile() {
   const auth = useContext(AuthContext);
@@ -124,89 +125,8 @@ function Intro({ userName, email, startDate }) {
         Below are the courses you've marked as favorites. Dive back in whenever
         you're ready! Happy learning!
       </p>
+
+      <CurrencySelector currencies={['NOK', 'USD', 'EUR', 'GBP']} /> {/* Render CurrencySelector with currencies prop */}
     </div>
   );
 }
-
-function Content({ userName }) {
-  return (
-    <div className="content">
-      {/* <h1>User Info:</h1> */}
-      {/* <div className="user-info">
-        <table>
-          <tr>Full Name:</tr>
-          <tr>Start Date:</tr>
-          <tr>Email:</tr>
-          <tr>Password:</tr>
-        </table>
-        <table>
-          <tr>Froggy Frogface</tr>
-          <tr>January 8th 2024</tr>
-          <tr>Frogger@Hotmail.com</tr>
-          <tr>Sup</tr>
-        </table>
-      </div> */}
-      <h1>Hello, {userName}!</h1>
-      <p>
-        Welcome to your profile! Here you may access your favorite courses.{" "}
-      </p>
-      <p>
-        Below are the courses you've marked as favorites. Dive back in whenever
-        you're ready!
-      </p>
-      <p>Happy learning!</p>
-    </div>
-  );
-}
-
-function CourseInfo() {
-  return (
-    <div className="course-info">
-      <h3>This is where info about the user's personal courses are located.</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-        asperiores, magnam consequuntur deserunt repudiandae, non tempore maxime
-        eum tempora ipsam reprehenderit, fuga labore corporis numquam quos rem
-        error quaerat necessitatibus.
-      </p>
-    </div>
-  );
-}
-
-function CourseSelection() {
-  return (
-    <div className="course-selection">
-      <h3>This is where the user's personal courses are located.</h3>
-    </div>
-  );
-}
-
-function SocialMedia() {
-  return (
-    <div className="social-media">
-      <h3>Miscellaneous social media info about the user.</h3>
-    </div>
-  );
-}
-
-/* useEffect(
-  function () {
-    async function getUsers() {
-      try {
-        const res = await axios.get(`http://localhost:8080/users`);
-        const data = await res.data;
-
-        if (data.Response === "False") {
-          throw new Error(data.Error);
-        }
-
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    }
-
-    getUsers();
-  },
-  [id]
-); */

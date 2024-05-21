@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "./Course.css";
 import "../../index.css";
 import { CartContext } from "../cart/CartProvider";
-import { useCurrencyContext } from "../../components/currencySelector/TargetCurrencyContext";
+import { useCurrencyContext } from "../../components/currencySelector/CurrencyContext";
 import { getOneCourseFromServer } from "../../services/course-service";
 import {
   addFavoriteCourseToServer,
@@ -11,6 +11,7 @@ import {
 } from "../../services/favorite-course";
 import { getAllProvidersForACourse } from "../../services/course-provider";
 import NotFound from "../error/notFound/404";
+import GetImage from "../../components/crudTest/post/image/GetImage";
 
 function Course() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ function Course() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [courseAdded, setCourseAdded] = useState(false);
   const [favorited, setFavorited] = useState(false);
+  const [expandedDescription, setExpandedDescription] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
   const addToCartButtonRef = useRef(null); // Ref for the add to cart button
@@ -109,36 +111,66 @@ function Course() {
   }, []);
 
   if (!course || !providers.length) {
-    return <NotFound/>
+    return <NotFound />;
   }
-
   return (
     <div className="Course">
-      <div className="head">
+      <div className="button-section">
         <Link to={`/courses`}>
-          <button className="goBackButton">← Courses</button>
+          <button className="goBackButton">← Back to Courses</button>
         </Link>
-        <h2 className="title">{course.title}</h2>
+      </div>
+      <div className="title-image-favorite">
+        <div className="title-image-section">
+          <h2 className="title">{course.title}</h2>
+          <div className="course-image-section">
+            <GetImage imageId={id} />
+          </div>
+        </div>
         <button
           className={`favoriteButton ${favorited ? "favorited" : ""}`}
           onClick={handleToggleFavorite}
           onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
-          tabIndex={0} // Ensure button is focusable
+          tabIndex={0}
         >
           {favorited ? "★ Remove from Favorites" : "☆ Add to Favorites"}
         </button>
       </div>
-      <p>{course.description}</p>
-      <p>Start Date: {course.startDate}</p>
-      <p>Related Certification: {course.relatedCertification}</p>
-      <h3>Providers:</h3>
-      <ul>
-        {providers.map((provider) => (
-          <li key={provider.providerId}>
-            <label
-              className={`providerLabel ${courseAdded ? "disabled" : ""}`}
-              tabIndex={0} // Ensure label is focusable
-              onKeyDown={(e) => handleKeyPress(e, provider)}
+      <div className="course-content">
+        <div className="description-container">
+          <h2>Description</h2>
+          <p>{expandedDescription ? course.description : `${course.description.slice(0, 100)}...`}</p>
+          <button className= "expand-description-button"onClick={() => setExpandedDescription(!expandedDescription)}>
+            {expandedDescription ? "Read Less" : "Read More"}
+          </button>
+        </div>
+        <div className="attributes-container">
+          <div className="attribute">
+            <h3>Start Date:</h3>
+            <span>{course.startDate}</span>
+          </div>
+          <div className="attribute">
+            <h3>End Date:</h3>
+            <span>{course.endDate}</span>
+          </div>
+          <div className="attribute">
+            <h3>Hours Per Week:</h3>
+            <span>{course.hoursPerWeek}</span>
+          </div>
+          <div className="attribute">
+            <h3>Credits:</h3>
+            <span>{course.credit}</span>
+          </div>
+        </div>
+        <h3>Providers:</h3>
+        <div className="providers-container">
+          {providers.map((provider) => (
+            <div
+              key={provider.providerId}
+              className={`provider-card ${
+                selectedProvider === provider ? "selected" : ""
+              } ${courseAdded ? "disabled" : ""}`}
+              onClick={() => !courseAdded && handleProviderSelection(provider)}
             >
               <input
                 type="radio"
@@ -147,34 +179,40 @@ function Course() {
                 onChange={() => handleProviderSelection(provider)}
                 disabled={courseAdded}
               />
-              {provider.providerName} - Price: {Math.ceil(provider.price)}{" "}
-              {provider.currency}
-            </label>
-          </li>
-        ))}
-      </ul>
-      {showWarning && (
-        <div className="warning" role="alert">
-          Please select a provider before adding to cart.
+              <span className="custom-radio"></span>
+              <div className="provider-info">
+                <div className="provider-name">{provider.providerName}</div>
+                <div className="provider-price">
+                  Price: {Math.ceil(provider.price)} {provider.currency}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      )}
-      {showSuccessMessage && (
-        <div className="success-message" role="alert">
-          Course successfully added to cart!
-        </div>
-      )}
-      <button
-        className="addToCartButton"
-        onClick={handleAddToCart}
-        disabled={!selectedProvider || courseAdded}
-        onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
-        tabIndex={0} // Ensure button is focusable
-        ref={addToCartButtonRef} // Attach ref to the button
-      >
-        {courseAdded ? "Already Added to Cart" : "Add to Cart"}
-      </button>
+        {showWarning && (
+          <div className="warning" role="alert">
+            Please select a provider before adding to cart.
+          </div>
+        )}
+        {showSuccessMessage && (
+          <div className="success-message" role="alert">
+            Course successfully added to cart!
+          </div>
+        )}
+        <button
+          className="addToCartButton"
+          onClick={handleAddToCart}
+          disabled={!selectedProvider || courseAdded}
+          onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
+          tabIndex={0}
+          ref={addToCartButtonRef}
+        >
+          {courseAdded ? "Already Added to Cart" : "Add to Cart"}
+        </button>
+      </div>
     </div>
   );
-}
+}  
 
 export default Course;
+

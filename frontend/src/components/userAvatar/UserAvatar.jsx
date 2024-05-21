@@ -28,8 +28,8 @@ function UserAvatar({ user }) {
   return (
     <div className="user-avatar">
       {!loading && userData && (
-        <Link to="/profile" className="user-avatar-link">
-          <div>{avatar}</div>
+        <Link to="/profile" className="user-avatar-link" aria-label="View Profile">
+          <div role="img" aria-label={`Avatar for ${userData.username}`}>{avatar}</div>
         </Link>
       )}
     </div>

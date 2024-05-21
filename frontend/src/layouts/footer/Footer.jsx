@@ -19,26 +19,6 @@ export default function Footer() {
               <li>Phone: (+47) 735 95 000</li>
             </ul>
           </div>
-
-          {/* <div className='useful-links'>
-            <h3>Useful Links</h3>
-            <ul>
-              <li><a href='/courses'>Courses</a></li>
-              <li><a href='mailto:group01webapp@outlook.com'>Email: info@learniverse-connect.com</a></li>
-              <li>Phone: (+47) 735 95 000</li>
-            </ul>
-          </div> */}
-
-          {/* <div className='useful-links'>
-            <h3>Useful Links</h3>
-            <ul>
-              <li>
-                <a href='/courses'>Courses</a>
-              </li>
-              <li><a href='mailto:group01webapp@outlook.com'>Email: info@learniverse-connect.com</a></li>
-              <li>Phone: (+47) 735 95 000</li>
-            </ul>
-          </div> */}
         </div>
         <div className='disclaimer'>
           <p>This website is a result of a university group project, performed in the course <a target="_blank" href='https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet'>IDATA2301 Web technologies</a>, at <a target="_blank" href='https://www.ntnu.edu/'>NTNU</a>. All the information provided here is a result of imagination. Any resemblance with real companies or products is a coincidence.</p>

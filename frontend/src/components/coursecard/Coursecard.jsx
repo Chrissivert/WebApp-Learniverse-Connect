@@ -3,7 +3,7 @@ import "./Coursecard.css";
 import CourseCardSkeleton from "./CourseCardSkeleton";
 import GetImage from "../crudTest/post/image/GetImage";
 
-export default function Coursecard({ course, favorited, onFavoriteToggle, showPrice=true }) {
+export default function Coursecard({ course, favorited, onFavoriteToggle, showPrice = true }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,28 +19,34 @@ export default function Coursecard({ course, favorited, onFavoriteToggle, showPr
   }
 
   return (
-    <div className="course-card">
-      <div className="favorite-icon" onClick={handleToggleFavorite}>
-        {favorited ? "★" : "☆"} {/* Use the favorited prop to determine the star icon */}
+    <article className="course-card" role="article">
+      <div
+        className="favorite-icon"
+        onClick={handleToggleFavorite}
+        aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+        aria-pressed={favorited}
+        role="button"
+      >
+        {favorited ? "★" : "☆"}
       </div>
-      <div className="image-section">
-        <GetImage imageId={course.imageId} />
-      </div>
-      <div className="info-section">
+      <figure className="image-section">
+        <GetImage imageId={course.imageId} alt={course.title} />
+      </figure>
+      <div className="info-section" role="region" aria-label="Course Information">
         <h2>{course.title}</h2>
         <p>Start Date: {course.startDate}</p>
-        <div className={'price-section' + (showPrice ? '' : ' close')}>
-        {Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ? (
-          <p>
-            Price: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}
-          </p>
-        ) : (
-          <p>
-            Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}
-          </p>
-        )}
+        <div className={'price-section' + (showPrice ? '' : ' close')} role="group" aria-label="Price Information">
+          {Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ? (
+            <p>
+              Price: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency}
+            </p>
+          ) : (
+            <p>
+              Price Range: {Math.ceil(course.cheapestPrice)} {course.cheapestCurrency} - {Math.ceil(course.mostExpensivePrice)} {course.cheapestCurrency}
+            </p>
+          )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

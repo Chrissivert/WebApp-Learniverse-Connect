@@ -3,14 +3,14 @@ import './confirmationModal.css';
 
 function ConfirmationModal({ message, items, totalPrice, currency, onConfirm, onCancel }) {
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h2>Confirmation</h2>
+    <section className="modal-overlay" role="dialog" aria-labelledby="confirmation-modal-title">
+      <div className="modal" role="document">
+        <h2 id="confirmation-modal-title">Confirmation</h2>
         <p>{message}</p>
         {items && (
           <div>
-            <p className="total-items"> Items:</p>
-            <ul>
+            <p className="total-items">Items:</p>
+            <ul aria-label="List of items">
               {items.map(({ course }) => (
                 <li key={course.id}>
                   {course.course.title} - {course.selectedProvider.providerName} - {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}
@@ -21,11 +21,11 @@ function ConfirmationModal({ message, items, totalPrice, currency, onConfirm, on
           </div>
         )}
         <div className="modal-buttons">
-          <button onClick={onConfirm}>Confirm</button>
-          <button onClick={onCancel}>Cancel</button>
+          <button onClick={onConfirm} aria-label="Confirm">Confirm</button>
+          <button onClick={onCancel} aria-label="Cancel">Cancel</button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
