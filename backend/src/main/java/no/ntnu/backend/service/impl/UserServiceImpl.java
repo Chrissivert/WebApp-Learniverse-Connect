@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
   public ResponseEntity<String> create(User user) {
     ResponseEntity<String> response;
 
+    System.out.println("Creating user first" + user.getEmail() + user.getId());
+
     try {
       this.addUser(user);
       response = new ResponseEntity<>(user.toString(), HttpStatus.CREATED);
@@ -103,6 +105,8 @@ public class UserServiceImpl implements UserService {
     if (user == null) {
       throw new IllegalArgumentException("User is invalid");
     }
+
+    System.out.println("Adding user to" + user.getEmail() + user.getId() + user.getStartDate());
     this.userRepository.save(user);
 
   }
