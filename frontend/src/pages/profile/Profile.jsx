@@ -56,7 +56,6 @@ export default function Profile() {
           setUserName(currentUser.username);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
-         
         }
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -108,9 +107,8 @@ function Intro({ userName, email, startDate }) {
         </Link>
       </div>
       <p>
-        Welcome to your profile! Here you may access your favorite courses.
-        Below are the courses you've marked as favorites. Dive back in whenever
-        you're ready! Happy learning!
+        Welcome to your profile! Here you may access your favorite courses. Dive
+        in whenever you're ready! Happy learning!
       </p>
       <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
       {/* Render CurrencySelector with currencies prop */}
