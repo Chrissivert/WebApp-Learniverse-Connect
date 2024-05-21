@@ -6,7 +6,7 @@ export default function SortByFilter({ onSortChange }) {
 
   useEffect(() => {
     onSortChange(sortAttribute, sortOrder);
-  }, [sortAttribute, sortOrder, onSortChange]);
+  }, [sortAttribute, sortOrder]);
 
   const handleAttributeChange = (event) => {
     const selectedAttribute = event.target.value;
