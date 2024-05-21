@@ -136,7 +136,7 @@ function Course() {
         <div className="title-image-section">
           <h2 className="title">{course.title}</h2>
           <div className="course-image-section">
-            <GetImage imageId={id} />
+            <GetImage imageId={course.id} />
           </div>
         </div>
         <button
