@@ -51,7 +51,6 @@ export default function About() {
         </p>
       </section>
       <div className="cta" aria-labelledby="cta-heading">
-        <h2 id="cta-heading" className="sr-only">Call to Action</h2>
         <a href="/courses" aria-label="Search for Courses">
           <button className="searchBtn">Search For Courses</button>
         </a>
