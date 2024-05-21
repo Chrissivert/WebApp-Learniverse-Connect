@@ -5,7 +5,6 @@ import findACourse from '/icons/home/find-a-course.png'
 import createAnAccount from '/icons/home/create-an-account.png'
 import readMoreAbout from '/icons/home/read-more-about.png'
 import Button from '../../components/button/Button';
-import PostImage from '../../components/crudTest/post/image/PostImage';
 
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
             <Button src={'/courses'} text={'Find a course →'} className={'home-row-button'} linkName={'button-link'} img={findACourse} imageName={'button-image'} alt={'Find a course'}/>
             <Button src={'/register'} text={'Create your account →'} className={'home-row-button'} linkName={'button-link'} img={createAnAccount} imageName={'button-image'} alt={'Create an account'}/>
             <Button src={'/about'} text={'Read more about us →'} className={'home-row-button'} linkName={'button-link'} img={readMoreAbout} imageName={'button-image'} alt={'Read more about us'}/>
-            <PostImage></PostImage>
           </div>
         </section>
       </section>

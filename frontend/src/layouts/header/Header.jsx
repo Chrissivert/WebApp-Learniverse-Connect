@@ -9,7 +9,6 @@ import { AuthContext } from '../../pages/admin/AuthProvider.jsx';
 import cartImage from '/cart/whiteCart.png';
 import whitelogo from '/logo/white_icon.png'
 import Button from '../../components/button/Button.jsx';
-import iconCart from '/cart/whiteCart.png';
 
 
 export default function Header() {
@@ -51,7 +50,7 @@ export default function Header() {
           ) : (
             <div className="login-container">
               <Link to="/login" className="login-link">
-                <img src="/login/login_white.png" alt="Login" className="login-img" />
+                <img src="/login/login.png" alt="Login" className="login-img" />
                 <span className="login-text">Login</span>
               </Link>
             </div>
