@@ -1,0 +1,9 @@
+.user-avatar {
+  height: 80px;
+  width: 80px;
+}
+
+.user-avatar-link {
+  color: white;
+  font-size: 90%;
+}
