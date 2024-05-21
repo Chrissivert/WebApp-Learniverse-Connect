@@ -140,11 +140,6 @@ function Course() {
 
   const difficultyIcon = difficultyIcons[course.level.difficulty] || null;
 
-
-  console.log(user)
-  console.log(JSON.stringify(user) + "HHHHH")
-
-
   console.log(JSON.stringify(course) + "course")
   return (
     <div className="Course">
@@ -219,30 +214,30 @@ function Course() {
         </div>
         <h3>Providers:</h3>
         <div className="providers-container">
-          {providers.map((provider) => (
-            <div
-              key={provider.providerId}
-              className={`provider-card ${
-                selectedProvider === provider ? "selected" : ""
-              } ${courseAdded ? "disabled" : ""}`}
-              onClick={!user || courseAdded ? null : () => handleProviderSelection(provider)}
-            >
-              <input
-                type="radio"
-                name="provider"
-                checked={selectedProvider === provider}
-                onChange={() => handleProviderSelection(provider)}
-                disabled={courseAdded}
-              />
-              <span className="custom-radio"></span>
-              <div className="provider-info">
-                <div className="provider-name">{provider.providerName}</div>
-                <div className="provider-price">
-                  Price: {Math.ceil(provider.price)} {provider.currency}
-                </div>
-              </div>
-            </div>
-          ))}
+  {providers.map((provider) => (
+    <div
+      key={provider.providerId}
+      className={`provider-card ${
+        selectedProvider === provider ? "selected" : ""
+      } ${(!user || courseAdded) ? "disabled" : ""}`}
+      onClick={!user || courseAdded ? null : () => handleProviderSelection(provider)}
+    >
+      <input
+        type="radio"
+        name="provider"
+        checked={selectedProvider === provider}
+        onChange={() => handleProviderSelection(provider)}
+        disabled={!user || courseAdded}
+      />
+      <span className="custom-radio"></span>
+      <div className="provider-info">
+        <div className="provider-name">{provider.providerName}</div>
+        <div className="provider-price">
+          Price: {Math.ceil(provider.price)} {provider.currency}
+        </div>
+      </div>
+    </div>
+  ))}
         </div>
         <div className="notification-container">
           <div className="notification-placeholder">
