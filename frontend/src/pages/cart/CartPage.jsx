@@ -66,7 +66,6 @@ function CartPage() {
       {loading && <div className="spinner"><Spinner /></div>}
       <div className="cart-header">
         <h1>Shopping Cart</h1>
-        <Button text="Go to Courses" src="/courses" />
       </div>
       
       {cart.length > 0 && (
