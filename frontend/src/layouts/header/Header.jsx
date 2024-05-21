@@ -8,6 +8,9 @@ import UserAvatar from '../../components/userAvatar/UserAvatar.jsx';
 import { AuthContext } from '../../pages/admin/AuthProvider.jsx';
 import cartImage from '/cart/whiteCart.png';
 import whitelogo from '/logo/white_icon.png'
+import Button from '../../components/button/Button.jsx';
+import iconCart from '/cart/whiteCart.png';
+
 
 export default function Header() {
   const { cart } = useContext(CartContext);
@@ -35,12 +38,14 @@ export default function Header() {
           <HamburgerMenu />
         </div>
         <div className="cart-and-profile-section">
+          {/*  */}
           <div className="cart-container">
-            <Link to="/cart" className="cart-link">
+            <Link to="/cart" className="cart-header-link">
               <img src={cartImage} className='cart-img' />
               <span className="cart-text">Cart ({cart.length})</span>
             </Link>
           </div>
+          {/*  */}
           {user ? (
             <UserAvatar user={user} className="user-avatar" />
           ) : (

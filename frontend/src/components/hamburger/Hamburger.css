@@ -65,3 +65,15 @@
   background-color: #fff;
   transition: transform 0.3s ease, top 0.3s ease;
 }
+
+@media (max-width: 1000px) {
+  .menu .navList .cart-link {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu .navList .cart-link {
+    display: block;
+  }
+}
