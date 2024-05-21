@@ -1,37 +1,6 @@
-/* .home-container {
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* .home-content{
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  background-color: transparent;
-  color: white;
-} */
-
-/* .home-content h1{
-  font-size: 70px;
-  margin-bottom: 80px;
-} */
-
-/* .home-content p{
-  margin: 20px auto;
-  font-weight: 100;
-  line-height: 25px;
-} */
-
 .home-content .button-row .home-row-button .button-image {
-  height: 65px;
-  width: auto;
+  height: 5rem;
+  width: auto
 }
 
 .home-container {
@@ -77,4 +46,11 @@
 .button-row .home-row-button:hover {
   border: 2px solid rgb(204, 115, 207);
   background: rgb(204, 115, 207);
+}
+
+.button-link .home-row-button {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
