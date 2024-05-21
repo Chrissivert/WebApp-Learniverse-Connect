@@ -44,6 +44,15 @@ export function getImageDataFromServer(imageId) {
 }
 
 /**
+ * Retrieves imagees from the server.
+ *
+ * @returns The outcome of the get request.
+ */
+export function getImagesFromServer() {
+  return sendApiGetRequest(IMAGE_URL);
+}
+
+/**
  * Generates the URL for retrieving an image from the server.
  *
  * @param {int} imageId The ID of the image to generate the URL for.
