@@ -19,10 +19,6 @@ function CartPage() {
   const navigate = useNavigate();
   const { sendPurchaseEmail } = useEmailLogic();
 
-  const handleRemoveItem = (courseId) => {
-    removeFromCart(courseId);
-  };
-
   const handleClearCart = () => {
     setConfirmationType("clearCart");
     setShowConfirmation(true);
@@ -67,6 +63,7 @@ function CartPage() {
   const totalPrice = cart.reduce((total, { course }) => total + course.selectedProvider.price, 0);
   const currency = cart.length > 0 ? cart[0].course.selectedProvider.currency : "";
 
+
   return (
     <div className="cart-page">
       {loading && <Spinner />}
@@ -75,15 +72,19 @@ function CartPage() {
         <Button text="Go to Courses" src="/courses" />
       </div>
       <div className="cart-items">
-        {cart.map(({ course }) => (
-          <div key={course.id} className="cart-item">
-            <Coursecard course={course.course} showPrice={false}/>
-            <p className="provider">Provider: {course.selectedProvider.providerName}</p>
-            <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
-            <button className="remove-btn" onClick={() => handleRemoveItem(course.id)}>Remove</button>
-          </div>
-        ))}
+  {cart.map(({ course }) => {
+    console.log(course); // Add console log here
+    return (
+      <div key={course.id} className="cart-item">
+        <Coursecard course={course.course} showPrice={false}/>
+        <p className="provider">Provider: {course.selectedProvider.providerName}</p>
+        <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
+        <button className="remove-btn" onClick={() => removeFromCart(course.id)}>Remove</button>
       </div>
+    );
+  })}
+</div>
+
       <div className="cart-summary">
         <div className="price-summary">
           <p>Total Price: {currency} {Math.ceil(totalPrice)}</p>

@@ -138,6 +138,7 @@ function Course() {
       </div>
       <div className="course-content">
         <div className="description-container">
+          <h2>Description</h2>
           <p>{expandedDescription ? course.description : `${course.description.slice(0, 100)}...`}</p>
           <button className= "expand-description-button"onClick={() => setExpandedDescription(!expandedDescription)}>
             {expandedDescription ? "Read Less" : "Read More"}
