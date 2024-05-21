@@ -1,15 +1,9 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
 import "./Profile.css";
-//import { PostImage } from "../../components/crudTest/post/image/PostImage";
-//import '../../index.css';
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import { getUserByEmail } from "../../services/user-request";
 import { AuthContext } from "../admin/AuthProvider";
 import Unauthorized from "../error/unauthorized/401";
-//import { logout } from "../admin/AuthProvider";
-import { getFavoriteCoursesFromAUser } from "../../services/favorite-course";
 import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
@@ -69,7 +63,6 @@ export default function Profile() {
     return <div>Loading...</div>;
   }
 
-  // If user is not user role or admin role, show unauthorized page
   if (!isUser && !isAdmin) {
     return <Unauthorized />;
   }
@@ -85,14 +78,6 @@ export default function Profile() {
     </div>
   );
 }
-
-function signoff() {
-  localStorage.removeItem("user");
-  localStorage.removeItem("token");
-  localStorage.removeItem("favorites");
-  localStorage.removeItem("cart");
-}
-
 function Intro({ userName, email, startDate }) {
   const auth = useContext(AuthContext);
 
@@ -116,7 +101,6 @@ function Intro({ userName, email, startDate }) {
         in whenever you're ready! Happy learning!
       </p>
       <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
-      {/* Render CurrencySelector with currencies prop */}
     </div>
   );
 }

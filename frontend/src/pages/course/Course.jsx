@@ -1,3 +1,5 @@
+//Code generated with the help of ChatGPT
+
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Course.css";
@@ -18,6 +20,7 @@ import iconExpert from "/icons/course/expert-icon.png";
 import iconBeginner from "/icons/course/beginner-icon.png";
 import iconIntermediate from "/icons/course/intermediate-icon.png";
 import iconCategory from "/icons/course/category-icon.png";
+import { AuthContext } from "../admin/AuthProvider";
 
 function Course() {
   const { id } = useParams();
@@ -31,8 +34,8 @@ function Course() {
   const [expandedDescription, setExpandedDescription] = useState(false);
   const { cart, addToCart } = useContext(CartContext);
   const { targetCurrency } = useCurrencyContext();
+  const { user } = useContext(AuthContext); // Get the authentication state
   const addToCartButtonRef = useRef(null); // Ref for the add to cart button
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -137,6 +140,11 @@ function Course() {
 
   const difficultyIcon = difficultyIcons[course.level.difficulty] || null;
 
+
+  console.log(user)
+  console.log(JSON.stringify(user) + "HHHHH")
+
+
   console.log(JSON.stringify(course) + "course")
   return (
     <div className="Course">
@@ -154,9 +162,10 @@ function Course() {
         </div>
         <button
           className={`favoriteButton ${favorited ? "favorited" : ""}`}
-          onClick={handleToggleFavorite}
+          onClick={user ? handleToggleFavorite : null}
           onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
           tabIndex={0}
+          disabled={!user}
         >
           {favorited ? "★ Remove from Favorites" : "☆ Add to Favorites"}
         </button>
@@ -204,7 +213,7 @@ function Course() {
           </div>
           <div className="category-attribute">
             <img src={iconCategory} alt="Difficulty icon" />
-            <h3>Difficulty:</h3>
+            <h3>Category:</h3>
             <span>{course.category.subject}</span>
           </div>
         </div>
@@ -216,7 +225,7 @@ function Course() {
               className={`provider-card ${
                 selectedProvider === provider ? "selected" : ""
               } ${courseAdded ? "disabled" : ""}`}
-              onClick={() => !courseAdded && handleProviderSelection(provider)}
+              onClick={!user || courseAdded ? null : () => handleProviderSelection(provider)}
             >
               <input
                 type="radio"
@@ -236,26 +245,25 @@ function Course() {
           ))}
         </div>
         <div className="notification-container">
-  <div className="notification-placeholder">
-    {/* Add a placeholder for notifications */}
-    {showWarning && <div className="warning-placeholder"></div>}
-    {showSuccessMessage && <div className="success-message-placeholder"></div>}
-  </div>
-  {showWarning && (
-    <div className="warning" role="alert">
-      Please select a provider before adding to cart.
-    </div>
-  )}
-  {showSuccessMessage && (
-    <div className="success-message" role="alert">
-      Course successfully added to cart!
-    </div>
-  )}
-</div>
+          <div className="notification-placeholder">
+            {showWarning && <div className="warning-placeholder"></div>}
+            {showSuccessMessage && <div className="success-message-placeholder"></div>}
+          </div>
+          {showWarning && (
+            <div className="warning" role="alert">
+              Please select a provider before adding to cart.
+            </div>
+          )}
+          {showSuccessMessage && (
+            <div className="success-message" role="alert">
+              Course successfully added to cart!
+            </div>
+          )}
+        </div>
         <button
           className="addToCartButton"
-          onClick={handleAddToCart}
-          disabled={!selectedProvider || courseAdded}
+          onClick={user ? handleAddToCart : null}
+          disabled={!selectedProvider || courseAdded || !user}
           onKeyDown={(e) => handleKeyPress(e, selectedProvider)}
           tabIndex={0}
           ref={addToCartButtonRef}
@@ -265,6 +273,7 @@ function Course() {
       </div>
     </div>
   );
+
 }
 
 export default Course;

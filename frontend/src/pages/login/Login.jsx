@@ -24,7 +24,10 @@ function parseJwt(token) {
 
 function saveUserDataToStorage(userData) {
   try {
-    const data = JSON.stringify(userData);
+    const userDataWithAuth = { ...userData, isAuthenticated: true };
+    
+    const data = JSON.stringify(userDataWithAuth);
+
     localStorage.setItem("user", data);
     console.log(data);
   } catch (error) {

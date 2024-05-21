@@ -8,7 +8,6 @@ import UserAvatar from '../../components/userAvatar/UserAvatar.jsx';
 import { AuthContext } from '../../pages/admin/AuthProvider.jsx';
 import cartImage from '/cart/whiteCart.png';
 import whitelogo from '/logo/white_icon.png'
-import Button from '../../components/button/Button.jsx';
 
 
 export default function Header() {
@@ -16,6 +15,8 @@ export default function Header() {
   const auth = useContext(AuthContext);
 
   const user = auth.user;
+
+  console.log('user', user);
 
   return (
     <header className="header-container">

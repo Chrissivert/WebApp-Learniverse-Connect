@@ -54,14 +54,22 @@ button:hover {
   transform: scale(1.05); /* Add slight scale effect on hover */
 }
 
+button:disabled,
+.provider-card.disabled {
+  background-color: #e0e0e0; /* Light gray background */
+  color: #a0a0a0; /* Gray text */
+  cursor: not-allowed; /* Not-allowed cursor */
+  pointer-events: none; /* Prevent interactions */
+}
+
+button:disabled {
+  border: 1px solid #a0a0a0; /* Gray border */
+}
+
 button:focus:not(:focus-visible) {
   outline: none; /* Remove outline for non-keyboard focus */
 }
 
-/* button:hover {
-  color:  rgb(255, 255, 255);
-  background-color: rgb(151, 88, 163);
-} */
 
 a:link, a:visited, a:active {
   text-decoration: none;
