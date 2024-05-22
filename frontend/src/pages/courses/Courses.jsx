@@ -42,7 +42,6 @@ function Courses({ courses }) {
         ))
       ) : (
         visibleCourses.map((course) => (
-          console.log(JSON.stringify(course) + "wdddd"),
           <div className="coursecards" key={course.id} role="listitem">
             <a href={`/course/${course.id}`} aria-label={`Course: ${course.title}`}>
               <Coursecard

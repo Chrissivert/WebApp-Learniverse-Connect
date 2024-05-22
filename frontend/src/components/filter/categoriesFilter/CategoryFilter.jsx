@@ -12,6 +12,7 @@ export default function CategoryFilter({ onCategoryChange }) {
   async function fetchCategories() {
     const response = await getCategoriesFromServer();
     setCategories(response.data);
+    console.log(categories +  "dadaw")
   }
 
   useEffect(() => {
