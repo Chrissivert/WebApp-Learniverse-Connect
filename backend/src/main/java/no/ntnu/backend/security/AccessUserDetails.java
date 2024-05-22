@@ -20,7 +20,7 @@ public class AccessUserDetails implements UserDetails {
   private final String email;
   private final String password;
   private final boolean isActive;
-  private final Set<GrantedAuthority> authorities = new HashSet();
+  private final Set<GrantedAuthority> authorities = new HashSet<>();
 
   /**
    * Constructs an AccessUserDetails object from a User entity.
