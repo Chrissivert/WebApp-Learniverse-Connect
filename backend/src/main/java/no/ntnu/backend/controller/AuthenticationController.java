@@ -1,11 +1,11 @@
 package no.ntnu.backend.controller;
+import no.ntnu.backend.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import no.ntnu.backend.dto.AuthenticationRequest;
 import no.ntnu.backend.dto.AuthenticationResponse;
 import no.ntnu.backend.dto.SignupDTO;
 import no.ntnu.backend.security.JwtUtil;
-import no.ntnu.backend.security.AccessUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +30,9 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private AccessUserService userService;
+    private UserServiceImpl userService;
     @Autowired
     private JwtUtil jwtUtil;
-
 
     /**
      * HTTP POST request to /authenticate.
@@ -79,5 +78,4 @@ public class AuthenticationController {
             return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
     }
-
 }
