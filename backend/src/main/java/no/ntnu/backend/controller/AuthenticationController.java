@@ -1,4 +1,5 @@
 package no.ntnu.backend.controller;
+
 import no.ntnu.backend.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,63 +20,73 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @CrossOrigin
 @RestController
-@RequestMapping ("/api/authenticate")
+@RequestMapping("/api/authenticate")
 public class AuthenticationController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+  private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private JwtUtil jwtUtil;
+  @Autowired
+  private AuthenticationManager authenticationManager;
+  @Autowired
+  private UserServiceImpl userService;
+  @Autowired
+  private JwtUtil jwtUtil;
 
-    /**
-     * HTTP POST request to /authenticate.
-     *
-     * @param authenticationRequest The request JSON object containing username and password
-     * @return OK + JWT token; Or UNAUTHORIZED
-     */
-    @PostMapping()
-    public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        logger.info("Received authentication request for email: {}", authenticationRequest.getEmail());
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+  /**
+   * HTTP POST request to /authenticate.
+   *
+   * @param authenticationRequest The request JSON object containing username and
+   *                              password
+   * @return OK + JWT token; Or UNAUTHORIZED
+   */
+  @PostMapping()
+  public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    logger.info("Received authentication request for email: {}", authenticationRequest.getEmail());
+    try {
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 
-                    authenticationRequest.getEmail(),
-                    authenticationRequest.getPassword()));
-            logger.info("Authentication successful for email: {}", authenticationRequest.getEmail());
-        } catch (BadCredentialsException e) {
-            logger.error("Authentication failed for email: {}", authenticationRequest.getEmail(), e);
-            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
-        } catch(Exception e){
-            logger.error("E");
-        }
-        final UserDetails userDetails = userService.loadUserByUsername(
-                authenticationRequest.getEmail());
-        logger.info("USERDETAILS :" + String.valueOf(userDetails.getUsername()));
-        final String jwt = jwtUtil.generateToken(userDetails);
-        logger.info("JWT token generated successfully for email: {}", authenticationRequest.getEmail());
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+          authenticationRequest.getEmail(),
+          authenticationRequest.getPassword()));
+      logger.info("Authentication successful for email: {}", authenticationRequest.getEmail());
+    } catch (BadCredentialsException e) {
+      logger.error("Authentication failed for email: {}", authenticationRequest.getEmail(), e);
+      return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+    } catch (Exception e) {
+      logger.error("E");
     }
+    final UserDetails userDetails = userService.loadUserByUsername(
+        authenticationRequest.getEmail());
+    logger.info("USERDETAILS :" + String.valueOf(userDetails.getUsername()));
+    final String jwt = jwtUtil.generateToken(userDetails);
+    logger.info("JWT token generated successfully for email: {}", authenticationRequest.getEmail());
+    return ResponseEntity.ok(new AuthenticationResponse(jwt));
+  }
 
-
-
-
-    @PostMapping("/signup")
-    public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
-        logger.info("Received signup request for email: {}", signupData.getEmail());
-        String errorMessage = userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(), signupData.getUsername());
-        if (errorMessage == null) {
-            logger.info("User created successfully for email: {}", signupData.getEmail());
-            return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
-        } else {
-            logger.error("Error creating user for email: {}: {}", signupData.getEmail(), errorMessage);
-            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-        }
+  /**
+   * HTTP POST request to /authenticate/signup.
+   * This endpoint registers a new user with the provided email, username, and
+   * password.
+   *
+   * @param signupData The request JSON object containing the user's email,
+   *                   username, and password.
+   * @return ResponseEntity indicating the success or failure of the signup
+   *         process.
+   *         If successful, returns CREATED status; Otherwise, returns BAD_REQUEST
+   *         status with an error message.
+   */
+  @PostMapping("/signup")
+  public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
+    logger.info("Received signup request for email: {}", signupData.getEmail());
+    String errorMessage = userService.tryCreateNewUser(signupData.getEmail(), signupData.getPassword(),
+        signupData.getUsername());
+    if (errorMessage == null) {
+      logger.info("User created successfully for email: {}", signupData.getEmail());
+      return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
+    } else {
+      logger.error("Error creating user for email: {}: {}", signupData.getEmail(), errorMessage);
+      return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
+  }
 }
