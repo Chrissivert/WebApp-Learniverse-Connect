@@ -26,19 +26,19 @@ function UserAvatar({ user }) {
   }
 
   return (
-    <div className="user-avatar">
-      {!loading && userData && (
-        <Link
-          to="/profile"
-          className="user-avatar-link"
-          aria-label="View Profile"
-        >
+    <Link
+      to="/profile"
+      className="user-avatar-link"
+      aria-label="View Profile"
+    >
+      <div className="user-avatar">
+        {!loading && userData && (
           <div role="img" aria-label={`Avatar for ${userData.username}`}>
             {avatar}
           </div>
-        </Link>
-      )}
-    </div>
+        )}
+      </div>
+    </Link>
   );
 }
 

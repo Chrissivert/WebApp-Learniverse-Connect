@@ -11,7 +11,7 @@ import whitelogo from '/logo/white_icon.png'
 
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
+  const { cart, cartPopped } = useContext(CartContext);
   const auth = useContext(AuthContext);
 
   const user = auth.user;
@@ -37,7 +37,7 @@ export default function Header() {
         </div>
         <div className="cart-and-profile-section">
           {/*  */}
-          <div className="cart-container">
+          <div className={`cart-container ${cartPopped ? "pop" : ""}`}>
             <Link to="/cart" className="cart-header-link">
               <img src={cartImage} className='cart-img' alt='White shopping cart'/>
               <span className="cart-text">Cart ({cart.length})</span>
@@ -58,4 +58,7 @@ export default function Header() {
       </div>
     </header>
   );
+
+
+  
 }
