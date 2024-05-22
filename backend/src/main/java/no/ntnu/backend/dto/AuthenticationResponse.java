@@ -2,14 +2,32 @@ package no.ntnu.backend.dto;
 
 import java.io.Serializable;
 
-public class AuthenticationResponse implements Serializable{
-    private final String jwt;
+/**
+ * Data Transfer Object (DTO) for handling authentication responses.
+ * Contains the JWT token generated upon successful authentication.
+ * 
+ * @version 23.05.2024
+ */
+public class AuthenticationResponse implements Serializable {
 
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
-    }
+  private static final long serialVersionUID = 1L;
+  private final String jwt;
 
-    public String getJwt() {
-        return this.jwt;
-    }
+  /**
+   * Constructor for AuthenticationResponse.
+   *
+   * @param jwt The JWT token.
+   */
+  public AuthenticationResponse(String jwt) {
+    this.jwt = jwt;
+  }
+
+  /**
+   * Gets the JWT token.
+   *
+   * @return The JWT token.
+   */
+  public String getJwt() {
+    return this.jwt;
+  }
 }
