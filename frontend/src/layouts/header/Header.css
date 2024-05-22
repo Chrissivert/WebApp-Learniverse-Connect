@@ -56,11 +56,6 @@
 .header-container .header-content .navlist-container ul li a {
   margin: 1rem;
   color: #ffffff;
-  transition: transform 0.3s ease;
-}
-
-.header-container .header-content .navlist-container ul li a:hover {
-  transform: scale(1.15);
 }
 
 .header-container .header-content .navlist-container ul li .cart-link {
