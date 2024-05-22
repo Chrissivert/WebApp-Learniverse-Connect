@@ -60,7 +60,7 @@ export default function PutUser() {
   }
 
   return (
-    <>
+    <div className='form'>
       <div>
         <Link to={"/admin/user"}>
           <button className='button'>← Go back</button>
@@ -90,6 +90,6 @@ export default function PutUser() {
         </label>
         <button type='submit'>Update</button>
       </form>
-    </>
+    </div>
   );
 }

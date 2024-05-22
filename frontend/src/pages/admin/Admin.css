@@ -83,3 +83,10 @@
     max-width: 400px; /* Adjust maximum width as needed */
     margin: 0 auto; /* Center the Coursecard */
   }
+
+.form {
+    width: 100%;
+    max-width: 700px;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+}

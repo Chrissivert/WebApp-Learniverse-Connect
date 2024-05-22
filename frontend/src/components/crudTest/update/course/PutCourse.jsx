@@ -95,7 +95,7 @@ export default function PutCourse() {
   }
 
   return (
-    <>
+    <div className='form'>
       <div>
         <Link to={"/admin/course"}>
           <button className='button'>← Go back</button>
@@ -149,6 +149,6 @@ export default function PutCourse() {
         </label>
         <button type='submit'>Update</button>
       </form>
-    </>
+    </div>
   );
 }

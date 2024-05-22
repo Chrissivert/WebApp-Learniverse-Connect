@@ -44,7 +44,7 @@ export default function DeleteCourse() {
 
 
   return (
-    <>
+    <div className='form'>
       <div>
         <Link to={"/admin/course"}>
           <button className='button'>← Go back</button>
@@ -58,6 +58,6 @@ export default function DeleteCourse() {
       </div>
       <button type='submit'>Delete</button>
       </form>
-    </>
+    </div>
   );
 }
