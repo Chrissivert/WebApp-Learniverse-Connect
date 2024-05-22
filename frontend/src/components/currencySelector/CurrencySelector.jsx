@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useCurrencyContext } from './CurrencyContext.jsx';
-import ConfirmationModal from '../popUps/modalBox/ConfirmationModalBox.jsx';
-// import ConfirmationModal from './ConfirmationModal.jsx';
 
-// In your CurrencySelector component
+import ConfirmationModal from '../popUps/modalBox/ConfirmationModalBox.jsx';
+import { CartContext } from '../../pages/cart/CartProvider.jsx';
+
 const CurrencySelector = ({ currencies }) => {
   const { targetCurrency, handleCurrencyChange } = useCurrencyContext();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
-  const clearCart = () => {
-    console.log("inside of clearCart")
-    localStorage.removeItem("cart"); // Remove the cart item from localStorage
-  };
+  
+  // Access CartContext
+  const { clearCart } = useContext(CartContext);
 
   const handleCurrencyChangeWithConfirmation = (newCurrency) => {
     if (targetCurrency !== newCurrency) {
@@ -22,8 +20,7 @@ const CurrencySelector = ({ currencies }) => {
   };
 
   const confirmCurrencyChange = () => {
-    clearCart(); // Clear the cart
-    console.log("inside of confirmCurrencyChange")
+    clearCart(); // Call clearCart from CartContext
     handleCurrencyChange(targetCurrency);
     setShowConfirmationModal(false);
   };
