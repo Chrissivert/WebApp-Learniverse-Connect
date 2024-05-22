@@ -179,32 +179,32 @@ function Course() {
         </div>
         <div className="attributes-container">
           <div className="start-date-attribute">
-            <img src={iconStartDate} alt={'Black hourglass'} />
+            <img src={iconStartDate} alt={'Black hourglass with the sand at the top'} />
             <h3>Start Date:</h3>
             <span>{course.startDate}</span>
           </div>
           <div className="end-date-attribute">
-            <img src={iconEndDate} alt={'Black hourglass'} />
+            <img src={iconEndDate} alt={'Black hourglass with the sand at the bottom'} />
             <h3>End Date:</h3>
             <span>{course.endDate}</span>
             </div>
           <div className="hours-attribute">
-            <img src={iconHoursPerWeek} alt={'Black clock'} />
+            <img src={iconHoursPerWeek} alt={"Black clock with the clock-arms pointing at 03:00 o'clock"} />
             <h3>Hours Per Week:</h3>
             <span>{course.hoursPerWeek}</span>
           </div>
           <div className="credits-attribute">
-            <img src={iconCredits} alt={'Black hourglass'} />
+            <img src={iconCredits} alt={'Black medal with a star in the middle'} />
             <h3>Credits:</h3>
             <span>{course.credit}</span>
           </div>
           <div className="level-attribute">
-            <img src={difficultyIcon} alt="Difficulty icon" />
+            <img src={difficultyIcon} alt="Bar chart representing the difficulty of the course" />
             <h3>Difficulty:</h3>
             <span>{course.level.difficulty}</span>
           </div>
           <div className="category-attribute">
-            <img src={iconCategory} alt="Difficulty icon" />
+            <img src={iconCategory} alt="Different shapes representing the various categories the courses can be" />
             <h3>Category:</h3>
             <span>{course.category.subject}</span>
           </div>

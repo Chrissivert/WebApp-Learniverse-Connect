@@ -12,15 +12,15 @@ export default function Home() {
     <main>
       <section className="home-container">
         <div className='front-image'>
-          <img className='image' src={frontImage} alt="Front Image" />
+          <img className='image' src={frontImage} alt="A group smiling at each other whilst working together" />
         </div>
         <section className='home-content'>
           <h1>Welcome to Learniverse Connect</h1>
           <p>Start Learning Today!</p>
           <div className='button-row'>
-            <Button src={'/courses'} text={'Find a course →'} className={'home-row-button'} linkName={'button-link'} img={findACourse} imageName={'button-image'} alt={'Find a course'}/>
-            <Button src={'/register'} text={'Create your account →'} className={'home-row-button'} linkName={'button-link'} img={createAnAccount} imageName={'button-image'} alt={'Create an account'}/>
-            <Button src={'/about'} text={'Read more about us →'} className={'home-row-button'} linkName={'button-link'} img={readMoreAbout} imageName={'button-image'} alt={'Read more about us'}/>
+            <Button src={'/courses'} text={'Find a course →'} className={'home-row-button'} linkName={'button-link'} img={findACourse} imageName={'button-image'} alt={'Find a course'} />
+            <Button src={'/register'} text={'Create your account →'} className={'home-row-button'} linkName={'button-link'} img={createAnAccount} imageName={'button-image'} alt={'Create an account'} />
+            <Button src={'/about'} text={'Read more about us →'} className={'home-row-button'} linkName={'button-link'} img={readMoreAbout} imageName={'button-image'} alt={'Read more about us'} />
           </div>
         </section>
       </section>

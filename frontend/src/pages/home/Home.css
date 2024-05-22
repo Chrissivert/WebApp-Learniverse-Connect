@@ -1,6 +1,6 @@
 .home-content .button-row .home-row-button .button-image {
   height: 5rem;
-  width: auto
+  width: 5rem;
 }
 
 .home-container {
@@ -17,7 +17,7 @@
 
 .home-container .front-image .image{
   width: 100%;
-  height:auto;
+  height: 100%;
   left: 0;
   right: 0;
 }

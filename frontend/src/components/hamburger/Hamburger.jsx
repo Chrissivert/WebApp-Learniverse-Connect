@@ -26,17 +26,10 @@ export default function HamburgerMenu() {
 
   return (
     <div role="navigation" aria-label="Main Menu" className={'hamburger-menu' + (isOpen ? ' open' : '')} ref={menuRef}>
-      <button
-        aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
-        className='menu-icon-container'
-        onClick={toggleMenu}
-        // aria-expanded={isOpen}
-        >
-        <Hamburger direction='right' toggled={isOpen} />
-      </button>
+      <Hamburger direction='right' toggled={isOpen} onToggle={toggleMenu} color='#ffffff'/>
       <nav className={'menu' + (isOpen ? ' open' : '')}>
-        <hr className='line'/>
-        <NavList/>
+        <hr className='line' />
+        <NavList />
       </nav>
     </div >
   );

@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className='footer-container'>
       <div className='container'>
         <div className='company-title'>
-          <img src="/logo/white_icon.png" alt="Learniverse-Connect's Logo" className="learniverse-connect-logo" />
+          <img src="/logo/white_icon.png" alt="A graduate hat representing Learniverse-Connect's Logo" className="learniverse-connect-logo"/>
           <h1>Learniverse Connect</h1>
         </div>
         <hr />
