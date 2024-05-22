@@ -1,3 +1,5 @@
+//class created with help from CHATGPT
+
 export function filterLogic(courses, filters) {
   // Filter by search query, min and max price, and selected category
   let filtered = courses.filter(course =>
