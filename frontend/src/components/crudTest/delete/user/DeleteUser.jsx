@@ -40,7 +40,7 @@ export default function DeleteUser() {
 
 
   return (
-    <>
+    <div className='form'>
       <div>
         <Link to={"/admin/user"}>
           <button className='button'>← Go back</button>
@@ -52,6 +52,6 @@ export default function DeleteUser() {
       <p>{user.username}</p>
       <button type='submit'>Delete</button>
       </form>
-    </>
+    </div>
   );
 }

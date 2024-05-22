@@ -113,7 +113,7 @@ export default function PostCourse() {
   */
 
   return (
-    <>
+    <div className='form'>
       <div>
         <Link to={"/admin/course"}>
           <button className='go-back-button'>← Go back</button>
@@ -223,6 +223,6 @@ export default function PostCourse() {
         
         <button type='submit'>Post</button>
       </form>
-    </>
+    </div>
   );
 }
