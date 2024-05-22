@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { getCoursesFromServer, updateCourseOnServer } from "../../services/course-service";
 import "./Admin.css";
 import { Link } from "react-router-dom";
+import { getAllProvidersForACourse } from '../../services/course-provider';
 
 function AdminCourse() {
     const [courses, setCourses] = useState([]);
@@ -14,10 +15,18 @@ function AdminCourse() {
         const fetchData = async () => {
             try {
                 const courseData = await getCoursesFromServer();
-                setCourses(courseData.data);
+                console.log('course data: ' + courseData.data);
+                const coursesWithProviders = await Promise.all(courseData.data.map(async (course) => {
+                    const response = await getAllProvidersForACourse(course.id, 'NOK');
+                    const providers = response.data || [];
+                    
+                    return { ...course, providers: providers };
+                }));
+                setCourses(coursesWithProviders);
+                console.log(coursesWithProviders);
                 setLoading(false); // Update coursesLoading after fetching data
                 const hiddenCourseIds = courseData.data.filter(course => course.hidden).map(course => course.id);
-            setHiddenCourses(hiddenCourseIds);
+                setHiddenCourses(hiddenCourseIds);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -92,6 +101,7 @@ function AdminCourse() {
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th>Providers</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -107,6 +117,11 @@ function AdminCourse() {
                                     {course.description}
                                 </td>
                                 <td>
+                                {(course.providers || []).map(provider => ( // Ensure providers is an array
+                                    <p key={provider.courseId + provider.providerName}>{provider.providerName}: {provider.price} {provider.currency}</p>
+                                ))}
+                                </td>
+                                <td>
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
                                         <div>
@@ -117,6 +132,11 @@ function AdminCourse() {
                                         <div>
                                             <Link to={`/admin/course/deleteCourse/${course.id}`}>
                                             <button className="button">Delete</button>
+                                            </Link>
+                                        </div>
+                                        <div>
+                                            <Link to={`/admin/course/addImage/${course.id}`}>
+                                            <button className="button">Add image</button>
                                             </Link>
                                         </div>
                                         <div>
