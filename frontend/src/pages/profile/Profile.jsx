@@ -69,7 +69,7 @@ export default function Profile() {
   return (
     <div className="profilepage">
       <div className="card">
-        <UserAvatar user={auth.user} />
+        <UserAvatar className="userAvatar-profile" user={auth.user} />
         <div className="data">
           <Intro userName={userName} email={email} startDate={startDate} />
         </div>
