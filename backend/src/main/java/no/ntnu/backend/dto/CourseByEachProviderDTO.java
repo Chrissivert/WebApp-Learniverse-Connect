@@ -20,7 +20,7 @@ public class CourseByEachProviderDTO {
    * @return The price of the course.
    */
   public double getPrice() {
-    return price;
+    return this.price;
   }
 
   /**
@@ -38,7 +38,7 @@ public class CourseByEachProviderDTO {
    * @return The currency of the price.
    */
   public String getCurrency() {
-    return currency;
+    return this.currency;
   }
 
   /**
@@ -56,7 +56,7 @@ public class CourseByEachProviderDTO {
    * @return The ID of the course.
    */
   public Long getCourseId() {
-    return courseId;
+    return this.courseId;
   }
 
   /**
@@ -74,7 +74,7 @@ public class CourseByEachProviderDTO {
    * @return The name of the provider.
    */
   public String getProviderName() {
-    return providerName;
+    return this.providerName;
   }
 
   /**
