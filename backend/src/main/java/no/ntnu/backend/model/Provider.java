@@ -34,7 +34,7 @@ public class Provider {
    * @return the ID of the provider
    */
   public int getId() {
-    return id;
+    return this.id;
   }
 
   /**
@@ -52,7 +52,7 @@ public class Provider {
    * @return the name of the provider
    */
   public String getName() {
-    return name;
+    return this.name;
   }
 
   /**
