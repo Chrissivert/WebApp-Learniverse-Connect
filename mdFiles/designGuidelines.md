@@ -57,10 +57,15 @@ inviting, easy to use and professional. This to encourage user to engage with th
 2. The **typography** for the website includes the same font for every page and different font sizes for different
 purposes. 
 ![Fontscale](/fontscale.png)
-3. **Hierarchy and layout**. The focus of the website is the courses. 
+3. **Hierarchy and layout**. The focus of the website is the courses. All other information is additional to the main purpose of Learniverse Connect. A user can view the page as a viewer, use the page as a user and modify the page as an admin. Therefore
+funcions for user and admins, are in second focus and not main. The purpose of Learniverse is to provide courses and therefore
+is the courses the most important element.
 4. **Icons**
+Learniverse Connect uses icons for a more userfriendly design. It's easier to navigate and selfexplainig icons for important features such as home, login and cart. Home is symbolised by a house, the login with an avatar and cart with a shopping cart. The icons are in the same style, to create a connection between them. In addition to icons, there is also an explanatory text for the icon. The icons is retrived from [iconfinder.](https://www.iconfinder.com/).
 5. **Spacing**
+To create a more organized layout, spacing between elements are taken to account. By creating a fulfilling but not crowded, makes the page more userfriendly. All elements have good spacing between them and not to many elements on the same surface, creates a calmer experience for the user. 
 6. **Border rounding**
+To create a softer and more welcoming look for the pages, the elements mostly have rounded edges and border rounding. Mainly buttons but also element containers have round features. The course card has both rounded borders and round elements.
 
 ## Conclusion
 By adhering to these design guidelines, we aim to create a user-friendly and accessible web application that provides a 

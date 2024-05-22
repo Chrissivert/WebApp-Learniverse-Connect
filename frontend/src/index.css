@@ -25,7 +25,7 @@ body {
   place-items: center;
   margin-bottom: 0rem;
   padding-top: 3rem;
-  font-size: var(--base-font-size); /* Apply base font size */
+  font-size: var(--base-font-size); 
 }
 
 h1, h2 {
@@ -37,47 +37,42 @@ h1, h2 {
 
 
 button {
-  background-color: #8a2be2; /* Change background color */
+  background-color: #8a2be2; 
   margin: 5%;
   border-radius: 15px;
-  color: white; /* Change text color */
-  height: 50px; /* Reduce button height */
-  padding: 0 20px; /* Add padding for better spacing */
-  font-size: 1rem; /* Adjust font size */
-  border: none; /* Remove border */
-  cursor: pointer; /* Add pointer cursor */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition effect */
+  color: white; 
+  height: 50px;
+  padding: 0 20px; 
+  font-size: 1rem;
+  border: none; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
-  background-color: #6a1b9a; /* Darken background color on hover */
-  transform: scale(1.05); /* Add slight scale effect on hover */
+  background-color: #6a1b9a; 
+  transform: scale(1.05); 
 }
 
 button:disabled,
 .provider-card.disabled {
-  background-color: #e0e0e0; /* Light gray background */
-  color: #a0a0a0; /* Gray text */
-  cursor: not-allowed; /* Not-allowed cursor */
-  pointer-events: none; /* Prevent interactions */
+  background-color: #e0e0e0; 
+  color: #a0a0a0; 
+  cursor: not-allowed;
+  pointer-events: none; 
 }
 
 button:disabled {
-  border: 1px solid #a0a0a0; /* Gray border */
+  border: 1px solid #a0a0a0;
 }
 
 button:focus:not(:focus-visible) {
-  outline: none; /* Remove outline for non-keyboard focus */
+  outline: none; 
 }
 
 
 a:link, a:visited, a:active {
   text-decoration: none;
-}
-
-:focus-visible {
-  outline: 3px solid rgb(151, 88, 163);
-  transition: outline 0.3s ease;
 }
 
 button:focus:not(:focus-visible) {

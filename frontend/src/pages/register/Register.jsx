@@ -25,24 +25,30 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    const trimmedUsername = username.trim(); // Remove leading and trailing spaces
+    
     if (password.length <= 6) {
       setError("Password must be longer than 6 characters.");
+      return;
+    }
+    if (trimmedUsername.length > 20) {
+      setError("Username must be maximum 20 characters.");
       return;
     }
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append("username", username);
+      formData.append("username", trimmedUsername); // Use trimmed username
       formData.append("email", email);
       formData.append("password", password);
       const response = await addUserToServer(formData);
-
+  
       console.log("Response:", response);
-
+  
       if (response.status !== 201) {
         throw new Error(response.message || "Registration failed");
       }
-
+  
       setRegisterSuccess(true);
     } catch (error) {
       const apiError = localStorage.getItem("ApiRequestError");
@@ -53,6 +59,7 @@ function Register() {
       setLoading(false);
     }
   };
+  
 
   return (
     <main>
