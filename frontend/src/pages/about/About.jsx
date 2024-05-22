@@ -5,7 +5,7 @@ export default function About() {
   return (
     <div className="about-container">
       <h1>About Us and Our Products</h1>
-      <img src="/logo/learniverse_connect_logo.svg" alt="Learniverse Connect Logo" className="logo" />
+      <img src="/logo/learniverse_connect_logo.svg" alt="A graduate hat representing Learniverse-Connect's Logo" className="logo" />
       <hr />
       <section>
         <p>

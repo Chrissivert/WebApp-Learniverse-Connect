@@ -17,6 +17,7 @@ function CoursesPage() {
 
   return (
     <div className='courses-page-container'>
+      <div className='filter-section'>
       <FilterSection
         onSearchQueryChange={handleSearchQueryChange}
         onPriceChange={handlePriceChange}
@@ -26,6 +27,7 @@ function CoursesPage() {
         filters={filters}
         maxPrice={filters.maxPrice}
       />
+      </div>
       <Courses
         filters={filters}
         courses={courses}

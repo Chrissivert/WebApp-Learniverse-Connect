@@ -2,6 +2,7 @@
 
 .profilepage {
   display: grid;
+  max-width: 1500px;
 
   background-color: #e4e1e1;
   border-radius: 30px;
@@ -9,6 +10,7 @@
   grid-template-columns: 300px 1fr;
   gap: 1rem;
   padding: 2rem;
+  margin: auto;
 }
 
 .card {
