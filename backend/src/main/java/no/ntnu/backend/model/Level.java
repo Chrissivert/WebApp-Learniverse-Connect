@@ -93,7 +93,7 @@ public class Level {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+    return Objects.hash(this.id, this.difficulty);
   }
 
   @Override
