@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
     user.setStartDate(existingUser.get().getStartDate());
     user.setId(existingUser.get().getId());
-    userRepository.save(user);
+    addUser(user);
   }
 
   private boolean removeUser(int id) {
