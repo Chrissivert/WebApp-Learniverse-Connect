@@ -5,6 +5,7 @@ import java.util.List;
 import no.ntnu.backend.repository.CourseTagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,7 @@ public class RoleController {
    * @param role The role object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Create a new role", description = "Creates a new role object in the system.")
   @PostMapping()
   public ResponseEntity<String> createRole(@RequestBody Role role) {
@@ -86,6 +88,7 @@ public class RoleController {
    * @param role The updated role object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Update a role", description = "Updates an existing role object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateRole(@PathVariable int id, @RequestBody Role role) {
@@ -98,6 +101,7 @@ public class RoleController {
    * @param id The ID of the role to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Delete a role", description = "Deletes a role object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteRole(@PathVariable int id) {

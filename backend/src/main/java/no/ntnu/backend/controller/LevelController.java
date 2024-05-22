@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Level;
@@ -50,6 +51,7 @@ public class LevelController {
    * @param level The level object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Create a new level", description = "Creates a new level object in the system.")
   @PostMapping()
   public ResponseEntity<String> createLevel(@RequestBody Level level) {
@@ -86,6 +88,7 @@ public class LevelController {
    * @param level The updated level object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Update a level", description = "Updates an existing level object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateLevel(@PathVariable int id, @RequestBody Level level) {
@@ -98,6 +101,7 @@ public class LevelController {
    * @param id The ID of the level to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Delete a level", description = "Deletes a level object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteLevel(@PathVariable int id) {

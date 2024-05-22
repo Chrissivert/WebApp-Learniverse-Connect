@@ -5,6 +5,7 @@ import no.ntnu.backend.model.Course;
 import no.ntnu.backend.service.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Creates a new course", description = "Creates a new course.")
     @PostMapping()
     public ResponseEntity<String> createCourse(@RequestBody Course course) {
@@ -50,12 +52,14 @@ public class CourseController {
         return this.courseService.readById(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Updates an existing course", description = "Updates an existing course.")
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCourse(@PathVariable int id, @RequestBody Course course) {
         return this.courseService.update(id, course);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Deletes a course by its ID", description = "Deletes a course by its ID.")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCourse(@PathVariable int id) {

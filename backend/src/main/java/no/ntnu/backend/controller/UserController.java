@@ -31,8 +31,10 @@ public class UserController {
         return this.userService.create(user);
     }
 
+
     @Operation(summary = "Retrieves all users", description = "Retrieves all users.")
     @GetMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> readAllUsers() {
         return this.userService.readAll();
     }
@@ -50,12 +52,14 @@ public class UserController {
         return this.userService.readByEmail(email);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Updates an existing user", description = "Updates an existing user.")
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
         return this.userService.update(id, user);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Deletes a user by its ID", description = "Deletes a user by its ID.")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {

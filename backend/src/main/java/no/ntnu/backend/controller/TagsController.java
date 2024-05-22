@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,6 +50,7 @@ public class TagsController {
    * @param tags The tag object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Creates a new tag", description = "Creates a new tag.")
   @PostMapping()
   public ResponseEntity<String> createTag(@RequestBody Tags tags) {
@@ -85,6 +87,7 @@ public class TagsController {
    * @param tags The updated tag object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Updates an existing tag", description = "Updates an existing tag.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateTag(@PathVariable int id, @RequestBody Tags tags) {
@@ -97,6 +100,7 @@ public class TagsController {
    * @param id The ID of the tag to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Deletes a tag by its ID", description = "Deletes a tag by its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteTag(@PathVariable int id) {

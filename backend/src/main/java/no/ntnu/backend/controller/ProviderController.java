@@ -2,6 +2,7 @@ package no.ntnu.backend.controller;
 
 import no.ntnu.backend.repository.CourseTagsRepository;
 import no.ntnu.backend.repository.CourseTagsRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import no.ntnu.backend.model.Provider;
@@ -52,6 +53,7 @@ public class ProviderController {
    * @param provider The provider object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Create a new provider", description = "Creates a new provider object in the system.")
   @PostMapping()
   public ResponseEntity<String> createProvider(@RequestBody Provider provider) {
@@ -88,6 +90,7 @@ public class ProviderController {
    * @param provider The updated provider object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Update a provider", description = "Updates an existing provider object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateProvider(@PathVariable int id, @RequestBody Provider provider) {
@@ -100,6 +103,7 @@ public class ProviderController {
    * @param id The ID of the provider to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Delete a provider", description = "Deletes a provider object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteProvider(@PathVariable int id) {
