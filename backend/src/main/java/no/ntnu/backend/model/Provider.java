@@ -94,7 +94,7 @@ public class Provider {
   @Override
   public String toString() {
     return "Provider["
-        + "id=" + this.id
+        + "id=" + this.id + ", "
         + "name=" + this.name + ']';
   }
 }

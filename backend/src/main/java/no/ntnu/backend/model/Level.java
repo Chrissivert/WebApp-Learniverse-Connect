@@ -99,7 +99,7 @@ public class Level {
   @Override
   public String toString() {
     return "Level["
-        + "id=" + this.id
+        + "id=" + this.id + ", "
         + "difficulty=" + this.difficulty + "]";
   }
 }

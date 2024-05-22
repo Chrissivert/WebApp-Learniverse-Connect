@@ -103,7 +103,7 @@ public class Role {
   @Override
   public String toString() {
     return "Role[" 
-      + "id=" + this.id 
+      + "id=" + this.id + ", "
       + "title=" + this.title + ']';
   }
 }
