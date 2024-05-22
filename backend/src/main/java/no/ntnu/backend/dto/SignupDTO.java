@@ -53,7 +53,7 @@ public class SignupDTO {
    * @return The signup date.
    */
   public Date getDate() {
-    return date;
+    return this.date;
   }
 
   /**
@@ -62,6 +62,6 @@ public class SignupDTO {
    * @return The username of the user.
    */
   public String getUsername() {
-    return username;
+    return this.username;
   }
 }
