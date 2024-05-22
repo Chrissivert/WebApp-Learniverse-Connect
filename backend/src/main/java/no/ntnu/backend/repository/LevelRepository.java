@@ -5,13 +5,15 @@ import org.springframework.stereotype.Repository;
 
 import no.ntnu.backend.model.Level;
 
-
 /**
+ * Repository interface for accessing and managing Level entities in the
+ * database.
+ * This interface extends JpaRepository, providing CRUD functionality for Level
+ * entities.
  * 
- *
- * @author 
- * @version 29.03.2024
+ * @version 22.05.2024
+ * @author Group 01
  */
 @Repository
-public interface LevelRepository extends JpaRepository<Level, Integer>{
+public interface LevelRepository extends JpaRepository<Level, Integer> {
 }

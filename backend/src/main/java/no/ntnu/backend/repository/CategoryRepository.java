@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import no.ntnu.backend.model.Category;
 
 /**
- * Repository interface for accessing and managing Category entities in the database.
- * This interface extends JpaRepository, providing CRUD functionality for Category entities.
+ * Repository interface for accessing and managing Category entities in the
+ * database.
+ * This interface extends JpaRepository, providing CRUD functionality for
+ * Category entities.
  * 
  * @version 22.05.2024
  * @author Group 01
