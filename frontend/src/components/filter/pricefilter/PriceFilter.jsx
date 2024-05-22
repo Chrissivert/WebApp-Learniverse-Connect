@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Slider from 'react-slider';
 import './priceFilter.css';
 
@@ -6,11 +6,12 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const [sliderValues, setSliderValues] = useState([0, Math.ceil(maxPrice / 100) * 100]);
   const initialMaxPrice = useRef(maxPrice); // Store the initial maxPrice
 
-  useEffect(() => {
-    onPriceChange(sliderValues[0], sliderValues[1]);
-  }, [sliderValues, onPriceChange]);
+  const memoizedOnPriceChange = useCallback(onPriceChange, []);
 
-  // Handle slider value changes
+  useEffect(() => {
+    memoizedOnPriceChange(sliderValues[0], sliderValues[1]);
+  }, [sliderValues, memoizedOnPriceChange]);
+
   const handleSliderChange = (newValues) => {
     setSliderValues(newValues);
   };

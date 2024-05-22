@@ -1,3 +1,5 @@
+//class generated with help from CHATGPT
+
 import { useState, useEffect } from 'react';
 import CourseDataCombiner from '../../components/combiner/CourseDataCombiner.jsx';
 import { useCurrencyContext } from '../../components/currencySelector/CurrencyContext.jsx';
