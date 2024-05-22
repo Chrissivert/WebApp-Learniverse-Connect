@@ -137,7 +137,7 @@ public class CourseProvider {
      * @return the course ID
      */
     public Long getCourseId() {
-      return courseId;
+      return this.courseId;
     }
 
     /**
@@ -146,7 +146,7 @@ public class CourseProvider {
      * @return the provider ID
      */
     public int getProviderId() {
-      return providerId;
+      return this.providerId;
     }
   }
 }
