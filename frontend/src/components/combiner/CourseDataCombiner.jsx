@@ -1,7 +1,7 @@
 class CourseDataCombiner {
-  static async combineCoursesWithPricesAndCategories(courses, cheapestProvider, mostExpensiveProvider, tags, courseTags) {
+  static async combineCoursesWithPricesAndCategories(courses, cheapestProvider, mostExpensiveProvider, category, tags, courseTags) {
     try {
-
+      // Create a map of tag IDs to tag names
       const tagIdToNameMap = tags.data.reduce((map, tag) => {
         map[tag.id] = tag.tag;
         return map;
@@ -28,15 +28,15 @@ class CourseDataCombiner {
         // Get the most expensive price data for the course
         const mostExpensiveCourseData = mostExpensiveProvider.data.find(provider => provider.courseId === course.id);
 
-        const courseWithTagsAndPrice = {
+        const courseWithCategoryAndTags = {
           ...course,
           cheapestPrice: cheapestCourseData ? cheapestCourseData.price : null,
           cheapestCurrency: cheapestCourseData ? cheapestCourseData.currency : null,
           mostExpensivePrice: mostExpensiveCourseData ? mostExpensiveCourseData.price : null,
           tags: tags
         };
-        console.log(courseWithTagsAndPrice);
-        return courseWithTagsAndPrice;
+        console.log(courseWithCategoryAndTags);
+        return courseWithCategoryAndTags;
       });
 
       

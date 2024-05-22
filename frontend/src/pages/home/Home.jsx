@@ -10,9 +10,6 @@ import Button from '../../components/button/Button';
 export default function Home() {
   return (
     <main>
-      <head>
-        <meta name='description' content="Learniverse-Connects's simple and easy-to-use landingpage for navigating around the website." />
-      </head>
       <section className="home-container">
         <div className='front-image'>
           <img className='image' src={frontImage} alt="A group smiling at each other whilst working together" />

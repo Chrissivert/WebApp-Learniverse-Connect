@@ -91,6 +91,7 @@ async function sendApiRequest(method, url, data) {
     return response;
   } catch (error) {
     console.error("Error in sendApiRequest:", error.response);
+    localStorage.setItem("ApiRequestError", error.response.data);
     return error.response;
   }
 }

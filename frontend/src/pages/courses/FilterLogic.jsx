@@ -8,7 +8,7 @@ export function filterLogic(courses, filters) {
     course.cheapestPrice >= filters.minPrice &&
     course.cheapestPrice <= filters.maxPrice &&
     (!filters.category || // Check if category is undefined or empty
-      course.categoryName.toLowerCase().includes(filters.category.toLowerCase())
+      course.category.subject.toLowerCase().includes(filters.category.toLowerCase())
     )
   );
 

@@ -45,8 +45,10 @@ function Register() {
 
       setRegisterSuccess(true);
     } catch (error) {
+      const apiError = localStorage.getItem("ApiRequestError");
       console.error("Error:", error);
-      setError(error.message || "Registration failed. Please try again.");
+      setError(apiError || "Registration failed. Please try again.");
+      localStorage.removeItem("ApiRequestError");
     } finally {
       setLoading(false);
     }
@@ -55,15 +57,20 @@ function Register() {
   return (
     <main>
       <h1 id="registerTitle">Register</h1>
-      {error && (
-        <p style={{ color: "red" }} role="alert">
-          {error}
-        </p>
-      )}
       <form onSubmit={handleSubmit} aria-labelledby="registerTitle">
         <div className="imgcontainer">
-          <img src="/login/login.png" alt="Standard profile picture of a person in a circle" className="avatar" />
+          <img
+            src="/login/login.png"
+            alt="Standard profile picture of a person in a circle"
+            className="avatar"
+          />
         </div>
+
+        {error && (
+          <p className="error-message" role="alert">
+            {error}
+          </p>
+        )}
         <fieldset className="form-container">
           <legend className="legend-register">Register Information</legend>
           <label htmlFor="username">Username</label>
