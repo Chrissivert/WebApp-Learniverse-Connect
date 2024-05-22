@@ -11,27 +11,37 @@ import io.swagger.v3.oas.annotations.Operation;
 import no.ntnu.backend.model.PurchaseData;
 import no.ntnu.backend.service.EmailSenderService;
 
-@RequestMapping("/api/purchased")
+/**
+ * Controller class for handling purchase requests.
+ * Handles HTTP requests/responses for purchase-related endpoints.
+ *
+ * @author Group 01
+ * @version 23.05.2024
+ */
 @RestController
+@RequestMapping("/api/purchased")
 @CrossOrigin
 public class PurchaseController {
 
-    @Autowired
-    private EmailSenderService emailSenderService;
+  @Autowired
+  private EmailSenderService emailSenderService;
 
-    @Operation(summary = "Handle Purchase", description = "Handle purchase request and send confirmation email.")
-    @PostMapping()
-    public void handlePurchase(@RequestBody PurchaseData purchaseData) {
-        String email = purchaseData.getToEmail();
-        String subject = purchaseData.getSubject();
-        String text = "Thank you for your purchase!\n\n" + purchaseData.getText();
+  /**
+   * Handles purchase requests and sends confirmation email.
+   *
+   * @param purchaseData The purchase data containing email, subject, and text.
+   */
+  @Operation(summary = "Handle Purchase", description = "Handle purchase request and send confirmation email.")
+  @PostMapping()
+  public void handlePurchase(@RequestBody PurchaseData purchaseData) {
+    String email = purchaseData.getToEmail();
+    String subject = purchaseData.getSubject();
+    String text = "Thank you for your purchase!\n\n" + purchaseData.getText();
 
-        System.out.println("Sending email to: " + email);
-        System.out.println("Subject: " + subject);
-        System.out.println("Text: " + text);
+    System.out.println("Sending email to: " + email);
+    System.out.println("Subject: " + subject);
+    System.out.println("Text: " + text);
 
-        System.out.println("Sending email..." + purchaseData.getText());
-
-        emailSenderService.sendEmail(email, subject, text);
-    }
+    emailSenderService.sendEmail(email, subject, text);
+  }
 }
