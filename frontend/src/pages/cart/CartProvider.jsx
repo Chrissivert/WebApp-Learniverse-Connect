@@ -32,8 +32,8 @@ const CartProvider = ({ children }) => {
     }, 300); // Adjust timing to match CSS animation duration
   };
 
-  const removeFromCart = (courseId) => {
-    setCart(currentCart => currentCart.filter(course => course.id !== courseId));
+  const removeFromCart = (id) => {
+    setCart(prevCart => prevCart.filter(item => item.course.course.id !== id));
   };
 
   const clearCart = () => {

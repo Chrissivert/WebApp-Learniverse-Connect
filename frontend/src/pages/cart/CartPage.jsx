@@ -79,13 +79,14 @@ function CartPage() {
       ) : (
         <div className="cart-items">
           {cart.map(({ course }) => (
+            console.log("course", course),
             <div key={course.id} className="cart-item">
               <Coursecard course={course.course} showPrice={false} />
               <div className="details">
                 <p className="provider">Provider: {course.selectedProvider.providerName}</p>
                 <p className="price">Price: {course.selectedProvider.currency} {Math.ceil(course.selectedProvider.price)}</p>
               </div>
-              <button className="remove-btn" onClick={() => removeFromCart(course.id)}>Remove</button>
+              <button className="remove-btn" onClick={() => removeFromCart(course.course.id)}>Remove</button>
             </div>
           ))}
         </div>
