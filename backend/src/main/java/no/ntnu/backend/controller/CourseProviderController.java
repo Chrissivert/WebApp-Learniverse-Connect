@@ -18,8 +18,8 @@ import io.swagger.v3.oas.annotations.Operation;
  * Controller class for managing operations related to course providers.
  * Handles HTTP requests/responses for course provider-related endpoints.
  *
- * @author Group 01
  * @version 23.05.2024
+ * @author Group 01
  */
 @RestController
 @CrossOrigin
@@ -32,6 +32,14 @@ public class CourseProviderController {
     this.courseProviderService = courseProviderService;
   }
 
+  /**
+   * Retrieves providers offering a particular course.
+   *
+   * @param courseId       The ID of the course.
+   * @param targetCurrency The target currency for conversion.
+   * @return List of CourseByEachProviderDTO containing providers offering the
+   *         specified course.
+   */
   @Operation(summary = "Retrieves providers offering a particular course", description = "Retrieves providers offering a particular course.")
   @GetMapping("/api/course/providers/{courseId}")
   public List<CourseByEachProviderDTO> getProvidersForCourse(@PathVariable Long courseId,
@@ -39,15 +47,27 @@ public class CourseProviderController {
     return courseProviderService.getProvidersForCourse(courseId, targetCurrency);
   }
 
+  /**
+   * Retrieves the cheapest course prices.
+   *
+   * @param targetCurrency The target currency for conversion.
+   * @return List of CourseProvider containing the cheapest course prices.
+   */
   @Operation(summary = "Retrieves the cheapest course prices", description = "Retrieves the cheapest course prices.")
   @GetMapping("/api/cheapest-course-prices")
   public List<CourseProvider> getCheapestCoursePrices(@RequestParam String targetCurrency) {
     return courseProviderService.getMinimumConvertedPriceForEachCourse(targetCurrency);
   }
 
+  /**
+   * Retrieves the most expensive course prices.
+   *
+   * @param targetCurrency The target currency for conversion.
+   * @return List of CourseProvider containing the most expensive course prices.
+   */
   @Operation(summary = "Retrieves the most expensive course prices", description = "Retrieves the most expensive course prices.")
-@GetMapping("/api/most-expensive-course-prices")
-public List<CourseProvider> getMostExpensiveCoursePrices(@RequestParam String targetCurrency) {
+  @GetMapping("/api/most-expensive-course-prices")
+  public List<CourseProvider> getMostExpensiveCoursePrices(@RequestParam String targetCurrency) {
     return courseProviderService.getMaximumConvertedPriceForEachCourse(targetCurrency);
-}
+  }
 }
