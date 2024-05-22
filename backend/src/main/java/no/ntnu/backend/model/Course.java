@@ -133,7 +133,7 @@ public class Course {
    * @return the category of the course
    */
   public Category getCategory() {
-    return category;
+    return this.category;
   }
 
   /**
@@ -286,7 +286,7 @@ public class Course {
    * @return true if the course is hidden, false otherwise
    */
   public boolean isHidden() {
-    return hidden;
+    return this.hidden;
   }
 
   /**
