@@ -107,7 +107,7 @@ function Login() {
 
       <form onSubmit={handleSubmit} aria-labelledby="loginFormTitle">
         <div className="imgcontainer">
-          <img src="/login/login.png" alt="Avatar" className="avatar" />
+          <img src="/login/login.png" alt="Standard profile picture of a person in a circle" className="avatar" />
         </div>
         <fieldset className="form-container">
           <legend id="loginFormTitle">Login Information</legend>

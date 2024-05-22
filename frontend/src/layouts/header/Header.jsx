@@ -24,7 +24,7 @@ export default function Header() {
         <Link to="/" className="header-home-link">
           <div className='logo-and-title-section'>
             <div className="logo-container">
-              <img src={whitelogo} className='company-logo' />
+              <img src={whitelogo} className='company-logo' alt="A graduate hat representing Learniverse-Connect's Logo"/>
             </div>
             <div className="company-title">
               <h2>Learniverse Connect</h2>
@@ -41,7 +41,7 @@ export default function Header() {
           {/*  */}
           <div className="cart-container">
             <Link to="/cart" className="cart-header-link">
-              <img src={cartImage} className='cart-img' />
+              <img src={cartImage} className='cart-img' alt='White shopping cart'/>
               <span className="cart-text">Cart ({cart.length})</span>
             </Link>
           </div>
@@ -51,7 +51,7 @@ export default function Header() {
           ) : (
             <div className="login-container">
               <Link to="/login" className="login-link">
-                <img src="/login/login.png" alt="Login" className="login-img" />
+                <img src="/login/login.png" alt="Standard Login icon of a person in a circle" className="login-img" />
                 <span className="login-text">Login</span>
               </Link>
             </div>
