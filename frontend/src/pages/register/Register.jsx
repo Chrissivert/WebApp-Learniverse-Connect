@@ -25,45 +25,59 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    const trimmedUsername = username.trim(); // Remove leading and trailing spaces
+    
     if (password.length <= 6) {
       setError("Password must be longer than 6 characters.");
+      return;
+    }
+    if (trimmedUsername.length > 20) {
+      setError("Username must be maximum 20 characters.");
       return;
     }
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append("username", username);
+      formData.append("username", trimmedUsername); // Use trimmed username
       formData.append("email", email);
       formData.append("password", password);
       const response = await addUserToServer(formData);
-
+  
       console.log("Response:", response);
-
+  
       if (response.status !== 201) {
         throw new Error(response.message || "Registration failed");
       }
-
+  
       setRegisterSuccess(true);
     } catch (error) {
+      const apiError = localStorage.getItem("ApiRequestError");
       console.error("Error:", error);
-      setError(error.message || "Registration failed. Please try again.");
+      setError(apiError || "Registration failed. Please try again.");
+      localStorage.removeItem("ApiRequestError");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <main>
       <h1 id="registerTitle">Register</h1>
-      {error && (
-        <p style={{ color: "red" }} role="alert">
-          {error}
-        </p>
-      )}
       <form onSubmit={handleSubmit} aria-labelledby="registerTitle">
         <div className="imgcontainer">
-          <img src="/login/login.png" alt="Standard profile picture of a person in a circle" className="avatar" />
+          <img
+            src="/login/login.png"
+            alt="Standard profile picture of a person in a circle"
+            className="avatar"
+          />
         </div>
+
+        {error && (
+          <p className="error-message" role="alert">
+            {error}
+          </p>
+        )}
         <fieldset className="form-container">
           <legend className="legend-register">Register Information</legend>
           <label htmlFor="username">Username</label>

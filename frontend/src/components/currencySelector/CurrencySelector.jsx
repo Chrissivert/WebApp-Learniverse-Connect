@@ -1,27 +1,26 @@
 import React, { useState, useContext } from 'react';
-import { useCurrencyContext } from './CurrencyContext.jsx';
 
 import ConfirmationModal from '../popUps/modalBox/ConfirmationModalBox.jsx';
 import { CartContext } from '../../pages/cart/CartProvider.jsx';
+import { useCurrencyContext } from './CurrencyContext.jsx';
 
 const CurrencySelector = ({ currencies }) => {
   const { targetCurrency, handleCurrencyChange } = useCurrencyContext();
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState();
   
-  // Access CartContext
-  const { clearCart } = useContext(CartContext);
+    const { clearCart } = useContext(CartContext);
 
   const handleCurrencyChangeWithConfirmation = (newCurrency) => {
     if (targetCurrency !== newCurrency) {
       setShowConfirmationModal(true);
-    } else {
-      handleCurrencyChange(newCurrency);
+      setSelectedCurrency(newCurrency);
     }
   };
 
   const confirmCurrencyChange = () => {
     clearCart(); // Call clearCart from CartContext
-    handleCurrencyChange(targetCurrency);
+    handleCurrencyChange(selectedCurrency);
     setShowConfirmationModal(false);
   };
 
@@ -57,3 +56,8 @@ const CurrencySelector = ({ currencies }) => {
 };
 
 export default CurrencySelector;
+
+
+
+
+

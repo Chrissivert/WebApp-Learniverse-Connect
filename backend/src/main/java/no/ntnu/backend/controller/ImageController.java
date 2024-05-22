@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class ImageController {
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Upload a new image", description = "Uploads a new image object in the system.")
   @PostMapping()
   public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile image, @RequestParam("alt") String altText) throws IOException {
@@ -90,6 +92,7 @@ public class ImageController {
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Update an image", description = "Update an existing image object in the system.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateImage(@PathVariable int id, @RequestParam("file") MultipartFile image)
@@ -103,6 +106,7 @@ public class ImageController {
    * @param id The ID of the image to delete.
    * @return ResponseEntity indication the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Delete an image", description = "Deletes an image object from the system based on its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteImage(@PathVariable int id) {

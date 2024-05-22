@@ -12,7 +12,7 @@ export default function Footer() {
         <hr />
         <div className='footer-info'>
           <div className='contact-us'>
-            <h3>Contact Us</h3>
+            <h2>Contact Us</h2>
             <ul>
               <li>Address: Larsgårdsvegen 2, Ålesund</li>
               <li><a href='mailto:info@learniverse-connect.com'>E-mail: info@learniverse-connect.com</a></li>

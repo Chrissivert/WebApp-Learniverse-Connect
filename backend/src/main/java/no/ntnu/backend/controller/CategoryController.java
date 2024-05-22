@@ -1,5 +1,6 @@
 package no.ntnu.backend.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,6 +51,7 @@ public class CategoryController {
    * @param category The category object to be created.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Creates a new category", description = "Creates a new category.")
   @PostMapping()
   public ResponseEntity<String> createCategory(@RequestBody Category category) {
@@ -86,6 +88,7 @@ public class CategoryController {
    * @param category The updated category object.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Updates an existing category", description = "Updates an existing category.")
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCategory(@PathVariable int id, @RequestBody Category category) {
@@ -98,6 +101,7 @@ public class CategoryController {
    * @param id The ID of the category to be deleted.
    * @return ResponseEntity indicating the success/failure of the operation.
    */
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Deletes a category by its ID", description = "Deletes a category by its ID.")
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteCategory(@PathVariable int id) {

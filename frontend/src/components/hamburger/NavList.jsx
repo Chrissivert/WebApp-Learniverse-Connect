@@ -29,12 +29,6 @@ export default function NavList() {
         <li>
           <Button text={'About'} src={'/about'} img={iconAbout} alt={'White open book'} imageName={'button-image'} className={'about-header-link'} />
         </li>
-        {/* <li>
-          <Button text={'Profile'} src={'/profile'} img={iconProfile} alt={'White door with an arrow pointing right from the left'} imageName={'button-image'} className={'profile-header-link'}/>
-        </li>
-        <li>
-          <Button text={'Register'} src={'/register'} img={iconRegister} alt={'White upper part of a person'} imageName={'button-image'} className={'register-header-link'}/>
-        </li> */}
         <li>
           <Button text={'Admin'} src={'/admin'} img={iconAdmin} alt={'White shield with a check mark'} imageName={'button-image'} className={'admin-header-link' + ((user) ? ((user.roles[0].authority == 'ROLE_ADMIN') ? ('-admin') : ('')) : (''))} />
         </li>

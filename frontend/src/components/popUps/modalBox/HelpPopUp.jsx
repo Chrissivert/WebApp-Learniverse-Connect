@@ -15,7 +15,7 @@ const HelpPopUp = () => {
 
   return (
     <div className="info-popup" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
-      <button></button>
+      <button className="help-button"></button>
       {showPopup && (
         <div className="popup-content">
           <p>Search for title of course or tags<br /><br />Change currency in profile page</p> {/* Content to display in the popup */}

@@ -1,6 +1,8 @@
 package no.ntnu.backend.model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -44,13 +46,15 @@ public class Course {
   private Level level;
 
 
-  @ManyToMany
+  @ManyToMany (fetch = FetchType.EAGER) 
   @JoinTable(
-      name = "CourseTags",
+      name = "course_tags",
       joinColumns = @JoinColumn(name = "course_id"),
       inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
-  private Set<Tags> tags;
+  private Set<Tags> tags = new HashSet<>();
+
+  
 
   
 

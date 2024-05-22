@@ -134,10 +134,12 @@ public class RoleServiceImpl implements RoleService{
    */
   private boolean removeRole(int id) {
     boolean result = false;
-
     try {
-      this.roleRepository.delete(this.getRoleById(id));
-      result = true;
+      //Admins cant delete the admin role.
+      if(!this.getRoleById(id).getTitle().equals("ROLE_ADMIN")){
+        this.roleRepository.delete(this.getRoleById(id));
+        result = true;
+      }
     } catch (Exception e) {
       throw new IllegalArgumentException("Invalid ID");
     }

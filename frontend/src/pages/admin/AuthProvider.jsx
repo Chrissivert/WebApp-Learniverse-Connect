@@ -15,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = (userData) => {
-    console.log("login", userData, isAuthenticated);
     setUser(userData);
     setIsAuthenticated(true);
   };

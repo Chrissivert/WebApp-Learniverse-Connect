@@ -1,6 +1,7 @@
 package no.ntnu.backend.model;
 
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -8,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Tags {
@@ -15,7 +17,6 @@ public class Tags {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String tag;
-
   
 
   public Tags() {
