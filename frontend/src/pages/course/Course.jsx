@@ -138,7 +138,6 @@ function Course() {
 
   const difficultyIcon = difficultyIcons[course.level.difficulty] || null;
 
-  console.log(JSON.stringify(course) + "course")
   return (
     <div className="Course">
       <div className="button-section">

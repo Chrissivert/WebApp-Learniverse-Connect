@@ -25,7 +25,6 @@ export default function CategoryFilter({ onCategoryChange }) {
       <select id="categorySelect" className="category-select" onChange={handleCategoryChange}>
         <option value="">All Categories</option>
         {categories.map((category) => (
-          console.log(category + "dada"),
           <option key={category.id} value={category.subject}>{category.subject}</option>
         ))}
       </select>

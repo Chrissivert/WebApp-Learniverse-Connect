@@ -55,7 +55,6 @@ export default function PostUser() {
         password: formData.password,
         role: formData.roleId
       };
-      console.log(userData);
 
       await addUserToServer(userData);
       navigate('/admin/user');

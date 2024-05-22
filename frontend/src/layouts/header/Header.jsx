@@ -16,8 +16,6 @@ export default function Header() {
 
   const user = auth.user;
 
-  console.log('user', user);
-
   return (
     <header className="header-container">
       <div className='header-content'>
