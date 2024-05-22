@@ -68,7 +68,7 @@ export default function PostUser() {
   };
 
   return (
-    <>
+    <div className='form'>
     <div>
         <Link to={"/admin/user"}>
           <button className='button'>← Go back</button>
@@ -112,6 +112,6 @@ export default function PostUser() {
         
         <button type='submit'>Submit</button>
       </form>
-    </>
+    </div>
   );
 }
