@@ -13,74 +13,47 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.JwtException;
 import java.io.IOException;
 
-/**
- * Filter class to intercept incoming HTTP requests and extract JWT tokens for
- * authentication.
- * This filter is applied once per request.
- *
- * @version 23.05.2024
- */
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
-  private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
-  @Autowired
-  private final UserDetailsService userDetailsService;
-  @Autowired
-  private final JwtUtil jwtUtil;
+public class  JwtRequestFilter extends OncePerRequestFilter {
+    private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);
+    @Autowired
+    private final UserDetailsService userDetailsService;
+    @Autowired
+    private final JwtUtil jwtUtil;
 
-  /**
-   * Constructs a JwtRequestFilter object.
-   *
-   * @param userDetailsService The UserDetailsService for retrieving user details.
-   * @param jwtUtil            The JwtUtil for JWT token operations.
-   */
-  @Autowired
-  public JwtRequestFilter(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
-    this.userDetailsService = userDetailsService;
-    this.jwtUtil = jwtUtil;
-  }
-
-  /**
-   * Filters each incoming HTTP request to extract and validate JWT tokens for
-   * authentication.
-   *
-   * @param request     The HTTP servlet request.
-   * @param response    The HTTP servlet response.
-   * @param filterChain The filter chain to proceed with filtering.
-   * @throws ServletException If an error occurs while processing the request.
-   * @throws IOException      If an I/O error occurs while processing the request.
-   */
-  @Override
-  protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
-      jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain)
-      throws jakarta.servlet.ServletException, IOException {
-    System.out.println("Request " + request);
-    String authorizationHeader = request.getHeader("Authorization");
-    String email = null;
-    String jwt = null;
-
-    try {
-      System.out.println("Header: " + authorizationHeader);
-      if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-        jwt = authorizationHeader.substring(7);
-        email = this.jwtUtil.extractUsername(jwt);
-      }
-
-      if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-        System.out.println(
-            "userdetails: " + userDetails.getUsername() + userDetails.getPassword() + userDetails.getAuthorities());
-        if (this.jwtUtil.validateToken(jwt, userDetails)) {
-          System.out.println("Valid");
-          UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(userDetails, (Object) null,
-              userDetails.getAuthorities());
-          upat.setDetails((new WebAuthenticationDetailsSource()).buildDetails(request));
-          SecurityContextHolder.getContext().setAuthentication(upat);
-        }
-      }
-    } catch (JwtException var9) {
-      logger.info("Error while parsing JWT token: " + var9.getMessage());
+    @Autowired
+    public JwtRequestFilter(UserDetailsService userDetailsService, JwtUtil jwtUtil) {
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
     }
-    filterChain.doFilter(request, response);
-  }
+
+    @Override
+    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+        System.out.println("Request " + request);
+        String authorizationHeader = request.getHeader("Authorization");
+        String email = null;
+        String jwt = null;
+
+        try {
+            System.out.println("Header: " + authorizationHeader);
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                jwt = authorizationHeader.substring(7);
+                email = this.jwtUtil.extractUsername(jwt);
+            }
+
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
+                System.out.println("userdetails: " + userDetails.getUsername() + userDetails.getPassword() + userDetails.getAuthorities());
+                if (this.jwtUtil.validateToken(jwt, userDetails)) {
+                    System.out.println("Valid");
+                    UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(userDetails, (Object)null, userDetails.getAuthorities());
+                    upat.setDetails((new WebAuthenticationDetailsSource()).buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(upat);
+                }
+            }
+        } catch (JwtException var9) {
+            logger.info("Error while parsing JWT token: " + var9.getMessage());
+        }
+        filterChain.doFilter(request, response);
+    }
 }

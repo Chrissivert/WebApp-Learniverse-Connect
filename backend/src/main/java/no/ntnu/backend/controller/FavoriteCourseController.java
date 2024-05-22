@@ -15,59 +15,38 @@ import java.util.List;
 @CrossOrigin
 public class FavoriteCourseController {
 
-  private final FavoriteCourseService favoriteCourseService;
+    private final FavoriteCourseService favoriteCourseService;
 
-  @Autowired
-  public FavoriteCourseController(FavoriteCourseService favoriteCourseService) {
-    this.favoriteCourseService = favoriteCourseService;
-  }
-
-  /**
-   * Retrieves all favorite courses by user ID.
-   *
-   * @param userId The ID of the user whose favorite courses to retrieve.
-   * @return ResponseEntity containing the list of favorite courses.
-   */
-  @GetMapping("/user/{userId}")
-  public ResponseEntity<List<FavoriteCourse>> getAllFavoriteCoursesByUserId(@PathVariable("userId") int userId) {
-    List<FavoriteCourse> favoriteCourses = favoriteCourseService.getAllFavoriteCoursesByUserId(userId);
-    return ResponseEntity.ok(favoriteCourses);
-  }
-
-  /**
-   * Adds a course to the user's favorite courses.
-   *
-   * @param userId   The ID of the user.
-   * @param courseId The ID of the course to add to favorites.
-   * @return ResponseEntity indicating the success/failure of the operation.
-   */
-  @PostMapping("/user/{userId}/course/{courseId}")
-  public ResponseEntity<String> addFavoriteCourse(@PathVariable("userId") int userId,
-      @PathVariable("courseId") int courseId) {
-    boolean success = favoriteCourseService.addFavoriteCourse(userId, courseId);
-    if (success) {
-      return ResponseEntity.status(HttpStatus.CREATED).body("Course added to favorites successfully.");
-    } else {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add course to favorites.");
+    @Autowired
+    public FavoriteCourseController(FavoriteCourseService favoriteCourseService) {
+        this.favoriteCourseService = favoriteCourseService;
     }
-  }
 
-  /**
-   * Removes a course from the user's favorite courses.
-   *
-   * @param userId   The ID of the user.
-   * @param courseId The ID of the course to remove from favorites.
-   * @return ResponseEntity indicating the success/failure of the operation.
-   */
-  @DeleteMapping("/user/{userId}/course/{courseId}")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or authentication.principal.id == #userId")
-  public ResponseEntity<String> removeFavoriteCourse(@PathVariable("userId") int userId,
-      @PathVariable("courseId") int courseId) {
-    boolean success = favoriteCourseService.removeFavoriteCourse(userId, courseId);
-    if (success) {
-      return ResponseEntity.ok("Course removed from favorites successfully.");
-    } else {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found in favorites or failed to remove.");
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<FavoriteCourse>> getAllFavoriteCoursesByUserId(@PathVariable("userId") int userId) {
+        System.out.println("HEEEEEEE");
+        List<FavoriteCourse> favoriteCourses = favoriteCourseService.getAllFavoriteCoursesByUserId(userId);
+        return ResponseEntity.ok(favoriteCourses);
     }
-  }
+
+    @PostMapping("/user/{userId}/course/{courseId}")
+    public ResponseEntity<String> addFavoriteCourse(@PathVariable("userId") int userId, @PathVariable("courseId") int courseId) {
+        boolean success = favoriteCourseService.addFavoriteCourse(userId, courseId);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Course added to favorites successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to add course to favorites.");
+        }
+    }
+
+    @DeleteMapping("/user/{userId}/course/{courseId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or authentication.principal.id == #userId")
+    public ResponseEntity<String> removeFavoriteCourse(@PathVariable("userId") int userId, @PathVariable("courseId") int courseId) {
+        boolean success = favoriteCourseService.removeFavoriteCourse(userId, courseId);
+        if (success) {
+            return ResponseEntity.ok("Course removed from favorites successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found in favorites or failed to remove.");
+        }
+    }
 }

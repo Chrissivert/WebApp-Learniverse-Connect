@@ -2,66 +2,35 @@ package no.ntnu.backend.dto;
 
 import java.sql.Date;
 
-/**
- * Data Transfer Object (DTO) for handling user signup information.
- * Contains details such as email, password, signup date, and username.
- * 
- * @version 23.05.2024
- */
 public class SignupDTO {
-  private final String email;
-  private final String password;
-  private final Date date;
-  private final String username;
+    private final String email;
+    private final String password;
 
-  /**
-   * Constructor for SignupDTO.
-   *
-   * @param email    The email of the user.
-   * @param password The password of the user.
-   * @param date     The date of signup.
-   * @param username The username of the user.
-   */
-  public SignupDTO(String email, String password, Date date, String username) {
-    this.email = email;
-    this.password = password;
-    this.date = date;
-    this.username = username;
-  }
+    private final Date date;
 
-  /**
-   * Gets the email of the user.
-   *
-   * @return The email of the user.
-   */
-  public String getEmail() {
-    return this.email;
-  }
+    private final String username;
 
-  /**
-   * Gets the password of the user.
-   *
-   * @return The password of the user.
-   */
-  public String getPassword() {
-    return this.password;
-  }
+    public SignupDTO(String email, String password, Date date, String username) {
+        this.email = email;
+        this.password = password;
+        this.date = date;
+        this.username = username;
+    }
 
-  /**
-   * Gets the signup date.
-   *
-   * @return The signup date.
-   */
-  public Date getDate() {
-    return this.date;
-  }
+    public String getEmail() {
+        return this.email;
+    }
 
-  /**
-   * Gets the username of the user.
-   *
-   * @return The username of the user.
-   */
-  public String getUsername() {
-    return this.username;
-  }
+    public String getPassword() {
+        return this.password;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }
+

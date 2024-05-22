@@ -98,7 +98,6 @@ public class CourseProvider {
     }
 
     
-
     @Embeddable
     public static class CourseProviderId implements Serializable {
 
