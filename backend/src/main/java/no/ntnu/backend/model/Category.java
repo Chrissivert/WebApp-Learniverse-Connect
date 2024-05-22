@@ -93,7 +93,7 @@ public class Category {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id);
+    return Objects.hash(this.id, this.subject);
   }
 
   @Override
