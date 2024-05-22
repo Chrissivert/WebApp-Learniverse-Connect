@@ -15,11 +15,6 @@ public class Role {
   private int id;
   private String title;
 
-//  @ManyToMany(
-//          mappedBy = "roles"
-//  )
-//  private Set<User> users = new LinkedHashSet();
-
   public Role() {
   }
 
