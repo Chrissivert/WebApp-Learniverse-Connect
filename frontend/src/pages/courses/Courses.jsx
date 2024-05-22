@@ -8,6 +8,7 @@ function Courses({ courses }) {
   const [favoritedCourses, setFavoritedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visibleCourses, setVisibleCourses] = useState([]);
+  const [anyVisibleCourses, setAnyVisibleCourses] = useState(false);
   const favorites = localStorage.getItem("favorites");
 
   const toggleFavorite = (courseId) => {
@@ -25,12 +26,15 @@ function Courses({ courses }) {
 
     if (filteredCourses.length > 0) {
       setLoading(false);
+      setAnyVisibleCourses(true);
+    } else {
+      setAnyVisibleCourses(false);
     }
   }, [courses]);
 
   return (
     <div className="courses" role="list" aria-live="polite">
-      {loading ? (
+      {loading && !anyVisibleCourses ? (
         Array(6).fill().map((_, index) => (
           <div className="coursecards-skeleton" key={index} role="listitem">
             <CourseCardSkeleton />
