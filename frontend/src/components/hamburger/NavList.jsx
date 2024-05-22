@@ -7,9 +7,15 @@ import iconCourses from "/icons/home/find-a-course.png";
 import iconAdmin from "/icons/home/admin-icon.png";
 import iconCart from '/cart/whiteCart.png';
 import { CartContext } from '../../pages/cart/CartProvider';
+import { AuthContext } from '../../pages/admin/AuthProvider';
 
 export default function NavList() {
   const { cart } = useContext(CartContext);
+  const auth = useContext(AuthContext);
+
+  const user = auth.user;
+  // console.log(user.roles[0].authority);  
+  // console.log(user.role.title);
 
   return (
     <nav>
@@ -30,7 +36,7 @@ export default function NavList() {
           <Button text={'Register'} src={'/register'} img={iconRegister} alt={'White upper part of a person'} imageName={'button-image'} className={'register-header-link'}/>
         </li> */}
         <li>
-          <Button text={'Admin'} src={'/admin'} img={iconAdmin} alt={'White shield with a check mark'} imageName={'button-image'} className={'admin-header-link'} />
+          <Button text={'Admin'} src={'/admin'} img={iconAdmin} alt={'White shield with a check mark'} imageName={'button-image'} className={'admin-header-link' + ((user) ? ((user.roles[0].authority == 'ROLE_ADMIN') ? ('-admin') : ('')) : (''))} />
         </li>
         <li>
           <Button text={'Cart (' + (cart.length) + ')'} src={'/cart'} img={iconCart} alt={'White shopping cart'} imageName={'button-image'} className={'cart-header-link'} linkName={'cart-link'} />
