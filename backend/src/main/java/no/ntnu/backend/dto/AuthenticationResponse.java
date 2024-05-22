@@ -9,7 +9,7 @@ public class AuthenticationResponse implements Serializable{
         this.jwt = jwt;
     }
 
-    public Strzing getJwt() {
+    public String getJwt() {
         return this.jwt;
     }
 }
