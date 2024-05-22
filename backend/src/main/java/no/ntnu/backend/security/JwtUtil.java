@@ -18,79 +18,77 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class JwtUtil {
-    @Value("${JWT_SECRET_KEY}")
+  @Value("${JWT_SECRET_KEY}")
 
-    private String JWT_SECRET_KEY;
-    /**
-     * Key inside JWT token where roles are stored.
-     */
-    private static final String ROLE_KEY = "roles";
+  private String JWT_SECRET_KEY;
+  /**
+   * Key inside JWT token where roles are stored.
+   */
+  private static final String ROLE_KEY = "roles";
 
-    /**
-     * Generate a JWT token for an authenticated user.
-     *
-     * @param userDetails Object containing user details
-     * @return JWT token string
-     */
-    public String generateToken(UserDetails userDetails) {
-        final long timeNow = System.currentTimeMillis();
-        final long millisecondsInSixMonths = 6L * 30 * 24 * 60 * 60 * 1000; // Approximation for 6 months
-        final long timeAfterSixMonths = timeNow + millisecondsInSixMonths;
+  /**
+   * Generate a JWT token for an authenticated user.
+   *
+   * @param userDetails Object containing user details
+   * @return JWT token string
+   */
+  public String generateToken(UserDetails userDetails) {
+    final long timeNow = System.currentTimeMillis();
+    final long millisecondsInSixMonths = 6L * 30 * 24 * 60 * 60 * 1000; // Approximation for 6 months
+    final long timeAfterSixMonths = timeNow + millisecondsInSixMonths;
 
-        return Jwts.builder()
-                .subject(userDetails.getUsername())
-                .claim(ROLE_KEY, userDetails.getAuthorities())
-                .issuedAt(new Date(timeNow))
-                .expiration(new Date(timeAfterSixMonths))
-                .signWith(getSigningKey())
-                .compact();
-    }
+    return Jwts.builder()
+        .subject(userDetails.getUsername())
+        .claim(ROLE_KEY, userDetails.getAuthorities())
+        .issuedAt(new Date(timeNow))
+        .expiration(new Date(timeAfterSixMonths))
+        .signWith(getSigningKey())
+        .compact();
+  }
 
-    private SecretKey getSigningKey() {
-        byte[] keyBytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
-        return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
-    }
+  private SecretKey getSigningKey() {
+    byte[] keyBytes = JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8);
+    return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
+  }
 
-    /**
-     * Find username from a JWT token.
-     *
-     * @param token JWT token
-     * @return Username
-     */
-    public String extractUsername(String token) throws JwtException {
-        return extractClaim(token, Claims::getSubject);
-    }
+  /**
+   * Find username from a JWT token.
+   *
+   * @param token JWT token
+   * @return Username
+   */
+  public String extractUsername(String token) throws JwtException {
+    return extractClaim(token, Claims::getSubject);
+  }
 
-    /**
-     * Check if a token is valid for a given user.
-     *
-     * @param token       Token to validate
-     * @param userDetails Object containing user details
-     * @return True if the token matches the current user and is still valid
-     */
-    public boolean validateToken(String token, UserDetails userDetails) throws JwtException {
-        final String username = extractUsername(token);
-        return userDetails != null
-                && username.equals(userDetails.getUsername())
-                && !isTokenExpired(token);
-    }
+  /**
+   * Check if a token is valid for a given user.
+   *
+   * @param token       Token to validate
+   * @param userDetails Object containing user details
+   * @return True if the token matches the current user and is still valid
+   */
+  public boolean validateToken(String token, UserDetails userDetails) throws JwtException {
+    final String username = extractUsername(token);
+    return userDetails != null
+        && username.equals(userDetails.getUsername())
+        && !isTokenExpired(token);
+  }
 
+  private Date extractExpiration(String token) {
+    return extractClaim(token, Claims::getExpiration);
+  }
 
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
+  private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    final Claims claims = extractAllClaims(token);
+    return claimsResolver.apply(claims);
+  }
 
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
+  private Claims extractAllClaims(String token) {
+    return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
+  }
 
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
-    }
-
-    private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
+  private Boolean isTokenExpired(String token) {
+    return extractExpiration(token).before(new Date());
+  }
 }
-
