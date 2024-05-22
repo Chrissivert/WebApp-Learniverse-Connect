@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 /**
- * Controller class for handling CRUD operations related to categories.
- * Handles HTTP requests/responses for category-related endpoints.
+ * Controller class for handling CRUD operations related to courses.
+ * Handles HTTP requests/responses for course-related endpoints.
  *
- * @author Group 01
  * @version 23.05.2024
+ * @author Group 01
  */
 @RestController
 @RequestMapping("/api/categories")
