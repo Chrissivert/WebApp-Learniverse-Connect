@@ -1,10 +1,9 @@
 :root {
-  --base-font-size: 16px; /* Define a CSS variable for base font size */
+  --base-font-size: 16px; 
   --dropdown-scale: 1;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
   background-color: #ffffff;
   font-synthesis: none;
@@ -82,3 +81,4 @@ button:focus:not(:focus-visible) {
 .success-message {
   font-size: 1.5rem;
 }
+
