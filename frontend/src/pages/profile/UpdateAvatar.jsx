@@ -45,15 +45,15 @@ export default function UpdateAvatar({ user }) {
     }
   };
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Upload File
-          <input type="file" name="file" accept=".png, .jpg, .jpeg, .webp, .svg" onChange={handleFileChange}/>
-        </label><br/>
-        <button type='submit'>Upload</button>
-      </form>
-    </div>
-  );
+//   return (
+//     <div>
+//       <form onSubmit={handleSubmit}>
+//         <label>
+//           Upload File
+//           <input type="file" name="file" accept=".png, .jpg, .jpeg, .webp, .svg" onChange={handleFileChange}/>
+//         </label><br/>
+//         <button type='submit'>Upload</button>
+//       </form>
+//     </div>
+//   );
 }

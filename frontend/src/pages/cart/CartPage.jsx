@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { CartContext } from './CartProvider';
 import './cartPage.css'; 
 import '../../index.css';
-import Button from '../../components/button/Button';
 import Coursecard from '../../components/coursecard/Coursecard';
 import ConfirmationModal from '../../components/popUps/modalBox/ConfirmationModalBox';
 import { useNavigate } from 'react-router-dom';
