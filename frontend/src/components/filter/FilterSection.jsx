@@ -14,7 +14,9 @@ export default function FilterSection({ onSearchQueryChange, onPriceChange, onSo
         <AutocompleteBox courses={courses} filters={filters} />
       </div>
       <div className="filter-row" role="group" aria-labelledby="filterHeading">
-        <PriceRangeFilter onPriceChange={onPriceChange} maxPrice={maxPrice} />
+        <div style={{ flex: 1 }}> {/* Add this div */}
+          <PriceRangeFilter className="price-container"onPriceChange={onPriceChange} maxPrice={maxPrice} />
+        </div>
         <SortByFilter onSortChange={onSortChange} />
         <CategoryFilter onCategoryChange={onCategoryChange} />
       </div>

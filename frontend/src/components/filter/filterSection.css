@@ -216,7 +216,7 @@ select {
 }
 
 @media screen and (max-width: 768px) {
-  .filter-container, .sort-filter-container, .search-container, .autocomplete-item {
+  .filter-container, .sort-filter-container, .search-container, .autocomplete-item, .price-container {
     font-size: 18px; 
   }
 }
@@ -238,3 +238,49 @@ select {
   outline: none;
 }
 
+
+
+
+.slider {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+  margin-top: 20px;
+  top: -5px
+ }
+
+ .slider .thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #8a2be2;
+  cursor: pointer;
+  position: relative; /* Ensure the position is relative */
+  top: -7px; /* Adjust the top position to move the thumb up */
+}
+
+
+ .track-1 {
+  background-color: #275efe;;
+ }
+
+ .slider-box{
+  width: 100%;
+  padding: 36px 32px;
+  background: #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(18,22,33,.12);
+ }
+
+ .values{
+  margin: 0;
+  font-weight: 500
+ }
+
+ small {
+  font-size: 14px;
+  margin-top: 8px;
+  display: block;
+  color: #88a3ba
+  height: 20px;
+ }

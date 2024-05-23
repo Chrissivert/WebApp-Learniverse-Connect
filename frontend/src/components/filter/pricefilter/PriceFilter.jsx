@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Slider from 'react-slider';
-import './priceFilter.css';
 
 export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const [sliderValues, setSliderValues] = useState([0, Math.ceil(maxPrice / 100) * 100]);
@@ -15,6 +14,7 @@ export default function PriceRangeFilter({ onPriceChange, maxPrice }) {
   const handleSliderChange = (newValues) => {
     setSliderValues(newValues);
   };
+
 
   return (
     <div className="slider-container">
