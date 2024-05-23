@@ -26,12 +26,11 @@ public class User {
   private String email;
   private String password;
   private boolean active = true;
-  private Integer imgId;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
       @JoinColumn(name = "role_id") })
-  private Set<Role> roles = new LinkedHashSet<>();
+  private Set<Role> roles = new LinkedHashSet();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<FavoriteCourse> favoriteCourses;
@@ -179,32 +178,13 @@ public class User {
     this.password = password;
   }
 
-  /**
-   * Gets the image ID of the user.
-   * 
-   * @return the image ID of the user
+  /*
+   * @JsonIgnore
+   * public boolean isValid() {
+   * return //this.id > 0 &&
+   * this.roleId > 0;
+   * }
    */
-  public Integer getImgId() {
-    return this.imgId;
-  }
-
-  /**
-   * Sets the image ID of the user.
-   * 
-   * @param imgId the new image ID of the user
-   */
-  public void setImgId(Integer imgId) {
-    this.imgId = imgId;
-  }
-
-  /**
-   * Checks if the user is active.
-   * 
-   * @return true if the user is active, false otherwise
-   */
-  public boolean isActive() {
-    return this.active;
-  }
 
   /**
    * Sets the active status of the user.
@@ -213,6 +193,15 @@ public class User {
    */
   public void setActive(boolean active) {
     this.active = active;
+  }
+
+  /**
+   * Returns the active state of the user.
+   *
+   * @return Returns {@code true} if the user is active. {@code false} otherwise
+   */
+  public boolean isActive() {
+    return this.active;
   }
 
   /**
@@ -234,7 +223,6 @@ public class User {
         Objects.equals(this.email, that.email) &&
         Objects.equals(this.password, that.password) &&
         this.active == that.active &&
-        Objects.equals(this.imgId, that.imgId) &&
         this.roles.equals(that.roles);
   }
 
@@ -245,8 +233,7 @@ public class User {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(this.id, this.username, this.startDate, this.email, this.password, this.active, this.imgId,
-        this.roles);
+    return Objects.hash(this.id, this.username, this.startDate, this.email, this.password, this.active, this.roles);
   }
 
   /**
@@ -263,7 +250,6 @@ public class User {
         "email=" + this.email + ", " +
         "password=" + this.password + ", " +
         "active=" + this.active + ", " +
-        "imgId=" + this.imgId + ", " +
         "roles=" + this.roles + "]";
   }
 }

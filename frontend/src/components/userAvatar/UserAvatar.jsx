@@ -28,23 +28,13 @@ function UserAvatar({ user }) {
   }
 
   return (
-    <Link
-      to="/profile"
-      className="user-avatar-link"
-      aria-label="View Profile"
-    >
+    <Link to="/profile" className="user-avatar-link" aria-label="View Profile">
       <div className="user-avatar">
-        {!loading && (
-          <div role="img" aria-label={`Avatar for ${userData.username}`} className={"avatar-image-section" + ((userData.imgId)?(""):("-none"))}>
-            <img src={generateImageUrl(userData.imgId)} className="avatar-image" alt="Profile picture"/>
-          </div>
-        )}
-        {userData && (
-          <div className={"avatar-default-section" + ((userData.imgId !== null)?(""):("-active"))}>
+        {!loading && userData && (
+          <div role="img" aria-label={`Avatar for ${userData.username}`}>
             {avatar}
           </div>
         )}
-        
       </div>
     </Link>
   );

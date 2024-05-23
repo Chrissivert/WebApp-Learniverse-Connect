@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +25,12 @@ import no.ntnu.backend.repository.ProviderRepository;
  */
 @Service
 public class CourseProviderService {
+
+  @Value("${currency.api.key}")
+  private String apiKey;
+
+  @Value("${currency.api.url}")
+  private String apiUrl;
 
   @Autowired
   private CourseProviderRepository courseProviderRepository;
@@ -167,10 +174,10 @@ public class CourseProviderService {
       // Fetch conversion rates if cache is empty or rates are outdated (1 hour in
       // this example)
       try {
-        String apiKey = "fca_live_g7qLJhzahQOmCMlAPGQZZTfLIAfLccPFjRrqS4mu";
-        String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=" + apiKey + "&base_currency=" + baseCurrency;
+        
+        String completeApiUrl = this.apiUrl + this.apiKey + "&base_currency=" + baseCurrency;
         RestTemplate restTemplate = new RestTemplate();
-        CurrencyConversionResponse response = restTemplate.getForObject(apiUrl, CurrencyConversionResponse.class);
+        CurrencyConversionResponse response = restTemplate.getForObject(completeApiUrl, CurrencyConversionResponse.class);
 
         conversionRates = response.getData();
         lastUpdated = System.currentTimeMillis();
