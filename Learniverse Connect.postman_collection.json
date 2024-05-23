@@ -3,8 +3,8 @@
 		"_postman_id": "b10b8bc4-fb4c-438b-b9e9-810afd26f462",
 		"name": "Learniverse Connect",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32732038",
-		"_collection_link": "https://ntnu-iir-students.postman.co/workspace/Learniverse-Connect~f51c5706-5a0c-40c0-bbe3-9b3e08c488f5/collection/32826715-b10b8bc4-fb4c-438b-b9e9-810afd26f462?action=share&source=collection_link&creator=32732038"
+		"_exporter_id": "35055111",
+		"_collection_link": "https://ntnu-iir-students.postman.co/workspace/Learniverse-Connect~f51c5706-5a0c-40c0-bbe3-9b3e08c488f5/collection/32826715-b10b8bc4-fb4c-438b-b9e9-810afd26f462?action=share&source=collection_link&creator=35055111"
 	},
 	"item": [
 		{
@@ -696,7 +696,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ3OTA3LCJleHAiOjE3MzE5OTk5MDd9.VMh6B9Zppu1tfqdYK0f0A0kmr9R0Lmy5PO5q6sd7Ma4",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ4NDQ1LCJleHAiOjE3MzIwMDA0NDV9.HK-lUeFc6V8ZnaURYNy8yYLzEd3maTdOMsHFSbQNMBg",
 										"type": "text"
 									}
 								],
@@ -739,7 +739,13 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ4NDQ1LCJleHAiOjE3MzIwMDA0NDV9.HK-lUeFc6V8ZnaURYNy8yYLzEd3maTdOMsHFSbQNMBg",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{BASE_URL}}/courses/{{new_course_id}}",
 									"host": [
@@ -771,7 +777,13 @@
 							],
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ4NDQ1LCJleHAiOjE3MzIwMDA0NDV9.HK-lUeFc6V8ZnaURYNy8yYLzEd3maTdOMsHFSbQNMBg",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{BASE_URL}}/course/5550",
 									"host": [
@@ -973,7 +985,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE3MTY0MDA0NjksImV4cCI6MTczMTk1MjQ2OX0.fEi2N0hI29ft3NJmDzBOFe2G0p6kGNHzyufIj2pwYvk",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ4NDQ1LCJleHAiOjE3MzIwMDA0NDV9.HK-lUeFc6V8ZnaURYNy8yYLzEd3maTdOMsHFSbQNMBg",
 										"type": "text"
 									}
 								],
@@ -1050,7 +1062,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlQGRhdmUuY29tIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzE2NDAwNjE2LCJleHAiOjE3MzE5NTI2MTZ9.qK_scD6qJnjldfHxQ_e2G6TjCTbdDDMx83YcrmZuyH4",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlQGRhdmUuY29tIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzE2NDQ5MDQ1LCJleHAiOjE3MzIwMDEwNDV9.rcBYKlQ8ARjTlcuL4VPjh4ad-YJte5Se9IVXxBdPMrk",
 										"type": "text"
 									}
 								],
@@ -1176,7 +1188,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE3MTY0MDA0NjksImV4cCI6MTczMTk1MjQ2OX0.fEi2N0hI29ft3NJmDzBOFe2G0p6kGNHzyufIj2pwYvk",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDQ4NDQ1LCJleHAiOjE3MzIwMDA0NDV9.HK-lUeFc6V8ZnaURYNy8yYLzEd3maTdOMsHFSbQNMBg",
 										"type": "text"
 									}
 								],
@@ -1220,98 +1232,6 @@
 									"path": [
 										"categories",
 										"2"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create new Category as user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Response has code 403\", function() {",
-											"    pm.response.to.have.status(403)",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZlQGRhdmUuY29tIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XSwiaWF0IjoxNzE2NDAwNjE2LCJleHAiOjE3MzE5NTI2MTZ9.qK_scD6qJnjldfHxQ_e2G6TjCTbdDDMx83YcrmZuyH4",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 5,\n    \"subject\": \"Economy and Leadership\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/categories",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"categories"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create new Category as admin",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Response has code 403\", function() {",
-											"    pm.response.to.have.status(403)",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzE2NDAyNjM3LCJleHAiOjE3MzE5NTQ2Mzd9.jy6CdxZhLKHNlBuf_FhaR_urAXp1wlpOvqCzWP0n2bg",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 5,\n    \"subject\": \"Economy and Leadership\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_URL}}/categories",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"categories"
 									]
 								}
 							},
@@ -1369,18 +1289,35 @@
 							"response": []
 						},
 						{
-							"name": "Update a category with authorization Copy",
+							"name": "Updating category to original state",
 							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "New Request",
-							"request": {
-								"method": "GET",
-								"header": []
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaHVja0BjaHVjay5jb20iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE3MTY0MDA0NjksImV4cCI6MTczMTk1MjQ2OX0.fEi2N0hI29ft3NJmDzBOFe2G0p6kGNHzyufIj2pwYvk",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 4,\n    \"subject\": \"Data Science and Analytics\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/categories/4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"categories",
+										"4"
+									]
+								}
 							},
 							"response": []
 						}

@@ -19,7 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 
 /**
- * This is a javadoc
+ * Controller class for managing courses.
+ * Provides endpoints for CRUD operations on courses.
+ *
+ * @version 23.05.2024
+ * @author Group 01
  */
 @RestController
 @RequestMapping("/api/courses")
@@ -33,6 +37,12 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    /**
+     * Creates a new course.
+     *
+     * @param course The course object to be created
+     * @return ResponseEntity indicating the success or failure of the operation
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Creates a new course", description = "Creates a new course.")
     @PostMapping()
@@ -40,18 +50,36 @@ public class CourseController {
         return this.courseService.create(course);
     }
 
+    /**
+     * Retrieves all courses.
+     *
+     * @return List of all courses
+     */
     @Operation(summary = "Retrieves all courses", description = "Retrieves all courses.")
     @GetMapping()
     public List<Course> readAllCourses() {
         return this.courseService.readAll();
     }
 
+    /**
+     * Retrieves a course by its ID.
+     *
+     * @param id The ID of the course to retrieve
+     * @return ResponseEntity containing the course if found, or an error message if not found
+     */
     @Operation(summary = "Retrieves a course by its ID", description = "Retrieves a course by its ID.")
     @GetMapping("/{id}")
     public ResponseEntity<Course> readCourseById(@PathVariable int id) {
         return this.courseService.readById(id);
     }
 
+    /**
+     * Updates an existing course.
+     *
+     * @param id The ID of the course to update
+     * @param course The updated course object
+     * @return ResponseEntity indicating the success or failure of the operation
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Updates an existing course", description = "Updates an existing course.")
     @PutMapping("/{id}")
@@ -59,6 +87,12 @@ public class CourseController {
         return this.courseService.update(id, course);
     }
 
+    /**
+     * Deletes a course by its ID.
+     *
+     * @param id The ID of the course to delete
+     * @return ResponseEntity indicating the success or failure of the operation
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Deletes a course by its ID", description = "Deletes a course by its ID.")
     @DeleteMapping("/{id}")
