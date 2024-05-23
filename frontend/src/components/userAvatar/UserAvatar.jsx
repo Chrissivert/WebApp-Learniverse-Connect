@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getUserByEmail } from "../../services/user-request";
 import "./UserAvatar.css";
+import { generateImageUrl } from "../../services/image-service";
 
 function UserAvatar({ user }) {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  // const [userId, setUserId] = useState(null);
   let avatar = "";
 
   useEffect(() => {
@@ -32,11 +34,17 @@ function UserAvatar({ user }) {
       aria-label="View Profile"
     >
       <div className="user-avatar">
-        {!loading && userData && (
-          <div role="img" aria-label={`Avatar for ${userData.username}`}>
+        {!loading && (
+          <div role="img" aria-label={`Avatar for ${userData.username}`} className={"avatar-image-section" + ((userData.imgId)?(""):("-none"))}>
+            <img src={generateImageUrl(userData.imgId)} className="avatar-image" alt="Profile picture"/>
+          </div>
+        )}
+        {userData && (
+          <div className={"avatar-default-section" + ((userData.imgId !== null)?(""):("-active"))}>
             {avatar}
           </div>
         )}
+        
       </div>
     </Link>
   );

@@ -45,17 +45,6 @@
   transition: filter 0.3s ease;
 }
 
-.user-avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 80px;
-  margin-top: 2px;
-  font-size: 32px;
-  color: #fefefe;
-  background-color: rgb(151, 88, 163);
-}
-
 .button:hover {
   filter: grayscale(50%);
   background-color: rgb(151, 88, 163, 0.6);

@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
 import { getUserByEmail } from "../../services/user-request";
 import { AuthContext } from "../admin/AuthProvider";
@@ -8,6 +7,7 @@ import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
 import CurrencySelector from "../../components/currencySelector/CurrencySelector";
+import UpdateAvatar from "./UpdateAvatar";
 
 export default function Profile() {
   const auth = useContext(AuthContext);
@@ -18,9 +18,10 @@ export default function Profile() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [images, setImages] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    console.log(auth.user);
     if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
       const isUser = auth.user.roles.some(
         (role) => role.authority === "ROLE_USER"
@@ -36,17 +37,17 @@ export default function Profile() {
     setLoading(false);
   }, [auth.user]);
 
-  useEffect(function () {
+  useEffect(() => {
     async function getUser() {
       try {
         const user = auth.user;
         if (auth.user != null) {
           const convertedEmail = user.sub.replace("@", "%40");
-          //console.log("this is my user" + user.sub);
           const res = await getUserByEmail(convertedEmail);
           const currentUser = res.data;
+          setCurrentUser(currentUser); // Store the current user in state
           setUserId(currentUser.id);
-          localStorage.setItem("ActiveUserId", userId);
+          localStorage.setItem("ActiveUserId", currentUser.id);
           setUserName(currentUser.username);
           setEmail(currentUser.email);
           setStartDate(currentUser.startDate);
@@ -57,7 +58,7 @@ export default function Profile() {
     }
 
     getUser();
-  });
+  }, [auth.user]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -71,14 +72,20 @@ export default function Profile() {
       <div className="card">
         <UserAvatar className="userAvatar-profile" user={auth.user} />
         <div className="data">
-          <Intro userName={userName} email={email} startDate={startDate} />
+          <Intro
+            userName={userName}
+            email={email}
+            startDate={startDate}
+            currentUser={currentUser} // Pass currentUser to Intro
+          />
         </div>
       </div>
       {userId && <GetFavoriteCourses userId={userId} />}
     </div>
   );
 }
-function Intro({ userName, email, startDate }) {
+
+function Intro({ userName, email, startDate, currentUser }) {
   const auth = useContext(AuthContext);
 
   const handleSignOff = () => {
@@ -100,7 +107,10 @@ function Intro({ userName, email, startDate }) {
         Welcome to your profile! Here you may access your favorite courses. Dive
         in whenever you're ready! Happy learning!
       </p>
-      <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
+      <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />
+      <section>
+        <UpdateAvatar user={currentUser} /> {/* Pass currentUser to UpdateAvatar */}
+      </section>
     </div>
   );
 }

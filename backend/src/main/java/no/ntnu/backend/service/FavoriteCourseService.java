@@ -40,7 +40,6 @@ public class FavoriteCourseService {
         FavoriteCourse favoriteCourse = new FavoriteCourse();
         favoriteCourse.setUser(new User(userId)); // You'll need to define a User class with an appropriate constructor
         favoriteCourse.setCourse(new Course(courseId)); // You'll need to define a Course class with an appropriate constructor
-        favoriteCourse.setFavorited(true);
         favoriteCourseRepository.save(favoriteCourse);
         logger.info("Course with ID {} added to favorites for user with ID: {}", courseId, userId);
         return true;

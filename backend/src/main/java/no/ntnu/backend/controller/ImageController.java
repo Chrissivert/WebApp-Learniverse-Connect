@@ -42,7 +42,6 @@ public class ImageController {
    * @return ResponseEntity indication the success/failure of the operation.
    * @throws IOException
    */
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @Operation(summary = "Upload a new image", description = "Uploads a new image object in the system.")
   @PostMapping()
   public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile image, @RequestParam("alt") String altText) throws IOException {
