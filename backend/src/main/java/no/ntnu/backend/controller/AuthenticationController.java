@@ -1,5 +1,5 @@
 package no.ntnu.backend.controller;
-import no.ntnu.backend.service.impl.UserServiceImpl;
+import no.ntnu.backend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import no.ntnu.backend.dto.AuthenticationRequest;
@@ -19,7 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * Controller class for handling authentication-related HTTP requests.
+ * This class provides endpoints for user authentication and signup.
+ * 
+ * @version 23.05.2024
+ * @author Group 01
+ */
 @CrossOrigin
 @RestController
 @RequestMapping ("/api/authenticate")
@@ -30,7 +36,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -63,9 +69,13 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-
-
-
+    /**
+     * HTTP POST request to /authenticate/signup.
+     * Registers a new user with the provided details.
+     * 
+     * @param signupData The request JSON object containing user signup details
+     * @return ResponseEntity indicating successful user creation or error message if failed
+     */
     @PostMapping("/signup")
     public ResponseEntity<String> signupProcess(@RequestBody SignupDTO signupData) {
         logger.info("Received signup request for email: {}", signupData.getEmail());

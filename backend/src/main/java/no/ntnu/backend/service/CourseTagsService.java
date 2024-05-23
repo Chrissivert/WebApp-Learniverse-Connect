@@ -8,15 +8,24 @@ import org.springframework.stereotype.Service;
 import no.ntnu.backend.model.CourseTags;
 import no.ntnu.backend.repository.CourseTagsRepository;
 
+/**
+ * Service class for managing CourseTags entities.
+ * 
+ * @version 23.05.2024
+ * @author Group 01
+ */
 @Service
 public class CourseTagsService {
 
-    @Autowired
-    private CourseTagsRepository courseTagsRepository;
+  @Autowired
+  private CourseTagsRepository courseTagsRepository;
 
-    public List<CourseTags> findAllDistinct3() {
-        return courseTagsRepository.findAll();
-    }
+  /**
+   * Retrieves all distinct CourseTags.
+   * 
+   * @return a list of all distinct CourseTags
+   */
+  public List<CourseTags> findAllDistinct3() {
+    return courseTagsRepository.findAll();
+  }
 }
-
-
