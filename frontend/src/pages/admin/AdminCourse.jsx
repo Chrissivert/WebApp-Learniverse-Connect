@@ -83,11 +83,6 @@ function AdminCourse() {
                 Hidden courses is marked with a purple background and has a "unhide" button to make it visible. The visible courses has a "hide"
                 button to hide the specific course. You can easily change whether you want to hide or unhide a each induvidual course.
                 To read full description of a course, click on the description section. </p>
-            <div>
-                <Link to={"/admin/course/newCourse"}>
-                <button className='button'>Add new course</button>
-                </Link>
-            </div>
             
             {/* Admin page content */}
         
@@ -124,22 +119,12 @@ function AdminCourse() {
                                 <td>
                                     {/* Add action buttons like Edit, Delete, etc. */}
                                     <div className="button-container">
-                                        <div>
-                                            <Link to={`/admin/course/updateCourse/${course.id}`}>
-                                            <button className="button">Edit</button>
-                                            </Link>
-                                        </div>
-                                        <div>
+                                        <div className='delete-course-button'>
                                             <Link to={`/admin/course/deleteCourse/${course.id}`}>
                                             <button className="button">Delete</button>
                                             </Link>
                                         </div>
-                                        <div>
-                                            <Link to={`/admin/course/addImage/${course.id}`}>
-                                            <button className="button">Add image</button>
-                                            </Link>
-                                        </div>
-                                        <div>
+                                        <div className='visibility-course-button'>
                                             <button 
                                                 className='button' 
                                                 onClick={() => toggleCourseVisibility(course.id)}

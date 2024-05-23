@@ -34,7 +34,7 @@ export default function Coursecard({ course, favorited, onFavoriteToggle, showPr
       </figure>
       <div className="info-section" role="region" aria-label="Course Information">
         <h2>{course.title}</h2>
-        <p>Start Date: {course.startDate}</p>
+        {/* <p>Start Date: {course.startDate}</p> */}
         <div className={'price-section' + (showPrice ? '' : ' close')} role="group" aria-label="Price Information">
           {Math.ceil(course.cheapestPrice) === Math.ceil(course.mostExpensivePrice) ? (
             <p>
