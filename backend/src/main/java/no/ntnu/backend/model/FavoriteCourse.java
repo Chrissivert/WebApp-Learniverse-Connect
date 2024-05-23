@@ -24,10 +24,6 @@ public class FavoriteCourse {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
 
-    // Change the column name to match the database
-    @Column(name = "is_favorited")
-    private boolean isFavorited;
-
     public FavoriteCourse() {
     }
 
@@ -53,13 +49,5 @@ public class FavoriteCourse {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public boolean isFavorited() {
-        return isFavorited;
-    }
-
-    public void setFavorited(boolean favorited) {
-        isFavorited = favorited;
     }
 }

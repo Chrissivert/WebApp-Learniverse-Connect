@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import GetFavoriteCourses from "../../components/crudTest/read/favoriteCourses/GetFavoriteCourses";
 import UserAvatar from "../../components/userAvatar/UserAvatar";
 import CurrencySelector from "../../components/currencySelector/CurrencySelector";
+import PostImage from "../../components/crudTest/post/image/PostImage";
+import { getImagesFromServer } from "../../services/image-service";
+import UpdateAvatar from "./UpdateAvatar";
 
 export default function Profile() {
   const auth = useContext(AuthContext);
@@ -18,9 +21,9 @@ export default function Profile() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    console.log(auth.user);
     if (auth.user && auth.user.roles && Array.isArray(auth.user.roles)) {
       const isUser = auth.user.roles.some(
         (role) => role.authority === "ROLE_USER"
@@ -101,6 +104,10 @@ function Intro({ userName, email, startDate }) {
         in whenever you're ready! Happy learning!
       </p>
       <CurrencySelector currencies={["NOK", "USD", "EUR", "GBP"]} />{" "}
+      <section>
+        {/* <PostImage/> */}
+        <UpdateAvatar user={auth.user}/>
+      </section>
     </div>
   );
 }

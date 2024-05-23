@@ -31,7 +31,7 @@ export default function PostImage() {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('alt', altText);
+    formData.append('alt', "Profile image for a user");
 
     try {
       uploadImageToServer(formData);
@@ -51,13 +51,13 @@ export default function PostImage() {
           Upload File
           <input type="file" name="file" accept=".png, .jpg, .jpeg, .webp, .svg" onChange={handleFileChange}/>
         </label><br/>
-        <label>
+        {/* <label>
           Image Description
           <input value={altText} onChange={handleAltTextChange}/>
         </label><br/>
         <div>
           <img src={previewImage} width={300} alt={previewImage ? 'Image Preview' : null}/>
-        </div>
+        </div> */}
         <button type='submit'>Upload</button>
       </form>
     </div>
