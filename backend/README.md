@@ -14,5 +14,5 @@ Look at the `application.properties.example` (resides within resources) on how t
 ## Running the backend:
 1. Enter the git repository folder
 2. Change directory to backend. This can be done using  `cd backend`
-3. Compile the backend folder:  `mvn install `
+3. Compile the backend folder:  `mvn package `
 4. Execute the jar file:  `java -jar target/*.jar` or use  `mvn spring-boot:mvn`
