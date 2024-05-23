@@ -27,8 +27,6 @@ public class User {
   private String password;
   private boolean active = true;
 
-  private Integer imgId;
-
   @ManyToMany(
           fetch = FetchType.EAGER
   )
@@ -119,14 +117,6 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public Integer getImgId(){
-    return this.imgId;
-  }
-
-  public void setImgId(Integer imgId){
-    this.imgId = imgId;
   }
 
   /*@JsonIgnore
