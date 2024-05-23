@@ -1,12 +1,12 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import { getImagesFromServer, uploadImageToServer } from '../../services/image-service';
 import { updateUserOnServer } from '../../services/user-request';
-// import { uploadImageToServer } from '../../../../services/image-service';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpdateAvatar({ user }) {
-
   const [file, setFile] = useState(null);
   const [images, setImages] = useState([]);
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const chosenImage = e.target.files[0];
@@ -16,42 +16,32 @@ export default function UpdateAvatar({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('alt', "Profile image for a user");
-    // console.log(images.length);
-
-    const userFormData = new FormData();
-    // userFormData.append('id', user.id);
-    // userFormData.append("username", user.username);
-    // userFormData.append("startDate", user.startDate);
-    // userFormData.append("email", user.email);
-    // userFormData.append("password", user.password);
-    // userFormData.append("role", user.roleId);
-
-
-    uploadImageToServer(formData);
     try {
-    
-    const imagesResponse = await getImagesFromServer();
-      setImages(imagesResponse.id);
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('alt', "Profile image for a user");
 
-      console.log("ddd" + JSON.stringify(imagesResponse.length));
+      await uploadImageToServer(formData);
+      const imagesResponse = await getImagesFromServer();
+      setImages(imagesResponse.data);
 
-      console.log("length" + images);
+      const imgId = imagesResponse.data.length;
+      const userData = {
+        id: user.id,
+        username: user.username,
+        startDate: user.startDate,
+        email: user.email,
+        password: user.password,
+        role: user.roleId,
+        imgId: 11
+      };
 
-      console.log("lol" + images.length);
+      console.log('NNNN:', userData)
 
-
-      userFormData.append("imgId", images);
-
-      console.log("dadwa" + JSON.stringify(userFormData));
-
-
-      updateUserOnServer(user.id, userFormData);
-    //   updateUserOnServer(user.id,);
+      await updateUserOnServer(user.id, userData);
+      alert('User updated successfully');
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.error("Error uploading file or updating user:", error);
     }
   };
 
@@ -65,5 +55,5 @@ export default function UpdateAvatar({ user }) {
         <button type='submit'>Upload</button>
       </form>
     </div>
-  )
+  );
 }

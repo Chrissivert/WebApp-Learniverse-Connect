@@ -47,6 +47,7 @@ export default function PutUser() {
         active: data.active,
         img_id: data.img_id,
       };
+      console.log('WWWWWWWW:', userData)
       await updateUserOnServer(id, userData);
       navigate('/admin/user');
       alert('User updated successfully');

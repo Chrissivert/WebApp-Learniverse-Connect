@@ -54,6 +54,8 @@ export function deleteUserOnServer(userId) {
  * @returns The outcome of the put request.
  */
 export function updateUserOnServer(userId, user) {
+  console.log("userId" + userId);
+  console.log("user" + JSON.stringify(user));
   return sendApiPutRequest(PROFILE_URL + "/" + userId, user);
 }
 

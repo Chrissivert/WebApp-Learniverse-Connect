@@ -52,7 +52,7 @@ public class UserController {
         return this.userService.readByEmail(email);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Updates an existing user", description = "Updates an existing user.")
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
