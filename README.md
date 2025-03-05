@@ -1,6 +1,7 @@
 # Learniverse Connect - A Website For Course Selection
 ![image](https://github.com/user-attachments/assets/52ddf8bc-3850-4c6d-928f-b2358cc95931)
 
+# Authors & Creation
 
 Created Spring 2024
 
